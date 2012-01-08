@@ -1,1 +1,53 @@
-h1 = @organization.name
+div class="row"
+  div class="span12"
+    h1
+      a href="/organizations/#{@project.organization.id}/projects/#{@project.id}"
+        = "#{@organization.name}, #{@organization.state} :: #{@project.year}"
+
+  div class="span4" style="text-align: right;"
+    div id="get-budget-vision"
+      a href="/contact" class="btn secondary"
+        | Get Budget Vision for your Town
+
+div class="span16"
+  div id="sharing" style="float: right;"
+    a href="https://twitter.com/share" class="twitter-share-button" data-lang="en"
+      | Tweet
+    javascript:
+      !function(d, s, id) {
+        var js,fjs = d.getElementsByTagName(s)[0];
+          if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+      }(document, "script", "twitter-wjs");
+
+    iframe src="//www.facebook.com/plugins/like.php?href&amp;send=false&amp;layout=button_count&amp;width=50&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=202773623141080" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:50px; height:21px;" allowTransparency="true"
+
+  ul class="tabs"
+    li class=""
+      a href="/organizations/#{@project.organization.id}/projects/#{@project.id}"
+        | Overview
+
+    li class=""
+      a href="/organizations/#{@project.organization.id}/projects/#{@project.id}/expenses"
+        | Expenses
+
+    li class=""
+      a href="/organizations/#{@project.organization.id}/projects/#{@project.id}/revenues"
+        | Revenues
+
+    li class=""
+       a href="/organizations/#{@project.organization.id}/projects/#{@project.id}/goals"
+        | Goals
+
+    li class=""
+       a href="/organizations/#{@project.organization.id}/projects/#{@project.id}/forecasts"
+        | Forecasts
+
+    - if can? :update, @project
+      li class=""
+         a href="/organizations/#{@project.organization.id}/projects/#{@project.id}/edit"
+          | Admin
