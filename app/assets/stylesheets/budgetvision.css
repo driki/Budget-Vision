@@ -1,0 +1,247 @@
+@font-face {
+    font-family: 'CallunaRegular';
+    src: url('Calluna-Regular-webfont.eot');
+    src: url('Calluna-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('Calluna-Regular-webfont.woff') format('woff'),
+         url('Calluna-Regular-webfont.ttf') format('truetype'),
+         url('Calluna-Regular-webfont.svg#CallunaRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
+
+
+body {
+  background-image:url('/assets/goovepaper.png');
+  background-repeat:repeat;
+  padding-top: 60px;
+  font-family: 'PT Sans Narrow', 'Arial Narrow', Arial, sans-serif;
+  background-color: #F2F2F2;
+  letter-spacing: 0.025em;
+}
+
+h1, h2, h3, h4, h5, p, table, li {
+}
+
+.blurry {
+  color: transparent;
+  text-shadow: 0 0 12px rgba(0,0,0,0.75); 
+}
+
+.box {
+  background-color: #FFFFFF;
+  padding: 8px;
+  margin-bottom: 16px;
+}
+
+.hero-unit {
+  background-color: #FFFFFF;
+}
+
+p, table {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.tabs {
+  font-family: PT+Sans+Narrow, serif;
+  font-size: 24px;
+}
+
+.nav {
+  font-family: PT+Sans+Narrow, serif;
+  font-size: 18px;
+}
+
+#budget {
+  margin-bottom: 30px;
+}
+
+#budget h1 {
+  font-size: 40px;
+}
+
+#slider {
+  margin: 10px;
+  background: #ccc;
+}
+
+div.org-card {
+  background: #fff;
+  width: 300px;
+  height: 300px;
+  margin-bottom: 30px;
+}
+
+div.org-card h2 {
+  padding-left: 8px;
+}
+
+.ui-widget-header {
+  border: 1px solid #AAA/*{borderColorHeader}*/;
+  background: #AA4643/*{bgColorHeader}*/ url(images/ui-bg_highlight-soft_75_cccccc_1x100.png)/*{bgImgUrlHeader}*/ 50%/*{bgHeaderXPos}*/ 50%/*{bgHeaderYPos}*/ repeat-x/*{bgHeaderRepeat}*/;
+  color: #222/*{fcHeader}*/;
+  font-weight: bold;
+  border-image: initial;
+}
+
+div.lede p {
+  line-height: 28px;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.category-bar-chart {
+  background: #AA4643;
+  height: 65px;
+}
+
+.expense {
+  background: #AA4643;
+}
+
+.revenue {
+  background: #1CAA1C;
+}
+
+table.bar-chart h2 {
+  line-height: 18px;
+}
+
+table.bar-chart p {
+  margin-bottom: 5px;
+}
+
+td.bar-chart {
+  background: #F5F8FF;
+  padding: 0px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  height: 65px;
+}
+
+.chart {
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
+.quick-stats {
+  font-size: 16px;
+}
+
+div#price-header {
+  height: 600px;
+  background-image:url('/images/city-landscape.jpg');
+  background-image:no-repeat;
+  background-size: 100%;
+}
+
+div#price-features {
+  margin-top: 30px;
+}
+
+div#pricing {
+  background-color: whiteSmoke;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 8px;
+  margin-left: 0px;
+}
+
+div.price-row {
+  margin-left: 10px;
+  padding-top: 50px;
+}
+
+div.price {
+  background-color:rgba(255,255,255,0.9);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+div#price {
+  text-align: center;
+  width: 50%;
+}
+
+table#price-examples {
+  margin-bottom: 5px;
+}
+
+form#price-calculator fieldset {
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+form#price-calculator fieldset, label {
+  text-align: left;
+  font-weight: bold;
+}
+
+form#price-calculator input {
+  margin-top: 5px;
+}
+
+hr {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+table.features th {
+  font-size: 1.1em;
+}
+
+table.features {
+  margin-bottom: 50px;
+}
+
+div.feature {
+  margin-bottom: 50px;
+  margin-top: 40px;
+  padding-top: 10px;
+  border-top-style: solid;
+  border-width: 1px;
+  border-color: #EEEEEE;
+}
+
+td.yes {
+  font-weight: bold;
+}
+
+table.items {
+  table-layout:fixed;
+}
+
+table.items td {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div.screenshot img {
+  width: 650px;
+  padding: 5px
+  -moz-box-shadow: 10px 10px 5px #ccc;
+  -webkit-box-shadow: 10px 10px 5px #ccc;
+  box-shadow: 10px 10px 5px #ccc;
+}
+
+.bio {
+  margin-bottom: 20px;
+}
+
+#goals ol, ul, h4{
+  font-size: 1em;
+  line-height: 1em;
+}
+
+.goal-review {
+  margin-left: 40px;
+}
+
+.money {
+  text-align: right;
+}

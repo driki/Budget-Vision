@@ -1,0 +1,8 @@
+h1 #{@organization.name}, #{@organization.state}
+
+- if can? :manage, @organization
+  h3
+    = link_to 'Edit', edit_organization_path(@organization)
+
+- for project in @organization.projects do
+  h3 = link_to project.title, organization_project_path(@organization, project)

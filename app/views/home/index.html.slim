@@ -1,0 +1,235 @@
+/! Main hero unit for a primary marketing message or call to action
+div class="hero-unit row"
+  div class="span4"
+    ul class="media-grid"
+      li
+        img style="max-height: 300px;" src="/assets/homepage-icon.jpg"
+  div class="span10"
+    h1 Budget Vision
+
+    p The dead simple way to create and share your city or town budget.
+    p
+      a href="/organizations/307/projects/1/expenses" class="btn primary large"
+        | View a Budget &raquo;
+      '  or 
+      a href="/setup_guide" class="btn secondary large"
+        | Create One &raquo;
+
+    p
+      | Use Budget Vision and collaborate with municipal employees to create a budget that will knock the socks off your citizens. Budget Vision provides the public with increased visibility and understanding, but the software isn't about transparency, open government and accountability. Budget Vision is a tool for professional town managers and finance directors to better understand their budgets and use data to make decisions.
+  
+div class="row"
+  div class="span5"
+    h3 Hermon, ME
+
+    p
+      | Hermon is a town in Penobscot County, Maine, United States. The population was 5,416 at the 2010 census. Clint Deschane the Town Manager of Hermon has been very helpful in providing feedback and information required to create this demonstration.
+
+    p
+      a class="btn large" href="/organizations/211/projects/3"
+        | Explore this budget &raquo;
+  
+  div class="span5"
+    h3 Mt. Desert, ME
+
+    p
+      | Mount Desert is a town on Mount Desert Island in Hancock County, Maine, United States. The population was 2,109 at the 2000 census. My father, Mike MacDonald, has been instrumental in helping me learn about the inner workings of local governments.
+
+    p
+      a class="btn large" href="/organizations/307/projects/1/expenses"
+        | Explore this budget &raquo;
+  
+  div class="span6"
+    h3  Watertown, MA
+
+    p
+      |The Town of Watertown is a city in Middlesex County, Massachusetts, United States. The population was 31,915 at the 2010 census. I moved to Watertown in the spring of 2010 and wanted to learn as much as I could about how our city operates and to try and help my fellow citizens better understand the budget.
+
+    p
+      a class="btn large" href="/organizations/783/projects/4/expenses"
+        | Explore this budget &raquo;
+
+div id="price-features" class="row"
+  div id="pricing" class="span5"
+    div class="box"
+      h2 Up front pricing
+
+      table id="price-examples" class="condensed-table"
+        thead
+          tr
+            th Examples
+            th class="money" Population
+            th class="money" Per month
+        tbody
+          tr
+            td = "#{@example_city_0.name},  #{@example_city_0.state}"
+            td class="money" = @example_city_0.population
+            td class="money" = Money.new_with_dollars(@example_city_0.price/12).format(:no_cents => true)
+
+          tr
+            td = "#{@example_city_1.name},  #{@example_city_1.state}"
+            td class="money" = @example_city_1.population
+            td class="money" = Money.new_with_dollars(@example_city_1.price/12).format(:no_cents => true)
+
+          tr
+            td = "#{@example_city_2.name},  #{@example_city_2.state}"
+            td class="money" = @example_city_2.population
+            td class="money" = Money.new_with_dollars(@example_city_2.price/12).to_money.format(:no_cents => true)
+
+          tr
+            td = "#{@example_city_3.name},  #{@example_city_3.state}"
+            td class="money" = @example_city_3.population
+            td class="money" = Money.new_with_dollars(@example_city_3.price/12).to_money.format(:no_cents => true)
+
+          tr
+            td = "#{@example_city_4.name},  #{@example_city_4.state}"
+            td class="money" = @example_city_4.population
+            td class="money" = Money.new_with_dollars(@example_city_4.price/12).to_money.format(:no_cents => true)
+
+          tr
+            td = "#{@example_city_5.name},  #{@example_city_5.state}"
+            td class="money" = @example_city_5.population
+            td class="money" = Money.new_with_dollars(@example_city_5.price/12).to_money.format(:no_cents => true)
+
+      div
+        form id="price-calculator" action="/price" method="POST"
+          fieldset
+            labelCity Name
+            input class="" id="name" name="name" size="16" type="text" value=""
+            input class="btn primary" type="submit" value="Calculate your city or town price"
+
+  div class="span11"
+    h2 8 awesome reasons to use Budget Vision
+    table class="zebra-striped features"
+      thead
+        th
+        th Budget Vision
+        th Excel &trade;
+        th PDF
+        th PowerPoint &trade;
+        th Civic Plus &trade;
+      tr
+        td Web based
+        td  class="yes" Yes
+        td No
+        td No
+        td No
+        td  class="yes"Yes      
+      tr
+        td Printable
+        td class="yes" Yes
+        td class="yes" Yes
+        td class="yes" Yes
+        td class="yes" Yes
+        td class="yes" Yes
+      tr
+        td Comparisons
+        td class="yes" Yes
+        td No
+        td No
+        td No
+        td No
+      tr
+        td Interactive Charts
+        td  class="yes" Yes
+        td No
+        td No
+        td No
+        td No
+      tr
+        td Comments
+        td class="yes" Yes
+        td No
+        td No
+        td No
+        td No
+      tr
+        td Import/Export
+        td class="yes" Yes
+        td class="yes" ~Yes
+        td No
+        td No
+        td No
+      tr
+        td Trends
+        td class="yes" Yes
+        td No
+        td No
+        td No
+        td No
+      tr
+        td Goal Setting
+        td class="yes" Yes
+        td No
+        td No
+        td No
+        td No
+
+div class="row feature"
+  div class="span5"
+    h2 Web based
+
+    p 
+      | Putting a PDF or Microsoft PowerPoint&trade; or Word&trade; document up on your website just doesn't cut it anymore. The public has come to expect high quality tools to interact with data and information while using the web. Personal finance sites like Mint.com have increased the expectations of your audience.
+  div class="span11 screenshot"
+    img src="/images/budget-screenshot-1.png"
+
+div class="row feature"
+  div class="span5"
+    h2 Printable
+
+    p
+      | The concept of the paperless office or government is a great one and hopefully Budget Vision reduces your paper needs but the reality is you'll still need to print things out for meetings. Budget Vision generates beautiful reports and PDF documents using the information on the website.
+  div class="span11 screenshot"
+    img src="/images/budget-screenshot-print.png"
+
+div class="row feature"
+  div class="span5"
+    h2 Comparisons
+
+    p
+      | How much are your neighboring towns spending on Public Safety, Education and Public Works? Budget Vision makes it easy to perform direct comparisons with similar communities to help planning and budgeting. View another town's budget and learn how they were able to trim their paving costs.
+
+  div class="span11 screenshot"
+    img src="/images/budget-screenshot-comparisons.png"
+
+div class="row feature"
+  div class="span5"
+    h2 Interactive Charts
+    p
+      | Goodbye static spreadsheets, hello interactive charts. Budget Vision is extremely easy for budget novices to dive in, view and understand the details of your budget. All the beautiful charts in Budget Vision are created using the data you provide, update the data and the chart is also updated.
+  div class="span11 screenshot"
+    img src="/images/budget-screenshot-charts.png"
+
+div class="row feature"
+  div class="span5"
+    h2 Comments &amp; Questions
+    p
+      | People will have questions or comments, Budget Vision integrates with the Disqus.com commenting platform, a super simple commenting tool that makes it easy for people to ask questions about the budget and for budget owners to respond.
+
+  div class="span11 screenshot"
+    img src="/images/budget-screenshot-comments.png"
+
+div class="row feature"
+  div class="span5"
+    h2 Import &amp; Export
+    p
+      | We make it easy for you to get your data in, but more importantly we will NEVER LOCK UP YOUR DATA . Import a CSV file to get started, then use our exporting tools to get it back out.
+  div class="span11 screenshot"
+    img src="/images/budget-screenshot-export.png"
+
+div class="row feature"
+  div class="span5"
+    h2 Trends
+    p
+      | Hopefully your budgets aren't shifting wildly year to year, but the automatically generated trending charts in Budget Vision will help you identify patterns and show your citizens the long term picture.
+  div class="span11 screenshot"
+    img src="/images/budget-screenshot-trends.png"
+
+div class="row feature"
+  div class="span5"
+    h2 Goals &amp; Results
+    p
+      | Where is your city or town headed? Describe city or town goals to frame the big picture and provide context, then generate results to show the public how you did.
+  div class="span11 screenshot"
+    img src="/images/budget-screenshot-goals.png"

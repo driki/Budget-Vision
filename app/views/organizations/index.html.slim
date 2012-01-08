@@ -1,0 +1,8 @@
+h1 Cities and Towns Using Budget Vision
+
+h1 Near #{@georesult.city}, #{@georesult.state}
+
+div class="row"
+  - for org in @nearby_orgs do
+    div class="org-card span5"
+      h2 = link_to org.name, organization_path(org)

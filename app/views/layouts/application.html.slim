@@ -1,0 +1,98 @@
+doctype html
+html
+  head
+    title Budget Vision - The dead simple way to create and share your city or town budget.
+    meta name="keywords" content="template language"
+
+    link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700' rel='stylesheet' type='text/css'
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+
+  body
+
+    div class="topbar"
+      div class="fill"
+        div class="container"
+          a class="brand" href="/" Budget Vision
+          ul class="nav"
+            - if request.path_info.eql?("/")
+              li class="active"
+                a href="/" Home
+            - else
+              li
+                a href="/" Home
+
+            - if request.path_info.eql?("/organizations")
+              li class="active"
+                a href="/organizations" Cities &amp; Towns
+            - else
+              li
+                a href="/organizations" Cities &amp; Towns
+
+            - if request.path_info.eql?("/price")
+              li class="active"
+                a href="/price" Pricing
+            - else
+              li
+                a href="/price" Pricing
+
+            - if request.path_info.eql?("/about")
+              li class="active"
+                a href="/about" About
+            - else
+              li
+                a href="/about" About
+
+            - if request.path_info.eql?("/contact")
+              li class="active"
+                a href="/contact" Contact
+            - else
+              li
+                a href="/contact" Contact
+
+          ul class="nav secondary-nav"
+            - if current_user.nil?
+              li
+                a href="/login" Login
+            - else
+              li
+                a href="/users/#{current_user.id}"
+                  = current_user.name
+              li
+                a href="/logout" Logout
+
+    div class="container"
+      - if flash[:error]
+          div class="alert-message error" flash[:error]
+      - if flash[:message]
+          div class="alert-message success" flash[:message]
+
+      = yield
+
+      footer
+        div class="row"
+          div class="span10"
+            h3
+              | A service provided by NearbyFYI
+            ul
+              li 34 Hardy Ave
+              li Watertown, MA 02472
+              li Phone: (617) 455-1513
+              li
+                a href="http://twitter.com/budgetvision" @BudgetVision
+          div class="span6"
+
+    javascript:
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-9947020-5']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+      })();
