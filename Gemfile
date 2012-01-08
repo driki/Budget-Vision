@@ -1,4 +1,5 @@
 source 'http://rubygems.org'
+source 'http://gemcutter.org'
 
 gem 'rails', '3.1.3'
 
@@ -15,6 +16,9 @@ gem 'geocoder'
 gem 'rest-client'
 gem 'cancan'
 gem 'ancestry'
+gem 'paper_trail'
+gem 'newrelic_rpm'
+gem 'acts-as-taggable-on', '~> 2.2.2'
 
 
 # Gems used only for assets and not required

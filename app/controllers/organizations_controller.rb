@@ -15,12 +15,13 @@ class OrganizationsController < ApplicationController
     @organization = Organization.find(params[:id])
   end
 
-   def update
-      @organization = Organization.find(params[:id])
-      if @organization.update_attributes(params[:organization])
-         redirect_to :action => 'show', :id => @organization
-      else
-        render :action => 'edit'
-      end
-   end
+  def update
+    @organization = Organization.find(params[:id])
+    if @organization.update_attributes(params[:organization])
+       redirect_to :action => 'show', :id => @organization
+    else
+      render :action => 'edit'
+    end
+  end
+
 end
