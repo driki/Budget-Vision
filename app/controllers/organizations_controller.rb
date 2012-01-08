@@ -1,4 +1,5 @@
 class OrganizationsController < ApplicationController
+  load_and_authorize_resource :organization
 
   def index
     ip_address = "24.34.221.0"
@@ -13,4 +14,13 @@ class OrganizationsController < ApplicationController
   def edit
     @organization = Organization.find(params[:id])
   end
+
+   def update
+      @organization = Organization.find(params[:id])
+      if @organization.update_attributes(params[:organization])
+         redirect_to :action => 'show', :id => @organization
+      else
+        render :action => 'edit'
+      end
+   end
 end

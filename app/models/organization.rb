@@ -1,4 +1,7 @@
 class Organization < ActiveRecord::Base
+  validates_presence_of :name
+  validates_presence_of :population
+
   has_many :organization_users
   has_many :users, :through => :organization_users
   has_many :projects

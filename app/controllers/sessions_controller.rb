@@ -16,6 +16,11 @@ class SessionsController < ApplicationController
     redirect_to '/'
   end
 
+  def destroy
+    session.clear
+    redirect_to :back
+  end
+
   protected
 
   def auth_hash
