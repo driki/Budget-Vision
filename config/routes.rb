@@ -5,6 +5,7 @@ Budgetvision::Application.routes.draw do
   match "/logout" => "sessions#destroy", :as => :signout
   match "/about" => "home#about"
   match "/price" => "home#price"
+  match "/setup" => "home#setup"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

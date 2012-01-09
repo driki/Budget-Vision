@@ -10,7 +10,7 @@ class OrganizationsController < ApplicationController
       ip_address = request.remote_ip
     end
     @georesult = Geocoder.search(ip_address)[0]
-    @nearby_orgs = Organization.near(ip_address, 4)
+    @nearby_orgs = Organization.near(ip_address, 10, :limit => 6)
   end
 
   def show

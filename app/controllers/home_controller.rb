@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
   def index
+    @sample_org = Organization.where(:is_demo => true).first
+
     @example_city_0 = Organization.where(:name => "Abbot", :state => "ME").first
     @example_city_1 = Organization.where(:name => "Mount Desert", :state => "ME").first
     @example_city_2 = Organization.where(:name => "Hermon", :state => "ME").first
