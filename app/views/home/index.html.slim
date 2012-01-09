@@ -63,32 +63,32 @@ div id="price-features" class="row"
         tbody
           tr
             td = "#{@example_city_0.name},  #{@example_city_0.state}"
-            td class="money" = @example_city_0.population
+            td class="money" = number_with_delimiter(@example_city_0.population)
             td class="money" = Money.new_with_dollars(@example_city_0.price/12).format(:no_cents => true)
 
           tr
             td = "#{@example_city_1.name},  #{@example_city_1.state}"
-            td class="money" = @example_city_1.population
+            td class="money" = number_with_delimiter(@example_city_1.population)
             td class="money" = Money.new_with_dollars(@example_city_1.price/12).format(:no_cents => true)
 
           tr
             td = "#{@example_city_2.name},  #{@example_city_2.state}"
-            td class="money" = @example_city_2.population
+            td class="money" = number_with_delimiter(@example_city_2.population)
             td class="money" = Money.new_with_dollars(@example_city_2.price/12).to_money.format(:no_cents => true)
 
           tr
             td = "#{@example_city_3.name},  #{@example_city_3.state}"
-            td class="money" = @example_city_3.population
+            td class="money" = number_with_delimiter(@example_city_3.population)
             td class="money" = Money.new_with_dollars(@example_city_3.price/12).to_money.format(:no_cents => true)
 
           tr
             td = "#{@example_city_4.name},  #{@example_city_4.state}"
-            td class="money" = @example_city_4.population
+            td class="money" = number_with_delimiter(@example_city_4.population)
             td class="money" = Money.new_with_dollars(@example_city_4.price/12).to_money.format(:no_cents => true)
 
           tr
             td = "#{@example_city_5.name},  #{@example_city_5.state}"
-            td class="money" = @example_city_5.population
+            td class="money" = number_with_delimiter(@example_city_5.population)
             td class="money" = Money.new_with_dollars(@example_city_5.price/12).to_money.format(:no_cents => true)
 
       div

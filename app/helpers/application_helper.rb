@@ -1,5 +1,9 @@
 module ApplicationHelper
-
+  
+  def remote_ip
+      '1.2.3.4'
+  end
+  
   def full_state_name(abbreviation)
     state_abbr = {
       'AL' => 'Alabama',

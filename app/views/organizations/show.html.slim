@@ -1,3 +1,6 @@
+- if @organization.is_verified
+  div class="verified-true"
+  
 h1 #{@organization.name}, #{@organization.state}
 
 - if can? :manage, @organization

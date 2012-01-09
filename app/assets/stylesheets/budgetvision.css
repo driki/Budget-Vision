@@ -24,11 +24,6 @@ body {
 h1, h2, h3, h4, h5, p, table, li {
 }
 
-.blurry {
-  color: transparent;
-  text-shadow: 0 0 12px rgba(0,0,0,0.75); 
-}
-
 .box {
   background-color: #FFFFFF;
   padding: 8px;
@@ -76,6 +71,18 @@ div.org-card {
 
 div.org-card h2 {
   padding-left: 8px;
+}
+
+div.verified-true {
+  position: relative;
+  height: 70px;
+  width: 70px;
+  left: -30px;
+  top: 0px;
+  float: left;
+  background-image: url('/assets/verified.jpg');
+  background-image: no-repeat;
+  background-size: 100%;
 }
 
 .ui-widget-header {
@@ -142,7 +149,6 @@ div#price-features {
 }
 
 div#pricing {
-  background-color: whiteSmoke;
   -moz-border-radius: 5px;
   border-radius: 5px;
   padding: 8px;

@@ -3,7 +3,8 @@ class ProjectsController < ApplicationController
   load_and_authorize_resource :organization
   load_and_authorize_resource :through => :organization
 
-  skip_authorize_resource :only => :new
+  skip_authorize_resource :only => [:new, :show, :expenses, :revenues, :goals, :forecasts]  
+  
 
   def expenses
     @categories = @project.categories(:type => "Expenses")
@@ -11,5 +12,11 @@ class ProjectsController < ApplicationController
 
   def revenues
     @categories = @project.categories(:type => "Revenues")
+  end
+
+  def goals
+  end
+
+  def forecasts
   end
 end

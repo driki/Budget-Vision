@@ -2,7 +2,13 @@ class OrganizationsController < ApplicationController
   load_and_authorize_resource :organization
 
   def index
-    ip_address = "24.34.221.0"
+    ip_address = nil
+    if request.remote_ip == '127.0.0.1'
+      # Hard coded remote address
+      ip_address = '4.21.169.0'
+    else
+      ip_address = request.remote_ip
+    end
     @georesult = Geocoder.search(ip_address)[0]
     @nearby_orgs = Organization.near(ip_address, 4)
   end

@@ -21,7 +21,14 @@ Budgetvision::Application.routes.draw do
   resources :organizations do 
     resources :users
     resources :projects do
-      resources :categories
+      resources :categories do
+      end
+      member do
+        get 'expenses'
+        get 'revenues'
+        get 'goals'
+        get 'forecasts'
+      end
     end
   end
 
