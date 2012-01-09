@@ -20,6 +20,7 @@ gem 'paper_trail'
 gem 'newrelic_rpm'
 gem 'acts-as-taggable-on', '~> 2.2.2'
 gem 'tabulous'
+gem 'ffaker'
 
 
 # Gems used only for assets and not required
