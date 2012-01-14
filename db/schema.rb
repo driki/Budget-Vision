@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20120108233930) do
     t.text     "description"
     t.float    "expense_budget"
     t.float    "revenue_budget"
+    t.string   "tags"
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"

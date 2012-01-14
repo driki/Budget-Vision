@@ -1,4 +1,7 @@
 class OrganizationsController < ApplicationController
+  load_and_authorize_resource :organization
+  skip_authorize_resource :only => :show
+
   def index
     ip_address = nil
     if request.remote_ip == '127.0.0.1'

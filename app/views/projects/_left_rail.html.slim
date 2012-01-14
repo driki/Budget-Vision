@@ -1,0 +1,38 @@
+div class="span3" id="left-rail"
+  == tabs
+
+  div id="characteristics"
+    h3 Characteristics
+    table
+      tbody
+    
+        tr
+          td
+            img class="icon" src="/assets/glyphicons/png/glyphicons_020_home.png"
+          td
+            = number_with_delimiter(@project.organization.housing_units)
+        tr
+          td
+            img class="icon" src="/assets/glyphicons/png/glyphicons_020_home.png"
+          td
+            = number_with_delimiter(@project.organization.diversity)
+        tr
+          td
+            img class="icon" src="/assets/glyphicons/png/glyphicons_020_home.png"
+          td
+            = number_with_delimiter(@project.organization.total_sq_mi)
+        tr
+          td
+            img class="icon" src="/assets/glyphicons/png/glyphicons_020_home.png"
+          td
+            = number_with_delimiter(@project.organization.pop_sq_mi)
+        tr
+          td
+            img class="icon" src="/assets/glyphicons/png/glyphicons_020_home.png"
+          td
+            = number_with_delimiter(@project.organization.housing_percent_vacant)
+
+  div id="nearby"
+    h3 Nearby Cities & Towns
+    - for org in Organization.near(@project.organization.name + ", " + @project.organization.state).limit(10)
+      h4 = link_to org.name, organization_path(org)

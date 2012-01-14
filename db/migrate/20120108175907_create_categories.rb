@@ -7,6 +7,7 @@ class CreateCategories < ActiveRecord::Migration
       t.text      :description
       t.float     :expense_budget
       t.float     :revenue_budget
+      t.string    :tags
 
       t.references :project
 

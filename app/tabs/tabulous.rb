@@ -95,7 +95,7 @@ Tabulous.setup do |config|
       [    :projects         ,    :revenues       ,    :revenue_tab          ],
       [    :projects         ,    :borrowing      ,    :borrowing_tab        ],
       [    :projects         ,    :goals          ,    :goals_tab            ],
-      [    :projects         ,    :forecasts      ,    :revenue_tab          ],
+      [    :projects         ,    :forecasts      ,    :forecasts_tab        ],
       #----------------------------------------------------------------------#
       #    CONTROLLER        |    ACTION          |    TAB                   #
       #----------------------------------------------------------------------#

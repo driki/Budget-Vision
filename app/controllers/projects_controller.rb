@@ -1,10 +1,8 @@
 class ProjectsController < ApplicationController
 
-  load_and_authorize_resource :project
+  load_resource :project
   
   def show
-    @random_item_1 = Item.find(1+Random.rand(Item.joins(:category).where('categories.project_id' => @project.id).count))
-    @random_item_2 = Item.find(1+Random.rand(Item.joins(:category).where('categories.project_id' => @project.id).count))
   end
 
   def categories

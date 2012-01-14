@@ -1,5 +1,10 @@
-== render :partial => 'primary_navigation'
+javascript:
+  $(document).ready(function() {
+    /* Activating Best In Place */
+    jQuery(".best_in_place").best_in_place();
+  });
 
-div
-  div id="budget" class="span16"
-    == render :partial => 'project_budget'
+== render :partial => 'masthead'
+
+div class="row"
+  == render :partial => 'left_rail'

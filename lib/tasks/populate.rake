@@ -1,27 +1,41 @@
 namespace :db do
   desc "Fill database"
-  task :populate => :environment do
+
+  task :populate_organizations => :environment do
+    [Organization].each(&:delete_all)
+
+
+    state_list = ["MA",
+                  "ME",
+                  "NH",
+                  "VT",
+                  "CT"
+                ]
+    state_list.each do |state|
+      Organization.load_census(state)
+    end
+        
+  end
+
+  task :populate_projects => :environment do
     require 'ffaker'
     
-    [Organization, Project, Category, Item].each(&:delete_all)
-
-    Organization.load_census("MA")
+    [Project, Category].each(&:delete_all)    
     
     orgs = Organization.all
     orgs.each do |org|
       puts "STARTING: " + org.name + " TIME: " + Time.now.asctime
 
-      2.times do |p|
+      1.times do |p|
         project = Project.new
 
-        project.title    = Faker::Company.name
-        project.description    = Faker::Lorem.paragraphs(paragraph_count = 3)
-        project.summary    = Faker::Lorem.paragraphs(paragraph_count = 3)
-        project.year = 1990+Random.rand(30)
-        project.expense_budget = 1+Random.rand(3000000000)
-        project.revenue_budget = 1+Random.rand(3000000000)
-        project.average_tax_bill = 1+Random.rand(10000)
-
+        project.title    = ""
+        project.description    = ""
+        project.summary    = ""
+        project.year = Time.now.year.to_i
+        project.expense_budget = 0
+        project.revenue_budget = 0
+        project.average_tax_bill = 0
 
         expense_names = ["Fire Department", 
                           "General Government",
@@ -34,38 +48,35 @@ namespace :db do
                           "Health & Safety",
                           "School Department"]
 
-        item_tags = ["Wages",
-                        "Supplies",
-                        "Benefits",
-                        "Debt Service",
-                        "Equipment",
-                        "Property",
-                        "Miscellaneous"]
-        8.times do |c|
+        expense_names.each do |name|
           category = Category.new
-          category.name = expense_names[c]
-          category.goal = Faker::Lorem.paragraphs(paragraph_count = 1)
-          category.description = Faker::Lorem.paragraphs(paragraph_count = 2)
-          category.challenge = Faker::Lorem.paragraphs(paragraph_count = 1)
-          category.expense_budget = 1+Random.rand(project.expense_budget)/20.75
-          category.revenue_budget = 1+Random.rand(project.revenue_budget)/20.75
+          category.name = name
+          category.goal = ""
+          category.description = ""
+          category.challenge = ""
+          category.expense_budget = 0
+          category.revenue_budget = 0
+          category.tag_list = "expense"
 
-          20.times do |i|
-            expense = Expense.new
-            expense.name = Faker::Company.bs
-            expense.description = Faker::Lorem.paragraphs(paragraph_count = 1)
-            expense.total = 1+Random.rand(100000)
-            expense.tag_list = item_tags[Random.rand(item_tags.size)]
+          project.categories << category
+        end
 
-            revenue = Revenue.new
-            revenue.name = Faker::Company.bs
-            revenue.description = Faker::Lorem.paragraphs(paragraph_count = 1)
-            revenue.total = 1+Random.rand(100000)
-            revenue.tag_list = item_tags[Random.rand(item_tags.size)]
+        revenue_names = ["State Aid", 
+                          "Property Tax",
+                          "Local Receipts",
+                          "Federal Stimulus",
+                          "Grants",
+                          "Fees"]
 
-            category.items << expense
-            category.items << revenue
-          end
+        revenue_names.each do |name|
+          category = Category.new
+          category.name = name
+          category.goal = ""
+          category.description = ""
+          category.challenge = ""
+          category.expense_budget = 0
+          category.revenue_budget = 0
+          category.tag_list = "revenue"
 
           project.categories << category
         end
