@@ -3,6 +3,7 @@ div id="masthead"
     h1 Hi there!
     h2
       | Our robots think that you might be somewhere near #{@georesult.city}, #{@georesult.state} so they thought you might be interested in budgets for these cities or towns.
+      = request.remote_ip
 
 div class="row"
   div class="span3" id="left-rail"
