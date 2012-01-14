@@ -1,0 +1,2 @@
+class Revenue < Item
+end

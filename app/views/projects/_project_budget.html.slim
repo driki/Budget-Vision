@@ -1,6 +1,0 @@
-h1
-  | Expense Budget:
-  span id="budget-total"
-    = !@project.expense_budget.nil? ? @project.expense_budget.to_money.format(:no_cents => true) : ""
-  span style="float: right"
-    | Line item total: #{Item.joins(:category).where('categories.project_id' => @project.id).sum(:total).to_money.format(:no_cents => true)}

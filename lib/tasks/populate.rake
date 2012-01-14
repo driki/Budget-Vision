@@ -3,13 +3,15 @@ namespace :db do
   task :populate => :environment do
     require 'ffaker'
     
-    [Project, Category, Item].each(&:delete_all)
+    [Organization, Project, Category, Item].each(&:delete_all)
+
+    Organization.load_census("MA")
+    
     orgs = Organization.all
     orgs.each do |org|
-      random_org = Random.rand(Organization.count-Organization.first.id)+Organization.first.id
-      org = Organization.find(random_org)
+      puts "STARTING: " + org.name + " TIME: " + Time.now.asctime
 
-      5.times do |p|
+      2.times do |p|
         project = Project.new
 
         project.title    = Faker::Company.name
@@ -32,44 +34,48 @@ namespace :db do
                           "Health & Safety",
                           "School Department"]
 
-        item_types = ["Wages",
+        item_tags = ["Wages",
                         "Supplies",
                         "Benefits",
                         "Debt Service",
                         "Equipment",
                         "Property",
                         "Miscellaneous"]
-        10.times do |c|
+        8.times do |c|
           category = Category.new
           category.name = expense_names[c]
-          category.type = "Expenses"
           category.goal = Faker::Lorem.paragraphs(paragraph_count = 1)
           category.description = Faker::Lorem.paragraphs(paragraph_count = 2)
           category.challenge = Faker::Lorem.paragraphs(paragraph_count = 1)
           category.expense_budget = 1+Random.rand(project.expense_budget)/20.75
           category.revenue_budget = 1+Random.rand(project.revenue_budget)/20.75
 
-          100.times do |i|
-            item = Item.new
-            item.name = Faker::Company.bs
-            item.description = Faker::Lorem.paragraphs(paragraph_count = 1)
-            item.total = 1+Random.rand(100000)
-            item.is_expense = true
-            item.type_list = item_types[Random.rand(item_types.size)]
+          20.times do |i|
+            expense = Expense.new
+            expense.name = Faker::Company.bs
+            expense.description = Faker::Lorem.paragraphs(paragraph_count = 1)
+            expense.total = 1+Random.rand(100000)
+            expense.tag_list = item_tags[Random.rand(item_tags.size)]
 
-            category.items << item
+            revenue = Revenue.new
+            revenue.name = Faker::Company.bs
+            revenue.description = Faker::Lorem.paragraphs(paragraph_count = 1)
+            revenue.total = 1+Random.rand(100000)
+            revenue.tag_list = item_tags[Random.rand(item_tags.size)]
+
+            category.items << expense
+            category.items << revenue
           end
 
           project.categories << category
         end
 
-        project.save
-
         org.projects << project
-        org.updated_at = Time.now
-        
-        org.save
+      
       end
+      puts "ABOUT TO SAVE: " + org.name + " TIME: " + Time.now.asctime
+      org.updated_at = Time.now
+      org.save
     end
   end
 end

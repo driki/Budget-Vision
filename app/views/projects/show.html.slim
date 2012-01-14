@@ -1,5 +1,108 @@
-== render :partial => 'primary_navigation'
+javascript:
+  $(document).ready(function() {
+    /* Activating Best In Place */
+    jQuery(".best_in_place").best_in_place();
+  });
 
-div
-  div id="budget" class="span16"
-    == render :partial => 'project_budget'
+div class="row" id="masthead"
+
+  div id="header" class="span13"
+    h1 #{@project.organization.name}, #{@project.organization.state}
+    h2 FY 2012
+    p id="make-it-more-accurate" Help improve the accuracy of this information
+  
+  div id="budget-vision-score" class="span3"
+    p Budget Vision Score &trade;
+    h1 23
+    p What is this?
+
+div class="row"
+  div class="span3" id="left-rail"
+    == tabs
+
+    div id="characteristics"
+      h3 Characteristics
+      table
+        tbody
+          tr
+            td
+              img class="icon" src="/assets/glyphicons/png/glyphicons_043_group.png"
+            td
+              span class="org-fact"
+              = number_with_delimiter(@project.organization.population)
+      
+          tr
+            td
+              img class="icon" src="/assets/glyphicons/png/glyphicons_020_home.png"
+            td
+              = number_with_delimiter(@project.organization.housing_units)
+          tr
+            td
+              img class="icon" src="/assets/glyphicons/png/glyphicons_020_home.png"
+            td
+              = number_with_delimiter(@project.organization.diversity)
+          tr
+            td
+              img class="icon" src="/assets/glyphicons/png/glyphicons_020_home.png"
+            td
+              = number_with_delimiter(@project.organization.total_sq_mi)
+          tr
+            td
+              img class="icon" src="/assets/glyphicons/png/glyphicons_020_home.png"
+            td
+              = number_with_delimiter(@project.organization.pop_sq_mi)
+          tr
+            td
+              img class="icon" src="/assets/glyphicons/png/glyphicons_020_home.png"
+            td
+              = number_with_delimiter(@project.organization.housing_percent_vacant)
+
+    div id="nearby"
+      h3 Nearby Cities & Towns
+      - for org in Organization.near(@project.organization.name + ", " + @project.organization.state).limit(10)
+        h4 = link_to org.name, organization_path(org)
+    
+  div class="row"  
+    div class="span6 dashboard-widget large"
+      h1 = number_with_delimiter(@project.organization.population)
+      span People live here
+
+    div class="span6 dashboard-widget large"
+      h1 800
+      span Employees work here
+
+    div class="span6 dashboard-widget large"
+      h1 = best_in_place @project, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
+      span Is how much is being spent
+
+    div class="span6 dashboard-widget large"
+      h1 = number_to_currency(@project.revenue_budget, :precision => 0)
+      span Is how much revenue comes in
+
+    div class="span12"
+      div id="overview"
+        h1 Overview
+        p = best_in_place @project, :description, :type => :textarea
+
+    div class="span6 barchart-widget"
+      h1 Where the money goes
+      - for category in @project.categories.order("expense_budget desc")
+        div class="bar-container"
+          div class="bar-category-text"
+            = link_to category.name, organization_project_category_path(@project.organization, @project, category)
+          div class="bar"
+            div class="bar-percent expense" style="width: #{((category.expense_budget/@project.expense_budget)*100).to_i}%;"
+
+    div class="span6 barchart-widget"
+      h1 Where the money comes from
+      - for category in @project.categories.order("revenue_budget desc")
+        div class="bar-container"
+          div class="bar-category-text"
+            = link_to category.name, organization_project_category_path(@project.organization, @project, category)
+          div class="bar"
+            div class="bar-percent revenue" style="width: #{((category.revenue_budget/@project.revenue_budget)*100).to_i}%;"
+      
+    div class="span12"
+      div id="summary"
+        h1 Summary
+        p = @project.summary

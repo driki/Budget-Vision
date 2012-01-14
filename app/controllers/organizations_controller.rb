@@ -1,6 +1,4 @@
 class OrganizationsController < ApplicationController
-  load_and_authorize_resource :organization
-
   def index
     ip_address = nil
     if request.remote_ip == '127.0.0.1'
@@ -10,11 +8,13 @@ class OrganizationsController < ApplicationController
       ip_address = request.remote_ip
     end
     @georesult = Geocoder.search(ip_address)[0]
-    @nearby_orgs = Organization.near(ip_address, 10, :limit => 6)
+    @nearby_orgs = Organization.near(ip_address, 10, :limit => 4)
+    @recently_updated_orgs = Organization.order("updated_at desc").limit(5)
   end
 
   def show
     @organization = Organization.find(params[:id])
+    redirect_to organization_project_path(@organization, @organization.projects.last)
   end
 
   def edit

@@ -1,4 +1,7 @@
 class Project < ActiveRecord::Base
+
+  has_paper_trail
+  
   belongs_to :organization
   has_many :categories
   has_many :goals

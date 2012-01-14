@@ -21,17 +21,25 @@ Budgetvision::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   resources :organizations do 
     resources :users
-    resources :projects do
-      resources :categories do
-      end
+
+    resources :projects do  
       member do
+        get 'categories'
         get 'expenses'
         get 'revenues'
+        get 'borrowing'
         get 'goals'
         get 'forecasts'
       end
+      
+      resources :categories do
+        resources :items
+      end
+      resources :items
     end
   end
+
+  resources :projects
 
   # Sample resource route with options:
   #   resources :products do

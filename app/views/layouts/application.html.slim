@@ -62,7 +62,7 @@ html
               li
                 a href="/logout" Logout
 
-    div class="container"
+    div id="content" class="container"
       - if flash[:error]
           div class="alert-message error" flash[:error]
       - if flash[:message]

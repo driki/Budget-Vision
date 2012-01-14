@@ -1,37 +1,43 @@
-div class="hero-unit"
-  h1 Hi there!
-  h2
-    | Our robots think that you might be somewhere near #{@georesult.city}, #{@georesult.state} so they thought you might be interested in these cities or towns. If not you can 
-    a href="#browse" browse by state and city.
+div id="masthead"
+  div id="header"
+    h1 Hi there!
+    h2
+      | Our robots think that you might be somewhere near #{@georesult.city}, #{@georesult.state} so they thought you might be interested in budgets for these cities or towns.
 
 div class="row"
-  - for org in @nearby_orgs do
-    div class="org-card span5"
-      h2 = link_to org.name, organization_path(org)
-      table
-        tbody
-          tr
-            td Population
-            td class="number" #{number_with_delimiter(org.population)}
-          tr
-            td Diversity
-            td class="number" #{number_with_delimiter(org.diversity)}
-          tr
-            td Housing units
-            td class="number" #{number_with_delimiter(org.housing_units)}
-          tr
-            td Total square miles
-            td class="number" #{number_with_delimiter(org.total_sq_mi)}
-          tr
-            td Population per square mile
-            td class="number" #{number_with_delimiter(org.pop_sq_mi)}
-          tr
-            td Percent of housing that is vacant
-            td class="number" #{number_with_delimiter(org.housing_percent_vacant)}
+  div class="span3" id="left-rail"
+    h2 Fresh List
+    p Recent updates to cities or towns
+    ul
+    - for org in @recently_updated_orgs
+      li = link_to org.name, organization_path(org)
 
-div class="hero-unit"
-  h1 Bad robots, bad, bad robots
-  a name="browse"
-  h2
-    | Sometimes our silly robots aren't able to find your city or town. Click on a state to browse for the city or town you are looking for.
-  
+    h2 Cities and Towns by State
+    ul
+    - for org in @recently_updated_orgs
+      li = link_to org.name, organization_path(org)
+
+  div class="span12"
+    - for org in @nearby_orgs do
+      div class="org-card span5"
+        h2 = link_to org.name, organization_path(org)
+        table
+          tbody
+            tr
+              td Population
+              td class="number" #{number_with_delimiter(org.population)}
+            tr
+              td Diversity
+              td class="number" #{number_with_delimiter(org.diversity)}
+            tr
+              td Housing units
+              td class="number" #{number_with_delimiter(org.housing_units)}
+            tr
+              td Total square miles
+              td class="number" #{number_with_delimiter(org.total_sq_mi)}
+            tr
+              td Population per square mile
+              td class="number" #{number_with_delimiter(org.pop_sq_mi)}
+            tr
+              td Percent of housing that is vacant
+              td class="number" #{number_with_delimiter(org.housing_percent_vacant)}

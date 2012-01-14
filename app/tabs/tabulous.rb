@@ -58,8 +58,10 @@ Tabulous.setup do |config|
       #    TAB NAME              |    DISPLAY TEXT       |    PATH                                    |    VISIBLE?    |    ENABLED?    #
       #---------------------------------------------------------------------------------------------------------------------------------#
       [    :project_tab          ,    'Overview'         ,    organization_project_path               ,    true        ,    true        ],
+      [    :categories_tab       ,    'Categories'       ,    categories_organization_project_path    ,    true        ,    true        ],
       [    :expense_tab          ,    'Expenses'         ,    expenses_organization_project_path      ,    true        ,    true        ],
       [    :revenue_tab          ,    'Revenues'         ,    revenues_organization_project_path      ,    true        ,    true        ],
+      [    :borrowing_tab        ,    'Borrowing'        ,    borrowing_organization_project_path     ,    true        ,    true        ],
       [    :goals_tab            ,    'Goals'            ,    goals_organization_project_path         ,    true        ,    true        ],
       [    :forecasts_tab        ,    'Forecasts'        ,    forecasts_organization_project_path     ,    true        ,    true        ],
       #---------------------------------------------------------------------------------------------------------------------------------#
@@ -88,8 +90,10 @@ Tabulous.setup do |config|
       #    CONTROLLER        |    ACTION          |    TAB                   #
       #----------------------------------------------------------------------#
       [    :projects         ,    :show           ,    :project_tab          ],
+      [    :projects         ,    :categories     ,    :categories_tab       ],
       [    :projects         ,    :expenses       ,    :expense_tab          ],
       [    :projects         ,    :revenues       ,    :revenue_tab          ],
+      [    :projects         ,    :borrowing      ,    :borrowing_tab        ],
       [    :projects         ,    :goals          ,    :goals_tab            ],
       [    :projects         ,    :forecasts      ,    :revenue_tab          ],
       #----------------------------------------------------------------------#
@@ -136,7 +140,7 @@ Tabulous.setup do |config|
   # generate invalid HTML markup.  They are merely meant to give you a
   # head start or an easy way to prototype quickly.
   # 
-  config.css.scaffolding = true
+  config.css.scaffolding = false
 
   # You can tweak the colors of the generated CSS.
   #

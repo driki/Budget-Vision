@@ -11,11 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120109021017) do
+ActiveRecord::Schema.define(:version => 20120108233930) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
-    t.string   "type"
     t.text     "goal"
     t.text     "challenge"
     t.text     "description"
@@ -49,12 +48,13 @@ ActiveRecord::Schema.define(:version => 20120109021017) do
     t.string   "name"
     t.text     "description"
     t.float    "total"
-    t.boolean  "is_expense"
-    t.string   "type"
+    t.string   "tags"
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "items", ["category_id"], :name => "index_items_on_category_id"
 
   create_table "organization_users", :force => true do |t|
     t.integer  "user_id"
@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(:version => 20120109021017) do
   create_table "organizations", :force => true do |t|
     t.string   "name"
     t.string   "state"
-    t.boolean  "type"
     t.boolean  "is_verified"
     t.integer  "population"
     t.float    "pop_sq_mi"
@@ -77,12 +76,15 @@ ActiveRecord::Schema.define(:version => 20120109021017) do
     t.string   "fips"
     t.string   "gnis"
     t.integer  "opener_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.float    "latitude"
     t.float    "longitude"
     t.boolean  "is_demo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
+
+  add_index "organizations", ["latitude", "longitude"], :name => "index_organizations_on_latitude_and_longitude"
+  add_index "organizations", ["name", "state"], :name => "index_organizations_on_name_and_state"
 
   create_table "projects", :force => true do |t|
     t.string   "title"
