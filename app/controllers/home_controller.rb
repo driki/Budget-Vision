@@ -13,4 +13,7 @@ class HomeController < ApplicationController
 
   def price
   end
+
+  def contact
+  end
 end

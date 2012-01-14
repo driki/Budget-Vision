@@ -35,4 +35,4 @@ div class="span3" id="left-rail"
   div id="nearby"
     h3 Nearby Cities & Towns
     - for org in Organization.near(@project.organization.name + ", " + @project.organization.state).limit(10)
-      h4 = link_to org.name, organization_path(org)
+      h4 = link_to "#{org.name}, #{org.state}", organization_path(org)

@@ -6,6 +6,7 @@ Budgetvision::Application.routes.draw do
   match "/about" => "home#about"
   match "/price" => "home#price"
   match "/setup" => "home#setup"
+  match "/contact" => "home#contact"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

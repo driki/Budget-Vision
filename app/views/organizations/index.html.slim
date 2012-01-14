@@ -11,12 +11,12 @@ div class="row"
     p Recent updates to cities or towns
     ul
     - for org in @recently_updated_orgs
-      li = link_to org.name, organization_path(org)
-
+      li = link_to "#{org.name}, #{org.state}", organization_path(org)
+  
     h2 Cities and Towns by State
     ul
     - for org in @recently_updated_orgs
-      li = link_to org.name, organization_path(org)
+      li = link_to "#{org.name}, #{org.state}", organization_path(org)
 
   div class="span12"
     - for org in @nearby_orgs do
