@@ -91,6 +91,7 @@ Tabulous.setup do |config|
       #----------------------------------------------------------------------#
       [    :projects         ,    :show           ,    :project_tab          ],
       [    :projects         ,    :categories     ,    :categories_tab       ],
+      [    :categories       ,    :show           ,    :categories_tab       ],      
       [    :projects         ,    :expenses       ,    :expense_tab          ],
       [    :projects         ,    :revenues       ,    :revenue_tab          ],
       [    :projects         ,    :borrowing      ,    :borrowing_tab        ],

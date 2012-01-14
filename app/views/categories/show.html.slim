@@ -1,1 +1,25 @@
-h1 Categories
+javascript:
+  $(document).ready(function() {
+    /* Activating Best In Place */
+    jQuery(".best_in_place").best_in_place();
+  });
+
+== render :partial => 'projects/masthead'
+
+div class="row"
+  == render :partial => 'projects/left_rail'
+
+  div class="span12"
+    h2 = @category.name
+
+  div class="span6 dashboard-widget"
+    h1 300
+    span People work in this department
+
+  div class="span6 dashboard-widget"
+    h1 = best_in_place @category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
+    span Is the cost for this department
+
+  div class="span6 dashboard-widget"
+    h1 = best_in_place @category, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
+    span Is how much this department makes

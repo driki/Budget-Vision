@@ -26,7 +26,7 @@ div class="row"
     div class="modal-header"
       a href="#" class="close" ×
       h3
-        | The dead simple way to create and share your city or town budget.
+        | Help us improve the accuracy of this information
     
     div class="modal-body"
       p
@@ -51,7 +51,7 @@ div class="row"
     span Is how much is being spent
 
   div class="span6 dashboard-widget large"
-    h1 = number_to_currency(@project.revenue_budget, :precision => 0)
+    h1 = best_in_place @project, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
     span Is how much revenue comes in
 
   div class="span12"
@@ -61,7 +61,7 @@ div class="row"
 
   div class="span6 barchart-widget"
     h1 Where the money goes
-    - for category in @project.categories.order("expense_budget desc")
+    - for category in @project.categories.tagged_with("expense").order("expense_budget desc")
       div class="bar-container"
         div class="bar-category-text"
           = link_to category.name, organization_project_category_path(@project.organization, @project, category)
@@ -71,7 +71,7 @@ div class="row"
 
   div class="span6 barchart-widget"
     h1 Where the money comes from
-    - for category in @project.categories.order("revenue_budget desc")
+    - for category in @project.categories.tagged_with("revenue").order("revenue_budget desc")
       div class="bar-container"
         div class="bar-category-text"
           = link_to category.name, organization_project_category_path(@project.organization, @project, category)
@@ -83,4 +83,15 @@ div class="row"
     div id="summary"
       h1 Summary
       p = @project.summary
+
+javascript:
+  $(function () {
+    $("p[rel=popover]")
+      .popover({
+        offset: 10
+      })
+      .click(function(e) {
+        e.preventDefault()
+      })
+  })
           

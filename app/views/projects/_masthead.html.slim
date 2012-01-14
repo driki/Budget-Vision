@@ -13,7 +13,8 @@ javascript:
 div class="row" id="masthead"
 
   div id="header" class="span13"
-    h1 #{@project.organization.name}, #{@project.organization.state}
+    h1 
+      = link_to "#{@project.organization.name}, #{@project.organization.state}", organization_path(@project.organization)
     h2 FY 2012
     p id="make-it-more-accurate" Help improve the accuracy of this information
   
