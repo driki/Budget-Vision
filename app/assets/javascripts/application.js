@@ -8,6 +8,8 @@
 //= require jquery_ujs
 //= require_tree .
 
+//= require twitter/bootstrap
+
 //= require jquery-ui
 //= require jquery.purr
 //= require best_in_place

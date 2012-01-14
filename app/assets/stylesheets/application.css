@@ -5,3 +5,432 @@
  *= require_self
  *= require_tree . 
 */
+
+@font-face {
+    font-family: 'CallunaRegular';
+    src: url('Calluna-Regular-webfont.eot');
+    src: url('Calluna-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('Calluna-Regular-webfont.woff') format('woff'),
+         url('Calluna-Regular-webfont.ttf') format('truetype'),
+         url('Calluna-Regular-webfont.svg#CallunaRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
+
+body {
+  background-image:url('/assets/goovepaper.png');
+  background-repeat:repeat;
+  font-family: 'PT Sans Narrow', 'Arial Narrow', Arial, sans-serif;
+  background-color: #F2F2F2;
+  padding-top: 60px;
+  letter-spacing: 0.025em;
+}
+
+#content {
+  background-color: #FFF;
+  -moz-box-shadow: 0 0 1px #C8B3B3;
+  -webkit-box-shadow: 0 0 1px#C8B3B3;
+  box-shadow: 0 0 1px #C8B3B3;
+  margin-bottom: 20px;
+  border-radius: 2px;
+}
+
+#pitch h1 {
+  font-size: 72px;
+  margin-top: 30px;
+}
+
+#call-to-action {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#example-cities {
+  margin-left: 10px;
+}
+
+#masthead {
+  margin-bottom: 0px;
+}
+
+#header {
+  background: #323A44;
+  min-height: 83px;
+  height: 100%;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-bottom: 10px;
+  margin-bottom: 0px;
+}
+
+#header h1 {
+  font-size: 52px;
+  color: #FFF;
+  margin-bottom: 0px;
+}
+
+#header h2 {
+  font-size: 28px;
+  color: #FFF;
+  margin-bottom: 0px;
+  float: left;
+}
+
+#make-it-more-accurate {
+  background: #323A44;
+  text-align: right;
+  padding-right: 12px;
+  float: right;
+  color: #FFF;
+  font-weight: bold;
+}
+
+.budget-vision-score-data {
+  height: 110px;
+  width: 414px;
+  border-top-right-radius: 2px;
+  background: #323A44;
+  margin-left: 0px;
+  padding-left: 8px;
+  color: #FFFFFF;
+}
+
+#budget-vision-score {
+  background: #FFF;
+  margin-left: 0px;
+  border-bottom: 1px solid #EAF6FF;
+}
+
+#budget-vision-score h1 {
+  text-align: center;
+  font-size: 72px;
+}
+
+#budget-vision-score p {
+  text-align: center;
+  margin-top: 0px;
+}
+
+span.org-fact {
+  font-size: 18px;
+}
+
+.box {
+  background-color: #FFF;
+  padding: 8px;
+  margin-bottom: 16px;
+}
+
+p, table {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+#tabs ul {
+  font-family: PT+Sans+Narrow, serif;
+  background: #FFF;
+  list-style: none;
+  margin: 0;
+  padding-left: -20px;
+
+}
+
+#tabs li {
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #EAF6FF;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+table td {
+  border-top: 1px solid #EAF6FF;
+}
+
+#tabs li a {
+  color: #000;
+}
+
+#tabs li.active.enabled {
+}
+
+
+#left-rail {
+  border-right: 1px solid #D9E7F1;
+  padding-left: 20px;
+}
+
+#characteristics, #nearby {
+  margin-top: 20px;
+}
+
+.nav {
+  font-family: PT+Sans+Narrow, serif;
+  font-size: 18px;
+}
+
+div.org-card h2 {
+  padding-left: 8px;
+}
+
+div.demo-chart {
+  text-align: center;
+}
+
+.demo-chart img {
+  width: 340px;
+  padding-bottom: 20px;
+}
+
+div.verified-true {
+  position: relative;
+  height: 70px;
+  width: 70px;
+  left: -30px;
+  top: 0px;
+  float: left;
+  background-image: url('/assets/verified.jpg');
+  background-image: no-repeat;
+  background-size: 100%;
+}
+
+div.lede p {
+  line-height: 28px;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.category-bar-chart {
+  background: #AA4643;
+  height: 65px;
+}
+
+.expense {
+  background: #AA4643;
+}
+
+.revenue {
+  background: #1CAA1C;
+}
+
+table.bar-chart h2 {
+  line-height: 18px;
+}
+
+table.bar-chart p {
+  margin-bottom: 5px;
+}
+
+td.bar-chart {
+  background: #F5F8FF;
+  padding: 0px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  height: 65px;
+}
+
+.chart {
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
+.quick-stats {
+  font-size: 16px;
+}
+
+div#price-header {
+
+}
+
+div#price-features {
+  margin-top: 30px;
+}
+
+div#pricing {
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 8px;
+  margin-left: 0px;
+}
+
+div.price-row {
+  margin-left: 10px;
+  padding-top: 50px;
+}
+
+div.price {
+  background-color:rgba(255,255,255,0.9);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+div#price {
+  text-align: center;
+  width: 50%;
+}
+
+table#price-examples {
+  margin-bottom: 5px;
+}
+
+form#price-calculator fieldset {
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+form#price-calculator fieldset, label {
+  text-align: left;
+  font-weight: bold;
+}
+
+form#price-calculator input {
+  margin-top: 5px;
+}
+
+hr {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+table.features th {
+  font-size: 1.1em;
+}
+
+table.features {
+  margin-bottom: 50px;
+}
+
+div.feature {
+  margin-bottom: 50px;
+  margin-top: 40px;
+  padding-top: 10px;
+  border-top-style: solid;
+  border-width: 1px;
+  border-color: #EEEEEE;
+}
+
+td.yes {
+  font-weight: bold;
+}
+
+table.items {
+  table-layout:fixed;
+}
+
+table.items td {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div.screenshot img {
+  width: 650px;
+  padding: 5px
+  -moz-box-shadow: 10px 10px 5px #ccc;
+  -webkit-box-shadow: 10px 10px 5px #ccc;
+  box-shadow: 10px 10px 5px #ccc;
+}
+
+.bio {
+  margin-bottom: 20px;
+}
+
+.bio img {
+  width: 350px;
+}
+
+.number {
+  text-align: right;
+}
+
+div.homepage-table {
+ margin-bottom: 30px;
+}
+
+div.dashboard-widget {
+  background: #F5F3EE;
+  margin-bottom: 0px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-radius: 2px;
+  padding-bottom: 20px;
+}
+
+div.dashboard-widget h1 {
+  margin-bottom: 8px;
+  margin-left: 0px;
+  padding-left: 20px;
+  color: #000;
+  font-size: 52px;
+}
+
+div.dashboard-widget span {
+  padding-left: 20px;
+}
+
+.dashboard-number {
+ font-size: 32px;
+ font-weight: bold;
+ color: #000;
+}
+
+div.dashboard-text {
+ margin-top: 2px;
+ padding-top: 2px;
+}
+
+div.barchart-widget {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+div.bar-container {
+ background: #fff;
+ width: 100%;
+ margin-bottom: 10px;
+}
+
+div.bar {
+ background: #EAECEF;
+ margin-top: 4px;
+}
+
+div.bar-percent {
+  height: 8px;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 4px;
+}
+
+div.bar-percent-text {
+  padding-top: 5px;
+}
+
+div.bar-category-text {
+ font-size: 18px;
+}
+
+.revenue {
+  background: #85D578;
+  border: 1px solid #85D578;
+  box-shadow: inset 0 0px 1px #85D578;
+  -o-box-shadow: inset 0 0px 1px #85D578;
+  -webkit-box-shadow: inset 0 0px 1px #85D578;
+  -moz-box-shadow: inset 0 0px 1px #85D578;
+}
+
+.expense {
+  background: #BF3030;
+  border: 1px solid #BF3030;
+  box-shadow: inset 0 0px 1px #BF3030;
+  -o-box-shadow: inset 0 0px 1px #BF3030;
+  -webkit-box-shadow: inset 0 0px 1px #BF3030;
+  -moz-box-shadow: inset 0 0px 1px #BF3030;
+}
