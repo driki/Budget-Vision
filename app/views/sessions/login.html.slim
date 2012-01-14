@@ -1,15 +1,18 @@
-div class="hero-unit row"
-  h1 Login
+div class="row"
+  div id="pitch" class="span8 offset1"
+    h1 Login
 
-  p Hi there, you need to login in order to start working with Budget Vision. Either login with your Twitter or Facebook account or contact
-    a href="matt.macdonald@gmail.com" matt.macdonald@gmail.com
-    ' so we can get you setup.
+    p
+      ' Hi there, you need to login in order to start working with Budget Vision. Either login with your Twitter or Facebook account or contact
+      a href="matt.macdonald@gmail.com"
+        ' matt.macdonald@gmail.com
+      ' so we can get you setup.
 
-  div class="alert-actions"
-    a class="btn primary large" href="/auth/twitter" Login with Twitter
-    '  or 
-    a class="btn primary large" href="/auth/facebook" Login with Facebook
-    
-    - if :development
+    div class="alert-actions"
+      a class="btn primary large" href="/auth/twitter" Login with Twitter
       '  or 
-      a class="btn secondary large" href="/auth/developer" Developer
+      a class="btn primary large" href="/auth/facebook" Login with Facebook
+      
+      - if :development
+        '  or 
+        a class="btn secondary large" href="/auth/developer" Developer
