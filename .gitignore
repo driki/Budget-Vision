@@ -13,3 +13,10 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+app/assets/.DS_Store
+app/assets/images/.DS_Store
+.DS_Store
+app/assets/images/glyphicons/png/.DS_Store
+app/assets/images/glyphicons/.DS_Store
+.gitignore

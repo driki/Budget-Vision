@@ -1,3 +1,15 @@
+javascript:
+  $(function () {
+    $("#budget-vision-score")
+      .popover({
+        offset: 10,
+        placement: "left"
+      })
+      .click(function(e) {
+        e.preventDefault()
+      })
+  })
+
 div class="row" id="masthead"
 
   div id="header" class="span13"
@@ -5,7 +17,7 @@ div class="row" id="masthead"
     h2 FY 2012
     p id="make-it-more-accurate" Help improve the accuracy of this information
   
-  div id="budget-vision-score" class="span3"
+  div id="budget-vision-score" class="span3" title="What is the Budget Vision Score&trade;?" data-content="The score is calculated by looking at how much detail is added to a budget as compared to the overall size. Smaller budgets will need less detail while larger budgets require more."
     p Budget Vision Score &trade;
     h1 23
     p What is this?

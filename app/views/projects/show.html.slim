@@ -2,12 +2,20 @@ javascript:
   $(document).ready(function() {
     /* Activating Best In Place */
     jQuery(".best_in_place").best_in_place();
-    
-    $('#modal').modal({
-      keyboard: true,
-      show: true
-    });
   });
+
+- if session[:show_welcome]
+  javascript:
+    $(document).ready(function() {
+      /* Activating Best In Place */
+      jQuery(".best_in_place").best_in_place();
+      
+      $('#modal').modal({
+        keyboard: true,
+        show: true
+      });
+    });
+
 
 == render :partial => 'masthead'
 
@@ -28,7 +36,7 @@ div class="row"
 
     div class="modal-footer"
       a href="#" class="btn primary" You work for a city or town
-      a href="#" class="btn secondary" You live hear or nearby
+      a href="#" class="btn secondary" You live here or nearby
 
   div class="span6 dashboard-widget large"
     h1 = number_with_delimiter(@project.organization.population)
@@ -75,3 +83,4 @@ div class="row"
     div id="summary"
       h1 Summary
       p = @project.summary
+          
