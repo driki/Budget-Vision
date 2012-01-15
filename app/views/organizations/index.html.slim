@@ -18,16 +18,9 @@ div class="row"
 
   div class="span11"
 
-    - if @georesult.nil?
+    - if !@georesult.nil?
       h1 Search for your city or town.
 
-      h1 States
-      - for state in states
-        div class="state"
-          h2
-            = link_to state[1], states_path(state[0])
-
-    - else
       h2 We think you are near #{@georesult.city}
       - for org in @nearby_orgs do
         div class="org-card span5"
@@ -52,3 +45,8 @@ div class="row"
               tr
                 td Percent of housing that is vacant
                 td class="number" #{number_with_delimiter(org.housing_percent_vacant)}
+    h1 States
+    - for state in states
+      div class="state"
+        h2
+          = link_to state[1], states_path(state[0])
