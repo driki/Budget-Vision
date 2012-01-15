@@ -77,7 +77,7 @@ class Organization < ActiveRecord::Base
                       "Police Department",
                       "Public Works",
                       "Recreation Department",
-                      "Parks & Recreation"
+                      "Parks & Recreation",
                       "Debt Service",
                       "County Taxes",
                       "Other Assesments",
