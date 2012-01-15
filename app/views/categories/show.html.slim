@@ -4,13 +4,26 @@ javascript:
     jQuery(".best_in_place").best_in_place();
   });
 
+javascript:
+  $(function () {
+    $("#version-history")
+      .popover({
+        offset: 10,
+        placement: "right"
+      })
+      .click(function(e) {
+        e.preventDefault()
+      })
+  })  
+
 == render :partial => 'projects/masthead'
 
 div class="row"
   == render :partial => 'projects/left_rail'
 
   div class="span12"
-    h2 = @category.name
+    h1 = @category.name
+    a id="version-history" href="#" class="btn secondary" title="Recent changes" data-content="<ul><li>#{@category.versions.last.event}</li></ul>" Version History
 
   div class="span6 dashboard-widget"
     h1 300

@@ -3,7 +3,7 @@ module ApplicationHelper
   def remote_ip
       '1.2.3.4'
   end
-  
+
   def states
     states = {
       'AL' => 'Alabama',

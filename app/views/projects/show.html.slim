@@ -36,28 +36,31 @@ div class="row"
 
     div class="modal-footer"
       a href="#" class="btn primary" You work for a city or town
-      a href="#" class="btn secondary" You live here or nearby
+      a href="#" class="btn secondary" You live here or nearby    
 
   div class="span6 dashboard-widget large"
     h1 = number_with_delimiter(@project.organization.population)
-    span People live here
+    p People live here
 
   div class="span6 dashboard-widget large"
     h1 800
-    span Employees work here
+    p Employees work here
 
   div class="span6 dashboard-widget large"
     h1 = best_in_place @project, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-    span Is how much is being spent
+    p Is how much is being spent
 
   div class="span6 dashboard-widget large"
     h1 = best_in_place @project, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-    span Is how much revenue comes in
+    p Is how much revenue comes in
 
   div class="span12"
     div id="overview"
-      h1 Overview
-      p = best_in_place @project, :description, :type => :textarea, :ok_button => 'Save', :cancel_button => 'Cancel', :nil => "Click me to add an overview!"
+      h1
+        ' Overview
+        a id="edit-overview" href="#" style="font-size: 14px;" edit this
+      p = best_in_place @project, :description, :type => :textarea, :ok_button => 'Save', :cancel_button => 'Cancel', :nil => "Click me to add an overview!", :activator => "#edit-overview"
+      
 
   div class="span6 barchart-widget"
     h1 Where the money goes

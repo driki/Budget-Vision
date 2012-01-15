@@ -25,6 +25,7 @@ gem 'flickraw'
 gem 'formtastic-bootstrap'
 gem 'best_in_place'
 gem 'activerecord-import'
+gem 'differ'
 
 
 # Gems used only for assets and not required
