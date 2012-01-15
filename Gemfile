@@ -24,6 +24,7 @@ gem 'ffaker'
 gem 'flickraw'
 gem 'formtastic-bootstrap'
 gem 'best_in_place'
+gem 'activerecord-import'
 
 
 # Gems used only for assets and not required

@@ -18,6 +18,11 @@ class OrganizationsController < ApplicationController
 
   def show
     @organization = Organization.find(params[:id])
+    # the first time that an organization is viewed it won't have any projects
+    # so create one as a stub for people to start with
+    if @organization.projects.nil?
+      @organization.create_stub_project
+    end
     redirect_to organization_project_path(@organization, @organization.projects.last)
   end
 
