@@ -77,10 +77,14 @@ class Organization < ActiveRecord::Base
                       "Police Department",
                       "Public Works",
                       "Recreation Department",
-                      "Public Safety",
-                      "Debt",
+                      "Parks & Recreation"
+                      "Debt Service",
+                      "County Taxes",
+                      "Other Assesments",
+                      "Library",
                       "Other",
                       "Health & Safety",
+                      "General Assistance",
                       "School Department"]
 
     expense_names.each do |name|
@@ -97,11 +101,14 @@ class Organization < ActiveRecord::Base
     end
 
     revenue_names = ["State Aid", 
-                      "Property Tax",
+                      "Property Taxes",
                       "Local Receipts",
+                      "Interst Income",
                       "Federal Stimulus",
                       "Grants",
-                      "Fees"]
+                      "Service Fees",
+                      "Other",
+                      "Permits & Fees"]
 
     revenue_names.each do |name|
       category = Category.new
