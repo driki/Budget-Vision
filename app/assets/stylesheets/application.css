@@ -64,7 +64,7 @@ body {
   border-top-right-radius: 2px;
   padding-top: 20px;
   padding-left: 20px;
-  padding-bottom: 10px;
+  padding-bottom: 0px;
   margin-bottom: 0px;
 }
 
@@ -125,9 +125,10 @@ span.org-fact {
 }
 
 .box {
-  background-color: #FFF;
+  background-color: #EAF6FF;
   padding: 8px;
   margin-bottom: 16px;
+  border-radius: 4px;
 }
 
 p, table {
@@ -159,10 +160,6 @@ table td {
 #tabs li a {
   color: #000;
 }
-
-#tabs li.active.enabled {
-}
-
 
 #left-rail {
   border-right: 1px solid #D9E7F1;
@@ -203,12 +200,6 @@ div.verified-true {
   background-size: 100%;
 }
 
-div.lede p {
-  line-height: 28px;
-  font-size: 20px;
-  margin-bottom: 20px;
-}
-
 .category-bar-chart {
   background: #AA4643;
   height: 65px;
@@ -247,19 +238,8 @@ td.bar-chart {
   font-size: 16px;
 }
 
-div#price-header {
-
-}
-
 div#price-features {
-  margin-top: 30px;
-}
-
-div#pricing {
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  padding: 8px;
-  margin-left: 0px;
+  margin-bottom: 30px;
 }
 
 div.price-row {
@@ -311,7 +291,6 @@ table.features {
 
 div.feature {
   margin-bottom: 50px;
-  margin-top: 40px;
   padding-top: 10px;
   border-top-style: solid;
   border-width: 1px;
@@ -335,7 +314,7 @@ table.items td {
 }
 
 div.screenshot img {
-  width: 650px;
+  width: 550px;
   padding: 5px
   -moz-box-shadow: 10px 10px 5px #ccc;
   -webkit-box-shadow: 10px 10px 5px #ccc;

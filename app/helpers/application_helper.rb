@@ -4,8 +4,8 @@ module ApplicationHelper
       '1.2.3.4'
   end
   
-  def full_state_name(abbreviation)
-    state_abbr = {
+  def states
+    states = {
       'AL' => 'Alabama',
       'AK' => 'Alaska',
       'AS' => 'America Samoa',
@@ -65,6 +65,10 @@ module ApplicationHelper
       'WI' => 'Wisconsin',
       'WY' => 'Wyoming'
     }
-    state_name = state_abbr.[](abbreviation)
+    return states
+  end
+
+  def full_state_name(abbreviation)
+    state_name = states.[](abbreviation)
   end
 end

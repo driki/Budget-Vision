@@ -1,18 +1,19 @@
 class OrganizationsController < ApplicationController
-  load_and_authorize_resource :organization
-  skip_authorize_resource :only => :show
+  load_resource :organization
 
   def index
-    ip_address = nil
     if request.remote_ip == '127.0.0.1'
-      # Hard coded remote address
-      ip_address = '4.21.169.0'
+      ip_address = nil
     else
       ip_address = request.remote_ip
+      @georesult = Geocoder.search(ip_address)[0]
+      @nearby_orgs = Organization.near(ip_address, 10, :limit => 4)
     end
-    @georesult = Geocoder.search(ip_address)[0]
-    @nearby_orgs = Organization.near(ip_address, 10, :limit => 4)
-    @recently_updated_orgs = Organization.order("updated_at desc").limit(5)
+    @recently_updated_projects = Project.order("updated_at desc").limit(20)
+  end
+
+  def states
+    @organizations = Organization.find_all_by_state(params[:state_abbr]).group_by{|u| u.name[0]}
   end
 
   def show

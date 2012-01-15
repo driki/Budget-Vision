@@ -1,18 +1,15 @@
+require "#{Rails.root}/app/helpers/application_helper"
+include ApplicationHelper
+
 namespace :db do
   desc "Fill database"
 
   task :populate_organizations => :environment do
     [Organization].each(&:delete_all)
 
-
-    state_list = ["MA",
-                  "ME",
-                  "NH",
-                  "VT",
-                  "CT"
-                ]
-    state_list.each do |state|
-      Organization.load_census(state)
+    # states from ApplicationHelper
+    states.each do |state|
+      Organization.load_census(state[0])
     end
         
   end
@@ -24,7 +21,7 @@ namespace :db do
     
     orgs = Organization.all
     orgs.each do |org|
-      puts "STARTING: " + org.name + " TIME: " + Time.now.asctime
+      puts "STARTING: #{org.name}, #{org.state} TIME: #{Time.now.asctime}"
 
       1.times do |p|
         project = Project.new
@@ -84,7 +81,7 @@ namespace :db do
         org.projects << project
       
       end
-      puts "ABOUT TO SAVE: " + org.name + " TIME: " + Time.now.asctime
+      puts "STARTING: #{org.name}, #{org.state} TIME: #{Time.now.asctime}\n"
       org.updated_at = Time.now
       org.save
     end
