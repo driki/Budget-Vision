@@ -1,5 +1,6 @@
 class OrganizationsController < ApplicationController
-  load_and_authorize_resource :organization
+  # no need to load and authorize an Organization for the "index" and "states" action
+  load_and_authorize_resource :organization, :except => [:index, :states]
 
   def index
     if request.remote_ip == '127.0.0.1'
