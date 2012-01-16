@@ -27,6 +27,9 @@ div class="row"
   div class="span11"
 
     h1 Search for your city or town.
+    = form_tag("/search", :method => "get") do
+      = text_field_tag(:q)
+      = submit_tag("Search", :class=> "btn")
 
     - if !@georesult.nil?
       h2 We think you are near #{@georesult.city}

@@ -2,25 +2,32 @@
 <html>
 <head>
   <title>The page you were looking for doesn't exist (404)</title>
-  <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-    div.dialog {
-      width: 25em;
-      padding: 0 4em;
-      margin: 4em auto 0 auto;
-      border: 1px solid #ccc;
-      border-right-color: #999;
-      border-bottom-color: #999;
-    }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
-  </style>
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700" rel="stylesheet" type="text/css" />
+  <link href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/application.css?body=1" media="screen" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
+  <div class="container" id="content">
   <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <h1>The page you were looking for doesn't exist.</h1>
-    <p>You may have mistyped the address or the page may have moved.</p>
+  <div id="pitch" class="row" style="text-align: center; padding-top: 20px;">
+    <div class="span16">
+      <iframe width="480" height="360" src="http://www.youtube.com/embed/mBS0OWGUidc" frameborder="0" allowfullscreen></iframe>
+      <h1>PAGE NOT FOUND</h1>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="span4">
+      <img height="300px;" src="/assets/homepage-icon.jpg"/>
+    </div>
+    <div class="span10">
+      <h1>These links might be of assistance.</h1>
+      <ul>
+        <li><h2><a href="/">Head to our homepage</a></h2></li>
+        <li><h2><a href="/organizations">Here is our list of cities and towns</a></li>
+      </ul>
+    </div>
   </div>
 </body>
 </html>

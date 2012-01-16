@@ -70,9 +70,7 @@ div class="row"
     div id="overview"
       h1
         ' Overview
-        - if can? :update, @project
-          a id="edit-overview" href="#" style="font-size: 14px;" edit this
-      p = best_in_place @project, :description, :type => :textarea, :ok_button => 'Save', :cancel_button => 'Cancel', :activator => "#edit-overview"
+      p = best_in_place @project, :description, :type => :textarea
 
   div class="row"
     div class="span6 barchart-widget"
