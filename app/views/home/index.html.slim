@@ -40,7 +40,7 @@ div id="example-cities" class="row"
 hr
 
 div class="row" id="pricing"
-  div class="span5 offset1"
+  div class="span5"
     h2 Up front pricing
     div class="box"
       table id="price-examples" class="condensed-table"
@@ -80,12 +80,8 @@ div class="row" id="pricing"
             td class="number" = number_with_delimiter(@example_city_5.population)
             td class="number" = Money.new_with_dollars(@example_city_5.price/12).to_money.format(:no_cents => true)
 
-      div
-        form id="price-calculator" action="/price" method="POST"
-          fieldset
-            labelCity Name
-            input class="" id="name" name="name" size="16" type="text" value=""
-            input class="btn primary" type="submit" value="Calculate your city or town price"
+      div style="text-align: center;"
+        a href="/organizations" class="btn primary large" Find your city or town
 
   div class="span10"
     h2 8 awesome reasons to use Budget Vision
@@ -183,11 +179,11 @@ div class="row feature"
     img src="/assets/budget-screenshot-comparisons.png"
 
 div class="row feature"
-  div class="span5"
+  div class="span5 offset1"
     h2 Interactive Charts
     p
       | Goodbye static spreadsheets, hello interactive charts. Budget Vision is extremely easy for budget novices to dive in, view and understand the details of your budget. All the beautiful charts in Budget Vision are created using the data you provide, update the data and the chart is also updated.
-  div class="span11 screenshot"
+  div class="span10 screenshot"
     img src="/assets/budget-screenshot-charts.png"
 
 div class="row feature"
@@ -208,11 +204,11 @@ div class="row feature"
     img src="/assets/budget-screenshot-export.png"
 
 div class="row feature"
-  div class="span5"
+  div class="span5 offset1"
     h2 Trends
     p
       | Hopefully your budgets aren't shifting wildly year to year, but the automatically generated trending charts in Budget Vision will help you identify patterns and show your citizens the long term picture.
-  div class="span11 screenshot"
+  div class="span10 screenshot"
     img src="/assets/budget-screenshot-trends.png"
 
 div class="row feature"

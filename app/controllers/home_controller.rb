@@ -18,6 +18,10 @@ class HomeController < ApplicationController
   def price
   end
 
+  def share
+    @organization = Organization.find(params[:id])
+  end
+
   def contact
   end
 end

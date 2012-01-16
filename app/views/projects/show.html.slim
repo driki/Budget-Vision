@@ -7,12 +7,13 @@ javascript:
 - if session[:show_welcome]
   javascript:
     $(document).ready(function() {
-      /* Activating Best In Place */
-      jQuery(".best_in_place").best_in_place();
-      
       $('#modal').modal({
         keyboard: true,
         show: true
+      });
+
+      $('#ok-btn').click(function() {
+        $('#modal').hide();
       });
     });
 
@@ -26,17 +27,28 @@ div class="row"
     div class="modal-header"
       a href="#" class="close" ×
       h3
-        | Help us improve the accuracy of this information
+        | Hi there!
     
     div class="modal-body"
-      p
-        | Hi there!
-      p
-        | Budget Vision&trade; allows you to view, edit and collaborate with others to learn more about your city or town budget. You can explore budgets, view goals and see how individual line items are spent.
+      div id="modal-welcome"
+        p
+          | Budget Vision is similar to Wikipedia, but built specifically for city and town budgets. It is an easy way to create, view, edit and collaborate with others to learn more about how your city or town generates revenue and spends money.
+        p Here are three easy ways to get started.
+        ul
+          li
+            p
+              = link_to "Add, edit or correct information that you see here", organization_path(@project.organization)
+          li
+            p 
+              a href="/about" Learn more about Budget Vision
+          li
+            p
+              a href="/share/#{@project.organization.id}" Share this tool with a city or town employee in #{@project.organization.name}
 
     div class="modal-footer"
-      a href="#" class="btn primary" You work for a city or town
-      a href="#" class="btn secondary" You live here or nearby    
+      a id="ok-btn" href="#" class="btn primary" Got it thanks
+
+  == render :partial => 'not_verified'
 
   div class="span6 dashboard-widget large"
     h1 = number_with_delimiter(@project.organization.population)

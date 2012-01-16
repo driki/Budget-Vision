@@ -9,7 +9,7 @@ class OrganizationsController < ApplicationController
       @georesult = Geocoder.search(ip_address)[0]
       @nearby_orgs = Organization.near(ip_address, 10, :limit => 4)
     end
-    @recently_updated_projects = Project.order("updated_at desc").limit(20)
+    @recently_updated_projects = Project.order("updated_at desc").limit(10)
   end
 
   def states

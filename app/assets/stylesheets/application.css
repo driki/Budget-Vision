@@ -120,6 +120,11 @@ p#make-it-more-accurate {
   margin-top: 0px;
 }
 
+.modal hr {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 span.org-fact {
   font-size: 18px;
 }
@@ -245,6 +250,10 @@ td.bar-chart {
 
 .quick-stats {
   font-size: 16px;
+}
+
+div#pricing {
+  margin-left: 10px;
 }
 
 div#price-features {
