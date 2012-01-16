@@ -4,12 +4,6 @@ class ProjectsController < ApplicationController
 
   load_and_authorize_resource :project
 
-  def show
-  end
-
-  def categories
-  end
-
   def expenses
     @categories = @project.categories(:type => "Expenses")
   end
@@ -18,19 +12,14 @@ class ProjectsController < ApplicationController
     @categories = @project.categories(:type => "Revenues")
   end
 
-  def borrowing
-  end
+  def edit
 
-  def goals
-  end
-
-  def forecasts
   end
 
   def update
     respond_to do |format|
       if @project.update_attributes(params[:project])
-        format.html { redirect_to(@project, :notice => 'project was successfully updated.') }
+        format.html { redirect_to organization_path(@project.organization, :notice => 'project was successfully updated.') }
         format.json { respond_with_bip(@project) }
       else
         format.html { render :action => "edit" }
