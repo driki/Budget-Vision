@@ -17,28 +17,25 @@ hr
 
 div id="example-cities" class="row"
   div class="span5"
-    h3 Hermon, ME
+    h3 #{@featured_city_0.name}, #{@featured_city_0.state}
     p
       | Hermon is a town in Penobscot County, Maine, United States. The population was 5,416 at the 2010 census. Clint Deschane the Town Manager of Hermon has been very helpful in providing feedback and information required to create this demonstration.
     p
-      a class="btn large" href="/organizations/211/projects/3"
-        | Explore this budget &raquo;
+      = link_to "Explore this budget", organization_path(@featured_city_0), :class => "btn large"
   
   div class="span5"
-    h3 Mt. Desert, ME
+    h3 #{@featured_city_1.name}, #{@featured_city_1.state}
     p
       | Mount Desert is a town on Mount Desert Island in Hancock County, Maine, United States. The population was 2,109 at the 2000 census. My father, Mike MacDonald, has been instrumental in helping me learn about the inner workings of local governments.
     p
-      a class="btn large" href="/organizations/307/projects/1/expenses"
-        | Explore this budget &raquo;
+      = link_to "Explore this budget", organization_path(@featured_city_1), :class => "btn large"
   
   div class="span5"
-    h3  Watertown, MA
+    h3 #{@featured_city_2.name}, #{@featured_city_2.state}
     p
       |The Town of Watertown is a city in Middlesex County, Massachusetts, United States. The population was 31,915 at the 2010 census. Matt moved to Watertown in the spring of 2010 and wanted to learn as much as he could about how his city operates.
     p
-      a class="btn large" href="/organizations/783/projects/4/expenses"
-        | Explore this budget &raquo;
+      = link_to "Explore this budget", organization_path(@featured_city_2), :class => "btn large"
 
 hr
 
@@ -54,32 +51,32 @@ div class="row" id="pricing"
             th style="width: 75px;" Per month
         tbody
           tr
-            td = "#{@example_city_0.name},  #{@example_city_0.state}"
+            td = link_to "#{@example_city_0.name},  #{@example_city_0.state}", organization_path(@example_city_0)
             td class="number" = number_with_delimiter(@example_city_0.population)
             td class="number" = Money.new_with_dollars(@example_city_0.price/12).format(:no_cents => true)
 
           tr
-            td = "#{@example_city_1.name},  #{@example_city_1.state}"
+            td = link_to "#{@example_city_1.name},  #{@example_city_1.state}", organization_path(@example_city_1)
             td class="number" = number_with_delimiter(@example_city_1.population)
             td class="number" = Money.new_with_dollars(@example_city_1.price/12).format(:no_cents => true)
 
           tr
-            td = "#{@example_city_2.name},  #{@example_city_2.state}"
+            td = link_to "#{@example_city_2.name},  #{@example_city_2.state}", organization_path(@example_city_2)
             td class="number" = number_with_delimiter(@example_city_2.population)
             td class="number" = Money.new_with_dollars(@example_city_2.price/12).to_money.format(:no_cents => true)
 
           tr
-            td = "#{@example_city_3.name},  #{@example_city_3.state}"
+            td = link_to "#{@example_city_3.name},  #{@example_city_3.state}", organization_path(@example_city_3)
             td class="number" = number_with_delimiter(@example_city_3.population)
             td class="number" = Money.new_with_dollars(@example_city_3.price/12).to_money.format(:no_cents => true)
 
           tr
-            td = "#{@example_city_4.name},  #{@example_city_4.state}"
+            td = link_to "#{@example_city_4.name},  #{@example_city_4.state}", organization_path(@example_city_4)
             td class="number" = number_with_delimiter(@example_city_4.population)
             td class="number" = Money.new_with_dollars(@example_city_4.price/12).to_money.format(:no_cents => true)
 
           tr
-            td = "#{@example_city_5.name},  #{@example_city_5.state}"
+            td = link_to "#{@example_city_5.name},  #{@example_city_5.state}", organization_path(@example_city_5)
             td class="number" = number_with_delimiter(@example_city_5.population)
             td class="number" = Money.new_with_dollars(@example_city_5.price/12).to_money.format(:no_cents => true)
 

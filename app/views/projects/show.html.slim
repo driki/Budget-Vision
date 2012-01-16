@@ -30,7 +30,7 @@ div class="row"
     
     div class="modal-body"
       p
-        | Hi There!
+        | Hi there!
       p
         | Budget Vision&trade; allows you to view, edit and collaborate with others to learn more about your city or town budget. You can explore budgets, view goals and see how individual line items are spent.
 
@@ -43,7 +43,7 @@ div class="row"
     p People live here
 
   div class="span6 dashboard-widget large"
-    h1 800
+    h1 = best_in_place @project.organization, :employee_count, :type => :input, :nil => "0"
     p Employees work here
 
   div class="span6 dashboard-widget large"
@@ -59,7 +59,7 @@ div class="row"
       h1
         ' Overview
         a id="edit-overview" href="#" style="font-size: 14px;" edit this
-      p = best_in_place @project, :description, :type => :textarea, :ok_button => 'Save', :cancel_button => 'Cancel', :nil => "Click me to add an overview!", :activator => "#edit-overview"
+      p = best_in_place @project, :description, :type => :textarea, :ok_button => 'Save', :cancel_button => 'Cancel', :activator => "#edit-overview"
       
 
   div class="span6 barchart-widget"
@@ -84,8 +84,10 @@ div class="row"
     
   div class="span12"
     div id="summary"
-      h1 Summary
-      p = @project.summary
+      h1
+        ' Summary
+        a id="edit-summary" href="#" style="font-size: 14px;" edit this
+      p = best_in_place @project, :summary, :type => :textarea, :activator => "#edit-summary"
 
 javascript:
   $(function () {

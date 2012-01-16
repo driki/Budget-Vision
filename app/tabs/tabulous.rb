@@ -91,7 +91,7 @@ Tabulous.setup do |config|
       #----------------------------------------------------------------------#
       [    :projects         ,    :show           ,    :project_tab          ],
       [    :projects         ,    :categories     ,    :categories_tab       ],
-      [    :categories       ,    :show           ,    :categories_tab       ],      
+      [    :categories       ,    :show           ,    :categories_tab       ],
       [    :projects         ,    :expenses       ,    :expense_tab          ],
       [    :projects         ,    :revenues       ,    :revenue_tab          ],
       [    :projects         ,    :borrowing      ,    :borrowing_tab        ],
@@ -116,7 +116,7 @@ Tabulous.setup do |config|
   # By default, when an action renders and no tab is defined for that action,
   # an error is thrown.  If you turn this off, no error is thrown and the
   # tabs are simply not rendered.
-  config.raise_error_if_no_tab_found = true
+  config.when_action_has_no_tab = :rais_error
 
   # By default, div elements are used in the tab markup.  When html5 is
   # true, nav elements are used instead.

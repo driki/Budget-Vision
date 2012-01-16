@@ -72,20 +72,35 @@ class Organization < ActiveRecord::Base
     project.revenue_budget = 0
     project.average_tax_bill = 0
 
-    expense_names = ["Fire Department", 
+    department_names = ["Fire Department", 
                       "General Government",
                       "Police Department",
                       "Public Works",
                       "Recreation Department",
                       "Parks & Recreation",
+                      "Library",
+                      "Health & Safety",
+                      "School Department"]
+
+    department_names.each do |name|
+      category = Department.new
+      category.name = name
+      category.goal = ""
+      category.description = ""
+      category.challenge = ""
+      category.expense_budget = 0
+      category.revenue_budget = 0
+      category.tag_list = "expense"
+
+      project.categories << category
+    end
+
+    expense_names = [
                       "Debt Service",
                       "County Taxes",
                       "Other Assesments",
-                      "Library",
                       "Other",
-                      "Health & Safety",
-                      "General Assistance",
-                      "School Department"]
+                      "General Assistance"]
 
     expense_names.each do |name|
       category = Category.new
@@ -103,7 +118,7 @@ class Organization < ActiveRecord::Base
     revenue_names = ["State Aid", 
                       "Property Taxes",
                       "Local Receipts",
-                      "Interst Income",
+                      "Interest Income",
                       "Federal Stimulus",
                       "Grants",
                       "Service Fees",

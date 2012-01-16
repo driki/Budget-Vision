@@ -23,16 +23,17 @@ div class="row"
 
   div class="span12"
     h1 = @category.name
-    a id="version-history" href="#" class="btn secondary" title="Recent changes" data-content="<ul><li>#{@category.versions.last.event}</li></ul>" Version History
+    a id="version-history" href="#" class="btn secondary" title="Recent changes" data-content="#{@category.versions.last.changeset}" Version History
 
-  div class="span6 dashboard-widget"
-    h1 300
-    span People work in this department
+  - if @category.class.name.eql?("Department")
+    div class="span6 dashboard-widget"
+      h1 = best_in_place @category, :people, :type => :input
+      p People work in this department
 
   div class="span6 dashboard-widget"
     h1 = best_in_place @category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-    span Is the cost for this department
+    p Is the cost for this department
 
   div class="span6 dashboard-widget"
     h1 = best_in_place @category, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-    span Is how much this department makes
+    p Is how much this department makes

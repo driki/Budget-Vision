@@ -31,11 +31,14 @@ class OrganizationsController < ApplicationController
   end
 
   def update
-    @organization = Organization.find(params[:id])
-    if @organization.update_attributes(params[:organization])
-       redirect_to :action => 'show', :id => @organization
-    else
-      render :action => 'edit'
+    respond_to do |format|
+      if @organization.update_attributes(params[:organization])
+        format.html { redirect_to(@organization, :notice => 'organization was successfully updated.') }
+        format.json { respond_with_bip(@organization) }
+      else
+        format.html { render :action => "edit" }
+        format.json { respond_with_bip(@organization) }
+      end
     end
   end
 

@@ -1,5 +1,9 @@
 class HomeController < ApplicationController
   def index
+    @featured_city_0 = Organization.where(:name => "Hermon", :state => "ME").first
+    @featured_city_1 = Organization.where(:name => "Mount Desert", :state => "ME").first
+    @featured_city_2 = Organization.where(:name => "Watertown Town", :state => "MA").first
+
     @example_city_0 = Organization.where(:name => "Union", :state => "CT").first
     @example_city_1 = Organization.where(:name => "Salisbury", :state => "NH").first
     @example_city_2 = Organization.where(:name => "Hermon", :state => "ME").first

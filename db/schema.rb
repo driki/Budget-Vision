@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120115210815) do
+ActiveRecord::Schema.define(:version => 20120115231355) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(:version => 20120115210815) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "ancestry"
+    t.string   "type"
+    t.integer  "people"
   end
 
   create_table "forecasts", :force => true do |t|
@@ -82,6 +84,8 @@ ActiveRecord::Schema.define(:version => 20120115210815) do
     t.boolean  "is_demo"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "employee_count"
+    t.string   "type"
   end
 
   add_index "organizations", ["latitude", "longitude"], :name => "index_organizations_on_latitude_and_longitude"

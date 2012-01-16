@@ -34,6 +34,10 @@ Budgetvision::Application.routes.draw do
         get 'forecasts'
       end
 
+      resources :departments do
+        resources :items
+      end
+
       resources :categories do
         resources :items
       end
@@ -43,6 +47,7 @@ Budgetvision::Application.routes.draw do
 
   resources :projects
   resources :categories
+  resources :departments
 
   # Sample resource route with options:
   #   resources :products do
