@@ -22,7 +22,10 @@ div class="row"
   == render :partial => 'projects/left_rail'
 
   div class="span12"
-    h1 = @category.name
+    h1
+      = @category.name
+      span style="font-size: 18px;"
+        = link_to " (Edit)", edit_organization_project_category_path(@category.project.organization, @category.project, @category)
     a id="version-history" href="#" class="btn secondary" title="Recent changes" data-content="#{@category.versions.last.changeset}" Version History
 
   - if @category.class.name.eql?("Department")
