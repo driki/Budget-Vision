@@ -1,6 +1,8 @@
 class SessionsController < ApplicationController
   def login
-
+    if !signed_in?
+      session[:pre_login_path] = @_env['HTTP_REFERER']
+    end
   end
 
   def create
@@ -13,7 +15,12 @@ class SessionsController < ApplicationController
         :provider => auth["provider"]})
 
     self.current_user = @user
-    redirect_to '/'
+
+    if session[:pre_login_path].nil?
+      redirect_to "/"
+    else
+      redirect_to session[:pre_login_path]
+    end
   end
 
   def destroy

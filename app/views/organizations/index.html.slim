@@ -3,10 +3,12 @@ div id="masthead"
     h1 Hi there!
     - if @georesult.nil?
       h2
-        | Our robots couldn't automatically find your city or town using their computer magic, but you can search for your city or town or select the state you are intersted in.
+        | Our robots couldn't automatically find your city or town using their computer magic,
+          but you can search for your city or town or select the state you are interested in.
     - else
       h2
-        | Our robots think that you might be somewhere near #{@georesult.city}, #{@georesult.state} so they thought you might be interested in budgets for these cities or towns.
+        | Our robots think that you might be somewhere near #{@georesult.city}, #{@georesult.state} so they thought you
+          might be interested in budgets for these cities or towns.
 
 div class="row"
   div class="span4" id="left-rail"

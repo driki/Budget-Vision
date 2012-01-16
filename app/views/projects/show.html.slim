@@ -28,7 +28,7 @@ div class="row"
       a href="#" class="close" ×
       h3
         | Hi there!
-    
+
     div class="modal-body"
       div id="modal-welcome"
         p
@@ -39,7 +39,7 @@ div class="row"
             p
               = link_to "Add, edit or correct information that you see here", organization_path(@project.organization)
           li
-            p 
+            p
               a href="/about" Learn more about Budget Vision
           li
             p
@@ -70,9 +70,9 @@ div class="row"
     div id="overview"
       h1
         ' Overview
-        a id="edit-overview" href="#" style="font-size: 14px;" edit this
+        - if can? :update, @project
+          a id="edit-overview" href="#" style="font-size: 14px;" edit this
       p = best_in_place @project, :description, :type => :textarea, :ok_button => 'Save', :cancel_button => 'Cancel', :activator => "#edit-overview"
-      
 
   div class="row"
     div class="span6 barchart-widget"
@@ -94,12 +94,13 @@ div class="row"
           div class="bar"
             - if @project.revenue_budget > 0
               div class="bar-percent revenue" style="width: #{((category.revenue_budget/@project.revenue_budget)*100).to_i}%;"
-    
+
   div class="span6 offset3"
     div id="summary"
       h1
         ' Summary
-        a id="edit-summary" href="#" style="font-size: 14px;" edit this
+        - if can? :update, @project
+          a id="edit-summary" href="#" style="font-size: 14px;" edit this
       p = best_in_place @project, :summary, :type => :textarea, :activator => "#edit-summary"
 
   div class="span6"
@@ -117,4 +118,3 @@ javascript:
         e.preventDefault()
       })
   })
-          

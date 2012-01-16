@@ -2,8 +2,8 @@ class ProjectsController < ApplicationController
 
   before_filter :show_welcome
 
-  load_resource :project
-  
+  load_and_authorize_resource :project
+
   def show
   end
 

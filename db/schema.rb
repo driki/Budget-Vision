@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120116015917) do
+ActiveRecord::Schema.define(:version => 20120116201054) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(:version => 20120116015917) do
     t.float    "diversity"
     t.string   "fips"
     t.string   "gnis"
-    t.integer  "opener_id"
+    t.integer  "owner_id"
     t.float    "latitude"
     t.float    "longitude"
     t.boolean  "is_demo"
@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(:version => 20120116015917) do
     t.integer  "organization_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "owner_id"
   end
 
   create_table "sources", :force => true do |t|
