@@ -12,6 +12,10 @@ div class="span12"
     a class="close" href="#" ×
     h3 Heads up! This budget information is not verified by an employee or official from #{@project.organization.name}. 
     p
-    	| You can help improve the accuracy of the data and make sure it is up-to-date by encouraging your city or town employees to use Budget Vision. Once logged in, anyone can use Budget Vision to enter information about a city or town, but collaboration tools, reports and other features are only available with a paid account.
+    	| You can 
+    	a href="#" class="make-it-more-accurate" title="You've got the power!" data-content="Budget Vision information can be edited by you, me and city employees. Wikipedia is the encyclopedia that anyone can edit, Budget Vision works in a similar way. Any time the edit icon appears next to an item you can add, edit or correct it." help improve the accuracy of the data 
+    	| and make sure it is up-to-date by encouraging your city or town employees to use Budget Vision. Once logged in, anyone can use Budget Vision to enter information about a city or town, but collaboration tools, reports and other features are only available with a paid account.
     div class="alert-actions"
       a class="btn primary" href="/share/#{@project.organization.id}" Tell your city or town about Budget Vision
+      '  or
+      a class="btn secondary" href="/contact/#{@project.organization.id}" Sign up and verify this information

@@ -1,19 +1,19 @@
 div id="pitch" class="row"
   div class="span12 offset2"
     h1 Spread the word
-    h2 Thanks for offering to bring Budget vision to your city or town.
+    h2 Bring Budget Vision to your city or town.
 
 div class="row"
 	div class="span10 offset2"
 		h1 
 		
 		p
-			| We believe that we've raised the bar for what city, town and government budgeting software could be. We want to provide these tools at a reasonable cost to you and your city. Unlike many other software companies that sell to cities, towns and governments, we have 
+			| We believe that we've raised the bar for what city, town and government budgeting software could be. We want to provide these tools at a reasonable cost to you and your city. Unlike many other software companies that sell to cities and towns, we have 
 			em 
-				strong no sales people working on commission or taking people out to expensive free lunches
+				strong no sales people working on commission
 			| .
 		p
-			| We rely on the quality of our products and people like you, living and working in cities and towns across the United States, to help introduce and encourage our city employees, Town Councilors, Mayors and professional City and Town Managers to start using Budget Vision.
+			| We rely on the quality of our products and word of mouth to help introduce and encourage our city employees, Town Councilors, Mayors and professional City and Town Managers to start using Budget Vision.
 
 br
 
@@ -21,18 +21,19 @@ div class="row"
 	div class="span14 offset2"
 		h1 The Budget Vision cost for #{@organization.name}, #{@organization.state}
 	div class="box span5 offset2"
-		h1 style="text-align: center;" Hamlet $29/mo
+		h1 style="text-align: center;" #{number_to_currency(@organization.price/12, :precision => 0)}/mo
+		p style="text-align: center;" or
 		table
 		  tbody
 		    tr
-		      td Weekly cost per person
-		      td $ #{((350/1000.00)/52).round(3)}
+		      td Weekly cost per resident
+		      td class="number" #{number_to_currency(@organization.price.to_f/52/@organization.population, :precision => 3)}
 		    tr
-		      td Monthly cost per person
-		      td $#{((350/1000.00)/12).round(3)}
+		      td Monthly cost per resident
+		      td class="number" #{number_to_currency(@organization.price.to_f/12/@organization.population, :precision => 3)}
 		    tr
-		      td Yearly cost per person
-		      td $ #{(350/1000.00).round(3)}
+		      td Yearly cost per resident
+		      td class="number" #{number_to_currency(@organization.price.to_f/@organization.population, :precision => 3)}
 	
 	div class="span5"
 		table
@@ -52,3 +53,25 @@ div class="row"
 		    tr
 		      td Population per square mile
 		      td class="number" #{number_with_delimiter(@organization.pop_sq_mi)}
+		    tr
+		      td Percent of vacant housing
+		      td class="number" #{number_with_delimiter(@organization.housing_percent_vacant)}
+div class="row"
+	div class="span12 offset2"
+		h1 How you can get your city or town to use Budget Vision
+		h3 Contact your city or town office
+		p 
+			' Give your city or town office a call or send them an email. A quick 
+			a href="http://www.google.com/?q=#{@organization.name}, #{@organization.state}" Google search for #{@organization.name}, #{@organization.state}
+			| can often return the contact information that you need to reach out. We've provided a template that you can use as a draft or that you could just send along.
+		pre
+			|
+				Hi,
+
+				I've found a great municipal budgeting tool that #{@organization.name} can use called Budget Vision.
+				Budget Vision is a web based, online tool that would allow our community to more easily understand our municipal budget.
+
+				You can view our community budget here: #{link_to organization_url(@organization), organization_url(@organization)}
+
+				Thank you for your time,
+				An interested citizen

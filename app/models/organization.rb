@@ -147,4 +147,22 @@ class Organization < ActiveRecord::Base
     self.projects << project
     self.save
   end
+
+  def price
+    if self.population <= 1000
+      price = 350
+    elsif self.population >= 1000 && self.population <= 5000
+      price = 75*12
+    elsif self.population >= 5000 && self.population <= 20000
+      price = 150*12
+    elsif self.population >= 20000 && self.population <= 50000
+      price = 200*12
+    elsif self.population >= 50000 && self.population <= 500000
+      price = 500*12
+    else
+      price = 1000*12
+    end
+
+    return price
+  end
 end
