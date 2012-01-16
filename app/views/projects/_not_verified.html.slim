@@ -5,13 +5,13 @@ javascript:
       $('.alert-message').hide();
     });
   });
-  
+
 div class="span12"
   br
   div class="alert-message block-message info"
     a class="close" href="#" ×
-    h3 Heads up! This budget information is currently not verified by an employee or official from #{@project.organization.name}. 
+    h3 Heads up! This budget information is not verified by an employee or official from #{@project.organization.name}. 
     p
-    | You can help improve the accuracy of the data and make sure it is up-to-date by encouraging your city or town employees to use Budget Vision. Once logged in, anyone can use Budget Vision to enter information about a city or town, but collaboration tools, reports and other features are only available with a paid account.
+    	| You can help improve the accuracy of the data and make sure it is up-to-date by encouraging your city or town employees to use Budget Vision. Once logged in, anyone can use Budget Vision to enter information about a city or town, but collaboration tools, reports and other features are only available with a paid account.
     div class="alert-actions"
       a class="btn primary" href="/share/#{@project.organization.id}" Tell your city or town about Budget Vision
