@@ -24,8 +24,9 @@ class Ability
     #   can :update, Article, :published => true
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
-    
-    can :read, Organization
+
+    can :read,   Organization
+    can :states, Organization
     can :read, Project
     can :read, Category
     can :read, Item
@@ -34,13 +35,22 @@ class Ability
     can :read, User
 
     if !user.nil?
-      can :manage, Organization
-      can :manage, Project
-      can :manage, Category
-      can :manage, Item
-      can :manage, Goal
-      can :manage, Forecast
-      can :manage, User
+      can :create, Organization
+      can :create, Project
+      can :create, Category
+      can :create, Item
+      can :create, Goal
+      can :create, Forecast
+      can :create, User
+
+      can :update, Organization do |org|
+        !org.is_verified || org.owner_id == user.id
+      end
+
+      can :update, Project do |project|
+        org = project.organization
+        !org.is_verified || org.users.include?(user)
+      end
     end
   end
 end

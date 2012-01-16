@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-  load_resource :organization
+  load_and_authorize_resource :organization
 
   def index
     if request.remote_ip == '127.0.0.1'
@@ -17,7 +17,6 @@ class OrganizationsController < ApplicationController
   end
 
   def show
-    @organization = Organization.find(params[:id])
     # the first time that an organization is viewed it won't have any projects
     # so create one as a stub for people to start with
     if @organization.projects.empty?
@@ -27,7 +26,7 @@ class OrganizationsController < ApplicationController
   end
 
   def edit
-    @organization = Organization.find(params[:id])
+
   end
 
   def update
@@ -41,5 +40,4 @@ class OrganizationsController < ApplicationController
       end
     end
   end
-
 end
