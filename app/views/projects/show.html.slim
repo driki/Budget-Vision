@@ -62,32 +62,38 @@ div class="row"
       p = best_in_place @project, :description, :type => :textarea, :ok_button => 'Save', :cancel_button => 'Cancel', :activator => "#edit-overview"
       
 
-  div class="span6 barchart-widget"
-    h1 Where the money goes
-    - for category in @project.categories.tagged_with("expense").order("expense_budget desc")
-      div class="bar-container"
-        div class="bar-category-text"
-          = link_to category.name, organization_project_category_path(@project.organization, @project, category)
-        div class="bar"
-          - if @project.expense_budget > 0
-            div class="bar-percent expense" style="width: #{((category.expense_budget/@project.expense_budget)*100).to_i}%;"
+  div class="row"
+    div class="span6 barchart-widget"
+      h1 Where the money goes
+      - for category in @project.categories.tagged_with("expense").order("expense_budget desc")
+        div class="bar-container"
+          div class="bar-category-text"
+            = link_to category.name, organization_project_category_path(@project.organization, @project, category)
+          div class="bar"
+            - if @project.expense_budget > 0
+              div class="bar-percent expense" style="width: #{((category.expense_budget/@project.expense_budget)*100).to_i}%;"
 
-  div class="span6 barchart-widget"
-    h1 Where the money comes from
-    - for category in @project.categories.tagged_with("revenue").order("revenue_budget desc")
-      div class="bar-container"
-        div class="bar-category-text"
-          = link_to category.name, organization_project_category_path(@project.organization, @project, category)
-        div class="bar"
-          - if @project.revenue_budget > 0
-            div class="bar-percent revenue" style="width: #{((category.revenue_budget/@project.revenue_budget)*100).to_i}%;"
+    div class="span6 barchart-widget"
+      h1 Where the money comes from
+      - for category in @project.categories.tagged_with("revenue").order("revenue_budget desc")
+        div class="bar-container"
+          div class="bar-category-text"
+            = link_to category.name, organization_project_category_path(@project.organization, @project, category)
+          div class="bar"
+            - if @project.revenue_budget > 0
+              div class="bar-percent revenue" style="width: #{((category.revenue_budget/@project.revenue_budget)*100).to_i}%;"
     
-  div class="span12"
+  div class="span6 offset3"
     div id="summary"
       h1
         ' Summary
         a id="edit-summary" href="#" style="font-size: 14px;" edit this
       p = best_in_place @project, :summary, :type => :textarea, :activator => "#edit-summary"
+
+  div class="span6"
+    h1 Sources
+    - for source in @project.sources
+      h3 = link_to source.title, source.url
 
 javascript:
   $(function () {

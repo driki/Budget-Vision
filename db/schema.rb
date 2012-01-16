@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120115231355) do
+ActiveRecord::Schema.define(:version => 20120116015917) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -104,6 +104,15 @@ ActiveRecord::Schema.define(:version => 20120115231355) do
     t.boolean  "enable_tips"
     t.boolean  "is_demo"
     t.integer  "organization_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sources", :force => true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.text     "description"
+    t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

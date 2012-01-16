@@ -97,7 +97,13 @@ class Organization < ActiveRecord::Base
 
     expense_names = [
                       "Debt Service",
+                      "Retirement",
+                      "Insurance & Employee Benefits",
+                      "Miscellaneous",
                       "County Taxes",
+                      "Capital Projects",
+                      "Snow & Ice",
+                      "Waste Disposal",
                       "Other Assesments",
                       "Other",
                       "General Assistance"]

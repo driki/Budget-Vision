@@ -27,7 +27,7 @@ div class="row"
 
   - if @category.class.name.eql?("Department")
     div class="span6 dashboard-widget"
-      h1 = best_in_place @category, :people, :type => :input
+      h1 = best_in_place @category, :people, :type => :input, :nil => "0"
       p People work in this department
 
   div class="span6 dashboard-widget"
