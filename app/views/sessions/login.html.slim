@@ -13,6 +13,6 @@ div class="row"
       '  or 
       a class="btn primary large" href="/auth/facebook" Login with Facebook
       
-      - if :development
+      - unless Rails.env.production?
         '  or 
         a class="btn secondary large" href="/auth/developer" Developer
