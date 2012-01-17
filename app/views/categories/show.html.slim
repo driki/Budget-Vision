@@ -21,17 +21,25 @@ javascript:
 div class="row"
   == render :partial => 'projects/left_rail'
 
-  div class="span12"
+  div class="span10"
     h1
       = @category.name
       span style="font-size: 18px;"
         = link_to " (Edit)", edit_organization_project_category_path(@category.project.organization, @category.project, @category)
+  div class="span2"
     a id="version-history" href="#" class="btn secondary" title="Recent changes" data-content="#{@category.versions.last.changeset}" Version History
 
-  - if @category.class.name.eql?("Department")
-    div class="span6 dashboard-widget"
-      h1 = best_in_place @category, :people, :type => :input, :nil => "0"
-      p People work in this department
+  div class="span6"
+    div id="description"
+      h1
+        ' Description
+      p = best_in_place @category, :description, :type => :textarea
+
+  div class="span6"
+    div id="goal"
+      h1
+        ' Goal
+      p = best_in_place @category, :goal, :type => :textarea
 
   div class="span6 dashboard-widget"
     h1 = best_in_place @category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
@@ -41,6 +49,32 @@ div class="row"
     h1 = best_in_place @category, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
     p Is how much this department makes
 
+  - if @category.class.name.eql?("Department")
+    div class="span6 dashboard-widget"
+      h1 = best_in_place @category, :people, :type => :input, :nil => "0"
+      p People work in this department
+
+  div class="span12"
+    table class="bar-chart"
+      thead
+        tr
+          th
+          th
+      tbody
+        - for item in @category.items.order('total desc')
+          tr
+            td
+              h2
+                = link_to item.name, category_item_path(@category, item)
+              p
+                = link_to item.category.name, category_path(item.category)
+            td class="number"
+              h1 #{number_to_currency(item.total)}
+
+  div class="span12"
+    = link_to "Add new line items", new_organization_project_category_item_path(@category.project.organization, @category.project, @category), :class => "btn secondary"
+  hr
+  
   div class="span12" id="disqus_thread"
     javascript:
       var disqus_shortname = 'budgetvision'; // required: replace example with your forum shortname

@@ -25,8 +25,7 @@ div class="row" id="masthead"
   div id="header" class="span13"
     h1 
       = link_to "#{@project.organization.name}, #{@project.organization.state}", organization_path(@project.organization)
-      span style="font-size: 18px;"
-        = link_to " (Edit)", edit_organization_project_path(@project.organization, @project)
+      = link_to " (Edit)", edit_organization_project_path(@project.organization, @project)
     h2 FY 2012
     p id="make-it-more-accurate" class="make-it-more-accurate" title="You've got the power!" data-content="Budget Vision information can be edited by you, me and city employees. Wikipedia is the encyclopedia that anyone can edit, Budget Vision works in a similar way. Any time the edit icon appears next to an item you can add, edit or correct it." Help improve the accuracy of this information
   

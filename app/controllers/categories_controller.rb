@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
 
-  load_resource :category
+  load_and_authorize_resource :category
 
   def show
     @project = @category.project

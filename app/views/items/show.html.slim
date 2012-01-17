@@ -1,1 +1,17 @@
-h1 Item
+div class="row"
+	div class="span12 offset1"
+		h1 #{link_to(@item.category.name, organization_project_category_path(@item.category.project.organization, @item.category.project, @item.category))} #{@item.name} #{link_to '(Edit)', edit_item_path(@item)}
+		h2 #{number_to_currency(@item.total)}
+		p #{@item.description}
+
+	div class="span12 offset1" id="disqus_thread"
+	  javascript:
+	    var disqus_shortname = 'budgetvision'; // required: replace example with your forum shortname
+
+	    (function() {
+	      var dsq = document.createElement('script');
+	      dsq.type = 'text/javascript';
+	      dsq.async = true;
+	      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();

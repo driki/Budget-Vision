@@ -93,16 +93,15 @@ div class="row"
             - if @project.revenue_budget > 0
               div class="bar-percent revenue" style="width: #{((category.revenue_budget/@project.revenue_budget)*100).to_i}%;"
 
-  div class="span6 offset3"
+  div class="span12 offset3"
     div id="summary"
       h1
         ' Summary
-        - if can? :update, @project
-          a id="edit-summary" href="#" style="font-size: 14px;" edit this
-      p = best_in_place @project, :summary, :type => :textarea, :activator => "#edit-summary"
+      p = best_in_place @project, :summary, :type => :textarea
 
-  div class="span6"
+  div class="span12 offset3"
     h1 Sources
+    p Below are links to verifiable and official budget documents from a city or town.
     - for source in @project.sources
       h3 = link_to source.title, source.url
 

@@ -1,5 +1,5 @@
 class DepartmentsController < CategoriesController
-  load_resource :department
+    load_and_authorize_resource :department
 
   def show
     @project = @department.project
