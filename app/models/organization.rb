@@ -1,11 +1,11 @@
 class Organization < ActiveRecord::Base
   has_paper_trail
   
-  validates_presence_of :name
-  validates_presence_of :population
-
-  validates_numericality_of :average_tax_bill,
-    :greater_than_or_equal_to => 0.00,
+  validates_presence_of :name, :allow_nil => false
+  validates_presence_of :state, :allow_nil => false
+  validates_numericality_of :population,
+    :greater_than_or_equal_to => 0,
+    :only_integer => true,
     :message => "must be greater than 0"
 
   has_many :organization_users
@@ -21,11 +21,11 @@ class Organization < ActiveRecord::Base
   def price
     if self.population <= 1000
       price = 350
-    elsif self.population >= 1000 && self.population <= 5000
+    elsif self.population > 1000 && self.population <= 5000
       price = 75*12
-    elsif self.population >= 5000 && self.population <= 20000
+    elsif self.population > 5000 && self.population <= 20000
       price = 150*12
-    elsif self.population >= 20000 && self.population <= 50000
+    elsif self.population > 20000 && self.population <= 50000
       price = 200*12
     elsif self.population >= 50000 && self.population <= 500000
       price = 500*12
@@ -150,23 +150,5 @@ class Organization < ActiveRecord::Base
 
     self.projects << project
     self.save
-  end
-
-  def price
-    if self.population <= 1000
-      price = 350
-    elsif self.population >= 1000 && self.population <= 5000
-      price = 75*12
-    elsif self.population >= 5000 && self.population <= 20000
-      price = 150*12
-    elsif self.population >= 20000 && self.population <= 50000
-      price = 200*12
-    elsif self.population >= 50000 && self.population <= 500000
-      price = 500*12
-    else
-      price = 1000*12
-    end
-
-    return price
   end
 end

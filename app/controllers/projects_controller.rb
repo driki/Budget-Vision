@@ -13,7 +13,9 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+  end
 
+  def show
   end
 
   def update

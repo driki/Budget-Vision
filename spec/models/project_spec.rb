@@ -20,6 +20,9 @@ describe Project do
   it { should_not allow_value(1899).for(:year) }
   it { should allow_value(1950).for(:year) }
 
+  it { should allow_mass_assignment_of :title }
+  it { should ensure_length_of(:title).is_at_least(0).is_at_most(150) }
+
   it { should allow_mass_assignment_of :average_tax_bill }
   it { should validate_numericality_of(:average_tax_bill).with_message(/must be greater than 0/) }
   it { should_not allow_value(-1).for(:average_tax_bill) } 

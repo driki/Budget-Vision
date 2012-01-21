@@ -8,7 +8,8 @@ class Project < ActiveRecord::Base
   has_many :forecasts
   has_many :sources
 
-	attr_accessible :year, 
+	attr_accessible :year,
+									:title, 
 									:average_tax_bill, 
 									:expense_budget, 
 									:revenue_budget,
@@ -28,18 +29,20 @@ class Project < ActiveRecord::Base
 
   validates_numericality_of :average_tax_bill,
   	:greater_than_or_equal_to => 0.00,
+  	:allow_nil => true,
   	:message => "must be greater than 0"
 
   validates_numericality_of :expense_budget,
   	:greater_than_or_equal_to => 0.00,
+  	:allow_nil => true,
   	:message => "must be greater than 0"
 
   validates_numericality_of :revenue_budget,
   	:greater_than_or_equal_to => 0.00,
+  	:allow_nil => true,
   	:message => "must be greater than 0"
 
   validates_length_of :description, :in => 0..2000, :allow_nil => true
   validates_length_of :summary, :in => 0..2000, :allow_nil => true
-
-  validates :enable_comments, :inclusion => {:in => [true, false]}
+  validates_length_of :title, :in => 0..150, :allow_nil => true
 end
