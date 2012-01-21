@@ -5,6 +5,15 @@ class ApplicationController < ActionController::Base
     render :file => "#{Rails.root}/public/403.html", :status => 403
   end
 
+  def title
+    base_title = "Budget Vision - The dead simple way to create and share your city or town budget."
+    if @title.nil?
+      base_title
+    else
+      "#{@title} | #{base_title}"
+    end
+  end
+
   protected
 
   def current_user

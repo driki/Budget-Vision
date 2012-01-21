@@ -25,6 +25,8 @@ gem 'flickraw'
 gem 'best_in_place'
 gem 'activerecord-import'
 gem 'differ'
+gem 'sqlite3'
+gem 'refraction'
 
 
 # Gems used only for assets and not required
@@ -49,9 +51,15 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
-group :test do
+group :development, :test do
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
+  gem 'rspec-rails'
+  gem 'webrat'
+ 	gem 'guard'
+ 	gem 'guard-spork'
+ 	gem 'guard-rspec'
+ 	gem 'growl'
 end
 
 group :production do
