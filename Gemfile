@@ -57,9 +57,12 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'webrat'
  	gem 'guard'
- 	gem 'guard-spork'
- 	gem 'guard-rspec'
+ 	gem 'spork', '> 0.9.0.rc'
  	gem 'growl'
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'guard-bundler'
+  gem 'guard-rspec'
+  gem 'guard-spork'
 end
 
 group :production do
