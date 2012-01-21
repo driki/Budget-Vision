@@ -4,6 +4,10 @@ class Organization < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :population
 
+  validates_numericality_of :average_tax_bill,
+    :greater_than_or_equal_to => 0.00,
+    :message => "must be greater than 0"
+
   has_many :organization_users
   has_many :users, :through => :organization_users
   has_many :projects

@@ -55,7 +55,7 @@ html
           ul class="nav secondary-nav"
             - if current_user.nil?
               li
-                a href="/login" Login
+                = link_to "Login", "/login", :class => "popup", :"data-width" => 600, :"data-height" => 400
             - else
               li
                 a href="/users/#{current_user.id}"

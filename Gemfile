@@ -28,7 +28,7 @@ gem 'activerecord-import'
 gem 'differ'
 gem 'sqlite3'
 gem 'refraction'
-
+gem 'factory_girl'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -57,6 +57,7 @@ group :development, :test do
   gem 'turn', '0.8.2', :require => false
   gem 'rspec-rails'
   gem 'webrat'
+  gem 'shoulda-matchers'
  	gem 'guard'
  	gem 'spork', '> 0.9.0.rc'
  	gem 'growl'

@@ -26,13 +26,7 @@ div class="row"
 
   div class="span11"
 
-    h1 Search for your city or town.
-    = form_tag("/search", :method => "get") do
-      = text_field_tag(:q)
-      = submit_tag("Search", :class=> "btn")
-
     - if !@location.nil?
-      h2 We think you are near #{@location.city_name}
       - for org in @nearby_orgs do
         div class="org-card span5"
           h2 = link_to org.name, organization_path(org)
