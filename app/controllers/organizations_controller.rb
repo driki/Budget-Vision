@@ -3,13 +3,8 @@ class OrganizationsController < ApplicationController
   load_and_authorize_resource :organization, :except => [:index, :states]
 
   def index
-    if request.remote_ip == '127.0.0.1'
-      ip_address = nil
-    else
-      ip_address = request.remote_ip
-      @georesult = Geocoder.search(ip_address)[0]
-      @nearby_orgs = Organization.near(ip_address, 10, :limit => 4)
-    end
+    @location = GeoIP.new('GeoLiteCity.dat').city(remote_ip)
+    @nearby_orgs = Organization.near([@location.latitude, @location.longitude], 10, :limit => 4)
     @recently_updated_projects = Project.order("updated_at desc").limit(10)
   end
 

@@ -5,13 +5,15 @@ class ApplicationController < ActionController::Base
     render :file => "#{Rails.root}/public/403.html", :status => 403
   end
 
-  def title
-    base_title = "Budget Vision - The dead simple way to create and share your city or town budget."
-    if @title.nil?
-      base_title
+  def remote_ip
+    remote_ip = nil
+    if request.remote_ip == '127.0.0.1'
+      # Hard coded remote address
+      remote_ip = '146.115.184.188'
     else
-      "#{@title} | #{base_title}"
+      remote_ip = request.remote_ip
     end
+    return remote_ip
   end
 
   protected

@@ -1,7 +1,21 @@
 module ApplicationHelper
   
-  def remote_ip
-      '1.2.3.4'
+  def title
+    base_title = "Budget Vision - The dead simple way to create and share your city or town budget."
+    if @title.nil?
+      base_title
+    else
+      "#{@title} | #{base_title}"
+    end
+  end
+
+  def location_name(remote_ip)
+    location_name = nil
+    location = GeoIP.new('GeoLiteCity.dat').city(remote_ip)
+    unless location.nil?
+      location_name = "#{location.city_name}, #{location.region_name}"
+    end
+    return location_name
   end
 
   def states

@@ -1,13 +1,13 @@
 div id="masthead"
   div id="header"
     h1 Hi there!
-    - if @georesult.nil?
+    - if @location.nil?
       h2
         | Our robots couldn't automatically find your city or town using their computer magic,
           but you can search for your city or town or select the state you are interested in.
     - else
       h2
-        | Our robots think that you might be somewhere near #{@georesult.city}, #{@georesult.state} so they thought you
+        | Our robots think that you might be somewhere near #{@location.city_name}, #{@location.region_name} so they thought you
           might be interested in budgets for these cities or towns.
 
 div class="row"
@@ -31,8 +31,8 @@ div class="row"
       = text_field_tag(:q)
       = submit_tag("Search", :class=> "btn")
 
-    - if !@georesult.nil?
-      h2 We think you are near #{@georesult.city}
+    - if !@location.nil?
+      h2 We think you are near #{@location.city_name}
       - for org in @nearby_orgs do
         div class="org-card span5"
           h2 = link_to org.name, organization_path(org)
