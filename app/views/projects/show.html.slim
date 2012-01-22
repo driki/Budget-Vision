@@ -1,9 +1,3 @@
-javascript:
-  $(document).ready(function() {
-    /* Activating Best In Place */
-    jQuery(".best_in_place").best_in_place();
-  });
-
 - if session[:show_welcome]
   javascript:
     $(document).ready(function() {
@@ -59,7 +53,7 @@ div class="row"
     p Employees work here
 
   div class="span6 dashboard-widget large"
-    h1 = best_in_place @project, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
+    h1 = best_in_place @project, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}, :class => "best_in_place"
     p Is how much is being spent
 
   div class="span6 dashboard-widget large"
