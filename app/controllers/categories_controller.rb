@@ -7,7 +7,9 @@ class CategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @category.update_attributes(params[:category])
-        format.html { redirect_to project_category_path(@category, :notice => 'category was successfully updated.') }
+        format.html { redirect_to project_category_path(
+                @category.project,
+                @category, :notice => 'Category was successfully updated.') }
         format.json { respond_with_bip(@category) }
       else
         format.html { render :action => "edit" }
