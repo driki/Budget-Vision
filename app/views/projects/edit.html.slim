@@ -16,17 +16,17 @@ div class="row"
         div class="clearfix"
           = f.label :average_tax_bill
           div class="input"
-            = f.text_field :average_tax_bill
+            = f.text_field :average_tax_bill, :value => number_to_currency(@project.average_tax_bill)
 
         div class="clearfix"
           = f.label :expense_budget
           div class="input"
-            = f.text_field :expense_budget
+            = f.text_field :expense_budget, :value => number_to_currency(@project.expense_budget)
 
         div class="clearfix"
           = f.label :revenue_budget
           div class="input"
-            = f.text_field :revenue_budget
+            = f.text_field :revenue_budget, :value => number_to_currency(@project.revenue_budget)
 
         div class="clearfix"
           = f.label :description
