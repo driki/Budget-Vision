@@ -1,4 +1,5 @@
 = form_for @organization do |f|
+  == render :partial => 'shared/error_message', :locals => {:target => @project}
   - if @organization.errors.any?
     div class="alert-message block-message error"
       h2 #{pluralize(@organization.errors.count, "error")} prohibited this organization from being saved:
