@@ -141,13 +141,11 @@ p, table {
   line-height: 20px;
 }
 
-#tabs ul {
+ul#tabs {
   font-family: PT+Sans+Narrow, serif;
   background: #FFF;
-  list-style: none;
   margin: 0;
-  padding-left: -20px;
-
+  margin-left: 0px;
 }
 
 #tabs li {
@@ -155,6 +153,8 @@ p, table {
   padding-top: 10px;
   border-top: 1px solid #EAF6FF;
   font-size: 16px;
+  list-style: none;
+  padding-left: -20px;
   text-transform: uppercase;
 }
 
