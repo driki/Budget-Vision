@@ -10,9 +10,9 @@ class CreateProjects < ActiveRecord::Migration
       t.string :type
       t.integer :year
       t.float :average_tax_bill
-      t.boolean :enable_comments
-      t.boolean :enable_tips
-      t.boolean :is_demo
+      t.boolean :enable_comments, :default => true
+      t.boolean :enable_tips, :default => false
+      t.boolean :is_demo, :default => false
       
       t.references :organization
 

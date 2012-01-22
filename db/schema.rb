@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120116201054) do
+ActiveRecord::Schema.define(:version => 20120121150635) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(:version => 20120116201054) do
     t.string   "type"
     t.integer  "year"
     t.float    "average_tax_bill"
-    t.boolean  "enable_comments"
+    t.boolean  "enable_comments",  :default => true
     t.boolean  "enable_tips"
     t.boolean  "is_demo"
     t.integer  "organization_id"
