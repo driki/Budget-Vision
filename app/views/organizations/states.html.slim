@@ -1,16 +1,16 @@
 div id="masthead"
-	div id="header"
-  	h1 Getting closer!
-  	h2 Now just pick a city or town from the list below.
+  div id="header"
+  h1 Getting closer!
+  h2 Now just pick a city or town from the list below.
 
 div class="row"
-	div class="span11 offset1"
-		h1 = full_state_name(params[:state_abbr])
+  div class="span11 offset1"
+    h1 = full_state_name(params[:state_abbr])
 - for name_group in @organizations.keys.sort
-	div class="row"
-		div class="span11 offset1"
-			h2 = name_group
-		- for org in @organizations[name_group]
-			div class="span5 offset1"
-				h3 = link_to org.name, organization_path(org)
-	hr
+  div class="row"
+    div class="span11 offset1"
+      h2 = name_group
+    - for org in @organizations[name_group]
+      div class="span5 offset1"
+        h3 = link_to org.name, organization_path(org)
+  hr

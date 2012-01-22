@@ -1,9 +1,12 @@
 class CategoriesController < ApplicationController
 
-  load_and_authorize_resource :category
+  load_and_authorize_resource :project
+  load_and_authorize_resource :category, :except => [:index]
+
+  def index
+  end
 
   def show
-    @project = @category.project
   end
 
   def expenses

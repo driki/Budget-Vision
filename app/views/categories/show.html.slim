@@ -14,20 +14,21 @@ javascript:
       .click(function(e) {
         e.preventDefault()
       })
-  })  
+  })
 
-== render :partial => 'projects/masthead'
+== render :partial => 'shared/masthead'
 
 div class="row"
-  == render :partial => 'projects/left_rail'
+  == render :partial => 'shared/left_rail'
 
   div class="span10"
     h1
       = @category.name
       span style="font-size: 18px;"
-        = link_to " (Edit)", edit_organization_project_category_path(@category.project.organization, @category.project, @category)
+        = link_to " (Edit)", edit_project_category_path(@category.project, @category)
   div class="span2"
-    a id="version-history" href="#" class="btn secondary" title="Recent changes" data-content="#{@category.versions.last.changeset}" Version History
+    /a id="version-history" href="#" class="btn secondary" title="Recent changes" data-content="#{@category.versions
+    /.last.changeset}" Version History
 
   div class="span6"
     div id="description"
@@ -72,9 +73,9 @@ div class="row"
               h1 #{number_to_currency(item.total)}
 
   div class="span12"
-    = link_to "Add new line items", new_organization_project_category_item_path(@category.project.organization, @category.project, @category), :class => "btn secondary"
+    = link_to "Add new line items", new_category_item_path(@category), :class => "btn secondary"
   hr
-  
+
   div class="span12" id="disqus_thread"
     javascript:
       var disqus_shortname = 'budgetvision'; // required: replace example with your forum shortname
@@ -86,4 +87,3 @@ div class="row"
         dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
       })();
-    

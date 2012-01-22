@@ -1,46 +1,46 @@
 div class="row"
-	div class="span12 offset2"
-		h1 Edit #{@project.organization.name}, #{@project.organization.state}
+  div class="span12 offset2"
+    h1 Edit #{@project.organization.name}, #{@project.organization.state}
 
-		= form_for @project do |f|
-			fieldset
-				div class="clearfix"
-				  = f.label :year
-				  div class="input"
-				  	= f.text_field :year
-					  span class="help-block"
-					  	span class="label" Required
-					  	|  Example: 2011 or 2012 not FY09 or FY12
+    = form_for @project do |f|
+      fieldset
+        div class="clearfix"
+          = f.label :year
+          div class="input"
+            = f.text_field :year
+              span class="help-block"
+                span class="label" Required
+                |  Example: 2011 or 2012 not FY09 or FY12
 
-				div class="clearfix"
-				  = f.label :average_tax_bill
-				  div class="input"
-				  	= f.text_field :average_tax_bill
+        div class="clearfix"
+          = f.label :average_tax_bill
+          div class="input"
+            = f.text_field :average_tax_bill
 
-				div class="clearfix"
-				  = f.label :expense_budget
-				  div class="input"
-				  	= f.text_field :expense_budget
+        div class="clearfix"
+          = f.label :expense_budget
+          div class="input"
+            = f.text_field :expense_budget
 
-				div class="clearfix"
-				  = f.label :revenue_budget
-				  div class="input"
-				  	= f.text_field :revenue_budget
+        div class="clearfix"
+          = f.label :revenue_budget
+          div class="input"
+            = f.text_field :revenue_budget
 
-				div class="clearfix"
-				  = f.label :description
-				  div class="input"
-				  	= f.text_area(:description, :class => "xxlarge required", :rows => "4")
+        div class="clearfix"
+          = f.label :description
+          div class="input"
+            = f.text_area(:description, :class => "xxlarge required", :rows => "4")
 
-				div class="clearfix"
-				  = f.label :summary
-				  div class="input"
-				  	= f.text_area(:summary, :class => "xxlarge required", :rows => "4")
-				
-				div class="clearfix"
-				  = f.label :enable_comments
-				  div class="input"
-				  	= f.check_box :enable_comments
-				check_box
-			div class="actions"
-				= f.submit(:class => "btn primary")
+        div class="clearfix"
+          = f.label :summary
+          div class="input"
+            = f.text_area(:summary, :class => "xxlarge required", :rows => "4")
+
+        div class="clearfix"
+          = f.label :enable_comments
+          div class="input"
+            = f.check_box :enable_comments
+        check_box
+      div class="actions"
+          = f.submit(:class => "btn primary")

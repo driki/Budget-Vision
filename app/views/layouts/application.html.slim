@@ -15,42 +15,42 @@ html
     div class="topbar"
       div class="fill"
         div class="container"
-          a class="brand" href="/" Budget Vision :: BETA
+          = link_to "Budget Vision :: BETA", root_path, :class => "brand"
           ul class="nav"
-            - if request.path_info.eql?("/")
+            - if request.path_info.eql?(root_path)
               li class="active"
-                a href="/" Home
+                = link_to "Home", root_path
             - else
               li
-                a href="/" Home
+                = link_to "Home", root_path
 
-            - if request.path_info.eql?("/organizations")
+            - if request.path_info.eql?(organizations_path)
               li class="active"
-                a href="/organizations" Cities &amp; Towns
+                = link_to "Cities & Towns", organizations_path
             - else
               li
-                a href="/organizations" Cities &amp; Towns
+                = link_to "Cities & Towns", organizations_path
 
-            - if request.path_info.eql?("/price")
+            - if request.path_info.eql?(price_path)
               li class="active"
-                a href="/price" Pricing
+                = link_to "Pricing", price_path
             - else
               li
-                a href="/price" Pricing
+                = link_to "Pricing", price_path
 
-            - if request.path_info.eql?("/about")
+            - if request.path_info.eql?(about_path)
               li class="active"
-                a href="/about" About
+                = link_to "About", about_path
             - else
               li
-                a href="/about" About
+                = link_to "About", about_path
 
-            - if request.path_info.eql?("/contact")
+            - if request.path_info.eql?(contact_path)
               li class="active"
-                a href="/contact" Contact
+                = link_to "Contact", contact_path
             - else
               li
-                a href="/contact" Contact
+                = link_to "Contact", contact_path
 
           ul class="nav secondary-nav"
             - if current_user.nil?
@@ -58,10 +58,9 @@ html
                 = link_to "Login", "/login", :class => "popup", :"data-width" => 600, :"data-height" => 400
             - else
               li
-                a href="/users/#{current_user.id}"
-                  = current_user.name
+                = current_user.name
               li
-                a href="/logout" Logout
+                = link_to "Logout", logout_path
 
     div id="content" class="container"
       - if flash[:error]

@@ -1,17 +1,19 @@
 Budgetvision::Application.routes.draw do
-
-  match "/login" => "sessions#login"
-  match '/auth/:provider/callback', :to => 'sessions#create'
-  match "/logout" => "sessions#destroy", :as => :signout
   match "/about" => "home#about"
+  match "/contact" => "home#contact", :as => "contact"
+  match "/contact/:id" => "home#contact"
+  match "/help" => "home#help"
   match "/price" => "home#price"
   match "/setup" => "home#setup"
-  match "/contact" => "home#contact"
-  match "/contact/:id" => "home#contact"
-  match "/purchase" => "home#purchase"
-  match "/share/:id" => "home#share"
-  match "/help" => "home#help"
+  match "/share/:id" => "home#share", :as => "share"
+
   match "/organizations/states/:state_abbr" => "organizations#states", :as => "states"
+
+  match '/auth/:provider/callback', :to => 'sessions#create'
+  #match '/auth/failure', :to => ? TODO
+
+  match "/login" => "sessions#login"
+  match "/logout" => "sessions#destroy", :as => "logout"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -25,38 +27,19 @@ Budgetvision::Application.routes.draw do
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
-  resources :organizations do 
-    resources :users
 
-    resources :projects do  
-      member do
-        get 'categories'
-        get 'expenses'
-        get 'revenues'
-        get 'borrowing'
-        get 'goals'
-        get 'forecasts'
-      end
-
-      resources :categories do
-        resources :items
-      end
-
-      resources :items
-    end
-
+  # See: http://weblog.jamisbuck.org/2007/2/5/nesting-resources
+  resources :organizations do
+    resources :projects, :name_prefix => "organization_"
   end
 
-  resources :projects
-  
-  resources :categories do
-    resources :items
+  resources :projects do
+    resources :categories, :name_prefix => "project_"
+    resources :expenses, :name_prefix => "project_"
+    resources :revenues, :name_prefix => "project_"
+    resources :goals, :name_prefix => "project_"
+    resources :forecasts, :name_prefix => "project_"
   end
-
-  resources :department do
-    resources :items
-  end
-  resources :items
 
   # Sample resource route with options:
   #   resources :products do

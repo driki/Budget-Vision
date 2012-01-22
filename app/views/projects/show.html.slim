@@ -18,10 +18,10 @@ javascript:
     });
 
 
-== render :partial => 'masthead'
+== render :partial => 'shared/masthead'
 
 div class="row"
-  == render :partial => 'left_rail'
+  == render :partial => 'shared/left_rail'
 
   div id="modal" class="modal hide fade" style="display: none;"
     div class="modal-header"
@@ -40,15 +40,15 @@ div class="row"
               = link_to "Add, edit or correct information that you see here", organization_path(@project.organization)
           li
             p
-              a href="/about" Learn more about Budget Vision
+              = link_to "Learn more about Budget Vision", about_path
           li
             p
-              a href="/share/#{@project.organization.id}" Share this tool with a city or town employee in #{@project.organization.name}
+              = link_to "Share this tool with a city or town employee in #{@project.organization.name}", share_path(@project.organization)
 
     div class="modal-footer"
       a id="ok-btn" href="#" class="btn primary" Got it thanks
 
-  == render :partial => 'not_verified'
+  == render :partial => 'shared/not_verified'
 
   div class="span6 dashboard-widget large"
     h1 = number_with_delimiter(@project.organization.population)
@@ -78,7 +78,7 @@ div class="row"
       - for category in @project.categories.tagged_with("expense").order("expense_budget desc")
         div class="bar-container"
           div class="bar-category-text"
-            = link_to category.name, organization_project_category_path(@project.organization, @project, category)
+            = link_to category.name, project_category_path(@project, category)
           div class="bar"
             - if @project.expense_budget > 0
               div class="bar-percent expense" style="width: #{((category.expense_budget/@project.expense_budget)*100).to_i}%;"
@@ -88,7 +88,7 @@ div class="row"
       - for category in @project.categories.tagged_with("revenue").order("revenue_budget desc")
         div class="bar-container"
           div class="bar-category-text"
-            = link_to category.name, organization_project_category_path(@project.organization, @project, category)
+            = link_to category.name, project_category_path(@project, category)
           div class="bar"
             - if @project.revenue_budget > 0
               div class="bar-percent revenue" style="width: #{((category.revenue_budget/@project.revenue_budget)*100).to_i}%;"
@@ -117,8 +117,6 @@ div class="row"
         dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
       })();
-    
-    
 
 javascript:
   $(function () {
