@@ -1,6 +1,6 @@
 class Organization < ActiveRecord::Base
   has_paper_trail
-  
+
   validates_presence_of :name, :allow_nil => false
   validates_presence_of :state, :allow_nil => false
   validates_numericality_of :population,
@@ -76,7 +76,7 @@ class Organization < ActiveRecord::Base
     project.revenue_budget = 0
     project.average_tax_bill = 0
 
-    department_names = ["Fire Department", 
+    department_names = ["Fire Department",
                       "General Government",
                       "Police Department",
                       "Public Works",
@@ -125,7 +125,7 @@ class Organization < ActiveRecord::Base
       project.categories << category
     end
 
-    revenue_names = ["State Aid", 
+    revenue_names = ["State Aid",
                       "Property Taxes",
                       "Local Receipts",
                       "Interest Income",

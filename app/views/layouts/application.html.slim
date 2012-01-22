@@ -58,7 +58,7 @@ html
                 = link_to "Login", "/login", :class => "popup", :"data-width" => 600, :"data-height" => 400
             - else
               li
-                = current_user.name
+                = link_to current_user.name, "#"
               li
                 = link_to "Logout", logout_path
 

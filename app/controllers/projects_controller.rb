@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-
+  set_tab :overview
   before_filter :show_welcome
 
   load_and_authorize_resource :project

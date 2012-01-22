@@ -1,11 +1,11 @@
 div class="span3" id="left-rail"
   = tabs_tag do |tab|
-    = tab.overview   'Overview', organization_project_path(@project.organization, @project)
+    = tab.overview 'Overview', organization_project_path(@project.organization, @project)
     = tab.categories 'Categories', project_categories_path(@project)
-    = tab.categories 'Expenses', project_expenses_path(@project)
-    = tab.categories 'Revenues', project_revenues_path(@project)
-    = tab.categories 'Goals', project_goals_path(@project)
-    = tab.categories 'Forecasts', project_forecasts_path(@project)
+    = tab.expenses 'Expenses', project_expenses_path(@project)
+    = tab.revenues 'Revenues', project_revenues_path(@project)
+    = tab.goals 'Goals', project_goals_path(@project)
+    = tab.forecasts 'Forecasts', project_forecasts_path(@project)
 
   div id="characteristics"
     h3 Characteristics

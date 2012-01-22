@@ -68,7 +68,7 @@ div class="row"
               h2
                 = link_to item.name, category_item_path(@category, item)
               p
-                = link_to item.category.name, category_path(item.category)
+                = link_to item.category.name, project_category_path(@category.project, @category)
             td class="number"
               h1 #{number_to_currency(item.total)}
 
