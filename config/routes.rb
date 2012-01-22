@@ -42,7 +42,11 @@ Budgetvision::Application.routes.draw do
   end
 
   resources :categories do
-    resources :items, :name_prefix => "categories_"
+    resources :items, :name_prefix => "category_"
+  end
+
+  resources :departments do
+    resources :items, :name_prefix => "department_"
   end
 
   # Sample resource route with options:
