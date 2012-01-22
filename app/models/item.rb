@@ -9,7 +9,16 @@ class Item < ActiveRecord::Base
   validates_presence_of :total
   validates_associated :category
 
-  attr_accessible :name
-  attr_accessible :total
-  attr_accessible :description
+  attr_accessible :name,
+                :number, 
+                :description, 
+                :total, 
+                :tags
+
+  validates_numericality_of :total,
+    :greater_than_or_equal_to => 0.00,
+    :allow_nil => true,
+    :message => "must be greater than 0"
+
+  validates_length_of :description, :in => 0..1000, :allow_nil => true
 end

@@ -3,6 +3,7 @@ div class="row"
 		h1 Edit #{@project.organization.name}, #{@project.organization.state}
 
 		= form_for @project do |f|
+  		= render "shared/error_messages", :target => @project
 			fieldset
 				div class="clearfix"
 				  = f.label :year
