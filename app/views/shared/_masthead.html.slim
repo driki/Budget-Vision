@@ -2,8 +2,8 @@ javascript:
   $(function () {
     $("#budget-vision-score")
       .popover({
-        offset: -5,
-        placement: "left"
+        offset: 0,
+        placement: "below"
       })
       .click(function(e) {
         e.preventDefault()
@@ -25,11 +25,10 @@ div class="row" id="masthead"
   div id="header" class="span13"
     h1
       = link_to "#{@project.organization.name}, #{@project.organization.state}", organization_path(@project.organization)
-      = link_to " (Edit)", edit_project_path(@project)
     h2 FY 2012
     p id="make-it-more-accurate" class="make-it-more-accurate" title="You've got the power!" data-content="Budget Vision information can be edited by you, me and city employees. Wikipedia is the encyclopedia that anyone can edit, Budget Vision works in a similar way. Any time the edit icon appears next to an item you can add, edit or correct it." Help improve the accuracy of this information
 
-  div id="budget-vision-score" class="span3" title="What is the Budget Vision&trade; Score?" data-content="The score is calculated by looking at how much detail is added to a budget as compared to the overall size. Smaller budgets will need less detail while larger budgets require more."
+  div id="budget-vision-score" class="span3" title="What is the Budget Vision&trade; Score?" data-content="Towns that provide more detail about their budget will have a higher score than those that do not. A Town with a $10,000,000 budget and only 10 line items will get a much lower score than another Town with the same budget providing 1,000 line items."
     p Budget Vision Score&trade;
     h1 23
     p What is this?

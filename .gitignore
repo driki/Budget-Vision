@@ -20,3 +20,4 @@ app/assets/images/.DS_Store
 app/assets/images/glyphicons/png/.DS_Store
 app/assets/images/glyphicons/.DS_Store
 .gitignore
+app/.DS_Store

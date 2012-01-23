@@ -8,6 +8,9 @@ javascript:
 
 div class="row"
   == render :partial => 'shared/left_rail'
+  div class="span12"
+    span style="margin-top: 10px; float: right;"
+      = link_to "New Category", new_project_category_path(@project)
 
   == render :partial => 'shared/not_verified'
 

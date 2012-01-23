@@ -20,27 +20,30 @@ javascript:
 
 div class="row"
   == render :partial => 'shared/left_rail'
+  div class="row"
+    div class="span12"
+      div class="row action_bar"
+        div class="span6"
+          h1
+            = @category.name
+        div class="span6"
+          span style="float: right; margin-top: 10px;"
+            = link_to "Edit this category", edit_project_category_path(@category.project, @category)
+            '  |
+            = link_to "New line item", new_category_item_path(@category)
+      
+      div class="row"  
+        div class="span6"
+          div id="description"
+            h1
+              ' Description
+            p = best_in_place @category, :description, :type => :textarea
 
-  div class="span10"
-    h1
-      = @category.name
-      span style="font-size: 18px;"
-        = link_to " (Edit)", edit_project_category_path(@category.project, @category)
-  div class="span2"
-    /a id="version-history" href="#" class="btn secondary" title="Recent changes" data-content="#{@category.versions
-    /.last.changeset}" Version History
-
-  div class="span6"
-    div id="description"
-      h1
-        ' Description
-      p = best_in_place @category, :description, :type => :textarea
-
-  div class="span6"
-    div id="goal"
-      h1
-        ' Goal
-      p = best_in_place @category, :goal, :type => :textarea
+        div class="span5"
+          div id="goal"
+            h1
+              ' Goal
+            p = best_in_place @category, :goal, :type => :textarea
 
   div class="span6 dashboard-widget"
     h1 = best_in_place @category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
@@ -71,10 +74,6 @@ div class="row"
                 = link_to item.category.name, project_category_path(@category.project, @category)
             td class="number"
               h1 #{number_to_currency(item.total)}
-
-  div class="span12"
-    = link_to "Add new line items", new_category_item_path(@category), :class => "btn secondary"
-  hr
 
   div class="span12" id="disqus_thread"
     javascript:

@@ -38,6 +38,15 @@ body {
   border-radius: 2px;
 }
 
+.action_bar {
+  padding-top: 10px;
+  background-color: #F3EFE9;
+}
+
+.action_bar a {
+  font-size: 16px;
+}
+
 #pitch h1 {
   font-size: 72px;
   margin-top: 30px;
