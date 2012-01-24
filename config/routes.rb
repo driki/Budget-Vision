@@ -50,6 +50,7 @@ Budgetvision::Application.routes.draw do
   end
 
   resources :items
+  resources :goals
 
   # Sample resource route with options:
   #   resources :products do

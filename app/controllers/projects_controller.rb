@@ -35,12 +35,4 @@ class ProjectsController < ApplicationController
       end
     end
   end
-
-  def show_welcome
-    if session[:show_welcome].nil?
-      session[:show_welcome] = true
-    else
-      session[:show_welcome] = false
-    end
-  end
 end

@@ -1,16 +1,83 @@
-javascript:
-  $(document).ready(function() {
-    /* Activating Best In Place */
-    jQuery(".best_in_place").best_in_place();
-  });
+- if session[:show_welcome]
+  javascript:
+    $(document).ready(function() {
+      $('#modal').modal({
+        keyboard: true,
+        show: true
+      });
+
+      $('#ok-btn').click(function() {
+        $('#modal').hide();
+      });
+    });
+
 
 == render :partial => 'shared/masthead'
 
+div id="modal" class="modal hide fade" style="display: none;"
+  div class="modal-header"
+    a href="#" class="close" ×
+    h3
+      | Hi there!
+
+  div class="modal-body"
+    div id="modal-welcome"
+      p
+        | Budget Vision is similar to Wikipedia, but built specifically for city and town budgets. It is an easy way to create, view, edit and collaborate with others to learn more about how your city or town generates revenue and spends money.
+      p Here are three easy ways to get started.
+      ul
+        li
+          p
+            = link_to "Add, edit or correct information that you see here", organization_path(@project.organization)
+        li
+          p
+            = link_to "Learn more about Budget Vision", about_path
+        li
+          p
+            = link_to "Share this tool with a city or town employee in #{@project.organization.name}", share_path(@project.organization)
+
+  div class="modal-footer"
+    a id="ok-btn" href="#" class="btn primary" Got it thanks
+
 div class="row"
-  == render :partial => 'shared/left_rail'
+  div class="span16"
+    div class="row"
+      div class="span3" id="left-rail"
+        == render :partial => 'shared/left_rail'
+      div class="span13"
+        div class="row action-bar"
+          div class="span7"
+            p &nbsp;
+          div class="span6"
+            span style="float: right; padding-right: 10px;"
+              = link_to "New goal", new_project_goal_path(@project)
 
-  == render :partial => 'shared/not_verified'
-
-  div class="span12"
-    h1 Goals
-    p Below are the goals
+        div class="span13"
+          div class="row"
+            div class="span8"
+              h1 Goals
+              - for goal in @project.goals
+              	div
+              		h2 = goal.name
+              		p = goal.description
+            div class="span4"
+              h2 Average Tax Bill: #{best_in_place @project, :average_tax_bill, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
+              table class="quick-stats"
+                tbody
+                  tr
+                    td Each day
+                    td class="number"
+                      span id="tax-bill-each-day" #{number_to_currency(@project.average_tax_bill/365, :precision => 2)}
+                  tr
+                    td Each week
+                    td class="number"
+                      span id="tax-bill-each-week" #{number_to_currency(@project.average_tax_bill/52, :precision => 2)}
+                  tr
+                    td Each month
+                    td class="number"
+                      span id="tax-bill-each-month" #{number_to_currency(@project.average_tax_bill/12, :precision => 2)}
+                  tr
+                    td Each year
+                    td class="number"
+                      span id="tax-bill-each-year" #{number_to_currency(@project.average_tax_bill, :precision => 2)}
+        

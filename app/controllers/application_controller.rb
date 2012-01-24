@@ -39,4 +39,12 @@ class ApplicationController < ActionController::Base
       session[:pre_login_path] = @_env['HTTP_REFERER']
     end
   end
+
+  def show_welcome
+    if session[:show_welcome].nil?
+      session[:show_welcome] = true
+    else
+      session[:show_welcome] = false
+    end
+  end
 end
