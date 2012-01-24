@@ -6,11 +6,15 @@ class ItemsController < ApplicationController
 	load_and_authorize_resource :category
 
   def index
-    @items = Item.joins(:category).where(:categories => {:project_id => @project.id})
+    @items = Item.joins(:category).where(:categories => {:project_id => @project.id}).order("total desc")
   end
 
   def new
     @item = @category.items.build
+  end
+
+  def show
+    @project = @category.project
   end
 
   def create

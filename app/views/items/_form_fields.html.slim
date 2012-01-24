@@ -1,4 +1,4 @@
-= form_for @item do |f|
+= form_for(@item, :url=>category_items_path(@category)) do |f|
   fieldset
     div class="clearfix"
       = f.label :name
