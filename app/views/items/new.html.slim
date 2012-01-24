@@ -8,17 +8,17 @@ div class="row"
           = f.label :name
           div class="input"
             = f.text_field :name
-              span class="help-block"
-                span class="label" Required
-                |  Example: Mechanic Wages or Vehicle Gas &amp; All Fluids
+            span class="help-block"
+              span class="label" Required
+              | Example: Mechanic Wages or Vehicle Gas &amp; All Fluids
 
         div class="clearfix"
           = f.label :total
           div class="input"
             = f.text_field :total
-              span class="help-block"
-                span class="label" Required
-                |  Example: $123,000 or 34000
+            span class="help-block"
+              span class="label" Required
+              | Example: $123,000 or 34000
 
         div class="clearfix"
           = f.label :tag_list
@@ -32,4 +32,4 @@ div class="row"
         check_box
 
         div class="actions"
-            = f.submit(:class => "btn primary")
+          = f.submit(:class => "btn primary")

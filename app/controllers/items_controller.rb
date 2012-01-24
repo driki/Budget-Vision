@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
 
 	load_and_authorize_resource :item
 	load_and_authorize_resource :category
-  
+
   def show
   end
 
@@ -15,7 +15,7 @@ class ItemsController < ApplicationController
   	@item = Item.new(params[:item])
   	@category.items << @item
     if @category.save
-      redirect_to item_path(@item)
+      redirect_to category_item_path(@item.category, @item)
     else
       render :action => 'new'
     end
