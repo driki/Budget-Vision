@@ -1,5 +1,5 @@
 == render :partial => 'shared/error_message', :locals => {:target => @project}
-= form_for @goal do |f|
+= form_for(@goal, :url=>project_goals_path(@project)) do |f|
   fieldset
     div class="clearfix"
       = f.label :name

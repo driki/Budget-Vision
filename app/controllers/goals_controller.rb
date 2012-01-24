@@ -20,12 +20,12 @@ class GoalsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @project.update_attributes(params[:goal])
+      if @goal.update_attributes(params[:goal])
         format.html { redirect_to project_goals_path(@project, :notice => 'goal was successfully updated.') }
         format.json { respond_with_bip(@goal) }
       else
         format.html { render :action => "edit" }
-        format.json { respond_with_bip(@project) }
+        format.json { respond_with_bip(@goal) }
       end
     end
   end
