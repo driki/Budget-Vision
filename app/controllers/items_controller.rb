@@ -7,7 +7,6 @@ class ItemsController < ApplicationController
   end
 
   def new
-  	@category = Category.find(params[:category_id])
     @item = @category.items.build
   end
 
