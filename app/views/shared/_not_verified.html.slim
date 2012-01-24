@@ -2,15 +2,15 @@
   javascript:
     $(document).ready(function() {
 
-      $('.close').click(function() {
-        $('.alert-message').hide();
+      $('#close-verification-warning').click(function() {
+        $('#not-verified').hide();
       });
     });
 
-  div class="span12"
+  div id="not-verified" class="span12"
     br
     div class="alert-message block-message info"
-      a class="close" href="#" ×
+      a id="close-verification-warning" class="close" href="#" ×
       h3 Heads up! This budget information is not verified by an employee or official from #{@project.organization.name}.
       p
         ' You can help improve the accuracy of the data and make sure it is up-to-date by encouraging your city or town employees to use Budget Vision. Once logged in, anyone can use Budget Vision to enter information about a city or town, but collaboration tools, reports and other features are only available with a paid account.

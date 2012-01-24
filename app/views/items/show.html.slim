@@ -19,6 +19,9 @@ div class="row"
               = link_to "Add an item", new_category_item_path(@item.category)
 
       div class="span13"
+        == render :partial => 'shared/not_verified'
+        
+      div class="span13"
         div class="row"
           div class="span8"
             h1 
