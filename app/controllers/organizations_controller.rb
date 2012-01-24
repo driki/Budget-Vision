@@ -4,7 +4,7 @@ class OrganizationsController < ApplicationController
 
   def index
     @location = GeoIP.new('GeoLiteCity.dat').city(remote_ip)
-    @nearby_orgs = Organization.near([@location.latitude, @location.longitude], 10, :limit => 4)
+    @nearby_orgs = Organization.near([@location.latitude, @location.longitude], 10, :limit => 8)
     @recently_updated_projects = Project.order("updated_at desc").limit(10)
   end
 
