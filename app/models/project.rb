@@ -47,7 +47,7 @@ class Project < ActiveRecord::Base
   validates_length_of :title, :in => 0..150, :allow_nil => true
 
   def items
-    @items = Item.joins(:category).where(:categories => {:project_id => @project.id})
+    @items = Item.joins(:category).where(:categories => {:project_id => id})
   end
 
   # A budget gets points the more detail it adds

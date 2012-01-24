@@ -1,10 +1,10 @@
 = tabs_tag :open_tabs => { :id => "tabs" } do |tab|
   = tab.overview 'Overview', organization_project_path(@project.organization, @project)
-  = tab.categories 'Categories', project_categories_path(@project)
-  = tab.items 'Line Items', project_items_path(@project)
-  = tab.goals 'Goals', project_goals_path(@project)
-  = tab.forecasts 'Forecasts', project_forecasts_path(@project)
-  = tab.sources 'Sources', project_sources_path(@project)
+  = tab.categories "Categories (#{@project.categories.length})", project_categories_path(@project)
+  = tab.items "Line Items (#{@project.items.length})", project_items_path(@project)
+  = tab.goals "Goals (#{@project.goals.length})", project_goals_path(@project)
+  = tab.forecasts "Forecasts (#{@project.forecasts.length})", project_forecasts_path(@project)
+  = tab.sources "Sources (#{@project.sources.length})", project_sources_path(@project)
 
 div id="characteristics"
   h3 Characteristics
