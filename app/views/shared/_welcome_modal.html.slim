@@ -1,0 +1,34 @@
+- if session[:show_welcome]
+  javascript:
+    $(document).ready(function() {
+      $('#modal').modal({
+        keyboard: true,
+        show: true
+      });
+
+      $('#ok-btn').click(function() {
+        $('#modal').hide();
+      });
+    });
+
+div id="modal" class="modal hide fade" style="display: none;"
+  div class="modal-header"
+    a href="#" class="close" ×
+    h3
+      | Hi there!
+
+  div class="modal-body"
+    div id="modal-welcome"
+      p
+        | Budget Vision is similar to Wikipedia, but built specifically for city and town budgets. It is an easy way to create, view, edit and collaborate with others to learn more about how your city or town generates revenue and spends money.
+      p Here are three easy ways to get started.
+      ul
+        li
+          p
+            = link_to "Add, edit or correct information that you see here", organization_path(@project.organization)
+        li
+          p
+            = link_to "Learn more about Budget Vision", about_path
+        li
+          p
+            = link_to "Share this tool with a city or town employee in #{@project.organization.name}", share_path(@project.organization)

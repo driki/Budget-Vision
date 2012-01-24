@@ -50,32 +50,17 @@ div class="row"
             p &nbsp;
           div class="span6"
             span style="float: right; padding-right: 10px;"
-              = link_to "New Forecast", new_project_goal_path(@project)
+              = link_to "Add a forecast", new_project_forecast_path(@project)
 
         div class="span13"
           div class="row"
             div class="span8"
               h1
                 ' Forecasts
-                p = best_in_place @project, :description, :type => :textarea
+                - for forecast in @project.forecasts
+                  div
+                    h2 = best_in_place forecast, :name, :type => :input
+                    p = best_in_place forecast, :description, :type => :textarea
             div class="span4"
-              h2 Average Tax Bill: #{best_in_place @project, :average_tax_bill, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
-              table class="quick-stats"
-                tbody
-                  tr
-                    td Each day
-                    td class="number"
-                      span id="tax-bill-each-day" #{number_to_currency(@project.average_tax_bill/365, :precision => 2)}
-                  tr
-                    td Each week
-                    td class="number"
-                      span id="tax-bill-each-week" #{number_to_currency(@project.average_tax_bill/52, :precision => 2)}
-                  tr
-                    td Each month
-                    td class="number"
-                      span id="tax-bill-each-month" #{number_to_currency(@project.average_tax_bill/12, :precision => 2)}
-                  tr
-                    td Each year
-                    td class="number"
-                      span id="tax-bill-each-year" #{number_to_currency(@project.average_tax_bill, :precision => 2)}
+              == render :partial => 'shared/tax_stamp'
         

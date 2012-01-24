@@ -1,0 +1,19 @@
+h2 Average Tax Bill: #{best_in_place @project, :average_tax_bill, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
+table class="quick-stats"
+  tbody
+    tr
+      td Each day
+      td class="number"
+        span id="tax-bill-each-day" #{number_to_currency(@project.average_tax_bill/365, :precision => 2)}
+    tr
+      td Each week
+      td class="number"
+        span id="tax-bill-each-week" #{number_to_currency(@project.average_tax_bill/52, :precision => 2)}
+    tr
+      td Each month
+      td class="number"
+        span id="tax-bill-each-month" #{number_to_currency(@project.average_tax_bill/12, :precision => 2)}
+    tr
+      td Each year
+      td class="number"
+        span id="tax-bill-each-year" #{number_to_currency(@project.average_tax_bill, :precision => 2)}

@@ -1,21 +1,3 @@
-javascript:
-  $(document).ready(function() {
-    /* Activating Best In Place */
-    jQuery(".best_in_place").best_in_place();
-  });
-
-javascript:
-  $(function () {
-    $("#version-history")
-      .popover({
-        offset: 10,
-        placement: "right"
-      })
-      .click(function(e) {
-        e.preventDefault()
-      })
-  })
-
 == render :partial => 'shared/masthead'
 
 div class="row"
@@ -26,12 +8,14 @@ div class="row"
       div class="span13"
         div class="row action-bar"
           div class="span7"
-            p = link_to "<< all categories", project_categories_path(@project)
+            == render :partial => 'shared/social_sharing'
           div class="span6"
             span style="float: right; padding-right: 10px;"
               = link_to "Edit this category", edit_project_category_path(@category.project, @category)
               '  |
-              = link_to "New category", new_project_category_path(@project)
+              = link_to "Add a category", new_project_category_path(@project)
+              '  |
+              = link_to "Add a line item", new_category_item_path(@category)
 
         div class="span13"
           div class="row"
@@ -49,25 +33,7 @@ div class="row"
                 p = best_in_place @category, :challenge, :type => :textarea
 
             div class="span4"
-              h2 Average Tax Bill: #{best_in_place @project, :average_tax_bill, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
-              table class="quick-stats"
-                tbody
-                  tr
-                    td Each day
-                    td class="number"
-                      span id="tax-bill-each-day" #{number_to_currency(@project.average_tax_bill/365, :precision => 2)}
-                  tr
-                    td Each week
-                    td class="number"
-                      span id="tax-bill-each-week" #{number_to_currency(@project.average_tax_bill/52, :precision => 2)}
-                  tr
-                    td Each month
-                    td class="number"
-                      span id="tax-bill-each-month" #{number_to_currency(@project.average_tax_bill/12, :precision => 2)}
-                  tr
-                    td Each year
-                    td class="number"
-                      span id="tax-bill-each-year" #{number_to_currency(@project.average_tax_bill, :precision => 2)}
+              == render :partial => 'shared/tax_stamp'
 
               h2 Costs: #{number_to_currency(@category.expense_budget, :precision => 0)}
               table class="quick-stats"
@@ -97,7 +63,7 @@ div class="row"
             div class="span6 barchart-widget"
               h1 Spending: #{best_in_place @category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
               h2 Where the money goes
-              - for item in @category.items.tagged_with("expense").order("total desc")
+              - for item in @category.items.order("total desc")
                 div class="bar-container"
                   div class="bar-category-text"
                     = link_to item.name, category_item_path(@category, item)

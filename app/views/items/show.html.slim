@@ -1,17 +1,30 @@
+== render :partial => 'shared/welcome_modal'
+
+== render :partial => 'shared/masthead'
+
 div class="row"
-  div class="span12 offset1"
-    h1 #{link_to(@item.category.name, project_category_path(@item.category.project, @item.category))}: #{@item.name} #{link_to '(Edit)', edit_category_item_path(@item.category, @item)}
-    h2 #{number_to_currency(@item.total)}
-    p #{@item.description}
+  div class="span16"
+    div class="row"
+      div class="span3" id="left-rail"
+        == render :partial => 'shared/left_rail'
 
-  div class="span12 offset1" id="disqus_thread"
-    javascript:
-      var disqus_shortname = 'budgetvision'; // required: replace example with your forum shortname
+      div class="span13"
+        div class="row action-bar"
+          div class="span7"
+            == render :partial => 'shared/social_sharing'
+          div class="span6"
+            span style="float: right; padding-right: 10px;"
+              = link_to "Edit the item", edit_category_item_path(@item.category, @item)
+              '  | 
+              = link_to "Add an item", new_category_item_path(@item.category)
 
-      (function() {
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
+      div class="span13"
+        div class="row"
+          div class="span8"
+            h1 
+              = @item.name
+            h2 
+              = @item.total
+            p = best_in_place @item, :description, :type => :textarea
+          div class="span4"
+            == render :partial => 'shared/tax_stamp'

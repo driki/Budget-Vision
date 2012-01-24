@@ -39,6 +39,8 @@ Budgetvision::Application.routes.draw do
     resources :revenues, :name_prefix => "project_"
     resources :goals, :name_prefix => "project_"
     resources :forecasts, :name_prefix => "project_"
+    resources :sources, :name_prefix => "project_"
+    resources :items, :name_prefix => "project_"
   end
 
   resources :categories do
@@ -51,6 +53,7 @@ Budgetvision::Application.routes.draw do
 
   resources :items
   resources :goals
+  resources :sources
 
   # Sample resource route with options:
   #   resources :products do

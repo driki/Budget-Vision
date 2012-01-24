@@ -1,11 +1,24 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :show_project_modal_if_not_verified
+
   rescue_from CanCan::AccessDenied do |exception|
     if !signed_in?
       session[:pre_login_path] = @_env['HTTP_REFERER']
     end
     render :file => "#{Rails.root}/public/403.html", :status => 403
+  end
+
+  def show_project_modal_if_not_verified
+    if !@project.nil?
+      session[:show_project_not_verified] ||= {}
+      if session[:show_project_not_verified][@project.id].nil?
+        session[:show_project_not_verified][@project.id] = true
+      else
+        session[:show_project_not_verified][@project.id] = false
+      end
+    end
   end
 
   def remote_ip

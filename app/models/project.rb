@@ -46,6 +46,10 @@ class Project < ActiveRecord::Base
   validates_length_of :summary, :in => 0..2000, :allow_nil => true
   validates_length_of :title, :in => 0..150, :allow_nil => true
 
+  def items
+    @items = Item.joins(:category).where(:categories => {:project_id => @project.id})
+  end
+
   # A budget gets points the more detail it adds
   def budget_vision_score
     score = 0
@@ -55,6 +59,22 @@ class Project < ActiveRecord::Base
 
     if !revenue_budget.nil? && revenue_budget > 0
       score = score+5
+    end
+
+    if !average_tax_bill.nil? && average_tax_bill > 0
+      score = score+5
+    end
+
+    if !description.empty? && description.length > 0
+      score = score+1
+    end
+
+    if !summary.empty? && summary.length > 0
+      score = score+1
+    end
+
+    sources.each do |source|
+      score = score+2
     end
 
     categories.each do |category|

@@ -1,9 +1,12 @@
 class ItemsController < ApplicationController
+  set_tab :items
 
+  load_and_authorize_resource :project
 	load_and_authorize_resource :item
 	load_and_authorize_resource :category
 
-  def show
+  def index
+    @items = Item.joins(:category).where(:categories => {:project_id => @project.id})
   end
 
   def new
@@ -20,13 +23,10 @@ class ItemsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
     respond_to do |format|
       if @item.update_attributes(params[:item])
-        format.html { redirect_to item_path(
+        format.html { redirect_to category_item_path(
                 @item, :notice => 'Item was successfully updated.') }
         format.json { respond_with_bip(@item) }
       else

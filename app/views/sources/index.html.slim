@@ -14,25 +14,19 @@ div class="row"
             == render :partial => 'shared/social_sharing'
           div class="span6"
             span style="float: right; padding-right: 10px;"
-              = link_to "Add a goal", new_project_goal_path(@project)
+              = link_to "Add a source", new_project_source_path(@project)
 
       div class="span13"
         div class="row"
-          div class="span12"
-            h1 Goals
-            - for goal in @project.goals
-            	div class="row"
-            		div class="span6"
-            			h2 = best_in_place goal, :name, :type => :input
-            		div class="span6"
-            			h2 Result
-            	div class="row"
-            		div class="span6"
-	            		p = best_in_place goal, :description, :type => :textarea
-	            	div class="span6"
-	            		p = best_in_place goal, :summary, :type => :textarea
-	            hr
-
+          div class="span13"
+            h1 Sources
+            p Below are sources or reference materials that were used in the construction of this budget.
+            - for source in @project.sources
+            	div
+            		h2 = best_in_place source, :title, :type => :input
+            		h3 = best_in_place source, :url, :type => :input
+                p = best_in_place source, :description, :type => :textarea
+                hr
     	div class="span13"
         div class="row"
           div class="span12"
