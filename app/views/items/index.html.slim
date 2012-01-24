@@ -22,7 +22,7 @@ div class="row"
         - for item in @items
           div class="bar-container"
             div class="bar-category-text"
-              = link_to item.name, category_item_path(item.category, item)
+              #{link_to item.category.name, project_category_path(item.category.project, item.category)} :: #{link_to item.name, category_item_path(item.category, item)}
               ' 
               = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
             div class="bar"
