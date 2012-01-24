@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :record_pre_login_path
 
   rescue_from CanCan::AccessDenied do |exception|
     render :file => "#{Rails.root}/public/403.html", :status => 403
@@ -32,11 +31,5 @@ class ApplicationController < ActionController::Base
   def current_user=(user)
     @current_user = user
     session[:user_id] = user.id
-  end
-
-  def record_pre_login_path
-    if !signed_in?
-      session[:pre_login_path] = @_env['REQUEST_URI']
-    end
   end
 end
