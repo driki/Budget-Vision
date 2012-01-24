@@ -2,6 +2,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   rescue_from CanCan::AccessDenied do |exception|
+    if !signed_in?
+      session[:pre_login_path] = @_env['HTTP_REFERER']
+    end
     render :file => "#{Rails.root}/public/403.html", :status => 403
   end
 
