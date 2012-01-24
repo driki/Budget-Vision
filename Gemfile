@@ -26,7 +26,6 @@ gem 'flickraw'
 gem 'best_in_place'
 gem 'activerecord-import'
 gem 'differ'
-gem 'sqlite3'
 gem 'refraction'
 gem 'factory_girl_rails'
 
@@ -65,6 +64,7 @@ group :development, :test do
   gem 'guard-bundler'
   gem 'guard-rspec'
   gem 'guard-spork'
+  gem 'sqlite3'
 end
 
 group :production do
