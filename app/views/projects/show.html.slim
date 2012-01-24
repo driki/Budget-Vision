@@ -14,118 +14,100 @@
 
 == render :partial => 'shared/masthead'
 
+div id="modal" class="modal hide fade" style="display: none;"
+  div class="modal-header"
+    a href="#" class="close" ×
+    h3
+      | Hi there!
+
+  div class="modal-body"
+    div id="modal-welcome"
+      p
+        | Budget Vision is similar to Wikipedia, but built specifically for city and town budgets. It is an easy way to create, view, edit and collaborate with others to learn more about how your city or town generates revenue and spends money.
+      p Here are three easy ways to get started.
+      ul
+        li
+          p
+            = link_to "Add, edit or correct information that you see here", organization_path(@project.organization)
+        li
+          p
+            = link_to "Learn more about Budget Vision", about_path
+        li
+          p
+            = link_to "Share this tool with a city or town employee in #{@project.organization.name}", share_path(@project.organization)
+
+  div class="modal-footer"
+    a id="ok-btn" href="#" class="btn primary" Got it thanks
+
 div class="row"
-  == render :partial => 'shared/left_rail'
-  div class="row"
-    div class="span12"
-      div class="row action_bar"
-          span style="float: right; margin-top: 10px;"
-            = link_to "Edit this budget", edit_organization_project_path(@project.organization, @project)
-            '  |
-            = link_to "New budget", new_organization_project_path(@project.organization)
+  div class="span16"
+    div class="row"
+      div class="span3" id="left-rail"
+        == render :partial => 'shared/left_rail'
+      div class="span13"
+        div class="row action-bar"
+          div class="span7"
+            p &nbsp;
+          div class="span6"
+            span style="float: right; padding-right: 10px;"
+              = link_to "Edit this budget", edit_organization_project_path(@project.organization, @project)
+              '  |
+              = link_to "New budget", new_organization_project_path(@project.organization)
 
-  div id="modal" class="modal hide fade" style="display: none;"
-    div class="modal-header"
-      a href="#" class="close" ×
-      h3
-        | Hi there!
+        div class="span13"
+          div class="row"
+            div class="span8"
+              h1
+                ' Overview
+                p = best_in_place @project, :description, :type => :textarea
+            div class="span4"
+              h2 Average Tax Bill: #{best_in_place @project, :average_tax_bill, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
+              table class="quick-stats"
+                tbody
+                  tr
+                    td Each day
+                    td class="number"
+                      span id="tax-bill-each-day" #{number_to_currency(@project.average_tax_bill/365, :precision => 2)}
+                  tr
+                    td Each week
+                    td class="number"
+                      span id="tax-bill-each-week" #{number_to_currency(@project.average_tax_bill/52, :precision => 2)}
+                  tr
+                    td Each month
+                    td class="number"
+                      span id="tax-bill-each-month" #{number_to_currency(@project.average_tax_bill/12, :precision => 2)}
+                  tr
+                    td Each year
+                    td class="number"
+                      span id="tax-bill-each-year" #{number_to_currency(@project.average_tax_bill, :precision => 2)}
+        
+        div class="span12"
+          hr
 
-    div class="modal-body"
-      div id="modal-welcome"
-        p
-          | Budget Vision is similar to Wikipedia, but built specifically for city and town budgets. It is an easy way to create, view, edit and collaborate with others to learn more about how your city or town generates revenue and spends money.
-        p Here are three easy ways to get started.
-        ul
-          li
-            p
-              = link_to "Add, edit or correct information that you see here", organization_path(@project.organization)
-          li
-            p
-              = link_to "Learn more about Budget Vision", about_path
-          li
-            p
-              = link_to "Share this tool with a city or town employee in #{@project.organization.name}", share_path(@project.organization)
-
-    div class="modal-footer"
-      a id="ok-btn" href="#" class="btn primary" Got it thanks
-
-  == render :partial => 'shared/not_verified'
-
-  div class="span6 dashboard-widget large"
-    h1 = number_with_delimiter(@project.organization.population)
-    p People live here
-
-  div class="span6 dashboard-widget large"
-    h1 = best_in_place @project.organization, :employee_count, :type => :input, :nil => "0"
-    p Employees work here
-
-  div class="span6 dashboard-widget large"
-    h1 = best_in_place @project, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}, :class => "best_in_place"
-    p Is how much is being spent
-
-  div class="span6 dashboard-widget large"
-    h1 = best_in_place @project, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-    p Is how much revenue comes in
-
-  div class="span12"
-    div id="overview"
-      h1
-        ' Overview
-      p = best_in_place @project, :description, :type => :textarea
-
-  div class="row"
-    div class="span6 barchart-widget"
-      h1 Where the money goes
-      - for category in @project.categories.tagged_with("expense").order("expense_budget desc")
-        div class="bar-container"
-          div class="bar-category-text"
-            = link_to category.name, project_category_path(@project, category)
-          div class="bar"
-            - if @project.expense_budget > 0
-              div class="bar-percent expense" style="width: #{((category.expense_budget/@project.expense_budget)*100).to_i}%;"
-
-    div class="span6 barchart-widget"
-      h1 Where the money comes from
-      - for category in @project.categories.tagged_with("revenue").order("revenue_budget desc")
-        div class="bar-container"
-          div class="bar-category-text"
-            = link_to category.name, project_category_path(@project, category)
-          div class="bar"
-            - if @project.revenue_budget > 0
-              div class="bar-percent revenue" style="width: #{((category.revenue_budget/@project.revenue_budget)*100).to_i}%;"
-
-  div class="span12 offset3"
-    div id="summary"
-      h1
-        ' Summary
-      p = best_in_place @project, :summary, :type => :textarea
-
-  div class="span12 offset3"
-    h1 Sources
-    p Below are links to verifiable and official budget documents from a city or town.
-    - for source in @project.sources
-      h3 = link_to source.title, source.url
-
-
-  div class="span10 offset3" id="disqus_thread"
-    javascript:
-      var disqus_shortname = 'budgetvision'; // required: replace example with your forum shortname
-
-      (function() {
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-
-javascript:
-  $(function () {
-    $("p[rel=popover]")
-      .popover({
-        offset: 10
-      })
-      .click(function(e) {
-        e.preventDefault()
-      })
-  })
+        div class="span12"
+          div class="row"
+            div class="span6 barchart-widget"
+              h1 Spending: #{best_in_place @project, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
+              h2 Where the money goes
+              - for category in @project.categories.tagged_with("expense").order("expense_budget desc")
+                div class="bar-container"
+                  div class="bar-category-text"
+                    = link_to category.name, project_category_path(@project, category)
+                    ' 
+                    = best_in_place category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
+                  div class="bar"
+                    - if @project.expense_budget > 0
+                      div class="bar-percent expense" style="width: #{((category.expense_budget/@project.expense_budget)*100).to_i}%;"
+         
+            div class="span6 barchart-widget"
+              h1 Income: #{best_in_place @project, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
+              h2 Where the money comes from
+              - for category in @project.categories.tagged_with("revenue").order("revenue_budget desc")
+                div class="bar-container"
+                  div class="bar-category-text"
+                    = link_to category.name, project_category_path(@project, category)
+                    ' 
+                    = best_in_place category, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
+                  div class="bar"
+                    - if @project.revenue_budget > 0
+                      div class="bar-percent revenue" style="width: #{((category.revenue_budget/@project.revenue_budget)*100).to_i}%;"

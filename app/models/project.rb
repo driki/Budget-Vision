@@ -45,4 +45,28 @@ class Project < ActiveRecord::Base
   validates_length_of :description, :in => 0..2000, :allow_nil => true
   validates_length_of :summary, :in => 0..2000, :allow_nil => true
   validates_length_of :title, :in => 0..150, :allow_nil => true
+
+  # A budget gets points the more detail it adds
+  def budget_vision_score
+    score = 0
+    if !expense_budget.nil? && expense_budget > 0
+      score = score+5
+    end
+
+    if !revenue_budget.nil? && revenue_budget > 0
+      score = score+5
+    end
+
+    categories.each do |category|
+      if !category.expense_budget.nil? && category.expense_budget > 0
+        score = score+2
+      end
+      if !category.revenue_budget.nil? && category.revenue_budget > 0
+        score = score+2
+      end
+    end
+
+    return score
+  end
+
 end

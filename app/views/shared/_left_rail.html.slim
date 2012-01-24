@@ -1,44 +1,37 @@
-div class="span3" id="left-rail"
-  = tabs_tag :open_tabs => { :id => "tabs" } do |tab|
-    = tab.overview 'Overview', organization_project_path(@project.organization, @project)
-    = tab.categories 'Categories', project_categories_path(@project)
-    = tab.expenses 'Expenses', project_expenses_path(@project)
-    = tab.revenues 'Revenues', project_revenues_path(@project)
-    = tab.goals 'Goals', project_goals_path(@project)
-    = tab.forecasts 'Forecasts', project_forecasts_path(@project)
+= tabs_tag :open_tabs => { :id => "tabs" } do |tab|
+  = tab.overview 'Overview', organization_project_path(@project.organization, @project)
+  = tab.categories 'Categories', project_categories_path(@project)
+  = tab.expenses 'Expenses', project_expenses_path(@project)
+  = tab.revenues 'Revenues', project_revenues_path(@project)
+  = tab.goals 'Goals', project_goals_path(@project)
+  = tab.forecasts 'Forecasts', project_forecasts_path(@project)
 
-  div id="characteristics"
-    h3 Characteristics
-    table
-      tbody
+div id="characteristics"
+  h3 Characteristics
+  table class="characteristics"
+    tbody
+      tr
+        td
+          img class="icon" src="/assets/glyphicons/png/glyphicons_020_home.png"
+          #{number_with_delimiter(@project.organization.housing_units)} homes
+      tr
+        td
+          img class="icon" src="/assets/glyphicons/png/glyphicons_043_group.png" style="float: left;"
+          #{number_with_precision(@project.organization.diversity, :precision => 2)} diversity
+      tr
+        td
+          img class="icon" src="/assets/glyphicons/png/glyphicons_020_home.png"
+          #{number_with_delimiter(@project.organization.total_sq_mi)} sq. miles
+      tr
+        td
+          img class="icon" src="/assets/glyphicons/png/glyphicons_020_home.png"
+          #{number_with_delimiter(@project.organization.pop_sq_mi)} pop/sq mile
+      tr
+        td
+          img class="icon" src="/assets/glyphicons/png/glyphicons_020_home.png"
+          #{number_with_precision(@project.organization.housing_percent_vacant, :precision => 2)} % homes vacant
 
-        tr
-          td
-            img class="icon" src="/assets/glyphicons/png/glyphicons_020_home.png"
-          td
-            #{number_with_delimiter(@project.organization.housing_units)} homes
-        tr
-          td
-            img class="icon" src="/assets/glyphicons/png/glyphicons_043_group.png"
-          td
-            #{number_with_precision(@project.organization.diversity, :precision => 2)} diversity
-        tr
-          td
-            img class="icon" src="/assets/glyphicons/png/glyphicons_020_home.png"
-          td
-            #{number_with_delimiter(@project.organization.total_sq_mi)} sq. miles
-        tr
-          td
-            img class="icon" src="/assets/glyphicons/png/glyphicons_020_home.png"
-          td
-            #{number_with_delimiter(@project.organization.pop_sq_mi)} pop/sq mile
-        tr
-          td
-            img class="icon" src="/assets/glyphicons/png/glyphicons_020_home.png"
-          td
-            #{number_with_precision(@project.organization.housing_percent_vacant, :precision => 2)} % homes vacant
-
-  div id="nearby"
-    h3 Nearby Cities & Towns
-    - for org in Organization.near(@project.organization.name + ", " + @project.organization.state).limit(10)
-      h4 = link_to "#{org.name}, #{org.state}", organization_path(org)
+div id="nearby"
+  h3 Nearby Cities & Towns
+  - for org in Organization.near(@project.organization.name + ", " + @project.organization.state).limit(10)
+    h4 = link_to "#{org.name}, #{org.state}", organization_path(org)

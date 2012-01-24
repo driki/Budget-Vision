@@ -52,6 +52,34 @@ describe Project do
   it { should allow_mass_assignment_of :enable_tips }
 
   it { should allow_mass_assignment_of :is_demo }
+
+  describe "Budget with no data" do
+    it "should have a Budget Vision score of 0" do
+      @project = Factory(:project, :year => Time.now.year)
+      @project.budget_vision_score.should == 0  
+    end
+  end
+
+  describe "Budget with only high level expense_budget" do
+    it "should have a Budget Vision score of 5" do
+      @project = Factory(:project, :year => Time.now.year, :expense_budget => 1000000)
+      @project.budget_vision_score.should == 5
+    end
+  end
+
+  describe "Budget with only high level revenue_budget" do
+    it "should have a Budget Vision score of 5" do
+      @project = Factory(:project, :year => Time.now.year, :revenue_budget => 1000000)
+      @project.budget_vision_score.should == 5
+    end
+  end
+
+  describe "Budget with high level revenue_budget and expense_budget" do
+    it "should have a Budget Vision score of 10" do
+      @project = Factory(:project, :year => Time.now.year, :revenue_budget => 1000000, :expense_budget => 1000000)
+      @project.budget_vision_score.should == 10
+    end
+  end
 end
 
 

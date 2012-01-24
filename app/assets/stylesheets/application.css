@@ -38,12 +38,13 @@ body {
   border-radius: 2px;
 }
 
-.action_bar {
+.action-bar {
   padding-top: 10px;
-  background-color: #F3EFE9;
+  background-color: #F7F4F0;
+  margin-bottom: 20px;
 }
 
-.action_bar a {
+.action-bar a {
   font-size: 16px;
 }
 
@@ -72,7 +73,7 @@ body {
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
   padding-top: 20px;
-  padding-left: 20px;
+  padding-left: 10px;
   padding-bottom: 0px;
   margin-bottom: 0px;
 }
@@ -177,11 +178,26 @@ table td {
 
 #left-rail {
   border-right: 1px solid #D9E7F1;
-  padding-left: 20px;
+  margin-right: -1px;
+}
+
+#left-rail ul {
+  padding-left: 10px;
+}
+
+#left-rail h3 {
+  margin-bottom: 0px;
+  padding-left: 10px;
+}
+
+#left-rail p {
+  margin-bottom: 0px;
+  padding-left: 10px;
 }
 
 #left-rail h1 {
   margin-bottom: 0px;
+  padding-left: 10px;
 }
 
 #left-rail hr {
@@ -189,8 +205,17 @@ table td {
   margin-top: 10px;
 }
 
+.characteristics img {
+  padding-right: 5px;
+  float: left;
+}
+
 #characteristics, #nearby {
-  margin-top: 20px;
+  margin-top: 10px;
+}
+
+#nearby h4 {
+  padding-left: 10px;
 }
 
 .nav {

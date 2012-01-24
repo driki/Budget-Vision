@@ -3,3 +3,7 @@ Factory.define :organization do |f|
   f.state "ME"
   f.population 1234
 end
+
+Factory.define :project do |f|
+  f.year Time.now.year
+end
