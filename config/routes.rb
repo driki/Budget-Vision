@@ -49,6 +49,8 @@ Budgetvision::Application.routes.draw do
     resources :items, :name_prefix => "department_"
   end
 
+  resources :items
+
   # Sample resource route with options:
   #   resources :products do
   #     member do

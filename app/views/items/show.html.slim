@@ -1,6 +1,6 @@
 div class="row"
   div class="span12 offset1"
-    h1 #{link_to(@item.category.name, project_category_path(@item.category.project, @item.category))} #{@item.name} #{link_to '(Edit)', edit_item_path(@item)}
+    h1 #{link_to(@item.category.name, project_category_path(@item.category.project, @item.category))}: #{@item.name} #{link_to '(Edit)', edit_category_item_path(@item.category, @item)}
     h2 #{number_to_currency(@item.total)}
     p #{@item.description}
 

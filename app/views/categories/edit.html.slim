@@ -11,7 +11,7 @@ div class="row"
             = f.text_field :name
             span class="help-block"
               span class="label" Required
-              |  Example: Fire Department, Public Safety, General Government
+              | Example: Fire Department, Public Safety, General Government
 
         - if @category.class == "Department"
           div class="clearfix"
@@ -41,4 +41,3 @@ div class="row"
 
         div class="actions"
           = f.submit(:class => "btn primary")
-      
