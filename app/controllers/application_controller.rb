@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   def signed_in?
-    !!current_user
+    !session[:user_id].nil?
   end
 
   helper_method :current_user, :signed_in?
@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
 
   def record_pre_login_path
     if !signed_in?
-      session[:pre_login_path] = @_env['HTTP_REFERER']
+      session[:pre_login_path] = @_env['REQUEST_URI']
     end
   end
 end
