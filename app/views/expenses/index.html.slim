@@ -56,8 +56,7 @@ div class="row"
           div class="row"
             div class="span8"
               h1
-                ' Goals
-                p = best_in_place @project, :description, :type => :textarea
+                ' Expenses
             div class="span4"
               h2 Average Tax Bill: #{best_in_place @project, :average_tax_bill, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
               table class="quick-stats"

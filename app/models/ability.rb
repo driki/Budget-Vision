@@ -38,12 +38,12 @@ class Ability
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
 
     can :read, Category # Department superclass
-      can :read, Department
+    can :read, Department
     can :read, Forecast
     can :read, Goal
     can :read, Item # Expense, Revenue superclass
-      can :read, Expense
-      can :read, Revenue
+    can :read, Expense
+    can :read, Revenue
     can :read, Organization
     can :read, Project
     can :read, Source
@@ -51,12 +51,12 @@ class Ability
 
     if !user.nil?
       can :create, Category
-        can :create, Department
+      can :create, Department
       can :create, Forecast
       can :create, Goal
       can :create, Item
-        can :read, Expense
-        can :read, Revenue
+      can :read, Expense
+      can :read, Revenue
       can :create, Organization
       can :create, Project
       can :create, Source
@@ -66,30 +66,29 @@ class Ability
         Ability.can_user_manage_category?(user, category)
       end
 
-        can :manage, Department do |category|
-          Ability.can_user_manage_category?(user, category)
-        end
+      can :manage, Department do |category|
+        Ability.can_user_manage_category?(user, category)
+      end
 
       can :manage, Forecast do |forecast|
         Ability.can_user_manage_project?(user, forecast.project)
       end
 
-      # REVIEW: should a goal belong to a project?
-      #can :manage, Goal do |goal|
-      #  Ability.can_user_manage_project?(user, goal.project)
-      #end
+      can :manage, Goal do |goal|
+        Ability.can_user_manage_project?(user, goal.project)
+      end
 
       can :manage, Item do |item|
         Ability.can_user_manage_category?(user, item.category)
       end
 
-        can :manage, Expense do |item|
-          Ability.can_user_manage_category?(user, item.category)
-        end
+      can :manage, Expense do |item|
+        Ability.can_user_manage_category?(user, item.category)
+      end
 
-        can :manage, Revenue do |item|
-          Ability.can_user_manage_category?(user, item.category)
-        end
+      can :manage, Revenue do |item|
+        Ability.can_user_manage_category?(user, item.category)
+      end
 
       can :manage, Organization do |org|
         !org.is_verified || org.owner_id == user.id || org.users.include?(user)
