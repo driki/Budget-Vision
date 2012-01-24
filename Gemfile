@@ -61,7 +61,7 @@ group :development, :test do
  	gem 'guard'
  	gem 'spork', '> 0.9.0.rc'
  	gem 'growl'
-  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'rb-fsevent'
   gem 'guard-bundler'
   gem 'guard-rspec'
   gem 'guard-spork'
