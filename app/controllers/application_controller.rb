@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :show_project_modal_if_not_verified
+  before_filter :show_project_modal_if_not_verified, :show_welcome
 
   rescue_from CanCan::AccessDenied do |exception|
     if !signed_in?
