@@ -53,6 +53,7 @@ Budgetvision::Application.routes.draw do
 
   resources :items
   resources :goals
+  resources :forecasts
   resources :sources
 
   # Sample resource route with options:

@@ -28,13 +28,25 @@ div class="row"
             == render :partial => 'shared/tax_stamp'
 
       div class="span12"
-        hr
-
-      div class="span12"
         div class="row"
           div class="span6 barchart-widget"
-            h1 Spending: #{best_in_place @project, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
-            h2 Where the money goes
+            h1 Where the money goes
+            table
+              tr
+                td Total Budgeted Expenses
+                td class="number" #{best_in_place @project, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
+              tr
+                td Expense Categories Total
+                td class="number" #{number_to_currency(@project.categories.tagged_with("expense").sum(:expense_budget), :precision => 0)}
+              tr
+                - if @project.expense_budget != @project.categories.tagged_with("expense").sum(:expense_budget)
+                  td 
+                    | Budget and category totals aren't equal
+                - else
+                  td 
+                    | Budget and category totals match
+                td class="number" = number_to_currency(@project.expense_budget - @project.categories.tagged_with("expense").sum(:expense_budget), :precision => 0)
+
             - for category in @project.categories.tagged_with("expense").order("expense_budget desc")
               div class="bar-container"
                 div class="bar-category-text"
@@ -46,8 +58,23 @@ div class="row"
                     div class="bar-percent expense" style="width: #{((category.expense_budget/@project.expense_budget)*100).to_i}%;"
        
           div class="span6 barchart-widget"
-            h1 Income: #{best_in_place @project, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
-            h2 Where the money comes from
+            h1 Where the money comes from
+            table
+              tr
+                td Total Budgeted Revenue
+                td class="number" #{best_in_place @project, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
+              tr
+                td Revenue Categories Total
+                td class="number" #{number_to_currency(@project.categories.tagged_with("revenue").sum(:revenue_budget), :precision => 0)}
+              tr
+                - if @project.revenue_budget != @project.categories.tagged_with("revenue").sum(:revenue_budget)
+                  td 
+                    | Budget and category totals aren't equal
+                - else
+                  td 
+                    | Budget and category totals match
+                td class="number" = number_to_currency(@project.revenue_budget - @project.categories.tagged_with("revenue").sum(:revenue_budget), :precision => 0)
+
             - for category in @project.categories.tagged_with("revenue").order("revenue_budget desc")
               div class="bar-container"
                 div class="bar-category-text"

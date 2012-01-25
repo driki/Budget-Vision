@@ -1,5 +1,5 @@
-== render :partial => 'shared/error_message', :locals => {:target => @goal}
-= form_for(@goal, :url=>project_goals_path(@project)) do |f|
+== render :partial => 'shared/error_message', :locals => {:target => @forecast}
+= form_for(@forecast, :url=>project_forecasts_path(@project)) do |f|
   fieldset
     div class="clearfix"
       = f.label :name
@@ -12,11 +12,6 @@
       = f.label :description
       div class="input"
         = f.text_area(:description, :class => "xxlarge required", :rows => "4")
-
-    div class="clearfix"
-      = f.label :summary
-      div class="input"
-        = f.text_area(:summary, :class => "xxlarge required", :rows => "4")
 
   div class="actions"
     = f.submit(:class => "btn primary")
