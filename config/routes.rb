@@ -15,6 +15,8 @@ Budgetvision::Application.routes.draw do
   match "/login" => "sessions#login"
   match "/logout" => "sessions#destroy", :as => "logout"
 
+  post "versions/:id/revert" => "versions#revert", :as => "revert_version"  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

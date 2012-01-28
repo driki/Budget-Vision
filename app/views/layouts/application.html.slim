@@ -65,7 +65,7 @@ html
       - if flash[:error]
           div class="alert-message error" flash[:error]
       - if flash[:message]
-          div class="alert-message success" flash[:message]
+          div class="alert-message success" raw(flash[:message])
       - if flash[:notice]
         div class="alert alert-success fade in" data-alert="alert"
           a class="close" data-dismiss='alert' href="#" ×
@@ -73,20 +73,20 @@ html
 
       = yield
 
-    footer
-      div class="row"
-        div class="span11 offset1"
-          h3
-            | A service provided by NearbyFYI
-          ul
-            li 34 Hardy Ave
-            li Watertown, MA 02472
-            li Phone: (405) 428-3438 or (405) 4-BUDGET
-            li
-              a href="mailto:info@budgetvisionapp.com" info@budgetvisionapp.com
-            li
-              | Twitter 
-              a href="http://twitter.com/budgetvision" @BudgetVision
+      footer
+        div class="row"
+          div class="span11 offset1"
+            h3
+              | A service provided by NearbyFYI
+            ul
+              li 34 Hardy Ave
+              li Watertown, MA 02472
+              li Phone: (405) 428-3438 or (405) 4-BUDGET
+              li
+                a href="mailto:info@budgetvisionapp.com" info@budgetvisionapp.com
+              li
+                | Twitter 
+                a href="http://twitter.com/budgetvision" @BudgetVision
 
     javascript:
       var _gaq = _gaq || [];

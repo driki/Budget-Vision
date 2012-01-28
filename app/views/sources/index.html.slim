@@ -14,7 +14,7 @@ div class="row"
             == render :partial => 'shared/social_sharing'
           div class="span5"
             span style="float: right; padding-right: 10px;"
-              = link_to "Add a source", new_project_source_path(@project)
+              = link_to "New source", new_project_source_path(@project)
 
       div class="span10"
         div class="row"
@@ -22,7 +22,7 @@ div class="row"
             p Below are sources or reference materials that were used in the construction of this budget.
             - for source in @project.sources
             	div
-            		h2 = best_in_place source, :title, :type => :input
+            		h2 = link_to source.title, project_source_path(@project, source)
             		h3 = best_in_place source, :url, :type => :input
                 p = best_in_place source, :description, :type => :textarea
                 hr

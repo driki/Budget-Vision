@@ -80,6 +80,13 @@ describe Project do
       @project.budget_vision_score.should == 10
     end
   end
+
+  describe "Budget with 1,000,000 of taxable revenue and average_tax_bill of 1,000 " do
+    it "should have a Budget Vision score of 10" do
+      @project = Factory(:project, :year => Time.now.year, :revenue_budget => 1000000, :expense_budget => 1000000)
+      @project.budget_vision_score.should == 10
+    end
+  end
 end
 
 
