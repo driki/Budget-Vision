@@ -395,7 +395,7 @@ table.items td {
 
 div.screenshot img {
   width: 550px;
-  padding: 5px
+  padding: 5px;
   -moz-box-shadow: 10px 10px 5px #ccc;
   -webkit-box-shadow: 10px 10px 5px #ccc;
   box-shadow: 10px 10px 5px #ccc;
