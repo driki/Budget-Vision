@@ -5,6 +5,7 @@ Budgetvision::Application.routes.draw do
   match "/help" => "home#help"
   match "/price" => "home#price"
   match "/setup" => "home#setup"
+  match "/learning" => "home#learning"
   match "/share/:id" => "home#share", :as => "share"
 
   match "/organizations/states/:state_abbr" => "organizations#states", :as => "states"

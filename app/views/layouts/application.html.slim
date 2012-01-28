@@ -30,6 +30,13 @@ html
                 li
                   = link_to "Cities & Towns", organizations_path
 
+              - if request.path_info.eql?(learning_path)
+                li class="active"
+                  = link_to "Learning Center", learning_path
+              - else
+                li
+                  = link_to "Learning Center", learning_path
+
               - if request.path_info.eql?(price_path)
                 li class="active"
                   = link_to "Pricing", price_path
