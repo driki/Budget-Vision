@@ -84,5 +84,5 @@ div class="row"
                 div class="progress success"
                   - if @project.expense_budget > 0
                     div class="bar" style="width: #{((category.revenue_budget/@project.revenue_budget)*100).to_i}%;"
-          div class="span10"
+          div class="span8"
             == render :partial => 'shared/comments'
