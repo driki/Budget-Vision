@@ -34,9 +34,9 @@ div class="row"
                   = link_to item.name, category_item_path(category, item)
                   ' 
                   = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-                div class="bar"
+                div class="progress danger"
                   - if category.expense_budget > 0
-                    div class="bar-percent expense" style="width: #{((item.total/category.expense_budget)*100).to_i}%;"
+                    div class="bar" style="width: #{((item.total/category.expense_budget)*100).to_i}%;"
 
       div class="span8"
         div class="row"
