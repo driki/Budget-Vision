@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
   load_and_authorize_resource :project
 	load_and_authorize_resource :item
 	load_and_authorize_resource :category
+  load_and_authorize_resource :department
 
   def index
     @items = Item.joins(:category).where(:categories => {:project_id => @project.id}).order("total desc")
@@ -18,8 +19,11 @@ class ItemsController < ApplicationController
   end
 
   def create
-  	@item = Item.new(params[:item])
-  	@category.items << @item
+    @item = Item.new(params[:item])
+    if !@department.nil?
+  	  @category = @department
+    end
+    @category.items << @item
     if @category.save
       redirect_to category_item_path(@item.category, @item)
     else

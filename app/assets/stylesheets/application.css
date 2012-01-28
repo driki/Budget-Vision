@@ -24,6 +24,10 @@ body, h1, h2, h3, h4, h5, p, a, label, input, button, select, textarea {
   text-decoration: none;
 }
 
+input, textarea, button, label {
+  font-size: 1em;
+}
+
 a:link, a:visited {
   color: #08C;
   text-decoration: none;
@@ -311,6 +315,10 @@ td.bar-chart {
 
 .quick-stats {
   font-size: 16px;
+}
+
+table.quick-stats {
+  width: 95%;
 }
 
 div#price-features {

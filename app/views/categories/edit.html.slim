@@ -1,4 +1,6 @@
 div class="row"
   div class="span10 offset2"
-    h1 Edit #{@project.organization.name}, #{@project.organization.state}
-    == render :partial => 'form_fields'
+    br
+    h1 Edit #{@category.name} for #{@project.organization.name}, #{@project.organization.state}
+    br
+  == render :partial => 'form_fields'

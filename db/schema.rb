@@ -11,15 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120125141000) do
+ActiveRecord::Schema.define(:version => 20120128180715) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.text     "goal"
     t.text     "challenge"
     t.text     "description"
-    t.float    "expense_budget"
-    t.float    "revenue_budget"
+    t.float    "expense_budget", :default => 0.0
+    t.float    "revenue_budget", :default => 0.0
     t.string   "tags"
     t.integer  "project_id"
     t.datetime "created_at"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(:version => 20120125141000) do
   end
 
   create_table "goals", :force => true do |t|
-    t.text     "name"
+    t.string   "name"
     t.text     "description"
     t.text     "summary"
     t.integer  "project_id"

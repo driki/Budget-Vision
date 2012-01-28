@@ -35,6 +35,7 @@ Budgetvision::Application.routes.draw do
 
   resources :projects do
     resources :categories, :name_prefix => "project_"
+    resources :departments, :name_prefix => "project_"
     resources :expenses, :name_prefix => "project_"
     resources :revenues, :name_prefix => "project_"
     resources :goals, :name_prefix => "project_"

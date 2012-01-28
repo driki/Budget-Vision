@@ -17,77 +17,77 @@ div class="row"
               '  |
               = link_to "Add a line item", new_category_item_path(@category)
 
-        div class="span10"
-          div class="row"
-            div class="span5"
-              h1
-                = @category.name
-              p = best_in_place @category, :description, :type => :textarea
+      div class="span10"
+        div class="row"
+          div class="span5"
+            h1
+              = @category.name
+            p = best_in_place @category, :description, :type => :textarea
 
-              h1
-                | Goal
-              p = best_in_place @category, :goal, :type => :textarea
-                
-              h1
-                | Challenges
-              p = best_in_place @category, :challenge, :type => :textarea
+            h1
+              | Goal
+            p = best_in_place @category, :goal, :type => :textarea
+              
+            h1
+              | Challenges
+            p = best_in_place @category, :challenge, :type => :textarea
 
-            div class="span5"
-              == render :partial => 'shared/tax_stamp'
+          div class="span5"
+            == render :partial => 'shared/tax_stamp'
 
-              h2 Costs: #{number_to_currency(@category.expense_budget, :precision => 0)}
-              table class="quick-stats"
-                tbody
-                  tr
-                    td Each day
-                    td class="number"
-                      span #{number_to_currency(@category.expense_budget/365, :precision => 0)}
-                  tr
-                    td Each week
-                    td class="number"
-                      span #{number_to_currency(@category.expense_budget/52, :precision => 0)}
-                  tr
-                    td Each month
-                    td class="number"
-                      span #{number_to_currency(@category.expense_budget/12, :precision => 0)}
-                  tr
-                    td Each year
-                    td class="number"
-                      span #{number_to_currency(@category.expense_budget, :precision => 0)}
+            h2 Category costs: #{number_to_currency(@category.expense_budget, :precision => 0)}
+            table class="quick-stats"
+              tbody
+                tr
+                  td Each day
+                  td class="number"
+                    span #{number_to_currency(@category.expense_budget/365, :precision => 0)}
+                tr
+                  td Each week
+                  td class="number"
+                    span #{number_to_currency(@category.expense_budget/52, :precision => 0)}
+                tr
+                  td Each month
+                  td class="number"
+                    span #{number_to_currency(@category.expense_budget/12, :precision => 0)}
+                tr
+                  td Each year
+                  td class="number"
+                    span #{number_to_currency(@category.expense_budget, :precision => 0)}
         
-        div class="span10"
-          hr
+      div class="span10"
+        hr
 
-        div class="span10"
-          div class="row"
-            div class="span5 barchart-widget"
-              h1 Spending: #{best_in_place @category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
-              h2 Where the money goes
-              - for item in @category.items.order("total desc")
-                div class="bar-container"
-                  div class="bar-category-text"
-                    = link_to item.name, category_item_path(@category, item)
-                    ' 
-                    = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-                  div class="bar"
-                    - if @category.expense_budget > 0
-                      div class="bar-percent expense" style="width: #{((item.total/@category.expense_budget)*100).to_i}%;"
-              - if @category.items.empty?
-                p 
-                  = link_to "Add line items", new_category_item_path(@category)
-                  '  to help show where the money goes.
-         
-            div class="span5 barchart-widget"
-              h1 Income: #{best_in_place @category, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
-              h2 Where the money comes from
-              - for item in @category.items.tagged_with("revenue").order("total desc")
-                div class="bar-container"
-                  div class="bar-category-text"
-                    = link_to item.name, category_item_path(@category, item)
-                    ' 
-                    = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-                  div class="bar"
-                    - if @category.revenue_budget > 0
-                      div class="bar-percent expense" style="width: #{((item.total/@category.revenue_budget)*100).to_i}%;"
+      div class="span10"
+        div class="row"
+          div class="span5 barchart-widget"
+            h1 Spending: #{best_in_place @category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
+            h2 Where the money goes
+            - for item in @category.items.order("total desc")
+              div class="bar-container"
+                div class="bar-category-text"
+                  = link_to item.name, category_item_path(@category, item)
+                  ' 
+                  = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
+                div class="progress danger"
+                  - if @category.expense_budget > 0
+                    div class="bar" style="width: #{((item.total/@category.expense_budget)*100).to_i}%;"
+            - if @category.items.empty?
+              p 
+                = link_to "Add line items", new_category_item_path(@category)
+                '  to help show where the money goes.
+       
+          div class="span5 barchart-widget"
+            h1 Income: #{best_in_place @category, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
+            h2 Where the money comes from
+            - for item in @category.items.tagged_with("revenue").order("total desc")
+              div class="bar-container"
+                div class="bar-category-text"
+                  = link_to item.name, category_item_path(@category, item)
+                  ' 
+                  = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
+                div class="progress success"
+                  - if @category.revenue_budget > 0
+                    div class="bar" style="width: #{((item.total/@category.revenue_budget)*100).to_i}%;"
         div class="span8"
           == render :partial => 'shared/comments'

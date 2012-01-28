@@ -4,6 +4,17 @@ class CategoriesController < ApplicationController
   load_and_authorize_resource :project
   load_and_authorize_resource :category, :except => [:index]
 
+  def create
+    @category = Category.new(params[:category])
+    @project.categories << @category
+    if @project.save
+      redirect_to project_category_path(@category.project, @category)
+    else
+      render :action => 'new'
+    end
+  end
+
+
   def update
     respond_to do |format|
       if @category.update_attributes(params[:category])

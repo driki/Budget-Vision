@@ -1,4 +1,5 @@
-div class="row"
-  div class="span10 offset2"
-    h1 Add a new line item to #{@category.project.organization.name}, #{@category.project.organization.state}
-    == render :partial => 'form_fields'
+div class="span10 offset2"
+  br
+  h1 Add a new link item for: #{@category.name}
+  br
+== render :partial => 'form_fields'

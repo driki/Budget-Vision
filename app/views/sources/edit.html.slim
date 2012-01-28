@@ -1,4 +1,6 @@
 div class="row"
-  div class="span12 offset2"
-		h1 Edit #{@project.organization.name}, #{@project.organization.state}
-		== render :partial => 'form_fields'
+  div class="span10 offset2"
+    br
+    h1 Edit Source for #{@project.organization.name}, #{@project.organization.state}
+    br
+  == render :partial => 'form_fields'

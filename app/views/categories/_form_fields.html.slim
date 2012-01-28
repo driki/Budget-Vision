@@ -1,50 +1,26 @@
-== render :partial => 'shared/error_message', :locals => {:target => @category}
-= form_for @category do |f|
-  fieldset
-    div class="clearfix"
-      = f.label :name
-      div class="input"
-        = f.text_field :name
-        span class="help-block"
-          span class="label" Required
-          |  Example: Fire Department, Public Safety, General Government
-
-    - if @category.class.name == "Department"
-      div class="clearfix"
-        = f.label :people
-        div class="input"
-          = f.text_field :people
-          span class="help-block"
-            | Example: 120
-
-    div class="clearfix"
-      = f.label :expense_budget
-      div class="input"
-        = f.text_field :expense_budget
-
-    div class="clearfix"
-      = f.label :revenue_budget
-      div class="input"
-        = f.text_field :revenue_budget
-
-    div class="clearfix"
-      = f.label :tag_list, "Tags"
-      div class="input"
-        = f.text_field :tag_list
-        span class="help-block"
-            | Example: expense, revenue, taxes, debt
-
-    div class="clearfix"
-      = f.label :description
-      div class="input"
-        = f.text_area(:description, :class => "xxlarge required", :rows => "4")
-
-    div class="clearfix"
-      = f.label :goal
-      div class="input"
-        = f.text_area(:goal, :class => "xxlarge required", :rows => "4")
-
-    div class="actions"
-      = f.submit(:class => "btn primary")
-      '  or 
-      = link_to "Cancel", request.env['HTTP_REFERER'] 
+= simple_form_for [@project, @category], :html => { :class => 'form-horizontal' } do |f|
+  - if f.error_notification
+    div class="row"
+      div class="span10 offset2"
+        div class="alert alert-error fade in"
+          a class="close" data-dismiss="alert" href="#" &times;
+          = f.error_notification
+  div class="controls"
+    = f.input :name, :hint => "Example: Fire Department, Public Safety, General Government"
+  div class="controls"
+    = f.input :expense_budget, :hint => "Example: $120,000"
+  div class="controls"
+    = f.input :revenue_budget, :hint => "Example: $120,000"
+  - if @category.class.name == "Department"
+    div class="controls"
+      = f.input :people, :hint => "Example: 12 or 120. The number of people working in the department"
+  div class="controls"
+    = f.input :tag_list, :hint => "Example: expense, revenue, taxes, debt"
+  div class="controls"
+    = f.input :description, :input_html => { :class => "span6", :rows => "4" }  
+  div class="controls"
+    = f.input :goal, :input_html => { :class => "span6", :rows => "4" }  
+  div class="form-actions span6 offset2"
+    = f.button :submit, "Save Category", :class => 'primary'
+    |  or 
+    = link_to "Cancel", request.env['HTTP_REFERER'], :class => "btn" 
