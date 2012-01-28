@@ -65,11 +65,11 @@ class Project < ActiveRecord::Base
       score = score+5
     end
 
-    if !description.empty? && description.length > 0
+    if !description.nil? && description.length > 0
       score = score+1
     end
 
-    if !summary.empty? && summary.length > 0
+    if !summary.nil? && summary.length > 0
       score = score+1
     end
 

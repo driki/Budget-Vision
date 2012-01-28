@@ -1,0 +1,25 @@
+= simple_form_for @project, :html => { :class => 'form-horizontal' } do |f|
+  - if f.error_notification
+    div class="span 10 offset2 alert alert-error fade in"
+      a class="close" data-dismiss="alert" href="#" &times;
+      = f.error_notification
+
+  div class="controls"
+    = f.input :year, :hint => "Example: 2011 or 2012 not FY09 or FY12"
+  div class="controls"
+    = f.input :average_tax_bill
+  div class="controls"
+    = f.input :expense_budget
+  div class="controls"
+    = f.input :revenue_budget
+  div class="controls"
+    = f.input :description, :input_html => { :class => "span6", :rows => "4" }
+  div class="controls"
+    = f.input :summary, :input_html => { :class => "span6", :rows => "4" }
+  div class="controls"
+    = f.input :enable_comments, :as => :boolean
+
+  div class="form-actions span6 offset2"
+    = f.button :submit, "Update Budget", :class => 'primary'
+    |  or 
+    = button_tag 'Cancel', :type => :reset, :class => "btn"

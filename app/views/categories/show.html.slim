@@ -1,15 +1,15 @@
 == render :partial => 'shared/masthead'
 
 div class="row"
-  div class="span16"
+  div class="span12"
     div class="row"
-      div class="span3" id="left-rail"
+      div class="span2" id="left-rail"
         == render :partial => 'shared/left_rail'
-      div class="span13"
+      div class="span10"
         div class="row action-bar"
-          div class="span7"
+          div class="span5"
             == render :partial => 'shared/social_sharing'
-          div class="span6"
+          div class="span5"
             span style="float: right; padding-right: 10px;"
               = link_to "Edit this category", edit_project_category_path(@category.project, @category)
               '  |
@@ -17,22 +17,22 @@ div class="row"
               '  |
               = link_to "Add a line item", new_category_item_path(@category)
 
-        div class="span13"
+        div class="span10"
           div class="row"
-            div class="span8"
+            div class="span5"
               h1
                 = @category.name
-                p = best_in_place @category, :description, :type => :textarea
+              p = best_in_place @category, :description, :type => :textarea
 
               h1
                 | Goal
-                p = best_in_place @category, :goal, :type => :textarea
+              p = best_in_place @category, :goal, :type => :textarea
                 
               h1
                 | Challenges
-                p = best_in_place @category, :challenge, :type => :textarea
+              p = best_in_place @category, :challenge, :type => :textarea
 
-            div class="span4"
+            div class="span5"
               == render :partial => 'shared/tax_stamp'
 
               h2 Costs: #{number_to_currency(@category.expense_budget, :precision => 0)}
@@ -55,12 +55,12 @@ div class="row"
                     td class="number"
                       span #{number_to_currency(@category.expense_budget, :precision => 0)}
         
-        div class="span12"
+        div class="span10"
           hr
 
-        div class="span12"
+        div class="span10"
           div class="row"
-            div class="span6 barchart-widget"
+            div class="span5 barchart-widget"
               h1 Spending: #{best_in_place @category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
               h2 Where the money goes
               - for item in @category.items.order("total desc")
@@ -77,7 +77,7 @@ div class="row"
                   = link_to "Add line items", new_category_item_path(@category)
                   '  to help show where the money goes.
          
-            div class="span6 barchart-widget"
+            div class="span5 barchart-widget"
               h1 Income: #{best_in_place @category, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
               h2 Where the money comes from
               - for item in @category.items.tagged_with("revenue").order("total desc")
@@ -89,5 +89,5 @@ div class="row"
                   div class="bar"
                     - if @category.revenue_budget > 0
                       div class="bar-percent expense" style="width: #{((item.total/@category.revenue_budget)*100).to_i}%;"
-              div class="span13"
-        == render :partial => 'shared/comments'
+        div class="span10"
+          == render :partial => 'shared/comments'

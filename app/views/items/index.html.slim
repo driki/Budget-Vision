@@ -3,20 +3,18 @@
 == render :partial => 'shared/masthead'
 
 div class="row"
-  div class="span16"
+  div class="span12"
     div class="row"
-      div class="span3" id="left-rail"
+      div class="span2" id="left-rail"
         == render :partial => 'shared/left_rail'
 
-      div class="span13"
+      div class="span10"
         div class="row action-bar"
-          div class="span7"
+          div class="span5"
             == render :partial => 'shared/social_sharing'
-          div class="span6"
-            span style="float: right; padding-right: 10px;"
-              = link_to "Add an item", new_project_item_path(@project)
+          div class="span5"
 
-      div class="span12"
+      div class="span9"
         h1
           ' Line items in this Budget
         - for item in @items
@@ -25,9 +23,9 @@ div class="row"
               #{link_to item.category.name, project_category_path(item.category.project, item.category)} :: #{link_to item.name, category_item_path(item.category, item)}
               ' 
               = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-            div class="bar"
+            div class="progress danger"
               - if @project.expense_budget > 0
-                div class="bar-percent expense" style="width: #{((item.total/@project.expense_budget)*100).to_i}%;"
+                div class="bar" style="width: #{((item.total/@project.expense_budget)*100).to_i}%;"
       
-      div class="span13"
+      div class="span10"
         == render :partial => 'shared/comments'

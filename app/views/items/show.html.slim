@@ -3,27 +3,27 @@
 == render :partial => 'shared/masthead'
 
 div class="row"
-  div class="span16"
+  div class="span12"
     div class="row"
-      div class="span3" id="left-rail"
+      div class="span2" id="left-rail"
         == render :partial => 'shared/left_rail'
 
-      div class="span13"
+      div class="span10"
         div class="row action-bar"
-          div class="span7"
+          div class="span5"
             == render :partial => 'shared/social_sharing'
-          div class="span6"
+          div class="span5"
             span style="float: right; padding-right: 10px;"
               = link_to "Edit the item", edit_category_item_path(@item.category, @item)
               '  | 
               = link_to "Add an item", new_category_item_path(@item.category)
 
-      div class="span13"
+      div class="span10"
         == render :partial => 'shared/not_verified'
-        
-      div class="span13"
+
+      div class="span10"
         div class="row"
-          div class="span8"
+          div class="span5"
             h1 
               = link_to @item.category.name, project_category_path(@item.category.project, @item.category)
               | :: 
@@ -31,7 +31,7 @@ div class="row"
             h2 
               #{best_in_place @item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
             p = best_in_place @item, :description, :type => :textarea
-          div class="span4"
+          div class="span5"
             == render :partial => 'shared/tax_stamp'            
             h2 Your cost for this item
             table class="quick-stats"
@@ -49,5 +49,5 @@ div class="row"
                   td Each year is
                   td class="number" #{number_to_currency(((@item.total/@project.expense_budget) * @project.average_tax_bill / 1).round(4)) }
 
-      div class="span12"
+      div class="span10"
         == render :partial => 'shared/comments'

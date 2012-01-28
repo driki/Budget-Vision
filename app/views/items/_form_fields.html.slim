@@ -1,4 +1,4 @@
-= form_for(@item, :url=>category_items_path(@category)) do |f|
+= form_for([@category, @item]) do |f|
   fieldset
     div class="clearfix"
       = f.label :name
@@ -29,3 +29,5 @@
 
     div class="actions"
         = f.submit(:class => "btn primary")
+        '  or 
+          = link_to "Cancel", request.env['HTTP_REFERER'] 

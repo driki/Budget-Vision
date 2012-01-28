@@ -2,8 +2,8 @@
  * This is a manifest file that'll automatically include all the stylesheets available in this directory
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
- *= require_self
  *= require_tree . 
+ *= require_self
 */
 
 @font-face {
@@ -18,18 +18,33 @@
 
 }
 
+body, h1, h2, h3, h4, h5, p, a, label, input, button, select, textarea {
+  font-family: 'PT Sans Narrow', 'Arial Narrow', Arial, sans-serif;
+  color: #404040;
+  text-decoration: none;
+}
+
+a:link, a:visited {
+  color: #08C;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #000000;
+  text-decoration: underline;
+}
+
 label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
 
 body {
   background-image:url('/assets/goovepaper.png');
   background-repeat:repeat;
-  font-family: 'PT Sans Narrow', 'Arial Narrow', Arial, sans-serif;
   background-color: #F2F2F2;
   padding-top: 60px;
   letter-spacing: 0.025em;
 }
 
-#content {
+.container {
   background-color: #FFF;
   -moz-box-shadow: 0 0 1px #C8B3B3;
   -webkit-box-shadow: 0 0 1px#C8B3B3;
@@ -42,6 +57,14 @@ body {
   padding-top: 10px;
   background-color: #F7F4F0;
   margin-bottom: 20px;
+
+}
+
+footer {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #EAF6FF;
 }
 
 .action-bar a {
@@ -51,15 +74,12 @@ body {
 #pitch h1 {
   font-size: 72px;
   margin-top: 30px;
+  line-height: 72px;
 }
 
 #call-to-action {
   margin-top: 10px;
   margin-bottom: 10px;
-}
-
-#example-cities {
-  margin-left: 10px;
 }
 
 #masthead {
@@ -117,12 +137,12 @@ p#make-it-more-accurate {
 #budget-vision-score {
   background: #FFF;
   margin-left: 0px;
-  border-bottom: 1px solid #EAF6FF;
 }
 
 #budget-vision-score h1 {
   text-align: center;
   font-size: 72px;
+  line-height: 52px;
 }
 
 #budget-vision-score p {
@@ -151,38 +171,24 @@ p, table {
   line-height: 20px;
 }
 
-ul#tabs {
-  font-family: PT+Sans+Narrow, serif;
-  background: #FFF;
-  margin: 0;
-  margin-left: 0px;
-}
-
-#tabs li {
-  padding-bottom: 10px;
-  padding-top: 10px;
-  border-top: 1px solid #EAF6FF;
-  font-size: 16px;
-  list-style: none;
-  padding-left: -20px;
-  text-transform: uppercase;
-}
-
 table td {
   border-top: 1px solid #EAF6FF;
 }
 
-#tabs li a {
-  color: #000;
+li.current span {
+  display: block;
+  padding: 3px 15px;
+  background-color: #323A44;
+  color: #fff;
+  margin-left: -14px;
+  margin-right: -14px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
 
 #left-rail {
+  margin-top: 14px;
   border-right: 1px solid #D9E7F1;
   margin-right: -1px;
-}
-
-#left-rail ul {
-  padding-left: 10px;
 }
 
 #left-rail h3 {
@@ -205,26 +211,47 @@ table td {
   margin-top: 10px;
 }
 
-.characteristics img {
-  padding-right: 5px;
-  float: left;
-}
-
 #characteristics, #nearby {
   margin-top: 10px;
+}
+
+#characteristics table {
+  margin-left: 10px;
 }
 
 #nearby h4 {
   padding-left: 10px;
 }
 
-.nav {
+.navbar {
   font-family: PT+Sans+Narrow, serif;
   font-size: 18px;
+  background: #222;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-div.org-card h2 {
-  padding-left: 8px;
+.nav {
+  padding-left: 20px;
+}
+
+.secondary-nav {
+  float: right;
+}
+
+.secondary-nav > li {
+  display: block;
+  float: right;
+  padding: 10px;
+}
+
+.secondary-nav a {
+  color: #FFF;
+}
+
+.org-card table {
+  width: 95%;
+  margin-bottom: 10px;
 }
 
 div.demo-chart {
@@ -286,10 +313,6 @@ td.bar-chart {
   font-size: 16px;
 }
 
-div#pricing {
-  margin-left: 10px;
-}
-
 div#price-features {
   margin-bottom: 30px;
 }
@@ -335,6 +358,11 @@ hr {
 
 table.features th {
   font-size: 1.1em;
+  text-align: left;
+}
+
+table.features {
+  width: 100%
 }
 
 table.features {
@@ -392,26 +420,27 @@ div.homepage-table {
 div.dashboard-widget {
   background: #F5F3EE;
   margin-bottom: 0px;
-  margin-top: 20px;
-  padding-top: 20px;
+  margin-right: 10px;
+  margin-top: 10px;
+  padding-top: 10px;
   border-radius: 2px;
-  padding-bottom: 20px;
-}
-
-div.dashboard-widget h1 {
-  margin-bottom: 8px;
-  margin-left: 0px;
-  padding-left: 20px;
-  color: #000;
-  font-size: 52px;
+  float: left;
+  text-align: center;
 }
 
 div.dashboard-widget p {
   padding-left: 20px;
+  padding-right: 20px;
+}
+
+div.dashboard-widget h1 {
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 4px;
 }
 
 .dashboard-number {
- font-size: 32px;
+ font-size: 52px;
  font-weight: bold;
  color: #000;
 }
@@ -426,22 +455,14 @@ div.barchart-widget {
   margin-top: 20px;
 }
 
+.barchart-widget table {
+  margin-bottom: 20px;
+  width: 95%;
+}
+
 div.bar-container {
  background: #fff;
- width: 100%;
  margin-bottom: 10px;
-}
-
-div.bar {
- background: #EAECEF;
- margin-top: 4px;
-}
-
-div.bar-percent {
-  height: 8px;
-  font-weight: bold;
-  color: #fff;
-  border-radius: 4px;
 }
 
 div.bar-percent-text {

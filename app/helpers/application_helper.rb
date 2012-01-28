@@ -18,6 +18,10 @@ module ApplicationHelper
     return location_name
   end
 
+  def show_not_verified_alert
+    return true
+  end
+
   def states
     states = {
       'AL' => 'Alabama',

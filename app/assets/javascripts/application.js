@@ -11,9 +11,10 @@
 //= require jquery.purr
 //= require best_in_place
 
-//= require bootstrap-twipsy
-//= require bootstrap-modal
+//= require bootstrap
+//= require bootstrap-tooltip
 //= require bootstrap-popover
+//= require bootstrap-alert
 
 //= require_tree .
 

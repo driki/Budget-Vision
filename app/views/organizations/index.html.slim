@@ -11,26 +11,26 @@ div id="masthead"
           might be interested in budgets for these cities or towns.
 
 div class="row"
-  div class="span16"
+  div class="span12"
     div class="row"
-      div class="span4" id="left-rail"
+      div class="span2" id="left-rail"
         h1 Fresh List
-        p Recent updates to cities or towns
+        p Recent updates
         - for project in @recently_updated_projects
           h3 = link_to "#{project.organization.name}, #{project.organization.state}", organization_path(project.organization)
         hr
         h1 States
-        p Browse for cities and towns
+        p Browse by state
         - for state in states
           div class="state"
             h3
               = link_to state[1], states_path(state[0])
 
-      div class="span12"
+      div class="span10"
         div class="row"
           - if !@location.nil?
             - for org in @nearby_orgs do
-              div class="org-card span6"
+              div class="org-card span5"
                 h2 = link_to org.name, organization_path(org)
                 table
                   tbody

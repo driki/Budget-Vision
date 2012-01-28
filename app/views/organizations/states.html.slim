@@ -10,7 +10,10 @@ div class="row"
   div class="row"
     div class="span11 offset1"
       h2 = name_group
-    - for org in @organizations[name_group]
-      div class="span5 offset1"
-        h3 = link_to org.name, organization_path(org)
+    div class="row"
+      div class="span11 offset1"
+        - @organizations[name_group].each_slice((@organizations[name_group].size/5.0).ceil).each do |column|
+          div class="span2"
+            - for org in column
+              h3 = link_to org.name, organization_path(org)
   hr

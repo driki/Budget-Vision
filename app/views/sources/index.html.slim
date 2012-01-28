@@ -3,23 +3,22 @@
 == render :partial => 'shared/masthead'
 
 div class="row"
-  div class="span16"
+  div class="span12"
     div class="row"
-      div class="span3" id="left-rail"
+      div class="span2" id="left-rail"
         == render :partial => 'shared/left_rail'
 
-      div class="span13"
+      div class="span10"
         div class="row action-bar"
-          div class="span7"
+          div class="span5"
             == render :partial => 'shared/social_sharing'
-          div class="span6"
+          div class="span5"
             span style="float: right; padding-right: 10px;"
               = link_to "Add a source", new_project_source_path(@project)
 
-      div class="span13"
+      div class="span10"
         div class="row"
-          div class="span13"
-            h1 Sources
+          div class="span10"
             p Below are sources or reference materials that were used in the construction of this budget.
             - for source in @project.sources
             	div
@@ -27,7 +26,7 @@ div class="row"
             		h3 = best_in_place source, :url, :type => :input
                 p = best_in_place source, :description, :type => :textarea
                 hr
-    	div class="span13"
+    	div class="span10"
         div class="row"
-          div class="span12"
+          div class="span10"
             == render :partial => 'shared/comments'

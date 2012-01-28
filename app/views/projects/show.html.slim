@@ -3,33 +3,33 @@
 == render :partial => 'shared/masthead'
 
 div class="row"
-  div class="span16"
+  div class="span12"
     div class="row"
-      div class="span3" id="left-rail"
+      div class="span2" id="left-rail"
         == render :partial => 'shared/left_rail'
 
-      div class="span13"
+      div class="span10"
         div class="row action-bar"
-          div class="span7"
+          div class="span5"
             == render :partial => 'shared/social_sharing'
-          div class="span6"
+          div class="span5"
             span style="float: right; padding-right: 10px;"
               = link_to "Edit the budget", edit_project_path(@project)
       
       == render :partial => 'shared/not_verified'
 
-      div class="span13"
+      div class="span10"
         div class="row"
-          div class="span8"
+          div class="span5"
             h1
-              ' Overview
-              p = best_in_place @project, :description, :type => :textarea
-          div class="span4"
+              ' Description
+            p = best_in_place @project, :description, :type => :textarea
+          div class="span5"
             == render :partial => 'shared/tax_stamp'
 
-      div class="span12"
+      div class="span10"
         div class="row"
-          div class="span6 barchart-widget"
+          div class="span5 barchart-widget"
             h1 Where the money goes
             table
               tr
@@ -53,11 +53,11 @@ div class="row"
                   = link_to category.name, project_category_path(@project, category)
                   ' 
                   = best_in_place category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-                div class="bar"
+                div class="progress danger"
                   - if @project.expense_budget > 0
-                    div class="bar-percent expense" style="width: #{((category.expense_budget/@project.expense_budget)*100).to_i}%;"
+                    div class="bar" style="width: #{((category.expense_budget/@project.expense_budget)*100).to_i}%;"
        
-          div class="span6 barchart-widget"
+          div class="span5 barchart-widget"
             h1 Where the money comes from
             table
               tr
@@ -81,8 +81,8 @@ div class="row"
                   = link_to category.name, project_category_path(@project, category)
                   ' 
                   = best_in_place category, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-                div class="bar"
-                  - if @project.revenue_budget > 0
-                    div class="bar-percent revenue" style="width: #{((category.revenue_budget/@project.revenue_budget)*100).to_i}%;"
-          div class="span12"
+                div class="progress success"
+                  - if @project.expense_budget > 0
+                    div class="bar" style="width: #{((category.revenue_budget/@project.revenue_budget)*100).to_i}%;"
+          div class="span10"
             == render :partial => 'shared/comments'

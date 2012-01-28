@@ -1,18 +1,23 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :show_project_modal_if_not_verified, :show_welcome
+  before_filter :show_welcome
 
   rescue_from CanCan::AccessDenied do |exception|
     if !signed_in?
       session[:pre_login_path] = @_env['HTTP_REFERER']
+      render :file => "#{Rails.root}/public/403.html", :status => 403
+    else
+      session[:pre_login_path] = @_env['HTTP_REFERER']
+      render :file => "#{Rails.root}/public/403_not_a_member.html", :status => 403
     end
-    render :file => "#{Rails.root}/public/403.html", :status => 403
   end
 
-  def show_project_modal_if_not_verified
-    if !@project.nil?
-      session[:show_project_not_verified] ||= {}
+  def show_not_verified_alert
+    session[:show_project_not_verified] ||= {}
+    if !@project.nil? && @project.organization.is_verified
+      session[:show_project_not_verified][@project.id] = false
+    else
       if session[:show_project_not_verified][@project.id].nil?
         session[:show_project_not_verified][@project.id] = true
       else

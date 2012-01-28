@@ -6,4 +6,6 @@ end
 
 Factory.define :project do |f|
   f.year Time.now.year
+  f.expense_budget 0
+  f.revenue_budget 0
 end

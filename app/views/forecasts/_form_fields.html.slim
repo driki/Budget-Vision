@@ -15,3 +15,5 @@
 
   div class="actions"
     = f.submit(:class => "btn primary")
+   	'  or 
+    = link_to "Cancel", request.env['HTTP_REFERER'] 

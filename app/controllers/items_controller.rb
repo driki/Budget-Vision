@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
   def update
     respond_to do |format|
       if @item.update_attributes(params[:item])
-        format.html { redirect_to category_item_path(
+        format.html { redirect_to category_item_path(@item.category,
                 @item, :notice => 'Item was successfully updated.') }
         format.json { respond_with_bip(@item) }
       else

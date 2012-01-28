@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/plataformatec/simple_form.git
+  revision: 10bd50dcf89fd5001e70369ec281c5887d335548
+  specs:
+    simple_form (2.0.0.dev)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
+
 GEM
   remote: http://rubygems.org/
   remote: http://gemcutter.org/
@@ -253,6 +261,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 3.1.5)
   shoulda-matchers
+  simple_form!
   slim
   spork (> 0.9.0.rc)
   sqlite3

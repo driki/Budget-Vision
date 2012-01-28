@@ -2,77 +2,80 @@ doctype html
 html
   head
     title = title
-    meta name="keywords" content="template language"
+    meta name="keywords" content="budgeting software cities towns government municipalities"
 
     link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700' rel='stylesheet' type='text/css'
-    link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css"
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
 
   body
+    div class="navbar navbar-fixed-top"
+      div class="navbar-inner"
+        div style="width: auto;"
+          div class="nav"
+            = link_to "Budget Vision :: BETA", root_path, :class => "brand"
+            ul class="nav"
+              - if request.path_info.eql?(root_path)
+                li class="active"
+                  = link_to "Home", root_path
+              - else
+                li
+                  = link_to "Home", root_path
 
-    div class="topbar"
-      div class="fill"
-        div class="container"
-          = link_to "Budget Vision :: BETA", root_path, :class => "brand"
-          ul class="nav"
-            - if request.path_info.eql?(root_path)
-              li class="active"
-                = link_to "Home", root_path
-            - else
-              li
-                = link_to "Home", root_path
+              - if request.path_info.eql?(organizations_path)
+                li class="active"
+                  = link_to "Cities & Towns", organizations_path
+              - else
+                li
+                  = link_to "Cities & Towns", organizations_path
 
-            - if request.path_info.eql?(organizations_path)
-              li class="active"
-                = link_to "Cities & Towns", organizations_path
-            - else
-              li
-                = link_to "Cities & Towns", organizations_path
+              - if request.path_info.eql?(price_path)
+                li class="active"
+                  = link_to "Pricing", price_path
+              - else
+                li
+                  = link_to "Pricing", price_path
 
-            - if request.path_info.eql?(price_path)
-              li class="active"
-                = link_to "Pricing", price_path
-            - else
-              li
-                = link_to "Pricing", price_path
+              - if request.path_info.eql?(about_path)
+                li class="active"
+                  = link_to "About", about_path
+              - else
+                li
+                  = link_to "About", about_path
 
-            - if request.path_info.eql?(about_path)
-              li class="active"
-                = link_to "About", about_path
-            - else
-              li
-                = link_to "About", about_path
+              - if request.path_info.eql?(contact_path)
+                li class="active"
+                  = link_to "Contact", contact_path
+              - else
+                li
+                  = link_to "Contact", contact_path
 
-            - if request.path_info.eql?(contact_path)
-              li class="active"
-                = link_to "Contact", contact_path
-            - else
-              li
-                = link_to "Contact", contact_path
-
-          ul class="nav secondary-nav"
+          ul class="secondary-nav"
             - if current_user.nil?
               li
                 = link_to "Login", "/login", :class => "popup", :"data-width" => 600, :"data-height" => 400
             - else
               li
-                = link_to current_user.name, "#"
-              li
                 = link_to "Logout", logout_path
+              li
+                = link_to current_user.name, "#"
 
     div id="content" class="container"
       - if flash[:error]
           div class="alert-message error" flash[:error]
       - if flash[:message]
           div class="alert-message success" flash[:message]
+      - if flash[:notice]
+        div class="alert alert-success fade in" data-alert="alert"
+          a class="close" data-dismiss='alert' href="#" ×
+          p = notice
 
       = yield
 
       footer
         div class="row"
-          div class="span10 offset3"
+          div class="span10 offset2"
             h3
               | A service provided by NearbyFYI
             ul
@@ -82,8 +85,8 @@ html
               li
                 a href="mailto:info@budgetvisionapp.com" info@budgetvisionapp.com
               li
-                a href="http://twitter.com/budgetvision" Twitter @BudgetVision
-          div class="span6"
+                | Twitter 
+                a href="http://twitter.com/budgetvision" @BudgetVision
 
     javascript:
       var _gaq = _gaq || [];

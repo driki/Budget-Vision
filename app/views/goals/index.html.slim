@@ -3,37 +3,36 @@
 == render :partial => 'shared/masthead'
 
 div class="row"
-  div class="span16"
+  div class="span12"
     div class="row"
-      div class="span3" id="left-rail"
+      div class="span2" id="left-rail"
         == render :partial => 'shared/left_rail'
 
-      div class="span13"
+      div class="span10"
         div class="row action-bar"
-          div class="span7"
+          div class="span5"
             == render :partial => 'shared/social_sharing'
-          div class="span6"
+          div class="span5"
             span style="float: right; padding-right: 10px;"
               = link_to "Add a goal", new_project_goal_path(@project)
 
-      div class="span13"
+      div class="span10"
         div class="row"
-          div class="span12"
-            h1 Goals
+          div class="span10"
             - for goal in @project.goals
             	div class="row"
-            		div class="span6"
+            		div class="span5"
             			h2 = best_in_place goal, :name, :type => :input
-            		div class="span6"
+            		div class="span5"
             			h2 Result
             	div class="row"
-            		div class="span6"
+            		div class="span5"
 	            		p = best_in_place goal, :description, :type => :textarea
-	            	div class="span6"
+	            	div class="span5"
 	            		p = best_in_place goal, :summary, :type => :textarea
 	            hr
 
-    	div class="span13"
+    	div class="span10"
         div class="row"
-          div class="span12"
+          div class="span10"
             == render :partial => 'shared/comments'
