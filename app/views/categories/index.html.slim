@@ -38,7 +38,7 @@ div class="row"
                   - if category.expense_budget > 0
                     div class="bar-percent expense" style="width: #{((item.total/category.expense_budget)*100).to_i}%;"
 
-      div class="span10"
+      div class="span8"
         div class="row"
-          div class="span10"
+          div class="span8"
             == render :partial => 'shared/comments'

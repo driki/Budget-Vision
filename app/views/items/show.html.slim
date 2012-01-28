@@ -49,5 +49,5 @@ div class="row"
                   td Each year is
                   td class="number" #{number_to_currency(((@item.total/@project.expense_budget) * @project.average_tax_bill / 1).round(4)) }
 
-      div class="span10"
+      div class="span8"
         == render :partial => 'shared/comments'
