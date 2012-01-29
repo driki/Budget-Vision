@@ -36,7 +36,14 @@ class ProjectsController < ApplicationController
 
   def comparisons
     set_tab :comparisons
-    @similar_orgs = Organization.where(:population => (25000)..(35000)).where(:total_sq_mi => (3)..(6)).where(:diversity => (0.25)..(0.35))
+    population_low = @project.organization.population*0.85
+    population_high = @project.organization.population*1.15
+    sq_mi_low = @project.organization.total_sq_mi*0.5
+    sq_mi_hi = @project.organization.total_sq_mi*1.5
+    diversity_low = @project.organization.diversity*0.85
+    diversity_high = @project.organization.diversity*1.15
+
+    @similar_orgs = Organization.where(:population => (population_low)..(population_high)).where(:total_sq_mi => (sq_mi_low)..(sq_mi_hi)).where(:diversity => (diversity_low)..(diversity_high))
   end
 
   def update
