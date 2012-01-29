@@ -49,6 +49,8 @@ GEM
       activerecord (>= 2.2.2)
     ansi (1.4.1)
     arel (2.2.1)
+    awesome_nested_set (2.1.2)
+      activerecord (>= 3.0.0)
     best_in_place (1.0.6)
       jquery-rails
       rails (~> 3.1)
@@ -232,6 +234,7 @@ DEPENDENCIES
   activerecord-import
   acts-as-taggable-on (~> 2.2.2)
   ancestry
+  awesome_nested_set
   best_in_place
   cancan
   capybara

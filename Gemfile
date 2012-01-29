@@ -30,6 +30,7 @@ gem 'activerecord-import'
 gem 'differ'
 gem 'refraction'
 gem 'factory_girl_rails'
+gem 'awesome_nested_set'
 
 # Gems used only for assets and not required
 # in production environments by default.

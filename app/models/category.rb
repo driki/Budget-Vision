@@ -1,5 +1,7 @@
 class Category < ActiveRecord::Base
   acts_as_taggable_on :tags, :tags
+  acts_as_nested_set
+
   has_paper_trail
   has_many :items
   belongs_to :project
@@ -14,7 +16,8 @@ class Category < ActiveRecord::Base
 								:revenue_budget,
 								:tags,
 								:type,
-								:people
+								:people,
+                :parent_id
 
   validates_numericality_of :expense_budget,
   	:greater_than_or_equal_to => 0.00,

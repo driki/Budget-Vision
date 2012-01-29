@@ -3,7 +3,8 @@
     $(document).ready(function() {
       $('#modal').modal({
         keyboard: true,
-        show: true
+        show: true,
+        backdrop: false
       });
 
       $('#ok-btn').click(function() {
@@ -13,7 +14,7 @@
 
 div id="modal" class="modal hide fade" style="display: none;"
   div class="modal-header"
-    a href="#" class="close" ×
+    a href="#" class="close" data-dismiss="modal" ×
     h3
       | Hi there!
 
@@ -21,7 +22,7 @@ div id="modal" class="modal hide fade" style="display: none;"
     div id="modal-welcome"
       p
         | Budget Vision is similar to Wikipedia, but built specifically for city and town budgets. It is an easy way to create, view, edit and collaborate with others to learn more about how your city or town generates revenue and spends money.
-      p Here are three easy ways to get started.
+      p Here are two easy ways to get started.
       ul
         li
           p
