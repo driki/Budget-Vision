@@ -5,6 +5,7 @@ Budgetvision::Application.routes.draw do
   match "/help" => "home#help"
   match "/price" => "home#price"
   match "/setup" => "home#setup"
+  match "/learning" => "home#learning"
   match "/share/:id" => "home#share", :as => "share"
 
   match "/organizations/states/:state_abbr" => "organizations#states", :as => "states"
@@ -14,6 +15,8 @@ Budgetvision::Application.routes.draw do
 
   match "/login" => "sessions#login"
   match "/logout" => "sessions#destroy", :as => "logout"
+
+  post "versions/:id/revert" => "versions#revert", :as => "revert_version"  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

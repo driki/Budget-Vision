@@ -14,6 +14,11 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def destroy   
+    @category.destroy  
+    redirect_to project_categories_path,
+      :notice => "Successfully deleted the category."  
+  end  
 
   def update
     respond_to do |format|
@@ -28,4 +33,9 @@ class CategoriesController < ApplicationController
       end
     end
   end
+
+  private  
+    def undo_link  
+      view_context.link_to("undo", revert_version_path(@category.versions.scoped.last), :method => :post)  
+    end 
 end

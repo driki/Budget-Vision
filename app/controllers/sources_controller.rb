@@ -18,6 +18,12 @@ class SourcesController < ApplicationController
     end
   end
 
+  def destroy   
+    @source.destroy  
+    redirect_to project_sources_path,
+      :notice => "Successfully deleted the source."  
+  end  
+
   def update
     respond_to do |format|
       if @source.update_attributes(params[:source])

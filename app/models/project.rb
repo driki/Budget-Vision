@@ -74,7 +74,7 @@ class Project < ActiveRecord::Base
     end
 
     sources.each do |source|
-      score = score+2
+      score = score+3
     end
 
     categories.each do |category|
@@ -89,4 +89,6 @@ class Project < ActiveRecord::Base
     return score
   end
 
+  def taxable_revenue
+  end
 end

@@ -11,11 +11,13 @@ div class="row"
             == render :partial => 'shared/social_sharing'
           div class="span5"
             span style="float: right; padding-right: 10px;"
+              = link_to "New category", new_project_category_path(@project)
+              '  |
               = link_to "Edit this category", edit_project_category_path(@category.project, @category)
               '  |
-              = link_to "Add a category", new_project_category_path(@project)
+              = link_to "Delete", { :action => "destroy", :id => @category.id }, :confirm => "Are you sure?", :method => :delete
               '  |
-              = link_to "Add a line item", new_category_item_path(@category)
+              = link_to "New line item", new_category_item_path(@category)
 
       div class="span10"
         div class="row"

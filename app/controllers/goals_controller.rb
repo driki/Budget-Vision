@@ -3,15 +3,7 @@ class GoalsController < ApplicationController
 
   load_and_authorize_resource :project
   load_and_authorize_resource :goal, :except => [:new]
-
-  def show
-    session[:show_project_not_verified] ||= {}
-    if session[:show_project_not_verified][@project.id].nil?
-      session[:show_project_not_verified][@project.id] = true
-    else
-      session[:show_project_not_verified][@project.id] = false
-    end
-  end
+  before_filter :show_not_verified_alert
 
   def new
     @goal = @project.goals.build
@@ -26,6 +18,12 @@ class GoalsController < ApplicationController
       render :action => 'new'
     end
   end
+
+  def destroy   
+    @goal.destroy  
+    redirect_to project_goals_path,
+      :notice => "Successfully deleted the goal."  
+  end  
 
   def update
     respond_to do |format|

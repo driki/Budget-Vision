@@ -14,23 +14,45 @@ div class="row"
             == render :partial => 'shared/social_sharing'
           div class="span5"
             span style="float: right; padding-right: 10px;"
-              = link_to "Edit the budget", edit_project_path(@project)
+              = link_to "Edit this budget", edit_project_path(@project)
+              '  | 
+              = link_to "Delete", { :action => "destroy", :id => @project.id }, :confirm => "Are you sure?", :method => :delete
       
       == render :partial => 'shared/not_verified'
 
       div class="span10"
-        div class="row"
-          div class="span5"
-            h1
-              ' Description
-            p = best_in_place @project, :description, :type => :textarea
-          div class="span5"
-            == render :partial => 'shared/tax_stamp'
+        - if !@project.description.empty?
+          div class="row"
+            div class="span10"
+              h1
+                ' Description
+              p == RedCloth.new(@project.description, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
+        - if !@project.summary.empty?
+          div class="row"
+            div class="span10"
+              h1
+                ' Summary
+              p == RedCloth.new(@project.description, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
+      div class="span5"
+        == render :partial => 'shared/tax_stamp'
+      div class="span5"
+        h1 Learning Center
+        ul
+          li 
+            a href="/learning" How are city and town budgets different than a household?
+          li
+            a href="/learning" What are Bonds?
+          li 
+            a href="/learning" What is State Aid?
+          li 
+            a href="/learning" What are Capital Improvement projects?
+          li 
+            a href="/learning" How is your tax bill calculated?
 
       div class="span10"
         div class="row"
           div class="span5 barchart-widget"
-            h1 Where the money goes
+            h1 Where it goes
             table
               tr
                 td Total Budgeted Expenses
@@ -56,9 +78,9 @@ div class="row"
                 div class="progress danger"
                   - if @project.expense_budget > 0
                     div class="bar" style="width: #{((category.expense_budget/@project.expense_budget)*100).to_i}%;"
-       
+          
           div class="span5 barchart-widget"
-            h1 Where the money comes from
+            h1 Where it comes from
             table
               tr
                 td Total Budgeted Revenue
@@ -84,5 +106,6 @@ div class="row"
                 div class="progress success"
                   - if @project.expense_budget > 0
                     div class="bar" style="width: #{((category.revenue_budget/@project.revenue_budget)*100).to_i}%;"
+
           div class="span8"
             == render :partial => 'shared/comments'
