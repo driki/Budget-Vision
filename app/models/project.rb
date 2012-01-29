@@ -1,7 +1,5 @@
 class Project < ActiveRecord::Base
 
-  default_scope where(:published => true)
-
   has_paper_trail
   
   belongs_to :organization
