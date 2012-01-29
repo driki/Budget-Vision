@@ -1,6 +1,7 @@
 = tabs_tag :open_tabs => { :class => "nav list" } do |tab|
   = tab.overview 'Overview', organization_project_path(@project.organization, @project)
   = tab.trends "Trends", trends_project_path(@project)
+  = tab.comparisons "Comparisons", comparisons_project_path(@project)
   = tab.categories "Categories (#{@project.categories.length})", project_categories_path(@project)
   = tab.items "Line Items (#{@project.items.length})", project_items_path(@project)
   = tab.goals "Goals (#{@project.goals.length})", project_goals_path(@project)

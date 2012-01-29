@@ -19,5 +19,14 @@ div class="row"
       == render :partial => 'shared/not_verified'
 
       div class="span10"
+        div class="row"
+          div class="span5"
+            h1 Expenditures
+            - for project in @project.organization.projects
+              h2 FY #{link_to project.year, organization_project_path(project.organization, project)} :: #{number_to_currency(project.expense_budget, :precision => 0)}
+          div class="span5"
+            h1 Revenue
+            - for project in @project.organization.projects
+              h2 FY #{project.year} :: #{number_to_currency(project.revenue_budget, :precision => 0)}
         div class="span8"
         == render :partial => 'shared/comments'

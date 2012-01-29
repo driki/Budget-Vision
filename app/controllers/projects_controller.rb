@@ -34,6 +34,11 @@ class ProjectsController < ApplicationController
     set_tab :trends
   end
 
+  def comparisons
+    set_tab :comparisons
+    @similar_orgs = Organization.where(:population => (25000)..(35000)).where(:total_sq_mi => (3)..(6)).where(:diversity => (0.25)..(0.35))
+  end
+
   def update
     respond_to do |format|
       if @project.update_attributes(params[:project])

@@ -46,6 +46,7 @@ Budgetvision::Application.routes.draw do
     resources :items, :name_prefix => "project_"
     member do
       get 'trends'
+      get 'comparisons'
     end
   end
 
