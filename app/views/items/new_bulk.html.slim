@@ -2,3 +2,6 @@ div class="span10 offset2"
   br
   h1 Add new line items for: #{@category.name}
   br
+  = form_tag new_bulk_category_items_path(@category), :multipart => true do
+    = file_field_tag "file"
+    = submit_tag "Upload file", :disable_with => "Please wait...", :class => 'btn primary'
