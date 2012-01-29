@@ -1,10 +1,10 @@
 div id="pitch" class="row"
-  div class="span12 offset2"
+  div class="span8 offset2"
     h1 Spread the word
     h2 Bring Budget Vision to your city or town.
 
 div class="row"
-  div class="span10 offset2"
+  div class="span8 offset2"
     h1
 
     p
@@ -17,46 +17,47 @@ div class="row"
 br
 
 div class="row"
-  div class="span14 offset2"
+  div class="span10 offset2"
     h1 The Budget Vision cost for #{@organization.name}, #{@organization.state}
-  div class="box span5 offset2"
-    h1 style="text-align: center;" #{number_to_currency(@organization.price/12, :precision => 0)}/mo
-    p style="text-align: center;" or
-    table
-      tbody
-        tr
-          td Weekly cost per resident
-          td class="number" #{number_to_currency(@organization.price.to_f/52/@organization.population, :precision => 3)}
-        tr
-          td Monthly cost per resident
-          td class="number" #{number_to_currency(@organization.price.to_f/12/@organization.population, :precision => 3)}
-        tr
-          td Yearly cost per resident
-          td class="number" #{number_to_currency(@organization.price.to_f/@organization.population, :precision => 3)}
+    div class="row"
+      div class="box span4"
+        h1 style="text-align: center;" #{number_to_currency(@organization.price/12, :precision => 0)}/mo
+        p style="text-align: center;" or
+        table
+          tbody
+            tr
+              td Weekly cost per resident
+              td class="number" #{number_to_currency(@organization.price.to_f/52/@organization.population, :precision => 3)}
+            tr
+              td Monthly cost per resident
+              td class="number" #{number_to_currency(@organization.price.to_f/12/@organization.population, :precision => 3)}
+            tr
+              td Yearly cost per resident
+              td class="number" #{number_to_currency(@organization.price.to_f/@organization.population, :precision => 3)}
 
-  div class="span5"
-    table
-      tbody
-        tr
-          td Population
-          td class="number" #{number_with_delimiter(@organization.population)}
-        tr
-          td Diversity
-          td class="number" #{number_with_delimiter(@organization.diversity)}
-        tr
-          td Housing units
-          td class="number" #{number_with_delimiter(@organization.housing_units)}
-        tr
-          td Total square miles
-          td class="number" #{number_with_delimiter(@organization.total_sq_mi)}
-        tr
-          td Population per square mile
-          td class="number" #{number_with_delimiter(@organization.pop_sq_mi)}
-        tr
-          td Percent of vacant housing
-          td class="number" #{number_with_delimiter(@organization.housing_percent_vacant)}
+      div class="span5"
+        table
+          tbody
+            tr
+              td Population
+              td class="number" #{number_with_delimiter(@organization.population)}
+            tr
+              td Diversity
+              td class="number" #{number_with_delimiter(@organization.diversity)}
+            tr
+              td Housing units
+              td class="number" #{number_with_delimiter(@organization.housing_units)}
+            tr
+              td Total square miles
+              td class="number" #{number_with_delimiter(@organization.total_sq_mi)}
+            tr
+              td Population per square mile
+              td class="number" #{number_with_delimiter(@organization.pop_sq_mi)}
+            tr
+              td Percent of vacant housing
+              td class="number" #{number_with_delimiter(@organization.housing_percent_vacant)}
 div class="row"
-  div class="span12 offset2"
+  div class="span8 offset2"
     h1 How you can get your city or town to use Budget Vision
     h3 Contact your city or town office
     p
