@@ -36,6 +36,7 @@ class Ability
     #   can :update, Article, :published => true
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
+    alias_action :trends, :comparisons, :to => :read
 
     can :read, Category # Department superclass
     can :read, Department
