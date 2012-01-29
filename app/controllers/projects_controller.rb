@@ -43,7 +43,7 @@ class ProjectsController < ApplicationController
     diversity_low = @project.organization.diversity*0.85
     diversity_high = @project.organization.diversity*1.15
 
-    @similar_orgs = Organization.where(:population => (population_low)..(population_high)).where(:total_sq_mi => (sq_mi_low)..(sq_mi_hi)).where(:diversity => (diversity_low)..(diversity_high))
+    @similar_orgs = Organization.where("id != ?", @project.organization.id).where(:population => (population_low)..(population_high)).where(:total_sq_mi => (sq_mi_low)..(sq_mi_hi)).where(:diversity => (diversity_low)..(diversity_high)).limit(10)
   end
 
   def update
