@@ -45,7 +45,9 @@ Budgetvision::Application.routes.draw do
   end
 
   resources :categories do
-    resources :items, :name_prefix => "category_"
+    resources :items, :name_prefix => "category_" do
+      get 'new_bulk', :on => :collection
+    end
   end
 
   resources :departments do
