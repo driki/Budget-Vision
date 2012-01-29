@@ -25,10 +25,7 @@ div id="modal" class="modal hide fade" style="display: none;"
       ul
         li
           p
-            = link_to "Add, edit or correct information that you see here", organization_path(@project.organization)
-        li
-          p
             = link_to "Learn more about Budget Vision", about_path
         li
           p
-            = link_to "Share this tool with a city or town employee in #{@project.organization.name}", share_path(@project.organization)
+            = link_to "Share this tool with a city or town employee in #{organization.name}", share_path(organization)

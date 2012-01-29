@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120128180715) do
+ActiveRecord::Schema.define(:version => 20120129145439) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -96,11 +96,11 @@ ActiveRecord::Schema.define(:version => 20120128180715) do
     t.string   "title"
     t.text     "description"
     t.text     "summary"
-    t.float    "expense_budget"
-    t.float    "revenue_budget"
+    t.float    "expense_budget",   :default => 0.0
+    t.float    "revenue_budget",   :default => 0.0
     t.string   "type"
     t.integer  "year"
-    t.float    "average_tax_bill"
+    t.float    "average_tax_bill", :default => 0.0
     t.boolean  "enable_comments",  :default => true
     t.boolean  "enable_tips"
     t.boolean  "is_demo"
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(:version => 20120128180715) do
     t.datetime "updated_at"
     t.integer  "owner_id"
     t.string   "status"
+    t.boolean  "published",        :default => false
   end
 
   create_table "sources", :force => true do |t|

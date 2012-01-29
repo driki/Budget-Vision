@@ -75,6 +75,7 @@ class Organization < ActiveRecord::Base
     project.expense_budget = 0
     project.revenue_budget = 0
     project.average_tax_bill = 0
+    project.published = true
 
     department_names = ["Fire Department",
                       "General Government",

@@ -7,7 +7,6 @@ Budgetvision::Application.routes.draw do
   match "/setup" => "home#setup"
   match "/learning" => "home#learning"
   match "/share/:id" => "home#share", :as => "share"
-
   match "/organizations/states/:state_abbr" => "organizations#states", :as => "states"
 
   match '/auth/:provider/callback', :to => 'sessions#create'
@@ -45,6 +44,9 @@ Budgetvision::Application.routes.draw do
     resources :forecasts, :name_prefix => "project_"
     resources :sources, :name_prefix => "project_"
     resources :items, :name_prefix => "project_"
+    member do
+      get 'trends'
+    end
   end
 
   resources :categories do

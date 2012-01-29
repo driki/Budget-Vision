@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
   # no need to load and authorize an Organization for the "index" and "states" action
-  load_and_authorize_resource :organization, :except => [:index, :states]
+  load_and_authorize_resource :organization
 
   def index
     @location = GeoIP.new('GeoLiteCity.dat').city(remote_ip)
@@ -18,11 +18,13 @@ class OrganizationsController < ApplicationController
     if @organization.projects.empty?
       @organization.create_stub_project
     end
-    redirect_to organization_project_path(@organization, @organization.projects.last)
+    # default to the most recent budget year / the itnerface allows the user to select older
+    # budgets
+    project = @organization.projects.order("year desc").first
+    redirect_to organization_project_path(@organization, project)
   end
 
   def edit
-
   end
 
   def update

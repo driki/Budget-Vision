@@ -6,7 +6,7 @@ div class="row"
   div class="span12"
     div class="row"
       div class="span2" id="left-rail"
-        == render :partial => 'shared/left_rail'
+        == render :partial => 'shared/left_rail'        
 
       div class="span10"
         div class="row action-bar"
@@ -14,17 +14,10 @@ div class="row"
             == render :partial => 'shared/social_sharing'
           div class="span5"
             span style="float: right; padding-right: 10px;"
-              = link_to "New source", new_project_source_path(@project, @source)
-              '  |  
-              = link_to "Edit this source", edit_project_source_path(@project, @source)
-              '  |  
-              = link_to "Delete", { :action => "destroy", :id => @source.id }, :confirm => "Are you sure?", :method => :delete
 
+      
       == render :partial => 'shared/not_verified'
 
       div class="span10"
-        h2 = best_in_place @source, :title, :type => :input
-        h3 = best_in_place @source, :url, :type => :input
-        p = best_in_place @source, :description, :type => :textarea
-      div class="span8"
+        div class="span8"
         == render :partial => 'shared/comments'

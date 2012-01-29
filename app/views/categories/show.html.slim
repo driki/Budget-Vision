@@ -1,10 +1,10 @@
-== render :partial => 'shared/masthead'
+== render :partial => 'shared/masthead', :locals => {:organization => @project.organization}
 
 div class="row"
   div class="span12"
     div class="row"
       div class="span2" id="left-rail"
-        == render :partial => 'shared/left_rail'
+        == render :partial => 'shared/left_rail', :organization => @project.organization
       div class="span10"
         div class="row action-bar"
           div class="span5"

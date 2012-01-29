@@ -13,11 +13,13 @@ div id="masthead"
 div class="row"
   div class="span12"
     div class="row"
-      div class="span2" id="left-rail"
+      div class="span3" id="left-rail"
         h1 Fresh List
         p Recent updates
-        - for project in @recently_updated_projects
-          h3 = link_to "#{project.organization.name}, #{project.organization.state}", organization_path(project.organization)
+        ul
+          - for project in @recently_updated_projects
+            li = link_to "#{project.organization.name}, #{project.organization.state} :: #{project.year}", organization_project_path(project.organization, project)
+
         hr
         h1 States
         p Browse by state
@@ -26,11 +28,12 @@ div class="row"
             h3
               = link_to state[1], states_path(state[0])
 
-      div class="span10"
+      div class="span8"
+        h1 Nearby Cities and Towns
         div class="row"
           - if !@location.nil?
             - for org in @nearby_orgs do
-              div class="org-card span5"
+              div class="org-card span4"
                 h2 = link_to org.name, organization_path(org)
                 table
                   tbody

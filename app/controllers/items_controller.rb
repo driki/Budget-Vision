@@ -13,7 +13,6 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = @category.items.build
   end
 
   def new_bulk

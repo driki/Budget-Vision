@@ -1,6 +1,6 @@
-== render :partial => 'shared/welcome_modal'
+== render :partial => 'shared/welcome_modal', :locals => {:organization => @project.organization}
 
-== render :partial => 'shared/masthead'
+== render :partial => 'shared/masthead', :locals => {:organization => @project.organization}
 
 div class="row"
   div class="span12"
@@ -14,6 +14,8 @@ div class="row"
             == render :partial => 'shared/social_sharing'
           div class="span5"
             span style="float: right; padding-right: 10px;"
+              = link_to "New budget", new_organization_project_path(@organization)
+              '  | 
               = link_to "Edit this budget", edit_project_path(@project)
               '  | 
               = link_to "Delete", { :action => "destroy", :id => @project.id }, :confirm => "Are you sure?", :method => :delete
