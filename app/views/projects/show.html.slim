@@ -32,7 +32,7 @@ div class="row"
             div class="span10"
               h1
                 ' Summary
-              p == RedCloth.new(@project.description, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
+              p == RedCloth.new(@project.summary, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
       div class="span5"
         == render :partial => 'shared/tax_stamp'
       div class="span5"
