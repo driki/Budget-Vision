@@ -11,8 +11,8 @@
   div class="controls"
     = f.input :url
   div class="controls"
-    = f.input :description, :input_html => { :class => "span6", :rows => "4" }  
+    = f.input :description, :input_html => { :class => "span6", :rows => "4" }
   div class="form-actions span6 offset2"
     = f.button :submit, "Update Source", :class => 'primary'
-    |  or 
-    = link_to "Cancel", request.env['HTTP_REFERER'], :class => "btn" 
+    '  or
+    = link_to "Cancel", request.env['HTTP_REFERER'], :class => "btn"

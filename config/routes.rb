@@ -16,7 +16,7 @@ Budgetvision::Application.routes.draw do
   match "/login" => "sessions#login"
   match "/logout" => "sessions#destroy", :as => "logout"
 
-  post "versions/:id/revert" => "versions#revert", :as => "revert_version"  
+  post "versions/:id/revert" => "versions#revert", :as => "revert_version"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -48,7 +48,10 @@ Budgetvision::Application.routes.draw do
   end
 
   resources :categories do
-    resources :items, :name_prefix => "category_"
+    resources :items, :name_prefix => "category_" do
+      get 'new_bulk', :on => :collection
+      post 'new_bulk', :on => :collection
+    end
   end
 
   resources :departments do

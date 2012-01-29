@@ -1,3 +1,5 @@
+require 'csv'
+
 class ItemsController < ApplicationController
   set_tab :items
 
@@ -12,6 +14,16 @@ class ItemsController < ApplicationController
 
   def new
     @item = @category.items.build
+  end
+
+  def new_bulk
+    if request.post? && params[:file].present?
+      file = params[:file].read
+      n, errs = 0, []
+
+      CSV.parse(file) do |row|
+      end
+    end
   end
 
   def show
