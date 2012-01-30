@@ -1,22 +1,22 @@
 class Category < ActiveRecord::Base
-  acts_as_taggable_on :tags, :tags
-
+  acts_as_taggable
   has_paper_trail
+
   has_many :items
   belongs_to :project
 
   validates_presence_of :name
 
 	attr_accessible :name,
-								:goal, 
-								:challenge, 
-								:description, 
-								:expense_budget,
-								:revenue_budget,
-						  		:tags,
-								:type,
-								:people,
-                :parent_id
+    :goal,
+    :challenge,
+    :description,
+    :is_expense,
+    :expense_budget,
+    :revenue_budget,
+    :tag_list,
+    :people,
+    :parent_id
 
   validates_numericality_of :expense_budget,
   	:greater_than_or_equal_to => 0.00,

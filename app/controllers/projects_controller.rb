@@ -5,14 +5,6 @@ class ProjectsController < ApplicationController
   load_and_authorize_resource :project
   before_filter :show_not_verified_alert, :except => [:new, :create, :update]
 
-  def expenses
-    @categories = @project.categories(:type => "Expenses")
-  end
-
-  def revenues
-    @categories = @project.categories(:type => "Revenues")
-  end
-
   def new
     @project = @organization.projects.build
   end
@@ -25,6 +17,11 @@ class ProjectsController < ApplicationController
     else
       render :action => 'new'
     end
+  end
+
+  def show
+    @expense_categories = @project.categories.where(:is_expense => true)
+    @revenue_categories = @project.categories.where(:is_expense => false)
   end
 
   def edit

@@ -18,8 +18,8 @@ class OrganizationsController < ApplicationController
     if @organization.projects.empty?
       @organization.create_stub_project
     end
-    # default to the most recent budget year / the itnerface allows the user to select older
-    # budgets
+    # default to the most recent budget year / the interface allows the user to select older
+    # budgets (under Trends)
     project = @organization.projects.order("year desc").first
     redirect_to organization_project_path(@organization, project)
   end

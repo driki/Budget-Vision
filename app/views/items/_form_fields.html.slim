@@ -9,11 +9,11 @@
   div class="controls"
     = f.input :name, :hint => "Example: Mechanic Wages or Vehicle Gas & All Fluids"
   div class="controls"
-    = f.input :total, :hint => "Example: $123,000 or 34000"
-  div class="controls"
     = f.input :is_expense, :label => 'Expense', :hint => 'Is this item an expense?', :as => :boolean
   div class="controls"
-    = f.input :tag_list, :hint => "Comma separated list of tags. Example: taxes, revenue"
+    = f.input :total, :hint => "Example: $123,000 or 34000"
+  div class="controls"
+    = f.input :tag_list, :label => 'Tags', :hint => "Example: taxes, revenue"
   div class="controls"
     = f.input :description, :input_html => { :class => "span6", :rows => "4" }
 

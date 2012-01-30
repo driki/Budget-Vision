@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120129210356) do
+ActiveRecord::Schema.define(:version => 20120130174425) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -25,12 +25,12 @@ ActiveRecord::Schema.define(:version => 20120129210356) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "ancestry"
-    t.string   "type"
     t.integer  "people"
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
     t.integer  "depth"
+    t.boolean  "is_expense",     :default => true
   end
 
   create_table "forecasts", :force => true do |t|
