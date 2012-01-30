@@ -124,7 +124,7 @@ class Organization < ActiveRecord::Base
       parent.expense_budget = 0
       parent.revenue_budget = 0
       parent.tag_list = "expense"
-      parent.save!
+      parent.save
 
       # now add the descendents for this category
       parent_category[1].each do |child_category|
@@ -175,7 +175,7 @@ class Organization < ActiveRecord::Base
       parent.expense_budget = 0
       parent.revenue_budget = 0
       parent.tag_list = "revenue"
-      parent.save!
+      parent.save
 
       # now add the descendents for this category
       parent_category[1].each do |child_category|
