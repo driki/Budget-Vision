@@ -24,9 +24,6 @@ class ProjectsController < ApplicationController
     @revenue_categories = @project.categories.where(:is_expense => false)
   end
 
-  def edit
-  end
-
   def trends
     set_tab :trends
   end
@@ -46,7 +43,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update_attributes(params[:project])
-        format.html { redirect_to organization_path(@project.organization, :notice => 'Budget was successfully updated.') }
+        format.html { redirect_to organization_project_path(@project.organization, @project, :notice => 'Budget was successfully updated.') }
         format.json { respond_with_bip(@project) }
       else
         format.html { render :action => "edit" }
