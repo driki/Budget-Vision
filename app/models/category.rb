@@ -1,6 +1,5 @@
 class Category < ActiveRecord::Base
   acts_as_taggable_on :tags, :tags
-  acts_as_nested_set
 
   has_paper_trail
   has_many :items
@@ -18,6 +17,8 @@ class Category < ActiveRecord::Base
 								:type,
 								:people,
                 :parent_id
+
+  acts_as_nested_set
 
   validates_numericality_of :expense_budget,
   	:greater_than_or_equal_to => 0.00,

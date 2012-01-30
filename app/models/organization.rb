@@ -76,7 +76,7 @@ class Organization < ActiveRecord::Base
     project.revenue_budget = 0
     project.average_tax_bill = 0
     project.published = true
-
+    project.save!
 
     # Based on the Maine Muni Fiscal Survey
     # There are parent categories and sub-categories
