@@ -29,7 +29,7 @@ div class="row"
             h1
               | Goal
             p = best_in_place @category, :goal, :type => :textarea
-              
+
             h1
               | Challenges
             p = best_in_place @category, :challenge, :type => :textarea
@@ -56,7 +56,7 @@ div class="row"
                   td Each year
                   td class="number"
                     span #{number_to_currency(@category.expense_budget, :precision => 0)}
-        
+
       div class="span10"
         hr
 
@@ -69,24 +69,24 @@ div class="row"
               div class="bar-container"
                 div class="bar-category-text"
                   = link_to item.name, category_item_path(@category, item)
-                  ' 
+                  '
                   = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
                 div class="progress danger"
                   - if @category.expense_budget > 0
                     div class="bar" style="width: #{((item.total/@category.expense_budget)*100).to_i}%;"
             - if @category.items.empty?
-              p 
+              p
                 = link_to "Add line items", new_category_item_path(@category)
                 '  to help show where the money goes.
-       
+
           div class="span5 barchart-widget"
             h1 Income: #{best_in_place @category, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
             h2 Where the money comes from
-            - for item in @category.items.tagged_with("revenue").order("total desc")
+            - for item in @category.items.where(:is_expense => false).order("total desc")
               div class="bar-container"
                 div class="bar-category-text"
                   = link_to item.name, category_item_path(@category, item)
-                  ' 
+                  '
                   = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
                 div class="progress success"
                   - if @category.revenue_budget > 0
