@@ -1,5 +1,5 @@
 class AddIsExpenseToCategories < ActiveRecord::Migration
-  def self.up
+  def up
     add_column :categories, :is_expense, :boolean, :default => true
     remove_column :categories, :type
 
@@ -8,7 +8,7 @@ class AddIsExpenseToCategories < ActiveRecord::Migration
     end
   end
 
-  def self.down
+  def down
     remove_column :categories, :is_expense
     add_column :categories, :type, :string
   end
