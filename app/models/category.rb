@@ -1,5 +1,6 @@
 class Category < ActiveRecord::Base
   acts_as_taggable
+  has_ancestry
   has_paper_trail
 
   has_many :items
