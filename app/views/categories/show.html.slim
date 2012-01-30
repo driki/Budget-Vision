@@ -65,7 +65,7 @@ div class="row"
           div class="span5 barchart-widget"
             h1 Spending: #{best_in_place @category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
             h2 Where the money goes
-            - for item in @category.items.order("total desc")
+            - for item in @category.items.where(:is_expense => true).order("total desc")
               div class="bar-container"
                 div class="bar-category-text"
                   = link_to item.name, category_item_path(@category, item)
