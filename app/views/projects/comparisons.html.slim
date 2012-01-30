@@ -18,31 +18,57 @@ div class="row"
       
       == render :partial => 'shared/not_verified'
 
-      div class="span10"
-      	div class="row"
-      		div class="span10"
-      			h1 Similar Cities and Towns
-      	div class="row"
-	        - for org in @similar_orgs
-	          div class="org-card span5"
-	            h2 = link_to "#{org.name}, #{org.state}", organization_path(org)
-	            table
-	              tbody
-	                tr
-	                  td Population
-	                  td class="number" #{number_with_delimiter(org.population)}
-	                tr
-	                  td Diversity
-	                  td class="number" #{number_with_delimiter(org.diversity)}
-	                tr
-	                  td Housing units
-	                  td class="number" #{number_with_delimiter(org.housing_units)}
-	                tr
-	                  td Total square miles
-	                  td class="number" #{number_with_delimiter(org.total_sq_mi)}
-	                tr
-	                  td Population per square mile
-	                  td class="number" #{number_with_delimiter(org.pop_sq_mi)}
-	                tr
-	                  td Percent of housing that is vacant
-	                  td class="number" #{number_with_delimiter(org.housing_percent_vacant)}
+      div class="row"
+        div class="span10"
+          div class="row"
+            div class="span5"
+              h1 Similar Cities and Towns
+              - for org in @similar_orgs
+                div class="org-card span4"
+                  h2 = link_to "#{org.name}, #{org.state}", organization_path(org)
+                  table
+                    tbody
+                      tr
+                        td Population
+                        td class="number" #{number_with_delimiter(org.population)}
+                      tr
+                        td Diversity
+                        td class="number" #{number_with_delimiter(org.diversity)}
+                      tr
+                        td Housing units
+                        td class="number" #{number_with_delimiter(org.housing_units)}
+                      tr
+                        td Total square miles
+                        td class="number" #{number_with_delimiter(org.total_sq_mi)}
+                      tr
+                        td Population per square mile
+                        td class="number" #{number_with_delimiter(org.pop_sq_mi)}
+                      tr
+                        td Percent of housing that is vacant
+                        td class="number" #{number_with_delimiter(org.housing_percent_vacant)}  
+            
+            div class="span5"
+              h1 Nearby Cities and Towns
+              - for org in Organization.near(@project.organization).limit(10)
+                div class="org-card span4"
+                  h2 = link_to "#{org.name}, #{org.state}", organization_path(org)
+                  table
+                    tbody
+                      tr
+                        td Population
+                        td class="number" #{number_with_delimiter(org.population)}
+                      tr
+                        td Diversity
+                        td class="number" #{number_with_delimiter(org.diversity)}
+                      tr
+                        td Housing units
+                        td class="number" #{number_with_delimiter(org.housing_units)}
+                      tr
+                        td Total square miles
+                        td class="number" #{number_with_delimiter(org.total_sq_mi)}
+                      tr
+                        td Population per square mile
+                        td class="number" #{number_with_delimiter(org.pop_sq_mi)}
+                      tr
+                        td Percent of housing that is vacant
+                        td class="number" #{number_with_delimiter(org.housing_percent_vacant)}
