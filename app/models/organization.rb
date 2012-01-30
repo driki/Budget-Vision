@@ -115,6 +115,7 @@ class Organization < ActiveRecord::Base
                                                       "Long Term Municipal Debt",
                                                       "Long Term Educational Debt"]
     
+    # create the parent categories
     expense_parent_categories.each do |parent_category|
       parent = Category.new
       parent.name = parent_category.first
@@ -125,8 +126,10 @@ class Organization < ActiveRecord::Base
       parent.revenue_budget = 0
       parent.tag_list = "expense"
       parent.save
+      project.categories << parent
+      project.save
 
-      # now add the descendents for this category
+      # now add the descendents
       parent_category[1].each do |child_category|
         child = Category.new
         child.name = child_category
@@ -138,9 +141,8 @@ class Organization < ActiveRecord::Base
         child.tag_list = "expense"
         child.save
         child.move_to_child_of(parent)
+        child.save
       end
-
-      project.categories << parent
     end
 
 
@@ -166,6 +168,7 @@ class Organization < ActiveRecord::Base
                                                   "Surplus",
                                                   "Reserve or Trust Funds"]
     
+    # create the parent categories
     revenue_parent_categories.each do |parent_category|
       parent = Category.new
       parent.name = parent_category.first
@@ -176,8 +179,10 @@ class Organization < ActiveRecord::Base
       parent.revenue_budget = 0
       parent.tag_list = "revenue"
       parent.save
+      project.categories << parent
+      project.save
 
-      # now add the descendents for this category
+      # now add the descendents
       parent_category[1].each do |child_category|
         child = Category.new
         child.name = child_category
@@ -189,11 +194,9 @@ class Organization < ActiveRecord::Base
         child.tag_list = "revenue"
         child.save
         child.move_to_child_of(parent)
+        child.save
       end
-
-      project.categories << parent
     end
-
     self.projects << project
     self.save
   end
