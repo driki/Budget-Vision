@@ -76,127 +76,79 @@ class Organization < ActiveRecord::Base
     project.revenue_budget = 0
     project.average_tax_bill = 0
     project.published = true
-    project.save!
 
-    # Based on the Maine Muni Fiscal Survey
-    # There are parent categories and sub-categories
-    # These are Expense categories
-    expense_parent_categories = Hash.new
-    expense_parent_categories["General Admin"] = ["Employee Benefits", 
-                                                    "Elected Officials",
-                                                    "Admin Offices",
-                                                    "Legal",
-                                                    "Government Buildings",
-                                                    "Economic Development"]
-    expense_parent_categories["Public Safety"] = ["Police",
-                                            "Fire",
-                                            "EMS",
-                                            "Street Lighting",
-                                            "Other",
-                                            "Capital"]
-    expense_parent_categories["Public Works Roads"] = ["Administration",
-                                                "Roads Winter",
-                                                "Roads All Other",
-                                                "Bridges",
-                                                "Capital"]
-    expense_parent_categories["Public Works Other"] = ["Solid Waste & Recycling",
-                                                "Water & Sewer",
-                                                "Capital"]
-    expense_parent_categories["Code & Human Services"] = ["Code Enforcement",
-                                                    "General Assistance",
-                                                    "Social Service Contributions",
-                                                    "Other"]
-    expense_parent_categories["Parks, Recreation & Library"] = ["Parks & Recreation",
-                                                        "Library",
-                                                        "Other",
-                                                        "Capital"]
-    expense_parent_categories["County, Education, & Debt"] = ["County Assesment",
-                                                      "K-12 Assesment",
-                                                      "Long Term Municipal Debt",
-                                                      "Long Term Educational Debt"]
-    
-    # create the parent categories
-    expense_parent_categories.each do |parent_category|
-      parent = Category.new
-      parent.name = parent_category.first
-      parent.goal = ""
-      parent.description = ""
-      parent.challenge = ""
-      parent.expense_budget = 0
-      parent.revenue_budget = 0
-      parent.tag_list = "expense"
-      parent.save
-      project.categories << parent
-      project.save
+    department_names = ["Fire Department",
+                      "General Government",
+                      "Police Department",
+                      "Public Works",
+                      "Recreation Department",
+                      "Parks & Recreation",
+                      "Library",
+                      "Health & Safety",
+                      "School Department"]
 
-      # now add the descendents
-      parent_category[1].each do |child_category|
-        child = Category.new
-        child.name = child_category
-        child.goal = ""
-        child.description = ""
-        child.challenge = ""
-        child.expense_budget = 0
-        child.revenue_budget = 0
-        child.tag_list = "expense"
-        child.save
-        child.move_to_child_of(parent)
-        child.save
-      end
+    department_names.each do |name|
+      category = Department.new
+      category.name = name
+      category.goal = ""
+      category.description = ""
+      category.challenge = ""
+      category.expense_budget = 0
+      category.revenue_budget = 0
+      category.tag_list = "expense"
+
+      project.categories << category
     end
 
+    expense_names = [
+                      "Debt Service",
+                      "Retirement",
+                      "Insurance & Employee Benefits",
+                      "Miscellaneous",
+                      "County Taxes",
+                      "Capital Projects",
+                      "Snow & Ice",
+                      "Waste Disposal",
+                      "Other Assesments",
+                      "Other",
+                      "General Assistance"]
 
-    # Based on the Maine Muni Fiscal Survey
-    # There are parent categories and sub-categories
-    # These are Revenue categories
-    revenue_parent_categories = Hash.new
-    revenue_parent_categories["Municipal Revenue"] = ["Property Tax", 
-                                                      "Motor Vehicle Excise Tax",
-                                                      "Watercraft Excise Tax",
-                                                      "Interest Tax",
-                                                      "License, Permits, Fees",
-                                                      "Service Fees"]
-    revenue_parent_categories["State Revenue"] = ["Revenue Sharing",
-                                                  "Homestead Exemption",
-                                                  "Road Assistance",
-                                                  "General Assistance",
-                                                  "Tree Growth",
-                                                  "State Aid Education",
-                                                  "Vetrans' Reimbursment",
-                                                  "Other"]
-    revenue_parent_categories["Other Revenue"] = ["Federal",
-                                                  "Surplus",
-                                                  "Reserve or Trust Funds"]
-    
-    # create the parent categories
-    revenue_parent_categories.each do |parent_category|
-      parent = Category.new
-      parent.name = parent_category.first
-      parent.goal = ""
-      parent.description = ""
-      parent.challenge = ""
-      parent.expense_budget = 0
-      parent.revenue_budget = 0
-      parent.tag_list = "revenue"
-      parent.save
-      project.categories << parent
-      project.save
+    expense_names.each do |name|
+      category = Category.new
+      category.name = name
+      category.goal = ""
+      category.description = ""
+      category.challenge = ""
+      category.expense_budget = 0
+      category.revenue_budget = 0
+      category.tag_list = "expense"
 
-      # now add the descendents
-      parent_category[1].each do |child_category|
-        child = Category.new
-        child.name = child_category
-        child.goal = ""
-        child.description = ""
-        child.challenge = ""
-        child.expense_budget = 0
-        child.revenue_budget = 0
-        child.tag_list = "revenue"
-        child.save
-        child.move_to_child_of(parent)
-        child.save
-      end
+      project.categories << category
     end
+
+    revenue_names = ["State Aid",
+                      "Property Taxes",
+                      "Local Receipts",
+                      "Interest Income",
+                      "Federal Stimulus",
+                      "Grants",
+                      "Service Fees",
+                      "Other",
+                      "Permits & Fees"]
+
+    revenue_names.each do |name|
+      category = Category.new
+      category.name = name
+      category.goal = ""
+      category.description = ""
+      category.challenge = ""
+      category.expense_budget = 0
+      category.revenue_budget = 0
+      category.tag_list = "revenue"
+
+      project.categories << category
+    end
+
     self.projects << project
     self.save
   end

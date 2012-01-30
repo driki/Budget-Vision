@@ -65,15 +65,6 @@ div class="row"
           div class="span5 barchart-widget"
             h1 Spending: #{best_in_place @category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
             h2 Where the money goes
-            - for child_category in @category.descendants.order("expense_budget desc")
-              div class="bar-container"
-                div class="bar-category-text"
-                  = link_to child_category.name, project_category_path(@project, child_category)
-                  ' 
-                  = best_in_place child_category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-                div class="progress danger"
-                  - if @category.expense_budget > 0
-                    div class="bar" style="width: #{((child_category.expense_budget/@category.expense_budget)*100).to_i}%;"
             - for item in @category.items.order("total desc")
               div class="bar-container"
                 div class="bar-category-text"
@@ -91,15 +82,6 @@ div class="row"
           div class="span5 barchart-widget"
             h1 Income: #{best_in_place @category, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
             h2 Where the money comes from
-            - for child_category in @category.descendants.order("revenue_budget desc")
-              div class="bar-container"
-                div class="bar-category-text"
-                  = link_to child_category.name, project_category_path(@project, child_category)
-                  ' 
-                  = best_in_place child_category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-                div class="progress danger"
-                  - if @category.expense_budget > 0
-                    div class="bar" style="width: #{((child_category.expense_budget/@category.expense_budget)*100).to_i}%;"
             - for item in @category.items.tagged_with("revenue").order("total desc")
               div class="bar-container"
                 div class="bar-category-text"

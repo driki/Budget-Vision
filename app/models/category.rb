@@ -13,12 +13,10 @@ class Category < ActiveRecord::Base
 								:description, 
 								:expense_budget,
 								:revenue_budget,
-								:tags,
+						  		:tags,
 								:type,
 								:people,
                 :parent_id
-
-  acts_as_nested_set
 
   validates_numericality_of :expense_budget,
   	:greater_than_or_equal_to => 0.00,
