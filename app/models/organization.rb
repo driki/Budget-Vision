@@ -136,7 +136,7 @@ class Organization < ActiveRecord::Base
         child.expense_budget = 0
         child.revenue_budget = 0
         child.tag_list = "expense"
-        child.save!
+        child.save
         child.move_to_child_of(parent)
       end
 
@@ -187,7 +187,7 @@ class Organization < ActiveRecord::Base
         child.expense_budget = 0
         child.revenue_budget = 0
         child.tag_list = "revenue"
-        child.save!
+        child.save
         child.move_to_child_of(parent)
       end
 
