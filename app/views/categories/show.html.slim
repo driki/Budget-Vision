@@ -74,13 +74,16 @@ div class="row"
                 td Sub-Categories Total
                 td class="number" #{number_to_currency(@category.descendants.sum(:expense_budget), :precision => 0)}
               tr
-              - if @category.expense_budget != @category.descendants.sum(:expense_budget)
+                td Category Items Total
+                td class="number" #{number_to_currency(@category.items.where(:is_expense => true).sum(:total), :precision => 0)}
+              tr
+              - if @category.expense_budget != (@category.descendants.sum(:expense_budget) + @category.items.where(:is_expense => true).sum(:total))
                 td
-                  | Category and sub-category totals aren't equal
+                  | Category, sub-category and item totals aren't equal
               - else
                 td
-                  | Category and sub-category totals match
-              td class="number" = number_to_currency(@category.expense_budget - @category.descendants.sum(:expense_budget), :precision => 0)
+                  | Category, sub-category and item totals match
+              td class="number" = number_to_currency(@category.expense_budget - (@category.descendants.sum(:expense_budget) + @category.items.where(:is_expense => true).sum(:total)), :precision => 0)
 
           h2 Where the money goes
           - for child_category in @category.descendants
@@ -92,6 +95,11 @@ div class="row"
               div class="progress danger"
                 - if @category.expense_budget > 0
                   div class="bar" style="width: #{((child_category.expense_budget/@category.expense_budget)*100).to_i}%;"
+          - if @category.descendants.empty?
+            p
+              = link_to "Add a category", new_project_category_path(@project)
+              '  to help show where the money goes.
+          h2 Line Items
           - for item in @category.items.where(:is_expense => true).order("total desc")
             div class="bar-container"
               div class="bar-category-text"
@@ -101,10 +109,6 @@ div class="row"
               div class="progress danger"
                 - if @category.expense_budget > 0
                   div class="bar" style="width: #{((item.total/@category.expense_budget)*100).to_i}%;"
-          - if @category.descendants.empty?
-            p
-              = link_to "Add a category", new_project_category_path(@project)
-              '  to help show where the money goes.
           - if @category.items.empty?
             p
               = link_to "Add an item", new_category_item_path(@category)
@@ -120,13 +124,20 @@ div class="row"
                 td Sub-Categories Total
                 td class="number" #{number_to_currency(@category.descendants.sum(:revenue_budget), :precision => 0)}
               tr
-              - if @category.revenue_budget != @category.descendants.sum(:revenue_budget)
+                td Category Items Total
+                td class="number" #{number_to_currency(@category.items.where(:is_expense => false).sum(:total), :precision => 0)}
+              tr
+              - if @category.revenue_budget != (@category.descendants.sum(:revenue_budget) + @category.items.where(:is_expense => false).sum(:total))
                 td
                   | Category and sub-category totals aren't equal
               - else
                 td
                   | Category and sub-category totals match
-              td class="number" = number_to_currency(@category.revenue_budget - @category.descendants.sum(:revenue_budget), :precision => 0)
+              td class="number" = number_to_currency(@category.revenue_budget - (@category.descendants.sum(:revenue_budget) + @category.items.where(:is_expense => false).sum(:total)), :precision => 0)
+          - if @category.descendants.empty?
+            p
+              = link_to "Add a category", new_project_category_path(@project)
+              '  to help show where the money comes from.
           - for child_category in @category.descendants
             div class="bar-container"
               div class="bar-category-text"
@@ -136,6 +147,7 @@ div class="row"
               div class="progress success"
                 - if @category.revenue_budget > 0
                   div class="bar" style="width: #{((child_category.revenue_budget/@category.revenue_budget)*100).to_i}%;"
+          h2 Line Items
           - for item in @category.items.where(:is_expense => false).order("total desc")
             div class="bar-container"
               div class="bar-category-text"
@@ -145,10 +157,6 @@ div class="row"
               div class="progress success"
                 - if @category.revenue_budget > 0
                   div class="bar" style="width: #{((item.total/@category.revenue_budget)*100).to_i}%;"
-          - if @category.descendants.empty?
-            p
-              = link_to "Add a category", new_project_category_path(@project)
-              '  to help show where the money comes from.
           - if @category.items.empty?
             p
               = link_to "Add an item", new_category_item_path(@category)
