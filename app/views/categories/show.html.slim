@@ -60,36 +60,53 @@ div class="row"
       div class="span10"
         hr
 
-      div class="span10"
-        div class="row"
-          div class="span5 barchart-widget"
-            h1 Spending: #{best_in_place @category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
-            h2 Where the money goes
-            - for item in @category.items.where(:is_expense => true).order("total desc")
-              div class="bar-container"
-                div class="bar-category-text"
-                  = link_to item.name, category_item_path(@category, item)
-                  '
-                  = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-                div class="progress danger"
-                  - if @category.expense_budget > 0
-                    div class="bar" style="width: #{((item.total/@category.expense_budget)*100).to_i}%;"
-            - if @category.items.empty?
-              p
-                = link_to "Add line items", new_category_item_path(@category)
-                '  to help show where the money goes.
-
-          div class="span5 barchart-widget"
-            h1 Income: #{best_in_place @category, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
-            h2 Where the money comes from
-            - for item in @category.items.where(:is_expense => false).order("total desc")
-              div class="bar-container"
-                div class="bar-category-text"
-                  = link_to item.name, category_item_path(@category, item)
-                  '
-                  = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-                div class="progress success"
-                  - if @category.revenue_budget > 0
-                    div class="bar" style="width: #{((item.total/@category.revenue_budget)*100).to_i}%;"
+      - if @category.is_expense
+        div class="span8 barchart-widget"
+          h1 Spending: #{best_in_place @category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
+          h2 Where the money goes
+          - for child_category in @category.descendants
+            div class="bar-container"
+              div class="bar-category-text"
+                = link_to child_category.name, project_category_path(@project, child_category)
+                '
+                = best_in_place child_category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
+              div class="progress danger"
+                - if @category.expense_budget > 0
+                  div class="bar" style="width: #{((child_category.expense_budget/@category.expense_budget)*100).to_i}%;"
+          - for item in @category.items.where(:is_expense => true).order("total desc")
+            div class="bar-container"
+              div class="bar-category-text"
+                = link_to item.name, category_item_path(@category, item)
+                '
+                = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
+              div class="progress danger"
+                - if @category.expense_budget > 0
+                  div class="bar" style="width: #{((item.total/@category.expense_budget)*100).to_i}%;"
+          - if @category.items.empty?
+            p
+              = link_to "Add line items", new_category_item_path(@category)
+              '  to help show where the money goes.
+      - else
+        div class="span8 barchart-widget"
+          h1 Income: #{best_in_place @category, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
+          h2 Where the money comes from
+          - for child_category in @category.descendants.where(:is_expense => false).order("revenue_budget desc")
+            div class="bar-container"
+              div class="bar-category-text"
+                = link_to child_category.name, project_category_path(@project, child_category)
+                '
+                = best_in_place child_category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
+              div class="progress danger"
+                - if @category.expense_budget > 0
+                  div class="bar" style="width: #{((child_category.expense_budget/@category.expense_budget)*100).to_i}%;"
+          - for item in @category.items.where(:is_expense => false).order("total desc")
+            div class="bar-container"
+              div class="bar-category-text"
+                = link_to item.name, category_item_path(@category, item)
+                '
+                = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
+              div class="progress success"
+                - if @category.revenue_budget > 0
+                  div class="bar" style="width: #{((item.total/@category.revenue_budget)*100).to_i}%;"
         div class="span8"
           == render :partial => 'shared/comments'

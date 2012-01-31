@@ -71,7 +71,7 @@ div class="row"
                     | Budget and category totals match
                 td class="number" = number_to_currency(@project.expense_budget - @expense_categories.sum(:expense_budget), :precision => 0)
 
-            - for category in @expense_categories.order("expense_budget desc")
+            - for category in @expense_categories
               div class="bar-container"
                 div class="bar-category-text"
                   = link_to category.name, project_category_path(@project, category)
@@ -99,7 +99,7 @@ div class="row"
                     | Budget and category totals match
                 td class="number" = number_to_currency(@project.revenue_budget - @revenue_categories.sum(:revenue_budget), :precision => 0)
 
-            - for category in @revenue_categories.order("revenue_budget desc")
+            - for category in @revenue_categories
               div class="bar-container"
                 div class="bar-category-text"
                   = link_to category.name, project_category_path(@project, category)

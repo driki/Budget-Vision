@@ -2,6 +2,63 @@
 
 == render :partial => 'shared/masthead', :locals => {:organization => @project.organization}
 
+javascript:
+  var chart;
+    jQuery(document).ready(function() {
+      chart = new Highcharts.Chart({
+        chart: {
+          renderTo: 'expenditures',
+          defaultSeriesType: 'column'
+        },
+        title: {
+          text: 'Expenditures and Revenues'
+        },
+        xAxis: {
+          categories:
+            #{@project_years}
+        },
+        yAxis: {
+          min: 0,
+          title: {
+            text: 'Cost'
+          }
+        },
+        legend: {
+          layout: 'vertical',
+          backgroundColor: '#FFFFFF',
+          align: 'left',
+          verticalAlign: 'top',
+          x: 100,
+          y: 30,
+          floating: true,
+          shadow: true
+        },
+        tooltip: {
+          formatter: function() {
+            return ''+
+              this.x +': $'+ this.y +'';
+          }
+        },
+        plotOptions: {
+          column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+          }
+        },
+        series: [{
+          name: 'Expenditures',
+          data: #{@expenditure_totals}
+      
+        }, {
+          name: 'Revenues',
+          data: #{@revenue_totals}
+      
+        }]
+      });
+      
+      
+    });
+
 div class="row"
   div class="span12"
     div class="row"
@@ -22,13 +79,7 @@ div class="row"
         div class="row"
           - if @project.organization.projects.size > 1
             div class="span5"
-              h1 Expenditures
-              - for project in @project.organization.projects
-                h2 FY #{link_to project.year, organization_project_path(project.organization, project)} :: #{number_to_currency(project.expense_budget, :precision => 0)}
-            div class="span5"
-              h1 Revenue
-              - for project in @project.organization.projects
-                h2 FY #{project.year} :: #{number_to_currency(project.revenue_budget, :precision => 0)}
+              div id="expenditures" class="highcharts-container" style="height:300px; margin: 0 2em; clear:both; min-width: 600px"
             div class="span8"
               == render :partial => 'shared/comments'
           - else

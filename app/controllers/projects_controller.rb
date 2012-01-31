@@ -20,12 +20,15 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @expense_categories = @project.categories.where(:is_expense => true)
-    @revenue_categories = @project.categories.where(:is_expense => false)
+    @revenue_categories = @project.categories.where(:is_expense => false).roots.order("revenue_budget desc")
+    @expense_categories = @project.categories.where(:is_expense => true).roots.order("expense_budget desc")
   end
 
   def trends
     set_tab :trends
+    @project_years = Project.where(:organization_id => @project.organization.id).order("year asc").select(:year).collect(&:year)
+    @expenditure_totals = Project.where(:organization_id => @project.organization.id).order("year asc").select(:expense_budget).collect(&:expense_budget)
+    @revenue_totals = Project.where(:organization_id => @project.organization.id).order("year asc").select(:revenue_budget).collect(&:revenue_budget)
   end
 
   def comparisons
