@@ -4,12 +4,12 @@ class ApplicationController < ActionController::Base
   before_filter :show_welcome
 
   rescue_from CanCan::AccessDenied do |exception|
-    if !signed_in?
+    if signed_in?
       session[:pre_login_path] = @_env['HTTP_REFERER']
       render :file => "#{Rails.root}/public/403.html", :status => 403
     else
       session[:pre_login_path] = @_env['HTTP_REFERER']
-      render :file => "#{Rails.root}/public/403_not_a_member.html", :status => 403
+      redirect_to login_path
     end
   end
 
