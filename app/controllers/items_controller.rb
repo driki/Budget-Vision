@@ -1,3 +1,4 @@
+require 'active_record'
 require 'csv'
 
 class ItemsController < ApplicationController
@@ -21,9 +22,11 @@ class ItemsController < ApplicationController
 
       CSV.parse(file, :headers => true) do |row|
         name        = row["NAME"]
-        is_expense  = !!row["EXPENSE"]
+        expense     = row["EXPENSE"]
         total       = row["TOTAL"]
         description = row["DESCRIPTION"]
+
+        is_expense = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(expense)
 
         item = Item.new(:name => name, :is_expense => is_expense, :total => total, :description => description)
         @category.items << item
