@@ -8,6 +8,8 @@
   div class="controls"
     = f.input :name, :hint => "Example: Fire Department, Public Safety, General Government"
   div class="controls"
+    = f.input :parent_id, :label => "Parent Category", :collection => @project.categories.roots, :input_html => { :multiple => false }
+  div class="controls"
     = f.input :is_expense, :label => 'Expense', :hint => 'Is this category an expense?', :as => :boolean
   div class="controls"
     = f.input :expense_budget, :hint => "Example: $120,000"
