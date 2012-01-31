@@ -20,7 +20,7 @@ div id="characteristics"
           | #{number_with_delimiter(@project.organization.housing_units)} homes
       tr
         td
-          | #{number_with_precision(@project.organization.diversity, :precision => 2)} diversity
+          | #{number_with_precision(@project.organization.diversity*100, :precision => 2)} USA Today Diversity Index
       tr
         td
           | #{number_with_delimiter(@project.organization.total_sq_mi)} sq. miles
@@ -29,7 +29,7 @@ div id="characteristics"
           | #{number_with_delimiter(@project.organization.pop_sq_mi)} pop/sq mile
       tr
         td
-          | #{number_with_precision(@project.organization.housing_percent_vacant, :precision => 2)} % homes vacant
+          | #{number_with_precision(@project.organization.housing_percent_vacant, :precision => 2)}% homes vacant
 
 div id="nearby"
   h3 Nearby
