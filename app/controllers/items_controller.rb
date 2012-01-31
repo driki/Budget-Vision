@@ -18,10 +18,19 @@ class ItemsController < ApplicationController
   def new_bulk
     if request.post? && params[:file].present?
       file = params[:file].read
-      n, errs = 0, []
 
-      CSV.parse(file) do |row|
+      CSV.parse(file, :headers => true) do |row|
+        name        = row["NAME"]
+        is_expense  = !!row["EXPENSE"]
+        total       = row["TOTAL"]
+        description = row["DESCRIPTION"]
+
+        item = Item.new(:name => name, :is_expense => is_expense, :total => total, :description => description)
+        @category.items << item
       end
+
+      @category.save
+      redirect_to project_category_path(@category.project, @category)
     end
   end
 

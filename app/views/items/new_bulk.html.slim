@@ -1,6 +1,26 @@
-div class="span10 offset2"
+div class="span8 offset2"
   br
   h1 Add new line items for: #{@category.name}
+  br
+  p
+    | Use the form below to add line item expenses in bulk to the budget. This bulk tool expects a comma separated value
+      (CSV) formatted file. Most spreadsheet tools like Excel can export in this format.
+  p
+    | The first line of the CSV file must be a header line with a column heading for each column of data. Supported
+      headings include:
+    ul
+      li
+        b NAME
+        |  - the name of the line item
+      li
+        b EXPENSE
+        |  - true if the line item is an expense, false otherwise
+      li
+        b TOTAL
+        |  - the total amount of the line item
+      li
+        b DESCRIPTION
+        |  - a description of the line item
   br
   = form_tag new_bulk_category_items_path(@category), :multipart => true do
     = file_field_tag "file"
