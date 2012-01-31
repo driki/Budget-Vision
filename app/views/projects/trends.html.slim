@@ -6,9 +6,10 @@ javascript:
   var chart;
     jQuery(document).ready(function() {
       chart = new Highcharts.Chart({
+        colors: ['#DD514C', '#5EB95E'],
         chart: {
           renderTo: 'expenditures',
-          defaultSeriesType: 'column'
+          defaultSeriesType: 'line'
         },
         title: {
           text: 'Expenditures and Revenues'
@@ -36,7 +37,7 @@ javascript:
         tooltip: {
           formatter: function() {
             return ''+
-              this.x +': $'+ this.y +'';
+              this.x +': $'+ Highcharts.numberFormat(this.y) +'';
           }
         },
         plotOptions: {
