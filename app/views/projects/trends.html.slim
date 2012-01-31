@@ -80,6 +80,10 @@ div class="row"
           - if @project.organization.projects.size > 1
             div class="span5"
               div id="expenditures" class="highcharts-container" style="height:300px; margin: 0 2em; clear:both; min-width: 600px"
+              h2 All Budgets
+              - for project in @project.organization.projects
+                h3 = link_to "#{project.organization.name}, #{project.year}", organization_project_path(project.organization, project)
+              hr
             div class="span8"
               == render :partial => 'shared/comments'
           - else
