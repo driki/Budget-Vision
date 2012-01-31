@@ -54,4 +54,10 @@ class ProjectsController < ApplicationController
       end
     end
   end
+
+  def destroy   
+    @project.destroy  
+    redirect_to organization_path(@organization),
+      :notice => "Successfully deleted the budget."  
+  end  
 end

@@ -66,4 +66,10 @@ class ItemsController < ApplicationController
       end
     end
   end
+
+  def destroy   
+    @item.destroy
+    redirect_to project_category_path(@item.category.project, @item.category),
+      :notice => "Successfully deleted the item."  
+  end  
 end

@@ -17,6 +17,8 @@ div class="row"
               = link_to "Edit the item", edit_category_item_path(@item.category, @item)
               '  | 
               = link_to "Add an item", new_category_item_path(@item.category)
+              '  | 
+              = link_to "Delete", { :action => "destroy", :id => @item.id }, :confirm => "Are you sure?", :method => :delete
 
       div class="span10"
         == render :partial => 'shared/not_verified'
