@@ -103,7 +103,7 @@ div class="row"
           - for item in @category.items.where(:is_expense => true).order("total desc")
             div class="bar-container"
               div class="bar-category-text"
-                = link_to item.name, category_item_path(@category, item)
+                = link_to item.name, organization_project_category_item_path(@organization, @project, @category, item)
                 '
                 = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
               div class="progress danger"
@@ -151,7 +151,7 @@ div class="row"
           - for item in @category.items.where(:is_expense => false).order("total desc")
             div class="bar-container"
               div class="bar-category-text"
-                = link_to item.name, category_item_path(@category, item)
+                = link_to item.name, organization_project_category_item_path(@organization, @project, @category, item)
                 '
                 = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
               div class="progress success"
