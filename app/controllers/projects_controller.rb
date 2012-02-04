@@ -27,6 +27,11 @@ class ProjectsController < ApplicationController
     @meta_keywords = @project.meta_keywords
   end
 
+  def show_by_id
+    project = Project.find_by_id(params[:id])
+    redirect_to organization_project_path(project.organization, project)
+  end
+
   def trends
     @title = "#{@organization.name}, #{@organization.state} city budget trends"
     set_tab :trends

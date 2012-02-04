@@ -29,7 +29,8 @@ Budgetvision::Application.routes.draw do
   post "versions/:id/revert" => "versions#revert", :as => "revert_version"
 
   # Google still knows about these so must redirect
-  match "organizations/:id" => "organizations#show_by_id"
+  match "/organizations/:id" => "organizations#show_by_id"
+  match "/projects/:id(/trends)(/comparisons)(/goals)" => "projects#show_by_id"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
