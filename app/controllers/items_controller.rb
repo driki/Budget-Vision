@@ -4,6 +4,7 @@ require 'csv'
 class ItemsController < ApplicationController
   set_tab :items
 
+  load_and_authorize_resource :organization, :find_by => :slug
   load_and_authorize_resource :project
 	load_and_authorize_resource :item
 	load_and_authorize_resource :category

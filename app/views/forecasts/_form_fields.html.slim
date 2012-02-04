@@ -1,5 +1,5 @@
 == render :partial => 'shared/error_message', :locals => {:target => @forecast}
-= form_for(@forecast, :url=>project_forecasts_path(@project)) do |f|
+= simple_form_for [@organization, @project, @forecast], :html => { :class => 'form-horizontal' } do |f|
   fieldset
     div class="clearfix"
       = f.label :name

@@ -1,13 +1,24 @@
 Budgetvision::Application.routes.draw do
-  match "/about" => "home#about"
-  match "/contact" => "home#contact", :as => "contact"
-  match "/contact/:id" => "home#contact"
-  match "/help" => "home#help"
-  match "/price" => "home#price"
-  match "/setup" => "home#setup"
-  match "/learning" => "home#learning"
+  
+  match "/about" => redirect("/tour/about")
+  match "/contact" => redirect("/tour/contact")
+  match "/price" => redirect("/tour/price")
+  match "/learning" => redirect("/help/learning")
+  
+  scope "/tour" do
+    match "/about" => "home#about"
+    match "/contact" => "home#contact"
+    match "/help" => "home#help"
+    match "/price" => "home#price"
+    match "/learning" => "home#learning"
+  end
+
+  scope "/help" do
+    match "/learning" => "home#learning"
+  end
+
   match "/share/:id" => "home#share", :as => "share"
-  match "/organizations/states/:state_abbr" => "organizations#states", :as => "states"
+  match "/organizations/states/:state_abbr" => "organizations#states", :as => "states"  
 
   match '/auth/:provider/callback', :to => 'sessions#create'
   #match '/auth/failure', :to => ? TODO
@@ -31,40 +42,42 @@ Budgetvision::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
 
   # See: http://weblog.jamisbuck.org/2007/2/5/nesting-resources
-  resources :organizations do
-    resources :projects, :name_prefix => "organization_"
-  end
-
-  resources :projects do
-    resources :categories, :name_prefix => "project_"
-    resources :departments, :name_prefix => "project_"
-    resources :expenses, :name_prefix => "project_"
-    resources :revenues, :name_prefix => "project_"
-    resources :goals, :name_prefix => "project_"
-    resources :forecasts, :name_prefix => "project_"
-    resources :sources, :name_prefix => "project_"
-    resources :items, :name_prefix => "project_"
-    member do
-      get 'trends'
-      get 'comparisons'
+  match "/organizations" => "organizations#index", :as => "organizations"
+  resources :organizations, :path => '', :except => [:index]
+  resources :organizations, :path => '', :only => [] do
+    resources :projects, :path => '', :except => [:index] do 
+      resources :categories do 
+        resources :items do
+          get 'new_bulk', :on => :collection
+          post 'new_bulk', :on => :collection
+        end
+      end
+      resources :departments do 
+        resources :items
+      end
+      resources :expenses
+      resources :revenues
+      resources :goals
+      resources :forecasts
+      resources :sources
+      resources :items
+      member do
+        get 'trends'
+        get 'comparisons'
+      end
     end
   end
 
-  resources :categories do
-    resources :items, :name_prefix => "category_" do
-      get 'new_bulk', :on => :collection
-      post 'new_bulk', :on => :collection
-    end
-  end
-
-  resources :departments do
-    resources :items, :name_prefix => "department_"
-  end
-
-  resources :items
+  resources :projects
+  resources :departments
+  resources :categories
+  resources :expenses
+  resources :revenues
   resources :goals
   resources :forecasts
   resources :sources
+  resources :items
+
 
   # Sample resource route with options:
   #   resources :products do
@@ -101,6 +114,7 @@ Budgetvision::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
+
   root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"

@@ -1,6 +1,7 @@
 class DepartmentsController < CategoriesController
   set_tab :categories
 
+  load_and_authorize_resource :organization, :find_by => :slug
   load_and_authorize_resource :project
   load_and_authorize_resource :department, :except => [:index]
 

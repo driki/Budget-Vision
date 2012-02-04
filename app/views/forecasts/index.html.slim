@@ -13,7 +13,7 @@ div class="row"
             == render :partial => 'shared/social_sharing'
           div class="span5"
             span style="float: right; padding-right: 10px;"
-              = link_to "Add a forecast", new_project_forecast_path(@project)
+              = link_to "Add a forecast", new_organization_project_forecast_path(@organization, @project)
 
         div class="span10"
           div class="row"

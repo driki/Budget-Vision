@@ -14,7 +14,7 @@ div class="row"
             == render :partial => 'shared/social_sharing'
           div class="span5"
             span style="float: right; padding-right: 10px;"
-              = link_to "New source", new_project_source_path(@project)
+              = link_to "New source", new_organization_project_source_path(@organization, @project)
 
       div class="span10"
         div class="row"

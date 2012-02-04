@@ -50,6 +50,24 @@ class Project < ActiveRecord::Base
     @items = Item.joins(:category).where(:categories => {:project_id => id})
   end
 
+  def meta_keywords
+    expense_categories = categories.where(:is_expense => true).roots.order("expense_budget desc")
+    revenue_categories = categories.where(:is_expense => false).roots.order("revenue_budget desc")
+
+    keywords = [organization.name, organization.state, year, "city and town budget"]
+    expense_categories.each do |c|
+      keywords << c.name
+    end
+    revenue_categories.each do |c|
+      keywords << c.name
+    end
+    meta_keywords = ""
+    keywords.each do |keyword|
+      meta_keywords += "#{keyword}, "
+    end
+    return meta_keywords
+  end
+
   # A budget gets points the more detail it adds
   def budget_vision_score
     score = 0

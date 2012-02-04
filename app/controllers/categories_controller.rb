@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
   set_tab :categories
 
+  load_and_authorize_resource :organization, :find_by => :slug
   load_and_authorize_resource :project
   load_and_authorize_resource :category, :except => [:index]
 
@@ -8,7 +9,7 @@ class CategoriesController < ApplicationController
     @category = Category.new(params[:category])
     @project.categories << @category
     if @project.save
-      redirect_to project_category_path(@category.project, @category)
+      redirect_to organization_project_categories_path(@organization, @category.project, @category)
     else
       render :action => 'new'
     end
@@ -16,14 +17,15 @@ class CategoriesController < ApplicationController
 
   def destroy   
     @category.destroy  
-    redirect_to project_categories_path,
+    redirect_to organization_project_categories_path,
       :notice => "Successfully deleted the category."  
   end  
 
   def update
     respond_to do |format|
       if @category.update_attributes(params[:category])
-        format.html { redirect_to project_category_path(
+        format.html { redirect_to organization_project_category_path(
+          @organization,
           @category.project,
           @category, :notice => 'Category was successfully updated.') }
         format.json { respond_with_bip(@category) }

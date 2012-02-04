@@ -1,6 +1,5 @@
 class OrganizationsController < ApplicationController
-  # no need to load and authorize an Organization for the "index" and "states" action
-  load_and_authorize_resource :organization
+  load_and_authorize_resource :organization, :find_by => :slug
 
   def index
     @location = GeoIP.new('GeoLiteCity.dat').city(remote_ip)
@@ -10,6 +9,11 @@ class OrganizationsController < ApplicationController
 
   def states
     @organizations = Organization.find_all_by_state(params[:state_abbr]).group_by{|u| u.name[0]}
+  end
+
+  def find_by_state_and_name
+    @organization = Organization.find_by_state_and_name(params[:state], params[:name])
+    redirect_to(@organization)
   end
 
   def show

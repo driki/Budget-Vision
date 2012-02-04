@@ -14,7 +14,7 @@ div class="row"
             == render :partial => 'shared/social_sharing'
           div class="span5"
             span style="float: right; padding-right: 10px;"
-              = link_to "Add a category", new_project_category_path(@project)
+              = link_to "Add a category", new_organization_project_category_path(@project)
 
       div class="span10"
         - for category in @project.categories.where(:is_expense => true).order("expense_budget desc")

@@ -1,6 +1,7 @@
 class GoalsController < ApplicationController
   set_tab :goals
 
+  load_and_authorize_resource :organization, :find_by => :slug
   load_and_authorize_resource :project
   load_and_authorize_resource :goal, :except => [:new]
   before_filter :show_not_verified_alert

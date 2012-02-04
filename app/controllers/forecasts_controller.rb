@@ -1,6 +1,7 @@
 class ForecastsController < ApplicationController
   set_tab :forecasts
 
+  load_and_authorize_resource :organization, :find_by => :slug
   load_and_authorize_resource :project
   load_and_authorize_resource :forecast, :except => [:new]
 

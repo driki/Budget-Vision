@@ -14,6 +14,10 @@ class Organization < ActiveRecord::Base
 
   reverse_geocoded_by :latitude, :longitude
 
+  def to_param
+    slug
+  end
+
   def address
     "#{self.name}, #{self.state}"
   end

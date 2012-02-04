@@ -1,6 +1,7 @@
 class SourcesController < ApplicationController
   set_tab :sources
 
+  load_and_authorize_resource :organization, :find_by => :slug
   load_and_authorize_resource :project
   load_and_authorize_resource :source, :except => [:new]
 

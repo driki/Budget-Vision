@@ -1,5 +1,4 @@
 == render :partial => 'shared/welcome_modal', :locals => {:organization => @project.organization}
-
 == render :partial => 'shared/masthead', :locals => {:organization => @project.organization}
 
 div class="row"
@@ -16,7 +15,7 @@ div class="row"
             span style="float: right; padding-right: 10px;"
               = link_to "New budget", new_organization_project_path(@organization)
               '  |
-              = link_to "Edit this budget", edit_project_path(@project)
+              = link_to "Edit this budget", edit_organization_project_path(@organization, @project)
               '  |
               = link_to "Delete", { :action => "destroy", :id => @project.id }, :confirm => "Are you sure?", :method => :delete
 
@@ -74,7 +73,7 @@ div class="row"
             - for category in @expense_categories
               div class="bar-container"
                 div class="bar-category-text"
-                  = link_to category.name, project_category_path(@project, category)
+                  = link_to category.name, organization_project_category_path(@organization, @project, category)
                   '
                   = best_in_place category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
                 div class="progress danger"
@@ -102,7 +101,7 @@ div class="row"
             - for category in @revenue_categories
               div class="bar-container"
                 div class="bar-category-text"
-                  = link_to category.name, project_category_path(@project, category)
+                  = link_to category.name, organization_project_category_path(@organization, @project, category)
                   '
                   = best_in_place category, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
                 div class="progress success"

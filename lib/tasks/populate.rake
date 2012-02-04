@@ -24,4 +24,16 @@ namespace :db do
       org.create_stub_project
     end
   end
+
+  task :create_org_slugs => :environment do  
+    
+    orgs = Organization.all
+    orgs.each do |org|
+      slug_friendly_name = org.name.downcase.gsub(/[^[:alnum:]]/,'-').gsub(/-{2,}/,'-')
+      slug_friendly_state = org.state.downcase
+      puts "Creating slug: #{slug_friendly_name}-#{slug_friendly_state}"
+      org.slug = slug_friendly_name+"-"+slug_friendly_state
+      org.save
+    end
+  end
 end

@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   set_tab :overview
 
-  load_and_authorize_resource :organization
+  load_and_authorize_resource :organization, :find_by => :slug
   load_and_authorize_resource :project
   before_filter :show_not_verified_alert, :except => [:new, :create, :update]
 
@@ -22,9 +22,13 @@ class ProjectsController < ApplicationController
   def show
     @revenue_categories = @project.categories.where(:is_expense => false).roots.order("revenue_budget desc")
     @expense_categories = @project.categories.where(:is_expense => true).roots.order("expense_budget desc")
+
+    @title = "#{@organization.name}, #{@organization.state} #{@project.year} city and town budget"
+    @meta_keywords = @project.meta_keywords
   end
 
   def trends
+    @title = "#{@organization.name}, #{@organization.state} city budget trends"
     set_tab :trends
     @project_years = Project.where(:organization_id => @project.organization.id).order("year asc").select(:year).collect(&:year)
     @expenditure_totals = Project.where(:organization_id => @project.organization.id).order("year asc").select(:expense_budget).collect(&:expense_budget)
@@ -32,6 +36,7 @@ class ProjectsController < ApplicationController
   end
 
   def comparisons
+    @title = "#{@organization.name}, #{@organization.state} city budget comparisons"
     set_tab :comparisons
     population_low = @project.organization.population*0.85
     population_high = @project.organization.population*1.15
@@ -60,4 +65,5 @@ class ProjectsController < ApplicationController
     redirect_to organization_path(@organization),
       :notice => "Successfully deleted the budget."  
   end  
+
 end
