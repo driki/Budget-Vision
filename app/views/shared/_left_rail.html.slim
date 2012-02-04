@@ -2,6 +2,7 @@
   = tab.overview 'Overview', organization_project_path(@project.organization, @project)
   = tab.trends "Trends", trends_organization_project_path(@project.organization, @project)
   = tab.comparisons "Comparisons", comparisons_organization_project_path(@project.organization, @project)
+  = tab.categories "Categories", organization_project_categories_path(@project.organization, @project)
   = tab.items "Line Items (#{@project.items.length})", organization_project_items_path(@project.organization, @project)
   = tab.goals "Goals (#{@project.goals.length})", organization_project_goals_path(@project.organization, @project)
   = tab.forecasts "Forecasts (#{@project.forecasts.length})", organization_project_forecasts_path(@project.organization, @project)
