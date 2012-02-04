@@ -28,6 +28,9 @@ Budgetvision::Application.routes.draw do
 
   post "versions/:id/revert" => "versions#revert", :as => "revert_version"
 
+  # Google still knows about these so must redirect
+  match "organizations/:id" => "organizations#show_by_id"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -77,7 +80,6 @@ Budgetvision::Application.routes.draw do
   resources :forecasts
   resources :sources
   resources :items
-
 
   # Sample resource route with options:
   #   resources :products do

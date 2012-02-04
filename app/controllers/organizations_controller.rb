@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-  load_and_authorize_resource :organization, :find_by => :slug
+  load_and_authorize_resource :organization, :find_by => :slug, :except => :show_by_id
 
   def index
     @location = GeoIP.new('GeoLiteCity.dat').city(remote_ip)
@@ -26,6 +26,11 @@ class OrganizationsController < ApplicationController
     # budgets (under Trends)
     project = @organization.projects.order("year desc").first
     redirect_to organization_project_path(@organization, project)
+  end
+
+  def show_by_id
+    org = Organization.find_by_id(params[:id])
+    redirect_to organization_path(org)
   end
 
   def edit
