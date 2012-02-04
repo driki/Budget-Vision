@@ -86,7 +86,7 @@ div class="row"
               td class="number" = number_to_currency(@category.expense_budget - (@category.descendants.sum(:expense_budget) + @category.items.where(:is_expense => true).sum(:total)), :precision => 0)
 
           h2 Where the money goes
-          - for child_category in @category.descendants
+          - for child_category in @category.descendants.order("expense_budget desc")
             div class="bar-container"
               div class="bar-category-text"
                 = link_to child_category.name, organization_project_category_path(@organization, @project, child_category)
@@ -138,7 +138,7 @@ div class="row"
             p
               = link_to "Add a category", new_organization_project_category_path(@organization, @project)
               '  to help show where the money comes from.
-          - for child_category in @category.descendants
+          - for child_category in @category.descendants.order("revenue_budget desc")
             div class="bar-container"
               div class="bar-category-text"
                 = link_to child_category.name, organization_project_category_path(@organization, @project, child_category)
