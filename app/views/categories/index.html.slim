@@ -19,7 +19,7 @@ div class="row"
       div class="span10"
         - for category in @project.categories.where(:is_expense => true).order("expense_budget desc")
           div class="span5 bar-container"
-            h1 = link_to category.name, project_category_path(@project, category)
+            h1 = link_to category.name, organization_project_category_path(@organization, @project, category)
             - if category.class.name == "Department"
               div class="dashboard-widget"
                 h1 class="dashboard-number" #{category.people.nil? ? 0 : category.people}

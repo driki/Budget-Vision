@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
     @category = Category.new(params[:category])
     @project.categories << @category
     if @project.save
-      redirect_to organization_project_categories_path(@organization, @category.project, @category)
+      redirect_to organization_project_category_path(@organization, @category.project, @category)
     else
       render :action => 'new'
     end
