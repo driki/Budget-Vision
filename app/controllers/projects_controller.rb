@@ -1,9 +1,9 @@
 class ProjectsController < ApplicationController
   set_tab :overview
 
-  load_and_authorize_resource :organization, :find_by => :slug
-  load_and_authorize_resource :project
-  before_filter :show_not_verified_alert, :except => [:new, :create, :update]
+  load_and_authorize_resource :organization, :find_by => :slug, :except => :show_by_id
+  load_and_authorize_resource :project, :except => :show_by_id
+  before_filter :show_not_verified_alert, :except => [:new, :create, :update, :show_by_id]
 
   def new
     @project = @organization.projects.build
@@ -27,6 +27,7 @@ class ProjectsController < ApplicationController
     @meta_keywords = @project.meta_keywords
   end
 
+  # just redirect over to show, this is because of old Google cached links.
   def show_by_id
     project = Project.find_by_id(params[:id])
     redirect_to organization_project_path(project.organization, project)
