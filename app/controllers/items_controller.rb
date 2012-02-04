@@ -49,7 +49,7 @@ class ItemsController < ApplicationController
     end
     @category.items << @item
     if @category.save
-      redirect_to category_item_path(@item.category, @item)
+      redirect_to organization_project_category_item_path(@organization, @project, @item.category, @item)
     else
       render :action => 'new'
     end
@@ -58,7 +58,7 @@ class ItemsController < ApplicationController
   def update
     respond_to do |format|
       if @item.update_attributes(params[:item])
-        format.html { redirect_to category_item_path(@item.category,
+        format.html { redirect_to organization_project_category_item_path(@organization, @project, @item.category,
                 @item, :notice => 'Item was successfully updated.') }
         format.json { respond_with_bip(@item) }
       else
@@ -70,7 +70,7 @@ class ItemsController < ApplicationController
 
   def destroy   
     @item.destroy
-    redirect_to project_category_path(@item.category.project, @item.category),
+    redirect_to organization_project_category_path(@organization, @item.category.project, @item.category),
       :notice => "Successfully deleted the item."  
   end  
 end

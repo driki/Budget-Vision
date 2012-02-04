@@ -14,9 +14,9 @@ div class="row"
             == render :partial => 'shared/social_sharing'
           div class="span5"
             span style="float: right; padding-right: 10px;"
-              = link_to "Edit the item", edit_category_item_path(@item.category, @item)
+              = link_to "Edit the item", edit_organization_project_category_item_path(@organization, @project, @item.category, @item)
               '  | 
-              = link_to "Add an item", new_category_item_path(@item.category)
+              = link_to "Add an item", new_organization_project_category_item_path(@organization, @project, @item.category)
               '  | 
               = link_to "Delete", { :action => "destroy", :id => @item.id }, :confirm => "Are you sure?", :method => :delete
 
@@ -27,7 +27,7 @@ div class="row"
         div class="row"
           div class="span5"
             h1 
-              = link_to @item.category.name, project_category_path(@item.category.project, @item.category)
+              = link_to @item.category.name, organization_project_category_path(@organization, @item.category.project, @item.category)
               | :: 
               = @item.name
             h2 
