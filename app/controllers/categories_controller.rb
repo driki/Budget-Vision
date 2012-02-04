@@ -19,7 +19,12 @@ class CategoriesController < ApplicationController
     @category.destroy  
     redirect_to organization_project_categories_path,
       :notice => "Successfully deleted the category."  
-  end  
+  end 
+  
+  def show
+    @title = "#{@organization.name}, #{@organization.state} #{@project.year} #{@category.name} budget"
+    @meta_keywords = @category.meta_keywords 
+  end
 
   def update
     respond_to do |format|
