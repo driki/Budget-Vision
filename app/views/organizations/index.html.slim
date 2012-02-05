@@ -3,38 +3,34 @@ div id="masthead"
     h1 Hi there!
     - if @location.nil?
       h2
-        | Our robots couldn't automatically find your city or town using their computer magic,
-          but you can search for your city or town or select the state you are interested in.
+        | Our robots couldn't automatically find your city or town using their computer magic, but you can search for your city or town or select the state you are interested in.
     - else
       h2
-        | Our robots think that you might be near #{@location.city_name}, #{@location.region_name} so they thought you
-          might be interested in budgets for these cities or towns.
+        | Our robots think that you might be near #{@location.city_name}, #{@location.region_name} so they thought you might be interested in budgets for these cities or towns.
 
 div class="row"
   div class="span12"
     div class="row"
       div class="span3" id="left-rail"
-        h1 Fresh List
-        p Recent updates
+        h2 Recent updates
         ul
           - for project in @recently_updated_projects
             li = link_to "#{project.organization.name}, #{project.organization.state} :: #{project.year}", organization_project_path(project.organization, project)
 
         hr
-        h1 States
-        p Browse by state
+        h2 Browse by state
         - for state in states
           div class="state"
             h3
               = link_to state[1], states_path(state[0])
 
       div class="span8"
-        h1 Nearby Cities and Towns
+        h2 Nearby Cities and Towns
         div class="row"
           - if !@location.nil?
             - for org in @nearby_orgs do
               div class="org-card span4"
-                h2 = link_to org.name, organization_path(org)
+                h3 = link_to org.name, organization_path(org)
                 table class="table"
                   tbody
                     tr

@@ -1,5 +1,5 @@
 div id="pitch" class="row"
-  div class="span8 offset2"
+  div class="span10 offset2 jumbotron"
     h1 Spread the word
     h2 Bring Budget Vision to your city or town.
 
@@ -59,17 +59,16 @@ div class="row"
               td class="number" #{number_with_delimiter(@organization.housing_percent_vacant)}
 div class="row"
   div class="span8 offset2"
-    h1 How you can get your city or town to use Budget Vision
-    h3 Contact your city or town office
+    h1 Get your city or town to use Budget Vision
     p
       ' Give your city or town office a call or send them an email. A quick
-      a href="http://www.google.com/?q=#{@organization.name}, #{@organization.state}" Google search for #{@organization.name}, #{@organization.state}
-      | can often return the contact information that you need to reach out. We've provided a template that you can use as a draft or that you could just send along.
+      a href="http://www.google.com/?q=#{@organization.name}, #{@organization.state}" Google search for #{@organization.name}, #{@organization.state} 
+      | can often return the contact information that you need to reach out. We've provided a template that you can use to contact them.
     pre
       |
         Hi,
 
-        I've found a great municipal budgeting tool that #{@organization.name} can use called Budget Vision. Budget Vision is a web based, online tool that would allow our community to more easily understand our municipal budget.
+        I've found a great municipal budgeting tool that #{@organization.name} can use called Budget Vision. Budget Vision is a web based, online tool that would allow our community to better understand our municipal budget.
 
         You can view our community budget here: #{link_to organization_url(@organization), organization_url(@organization)}
 

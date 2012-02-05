@@ -10,12 +10,13 @@ div class="row"
 div class="row"
   div class="span6"
     h1
-      ' Expense line items in this budget
+      ' Expense line items
     table class="table table-striped"
       thead
         tr
           th Name
           th Category
+          th Details
           th class="number" Cost
       tbody
         - for item in @items.where(:is_expense => true)
@@ -24,16 +25,20 @@ div class="row"
               | #{link_to item.name, organization_project_category_item_path(@organization, @project, item.category, item)}
             td
               | #{link_to item.category.name, organization_project_category_path(@organization,item.category.project, item.category)}
+            td
+              - unless item.description.empty?
+                span class="label label-info" Details 
             td class="number"
               | #{number_to_currency(item.total, :precision => 0)}
   div class="span6"
     h1
-      ' Revenue line items in this budget
+      ' Revenue line items
     table class="table table-striped"
       thead
         tr
           th Name
           th Category
+          th Details
           th class="number" Cost
       tbody
         - for item in @items.where(:is_expense => false)
@@ -42,6 +47,9 @@ div class="row"
               | #{link_to item.name, organization_project_category_item_path(@organization, @project, item.category, item)}
             td
               | #{link_to item.category.name, organization_project_category_path(@organization,item.category.project, item.category)}
+            td
+              - unless item.description.empty?
+                span class="label label-info" Details
             td class="number"
               | #{number_to_currency(item.total, :precision => 0)}
 

@@ -73,6 +73,7 @@ body {
 #header {
   background: #323A44;
   margin-bottom: 20px;
+  color: #FFF;
 }
 
 #header h1 {
@@ -80,6 +81,12 @@ body {
   line-height: 52px;
   margin-bottom: 0px;
   color: #FFF;
+  padding-left: 14px;
+}
+
+#header h2 {
+  color: #FFF;
+  padding-left: 14px;
 }
 
 #header h1 a {

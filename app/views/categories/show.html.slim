@@ -14,6 +14,51 @@ div class="row"
       = link_to "New line item", new_organization_project_category_item_path(@organization, @project, @category)
 
 div class="row"
+  div class="span6"
+    == render :partial => 'shared/tax_stamp'
+  div class="span6"
+    - if @category.is_expense
+      h2 Category costs: #{number_to_currency(@category.expense_budget, :precision => 0)}
+      table class="table"
+        tbody
+          tr
+            td Each day
+            td class="number"
+              span #{number_to_currency(@category.expense_budget/365, :precision => 0)}
+          tr
+            td Each week
+            td class="number"
+              span #{number_to_currency(@category.expense_budget/52, :precision => 0)}
+          tr
+            td Each month
+            td class="number"
+              span #{number_to_currency(@category.expense_budget/12, :precision => 0)}
+          tr
+            td Each year
+            td class="number"
+              span #{number_to_currency(@category.expense_budget, :precision => 0)}
+    - else
+      h2 Category generates: #{number_to_currency(@category.revenue_budget, :precision => 0)}
+      table class="table"
+        tbody
+          tr
+            td Each day
+            td class="number"
+              span #{number_to_currency(@category.revenue_budget/365, :precision => 0)}
+          tr
+            td Each week
+            td class="number"
+              span #{number_to_currency(@category.revenue_budget/52, :precision => 0)}
+          tr
+            td Each month
+            td class="number"
+              span #{number_to_currency(@category.revenue_budget/12, :precision => 0)}
+          tr
+            td Each year
+            td class="number"
+              span #{number_to_currency(@category.revenue_budget, :precision => 0)}
+
+div class="row"
   div class="span12"
     div class="row"
       div class="span6"
@@ -32,49 +77,7 @@ div class="row"
         - unless @category.goal.empty?
           p == RedCloth.new(@category.challenge, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
 
-      div class="span6"
-        == render :partial => 'shared/tax_stamp'
-
-        - if @category.is_expense
-          h2 Category costs: #{number_to_currency(@category.expense_budget, :precision => 0)}
-          table class="table"
-            tbody
-              tr
-                td Each day
-                td class="number"
-                  span #{number_to_currency(@category.expense_budget/365, :precision => 0)}
-              tr
-                td Each week
-                td class="number"
-                  span #{number_to_currency(@category.expense_budget/52, :precision => 0)}
-              tr
-                td Each month
-                td class="number"
-                  span #{number_to_currency(@category.expense_budget/12, :precision => 0)}
-              tr
-                td Each year
-                td class="number"
-                  span #{number_to_currency(@category.expense_budget, :precision => 0)}
-        - else
-          h2 Category generates: #{number_to_currency(@category.revenue_budget, :precision => 0)}
-          table class="table"
-            tbody
-              tr
-                td Each day
-                td class="number"
-                  span #{number_to_currency(@category.revenue_budget/365, :precision => 0)}
-              tr
-                td Each week
-                td class="number"
-                  span #{number_to_currency(@category.revenue_budget/52, :precision => 0)}
-              tr
-                td Each month
-                td class="number"
-                  span #{number_to_currency(@category.revenue_budget/12, :precision => 0)}
-              tr
-                td Each year
-                td class="number"
-                  span #{number_to_currency(@category.revenue_budget, :precision => 0)}
+      
 
 div class="row"
   div class="span12"
@@ -102,7 +105,6 @@ div class="row"
               | Category, sub-category and item totals match
           td class="number" = number_to_currency(@category.expense_budget - (@category.descendants.sum(:expense_budget) + @category.items.where(:is_expense => true).sum(:total)), :precision => 0)
 
-      h2 Where the money goes
       - for child_category in @category.descendants.order("expense_budget desc")
         div class="bar-container"
           div class="bar-category-text"

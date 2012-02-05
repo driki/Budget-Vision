@@ -4,29 +4,29 @@ table class="table table-condensed"
       td
         | People living here
       td class="number"
-        | #{number_with_delimiter(@organization.population)}
+        | #{number_with_delimiter(organization.population)}
     tr
       td
         | Homes
       td class="number"
-        | #{number_with_delimiter(@organization.housing_units)}
+        | #{number_with_delimiter(organization.housing_units)}
     tr
       td
         | USA Today Diversity Index
       td class="number"
-        | #{number_with_precision(@organization.diversity*100, :precision => 2)}
+        | #{number_with_precision(organization.diversity*100, :precision => 2)}
     tr
       td
         | Land in square miles
       td class="number"
-        | #{number_with_delimiter(@organization.total_sq_mi)}
+        | #{number_with_delimiter(organization.total_sq_mi)}
     tr
       td
         | Population per square mile, density
       td class="number"
-        | #{number_with_delimiter(@organization.pop_sq_mi)}
+        | #{number_with_delimiter(organization.pop_sq_mi)}
     tr
       td
         | Percent of homes that are vacant
       td class="number"
-        | #{number_with_precision(@organization.housing_percent_vacant, :precision => 2)}
+        | #{number_with_precision(organization.housing_percent_vacant, :precision => 2)}

@@ -12,6 +12,7 @@
 //= require best_in_place
 
 //= require bootstrap
+//= require bootstrap-modal
 //= require bootstrap-collapse
 //= require bootstrap-tooltip
 //= require bootstrap-popover

@@ -25,11 +25,11 @@ div class="row"
             
             td class="number"
               - if category.class.name == "Department"
-                #{category.people.nil? ? 0 : category.people}
+                h1 #{category.people.nil? ? 0 : category.people}
             td class="number"
-              = number_to_currency(category.expense_budget, :precision => 0)
+              h1 = number_to_currency(category.expense_budget, :precision => 0)
             td class="number"
-              = number_to_currency(category.revenue_budget, :precision => 0)
+              h1 = number_to_currency(category.revenue_budget, :precision => 0)
 
 
 == render :partial => 'shared/comments'

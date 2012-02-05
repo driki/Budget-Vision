@@ -7,22 +7,23 @@
         backdrop: false
       });
 
-      $('#ok-btn').click(function() {
+      $('.close').click(function() {
         $('#modal').hide();
       });
     });
 
-div id="modal" class="modal hide fade" style="display: none;"
+div id="modal" class="modal hide"
   div class="modal-header"
-    a href="#" class="close" data-dismiss="modal" ×
+    a class="close" data-dismiss="modal" ×
     h3
       | Hi there!
 
   div class="modal-body"
     div id="modal-welcome"
       p
-        | Budget Vision is similar to Wikipedia, but built specifically for city and town budgets. It is an easy way to create, view, edit and collaborate with others to learn more about how your city or town generates revenue and spends money.
-      p Here are two easy ways to get started.
+        | I just wanted to let you know that #{@organization.name} hasn't added much data to Budget Vision yet. Getting all the pretty charts, graphs and details about the city budget is simple, you just need to contact your town office and tell them about Budget Vision.
+      p
+        | Check out other cities and towns using Budget Vision and see how much detail and information you are missing from your city budget.
       ul
         li
           p
@@ -30,3 +31,6 @@ div id="modal" class="modal hide fade" style="display: none;"
         li
           p
             = link_to "Share this tool with a city or town employee in #{organization.name}", share_path(organization)
+    div class="modal-footer"
+      a href="#" class="btn btn-primary" Save changes
+      a href="#" class="btn" data-dismiss="modal" Close
