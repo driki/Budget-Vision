@@ -1,23 +1,23 @@
 = simple_form_for [@organization, @project, @category, @item], :html => { :class => 'form-horizontal' } do |f|
   - if f.error_notification
     div class="row"
-      div class="span10 offset2"
-        div class="alert alert-error fade in"
-          a class="close" data-dismiss="alert" href="#" &times;
-          = f.error_notification
+      div class="alert alert-error fade in"
+        a class="close" data-dismiss="alert" href="#" &times;
+        = f.error_notification
 
-  div class="controls"
-    = f.input :name, :hint => "Example: Mechanic Wages or Vehicle Gas & All Fluids"
-  div class="controls"
-    = f.input :is_expense, :label => 'Expense', :hint => 'Is this item an expense?', :as => :boolean
-  div class="controls"
-    = f.input :total, :hint => "Example: $123,000 or 34000"
-  div class="controls"
-    = f.input :tag_list, :label => 'Tags', :hint => "Example: taxes, revenue"
-  div class="controls"
-    = f.input :description, :input_html => { :class => "span6", :rows => "4" }
+  fieldset
+    div class="control-group"
+      = f.input :name, :hint => "Example: Mechanic Wages or Vehicle Gas & All Fluids"
+    div class="control-group"
+      = f.input :is_expense, :label => 'Expense', :hint => 'Is this item an expense?', :as => :boolean
+    div class="control-group"
+      = f.input :total, :hint => "Example: $123,000 or 34000"
+    div class="control-group"
+      = f.input :tag_list, :label => 'Tags', :hint => "Example: taxes, revenue"
+    div class="control-group"
+      = f.input :description, :input_html => { :class => "span6", :rows => "4" }
 
-  div class="form-actions span6 offset2"
-    = f.button :submit, "Save Item", :class => 'primary'
-    '  or
-    = link_to "Cancel", request.env['HTTP_REFERER'], :class => "btn"
+    div class="form-actions"
+      = f.button :submit, "Save Item", :class => 'btn btn-primary'
+      '  or
+      = link_to "Cancel", request.env['HTTP_REFERER'], :class => "btn"

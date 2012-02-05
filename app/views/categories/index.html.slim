@@ -1,44 +1,33 @@
 == render :partial => 'shared/welcome_modal', :locals => {:organization => @project.organization}
-
 == render :partial => 'shared/masthead', :locals => {:organization => @project.organization}
+== render :partial => 'shared/project_nav'
 
 div class="row"
   div class="span12"
-    div class="row"
-      div class="span2" id="left-rail"
-        == render :partial => 'shared/left_rail'
+    span class="pull-right"
+        = link_to "Add a category", new_organization_project_category_path(@organization, @project)
 
-      div class="span10"
-        div class="row action-bar"
-          div class="span5"
-            == render :partial => 'shared/social_sharing'
-          div class="span5"
-            span style="float: right; padding-right: 10px;"
-              = link_to "Add a category", new_organization_project_category_path(@organization, @project)
+div class="row"
+  div class="span12"
+    - for category in @project.categories.where(:is_expense => true).order("expense_budget desc")
+      div class="span6 bar-container"
+        h1 = link_to category.name, organization_project_category_path(@organization, @project, category)
+        - if category.class.name == "Department"
+          div class="dashboard-widget"
+            h1 class="dashboard-number" #{category.people.nil? ? 0 : category.people}
+            p class="dashboard-text" People
+        div class="dashboard-widget"
+          h1 class="dashboard-number" = best_in_place category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
+          p class="dashboard-text" Expense Budget
+      div class="span6"
+        - for item in category.items.order("total desc").limit(3)
+          div class="bar-container"
+            div class="bar-category-text"
+              = link_to item.name, organization_project_category_item_path(@organization, @project, category, item)
+              '
+              = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
+            div class="progress-danger"
+              - if category.expense_budget > 0
+                div class="bar" style="width: #{((item.total/category.expense_budget)*100).to_i}%;"
 
-      div class="span10"
-        - for category in @project.categories.where(:is_expense => true).order("expense_budget desc")
-          div class="span5 bar-container"
-            h1 = link_to category.name, organization_project_category_path(@organization, @project, category)
-            - if category.class.name == "Department"
-              div class="dashboard-widget"
-                h1 class="dashboard-number" #{category.people.nil? ? 0 : category.people}
-                p class="dashboard-text" People
-            div class="dashboard-widget"
-              h1 class="dashboard-number" = best_in_place category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-              p class="dashboard-text" Expense Budget
-          div class="span5"
-            - for item in category.items.order("total desc").limit(3)
-              div class="bar-container"
-                div class="bar-category-text"
-                  = link_to item.name, organization_project_category_item_path(@organization, @project, category, item)
-                  '
-                  = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-                div class="progress danger"
-                  - if category.expense_budget > 0
-                    div class="bar" style="width: #{((item.total/category.expense_budget)*100).to_i}%;"
-
-      div class="span8"
-        div class="row"
-          div class="span8"
-            == render :partial => 'shared/comments'
+== render :partial => 'shared/comments'

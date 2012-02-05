@@ -1,17 +1,16 @@
 = simple_form_for [@organization, @project, @goal], :html => { :class => 'form-horizontal' } do |f|
   - if f.error_notification
-    div class="row"
-      div class="span10 offset2"
-        div class="alert alert-error fade in"
-          a class="close" data-dismiss="alert" href="#" &times;
-          = f.error_notification
-  div class="controls"
-    = f.input :name
-  div class="controls"
-    = f.input :description, :input_html => { :class => "span6", :rows => "4" }
-  div class="controls"
-    = f.input :summary, :input_html => { :class => "span6", :rows => "4" }
-  div class="form-actions span6 offset2"
-    = f.button :submit, "Save Goal", :class => 'primary'
-    '  or
-    = link_to "Cancel", request.env['HTTP_REFERER'], :class => "btn"
+    div class="alert alert-error fade in"
+      a class="close" data-dismiss="alert" href="#" &times;
+      = f.error_notification
+  fieldset
+    div class="control-group"
+      = f.input :name
+    div class="control-group"
+      = f.input :description, :input_html => { :class => "span6", :rows => "4" }
+    div class="control-group"
+      = f.input :summary, :input_html => { :class => "span6", :rows => "4" }
+    div class="form-actions"
+      = f.button :submit, "Save Goal", :class => 'btn btn-primary'
+      '  or
+      = link_to "Cancel", request.env['HTTP_REFERER'], :class => "btn"

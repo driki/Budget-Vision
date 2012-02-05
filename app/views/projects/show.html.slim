@@ -1,17 +1,8 @@
 == render :partial => 'shared/welcome_modal', :locals => {:organization => @project.organization}
 == render :partial => 'shared/masthead', :locals => {:organization => @project.organization}
+== render :partial => 'shared/project_nav'
 
-div id="action-bar" class="row"
-  div class="span12"
-    = tabs_tag :open_tabs => { :class => "nav nav-pills" } do |tab|
-      = tab.overview 'Overview', organization_project_path(@project.organization, @project)
-      = tab.trends "Trends", trends_organization_project_path(@project.organization, @project)
-      = tab.comparisons "Comparisons", comparisons_organization_project_path(@project.organization, @project)
-      = tab.categories "Categories", organization_project_categories_path(@project.organization, @project)
-      = tab.items "Line Items (#{@project.items.length})", organization_project_items_path(@project.organization, @project)
-      = tab.goals "Goals (#{@project.goals.length})", organization_project_goals_path(@project.organization, @project)
-      = tab.forecasts "Forecasts (#{@project.forecasts.length})", organization_project_forecasts_path(@project.organization, @project)
-      = tab.sources "Sources (#{@project.sources.length})", organization_project_sources_path(@project.organization, @project)
+div class="row"
   div class="span12"
     span class="pull-right"
         = link_to "New budget", new_organization_project_path(@organization)
@@ -22,7 +13,70 @@ div id="action-bar" class="row"
 
 == render :partial => 'shared/not_verified'
 
-== render :partial => 'shared/left_rail'
+div class="row"
+  div id="expenses" class="span12"
+  javascript:
+    var w = 460,
+    h = 400,
+    color = d3.scale.category20c();
+
+    var treemap = d3.layout.treemap()
+        .size([w, h])
+        .sticky(true)
+        .value(function(d) { return d.size; });
+
+    var div = d3.select("#expenses").append("div")
+        .style("position", "relative")
+        .style("width", w + "px")
+        .style("height", h + "px");
+
+    d3.json("/api/v1/categories/#{@project.id}.json", function(json) {
+      div.data([json]).selectAll("div")
+          .data(treemap.nodes)
+        .enter().append("div")
+          .attr("class", "cell")
+          .style("background", function(d) { return d.children ? color(d.name) : color(d.name); })
+          .call(cell)
+          .text(function(d) { return d.children ? null : d.name; });
+
+      d3.select("#size").on("click", function() {
+        div.selectAll("div")
+            .data(treemap.value(function(d) { return d.size; }))
+          .transition()
+            .duration(1500)
+            .call(cell);
+
+        d3.select("#size").classed("active", true);
+        d3.select("#count").classed("active", false);
+      });
+
+      d3.select("#count").on("click", function() {
+        div.selectAll("div")
+            .data(treemap.value(function(d) { return 1; }))
+          .transition()
+            .duration(1500)
+            .call(cell);
+
+        d3.select("#size").classed("active", false);
+        d3.select("#count").classed("active", true);
+      });
+    });
+
+    function cell() {
+      this
+          .style("left", function(d) { return d.x + "px"; })
+          .style("top", function(d) { return d.y + "px"; })
+          .style("width", function(d) { return d.dx - 1 + "px"; })
+          .style("height", function(d) { return d.dy - 1 + "px"; });
+    }
+
+div class="row"
+  div class="span12"
+    div class="row"
+      div class="span6"
+        == render :partial => 'shared/us_census'
+      div class="span6"
+        == render :partial => 'shared/tax_stamp'
 
 div class="row"
   div class="span6"
@@ -44,7 +98,7 @@ div class="row"
         div class="row"
 
           div class="span6 barchart-widget"
-            h1 Where it comes from
+            h1 Where money comes from
             table class="table table-condensed"
               tr
                 td Total Budgeted Revenue
@@ -73,7 +127,7 @@ div class="row"
                     div class="bar" style="width: #{((category.revenue_budget/@project.revenue_budget)*100).to_i}%;"
 
           div class="span6 barchart-widget"
-            h1 Where it goes
+            h1 Where money goes
             table class="table table-condensed"
               tr
                 td Total Budgeted Expenses
@@ -108,6 +162,4 @@ div class="row"
         li 
           h4 = link_to "#{org.name}, #{org.state}", organization_path(org)
 
-
-div class="span12"
-  == render :partial => 'shared/comments'
+== render :partial => 'shared/comments'

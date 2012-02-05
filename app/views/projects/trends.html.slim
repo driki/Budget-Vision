@@ -1,7 +1,15 @@
 == render :partial => 'shared/welcome_modal', :locals => {:organization => @project.organization}
-
 == render :partial => 'shared/masthead', :locals => {:organization => @project.organization}
+== render :partial => 'shared/project_nav'
 
+div class="row"
+  div class="span12"
+    span class="pull-right"
+        = link_to "New budget", new_organization_project_path(@organization)
+        '  |
+        = link_to "Edit this budget", edit_organization_project_path(@organization, @project)
+        '  |
+        = link_to "Delete", { :action => "destroy", :id => @project.id }, :confirm => "Are you sure?", :method => :delete
 javascript:
   var chart;
     jQuery(document).ready(function() {
@@ -61,33 +69,20 @@ javascript:
     });
 
 div class="row"
-  div class="span12"
-    div class="row"
-      div class="span2" id="left-rail"
-        == render :partial => 'shared/left_rail'        
+  div class="span12"      
+    == render :partial => 'shared/not_verified'
 
-      div class="span10"
-        div class="row action-bar"
-          div class="span5"
-            == render :partial => 'shared/social_sharing'
-          div class="span5"
-            span style="float: right; padding-right: 10px;"
+div class="row"
+  - if @project.organization.projects.size > 1
+    div class="span6"
+      div id="expenditures" class="highcharts-container" style="height:300px; margin: 0 0em; clear:both; min-width: 600px"
+      h2 All Budgets
+      - for project in @project.organization.projects.order("year desc")
+        h3 = link_to "#{project.organization.name}, #{project.year}", organization_project_path(project.organization, project)
+      hr
+  - else
+    div class="span8"
+      h2
+        | Sorry, but #{@project.organization.name} hasn't added more than one budget. Once more than one budget is available we'll be able to generate trending charts and graphs.
 
-      
-      == render :partial => 'shared/not_verified'
-
-      div class="span10"
-        div class="row"
-          - if @project.organization.projects.size > 1
-            div class="span5"
-              div id="expenditures" class="highcharts-container" style="height:300px; margin: 0 2em; clear:both; min-width: 600px"
-              h2 All Budgets
-              - for project in @project.organization.projects.order("year desc")
-                h3 = link_to "#{project.organization.name}, #{project.year}", organization_project_path(project.organization, project)
-              hr
-            div class="span8"
-              == render :partial => 'shared/comments'
-          - else
-            div class="span10"
-              h2
-                | Sorry, but #{@project.organization.name} hasn't added more than one budget. Once more than one budget is available we'll be able to generate trending charts and graphs.
+== render :partial => 'shared/comments'

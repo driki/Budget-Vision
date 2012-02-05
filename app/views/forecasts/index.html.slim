@@ -1,29 +1,21 @@
 == render :partial => 'shared/welcome_modal', :locals => {:organization => @project.organization}
-
 == render :partial => 'shared/masthead', :locals => {:organization => @project.organization}
+== render :partial => 'shared/project_nav'
+
+div class="row"
+  div class="span12"
+    span class="pull-right"
+        = link_to "Add a forecast", new_organization_project_forecast_path(@organization, @project)
 
 div class="row"
   div class="span12"
     div class="row"
-      div class="span2" id="left-rail"
-        == render :partial => 'shared/left_rail'
-      div class="span10"
-        div class="row action-bar"
-          div class="span5"
-            == render :partial => 'shared/social_sharing'
-          div class="span5"
-            span style="float: right; padding-right: 10px;"
-              = link_to "Add a forecast", new_organization_project_forecast_path(@organization, @project)
-
-        div class="span10"
-          div class="row"
-            div class="span5"
-              - for forecast in @project.forecasts
-                div
-                  h2 = best_in_place forecast, :name, :type => :input
-                  p = best_in_place forecast, :description, :type => :textarea
-            div class="span5"
-              == render :partial => 'shared/tax_stamp'
+      div class="span6"
+        - for forecast in @project.forecasts
+          div
+            h2 = best_in_place forecast, :name, :type => :input
+            p = best_in_place forecast, :description, :type => :textarea
+      div class="span6"
+        == render :partial => 'shared/tax_stamp'
         
-        div class="span8"
-          == render :partial => 'shared/comments'
+== render :partial => 'shared/comments'

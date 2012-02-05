@@ -1,0 +1,33 @@
+h2 2010 US Census
+table class="table table-condensed"
+  tbody
+    tr
+      td
+        | People living here
+      td class="number"
+        | #{number_with_delimiter(@project.organization.population)}
+    tr
+      td
+        | Homes
+      td class="number"
+        | #{number_with_delimiter(@project.organization.housing_units)}
+    tr
+      td
+        | USA Today Diversity Index
+      td class="number"
+        | #{number_with_precision(@project.organization.diversity*100, :precision => 2)}
+    tr
+      td
+        | Land in square miles
+      td class="number"
+        | #{number_with_delimiter(@project.organization.total_sq_mi)}
+    tr
+      td
+        | Population per square mile, density
+      td class="number"
+        | #{number_with_delimiter(@project.organization.pop_sq_mi)}
+    tr
+      td
+        | Percent of homes that are vacant
+      td class="number"
+        | #{number_with_precision(@project.organization.housing_percent_vacant, :precision => 2)}

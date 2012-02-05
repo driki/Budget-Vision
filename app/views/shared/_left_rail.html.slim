@@ -2,8 +2,6 @@ div class="row"
   div class="span12"
     div class="row"
       div class="span2"
-
-
       div id="tax-stamp" class="span4"
         == render :partial => 'shared/tax_stamp'
 
@@ -41,7 +39,4 @@ div class="row"
               td
                 | Percent of homes that are vacant
               td class="number"
-                | #{number_with_precision(@project.organization.housing_percent_vacant, :precision => 2)}
-
-
-      div id="nearby" class="span3"        
+                | #{number_with_precision(@project.organization.housing_percent_vacant, :precision => 2)}      

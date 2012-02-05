@@ -5,6 +5,7 @@
 *= require_self
 *= require bootstrap
 *= require bootstrap-responsive
+*= require treemap
 */
 
 body {
@@ -31,17 +32,13 @@ body {
 }
 
 #masthead {
-  margin-bottom: 0px;
+  margin-bottom: 20px;
 }
 
 #header {
   background: #323A44;
-  height: 100%;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
-  padding-top: 20px;
-  padding-left: 10px;
-  margin-left: 5px;
 }
 
 #header h1 {
@@ -53,12 +50,14 @@ body {
 
 #header h1 a {
   color: #FFF;
+  padding-left: 14px;
 }
 
 #header h2 {
   font-size: 28px;
   color: #FFF;
   margin-bottom: 0px;
+  padding-left: 14px;
 }
 
 p#make-it-more-accurate {
@@ -95,4 +94,34 @@ p#make-it-more-accurate {
 
 table td.number {
   text-align: right;
+}
+
+.nav-tabs > li > span {
+  padding-top: 9px;
+  padding-bottom: 9px;
+  border: 1px solid transparent;
+  -webkit-border-radius: 4px 4px 0 0;
+  -moz-border-radius: 4px 4px 0 0;
+  border-radius: 4px 4px 0 0;
+  border-image: initial;
+}
+
+.nav-tabs > .current > span {
+  color: #555;
+  background-color: white;
+  border: 1px solid #DDD;
+  border-bottom-color: transparent;
+  cursor: default;
+  border-image: initial;
+}
+
+.nav-tabs > li > span, .nav-pills > li > span {
+  padding-right: 12px;
+  padding-left: 12px;
+  margin-right: 2px;
+  line-height: 14px;
+}
+
+.nav > li > span {
+  display: block;
 }

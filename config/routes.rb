@@ -1,5 +1,8 @@
 Budgetvision::Application.routes.draw do
-  
+  scope "/api" do
+    match "/v1/categories/:id" => "api/v1/categories#show"
+  end
+
   match "/about" => redirect("/tour/about")
   match "/contact" => redirect("/tour/contact")
   match "/price" => redirect("/tour/price")

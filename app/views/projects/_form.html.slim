@@ -1,27 +1,26 @@
 = simple_form_for [@organization, @project], :html => { :class => 'form-horizontal' } do |f|
   - if f.error_notification
-    div class="row"
-      div class="span10 offset2"
-        div class="alert alert-error fade in"
-          a class="close" data-dismiss="alert" href="#" &times;
-          = f.error_notification
+    div class="alert alert-error fade in"
+      a class="close" data-dismiss="alert" href="#" &times;
+      = f.error_notification
 
-  div class="controls"
-    = f.input :year, :hint => "Example: 2011 or 2012 not FY09 or FY12"
-  div class="controls"
-    = f.input :average_tax_bill
-  div class="controls"
-    = f.input :expense_budget
-  div class="controls"
-    = f.input :revenue_budget
-  div class="controls"
-    = f.input :description, :input_html => { :class => "span6", :rows => "4" }
-  div class="controls"
-    = f.input :summary, :input_html => { :class => "span6", :rows => "4" }
-  div class="controls"
-    = f.input :enable_comments, :as => :boolean
+  fieldset
+    div class="control-group"
+      = f.input :year, :hint => "Example: 2011 or 2012 not FY09 or FY12"
+    div class="control-group"
+      = f.input :average_tax_bill
+    div class="control-group"
+      = f.input :expense_budget
+    div class="control-group"
+      = f.input :revenue_budget
+    div class="control-group"
+      = f.input :description, :input_html => { :class => "span6", :rows => "4" }
+    div class="control-group"
+      = f.input :summary, :input_html => { :class => "span6", :rows => "4" }
+    div class="control-group"
+      = f.input :enable_comments, :as => :boolean
 
-  div class="form-actions span6 offset2"
-    = f.button :submit, "Update Budget", :class => 'primary'
-    '  or
-    = link_to "Cancel", request.env['HTTP_REFERER'], :class => "btn"
+    div class="form-actions"
+      = f.button :submit, "Update Budget", :class => 'btn btn-primary'
+      '  or
+      = link_to "Cancel", request.env['HTTP_REFERER'], :class => "btn"

@@ -1,0 +1,11 @@
+{
+  "name": "Expense Categories",
+  "children": [
+    <% @expense_categories.each do |root| %>
+    {
+      "name": "<%=raw root.name%>",
+      "size": <%=root.expense_budget.to_i%>
+    }<%=@expense_categories.last == root ? "" : ","%>
+    <% end %>
+  ]
+}
