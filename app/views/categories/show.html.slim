@@ -35,26 +35,46 @@ div class="row"
       div class="span6"
         == render :partial => 'shared/tax_stamp'
 
-        h2 Category costs: #{number_to_currency(@category.expense_budget, :precision => 0)}
-        table class="table"
-          tbody
-            tr
-              td Each day
-              td class="number"
-                span #{number_to_currency(@category.expense_budget/365, :precision => 0)}
-            tr
-              td Each week
-              td class="number"
-                span #{number_to_currency(@category.expense_budget/52, :precision => 0)}
-            tr
-              td Each month
-              td class="number"
-                span #{number_to_currency(@category.expense_budget/12, :precision => 0)}
-            tr
-              td Each year
-              td class="number"
-                span #{number_to_currency(@category.expense_budget, :precision => 0)}
-
+        - if @category.is_expense
+          h2 Category costs: #{number_to_currency(@category.expense_budget, :precision => 0)}
+          table class="table"
+            tbody
+              tr
+                td Each day
+                td class="number"
+                  span #{number_to_currency(@category.expense_budget/365, :precision => 0)}
+              tr
+                td Each week
+                td class="number"
+                  span #{number_to_currency(@category.expense_budget/52, :precision => 0)}
+              tr
+                td Each month
+                td class="number"
+                  span #{number_to_currency(@category.expense_budget/12, :precision => 0)}
+              tr
+                td Each year
+                td class="number"
+                  span #{number_to_currency(@category.expense_budget, :precision => 0)}
+        - else
+          h2 Category generates: #{number_to_currency(@category.revenue_budget, :precision => 0)}
+          table class="table"
+            tbody
+              tr
+                td Each day
+                td class="number"
+                  span #{number_to_currency(@category.revenue_budget/365, :precision => 0)}
+              tr
+                td Each week
+                td class="number"
+                  span #{number_to_currency(@category.revenue_budget/52, :precision => 0)}
+              tr
+                td Each month
+                td class="number"
+                  span #{number_to_currency(@category.revenue_budget/12, :precision => 0)}
+              tr
+                td Each year
+                td class="number"
+                  span #{number_to_currency(@category.revenue_budget, :precision => 0)}
 
 div class="row"
   div class="span12"

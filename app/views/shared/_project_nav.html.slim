@@ -12,11 +12,10 @@ div class="row"
     
       - if !@project.nil?
         div class="btn-group pull-right"
-          a class="btn btn-primary"
+          a class="btn"
             | #{@project.year}
-          a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"
+          a class="btn dropdown-toggle" data-toggle="dropdown" href="#"
             span class="caret"
-
           ul class="dropdown-menu"
             - for project in @organization.projects
               li

@@ -81,8 +81,12 @@ div class="row"
         h3 = link_to "#{project.organization.name}, #{project.year}", organization_project_path(project.organization, project)
       hr
   - else
-    div class="span8"
-      h2
-        | Sorry, but #{@project.organization.name} hasn't added more than one budget. Once more than one budget is available we'll be able to generate trending charts and graphs.
+    div class="span12"
+      div class="alert alert-info"
+        a data-dismiss="alert" class="close" href="#" ×
+        h3
+          ' Sorry, but #{@project.organization.name} hasn't added more than one budget.
+        p
+          ' Once more than one budget is available we'll be able to generate trending charts and graphs. If you are interested in seeing the charts and graphs that we generate consider encouraging your city or town to use Budget Vision.
 
 == render :partial => 'shared/comments'

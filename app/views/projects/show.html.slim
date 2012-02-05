@@ -14,77 +14,26 @@ div class="row"
 == render :partial => 'shared/not_verified'
 
 div class="row"
+  div class="span12"
+    div class="row"
+      div class="span6"
+        h2 2010 US Census
+        == render :partial => 'shared/us_census', :locals => {:organization => @organization}
+      div class="span6"
+        == render :partial => 'shared/tax_stamp'
+
+
+div class="row"
   div class="span6"
     | &nbsp;
     - if @project.categories.where(:is_expense => false).sum("revenue_budget") > 0
       div class="row"
         div class="span6"
-          h2 How the money is collected
+          h1 Where money comes from
         div id="revenues" class="span6"
         javascript:
-          var w = 400,
-          h = 400,
-          color = d3.scale.category20c();
-
-          var treemap = d3.layout.treemap()
-              .size([w, h])
-              .sticky(true)
-              .value(function(d) { return d.size; });
-
-          var div = d3.select("#revenues").append("div")
-              .style("position", "relative")
-              .style("width", w + "px")
-              .style("height", h + "px");
-
-          d3.json("/api/v1/categories/#{@project.id}.json", function(json) {
-            div.data([json]).selectAll("div")
-                .data(treemap.nodes)
-              .enter().append("div")
-                .attr("class", "cell")
-                .style("background", function(d) { return d.children ? d3.rgb("#DD514C") : d3.rgb("#DD514C"); })
-                .call(cell)
-                .text(function(d) { return d.children ? null : d.name; });
-
-            d3.select("#size").on("click", function() {
-              div.selectAll("div")
-                  .data(treemap.value(function(d) { return d.size; }))
-                .transition()
-                  .duration(1500)
-                  .call(cell);
-
-              d3.select("#size").classed("active", true);
-              d3.select("#count").classed("active", false);
-            });
-
-            d3.select("#count").on("click", function() {
-              div.selectAll("div")
-                  .data(treemap.value(function(d) { return 1; }))
-                .transition()
-                  .duration(1500)
-                  .call(cell);
-
-              d3.select("#size").classed("active", false);
-              d3.select("#count").classed("active", true);
-            });
-          });
-
-          function cell() {
-            this
-                .style("left", function(d) { return d.x + "px"; })
-                .style("top", function(d) { return d.y + "px"; })
-                .style("width", function(d) { return d.dx - 1 + "px"; })
-                .style("height", function(d) { return d.dy - 1 + "px"; });
-          }
-
-  div class="span6"
-    | &nbsp;
-    - if @project.categories.where(:is_expense => true).sum("expense_budget") > 0
-      div class="row"
-          div class="span6"
-            h2 How the money is allocated
-          div id="expenses" class="span6"
-          javascript:
-            var w = 400,
+          function drawRevenue() {
+            var w = 460,
             h = 400,
             color = d3.scale.category20c();
 
@@ -93,17 +42,17 @@ div class="row"
                 .sticky(true)
                 .value(function(d) { return d.size; });
 
-            var div = d3.select("#expenses").append("div")
+            var div = d3.select("#revenues").append("div")
                 .style("position", "relative")
                 .style("width", w + "px")
                 .style("height", h + "px");
 
             d3.json("/api/v1/categories/#{@project.id}.json", function(json) {
-              div.data([json]).selectAll("div")
+              div.data([json]).selectAll("#revenues")
                   .data(treemap.nodes)
                 .enter().append("div")
                   .attr("class", "cell")
-                  .style("background", function(d) { return d.children ? d3.rgb("#DD514C") : d3.rgb("#DD514C"); })
+                  .style("background", function(d) { return d.children ? color(d.name) : color(d.name); })
                   .call(cell)
                   .text(function(d) { return d.children ? null : d.name; });
 
@@ -120,7 +69,7 @@ div class="row"
 
               d3.select("#count").on("click", function() {
                 div.selectAll("div")
-                    .data(treemap.value(function(d) { return 1; }))
+                    .data(rev_treemap.value(function(d) { return 1; }))
                   .transition()
                     .duration(1500)
                     .call(cell);
@@ -137,26 +86,85 @@ div class="row"
                   .style("width", function(d) { return d.dx - 1 + "px"; })
                   .style("height", function(d) { return d.dy - 1 + "px"; });
             }
+          }
+          drawRevenue();
 
-div class="row"
-  div class="span12"
-    div class="row"
-      div class="span6"
-        == render :partial => 'shared/us_census'
-      div class="span6"
-        == render :partial => 'shared/tax_stamp'
+  div class="span6"
+    | &nbsp;
+    - if @project.categories.where(:is_expense => true).sum("expense_budget") > 0
+      div class="row"
+          div class="span6"
+            h1 Where money goes
+          div id="expenses" class="span6"
+          javascript:
+            function drawExpense() {
+              var w = 460,
+              h = 400,
+              color = d3.scale.category20c();
+
+              var treemap = d3.layout.treemap()
+                  .size([w, h])
+                  .sticky(true)
+                  .value(function(d) { return d.size; });
+
+              var div = d3.select("#expenses").append("div")
+                  .style("position", "relative")
+                  .style("width", w + "px")
+                  .style("height", h + "px");
+
+              d3.json("/api/v1/categories/#{@project.id}.json?is_expense=true", function(json) {
+                div.data([json]).selectAll("div")
+                    .data(treemap.nodes)
+                  .enter().append("div")
+                    .attr("class", "cell")
+                    .style("background", function(d) { return d.children ? color(d.name) : color(d.name); })
+                    .call(cell)
+                    .text(function(d) { return d.children ? null : d.name; });
+
+                d3.select("#size").on("click", function() {
+                  div.selectAll("div")
+                      .data(treemap.value(function(d) { return d.size; }))
+                    .transition()
+                      .duration(1500)
+                      .call(cell);
+
+                  d3.select("#size").classed("active", true);
+                  d3.select("#count").classed("active", false);
+                });
+
+                d3.select("#count").on("click", function() {
+                  div.selectAll("div")
+                      .data(treemap.value(function(d) { return 1; }))
+                    .transition()
+                      .duration(1500)
+                      .call(cell);
+
+                  d3.select("#size").classed("active", false);
+                  d3.select("#count").classed("active", true);
+                });
+              });
+
+              function cell() {
+                this
+                    .style("left", function(d) { return d.x + "px"; })
+                    .style("top", function(d) { return d.y + "px"; })
+                    .style("width", function(d) { return d.dx - 1 + "px"; })
+                    .style("height", function(d) { return d.dy - 1 + "px"; });
+              }
+            }
+            drawExpense();
 
 div class="row"
   div class="span6"
     - if !@project.description.empty?
-      h1
-        ' Description
+      h2
+        ' Revenue Overview
       p == RedCloth.new(@project.description, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
 
   div class="span6"
     - if !@project.summary.empty?
-      h1
-        ' Summary
+      h2
+        ' Expenditure Overview
       p == RedCloth.new(@project.summary, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
 
 hr
@@ -191,7 +199,7 @@ div class="row"
                     '
                     = best_in_place category, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
                 div class="progress progress-success"
-                  - if @project.expense_budget > 0
+                  - if @project.revenue_budget > 0
                     div class="bar" style="width: #{((category.revenue_budget/@project.revenue_budget)*100).to_i}%;"
 
           div class="span6 barchart-widget"
@@ -222,12 +230,15 @@ div class="row"
                 div class="progress progress-danger"
                   - if @project.expense_budget > 0
                     div class="bar" style="width: #{((category.expense_budget/@project.expense_budget)*100).to_i}%;"
+hr
+
 div class="row"
-  div class="span6"
+  div class="span12"
     h2 Nearby
-    ul class="nav list"
-      - for org in Organization.near(@project.organization.name + ", " + @project.organization.state).limit(10)
-        li 
-          h4 = link_to "#{org.name}, #{org.state}", organization_path(org)
+    div class="row"
+      - for org in Organization.near(@project.organization.name + ", " + @project.organization.state).limit(4)
+        div class="span6"
+          h3 = link_to "#{org.name}, #{org.state}", organization_path(org)
+          == render :partial => 'shared/us_census', :locals => {:organization => org}
 
 == render :partial => 'shared/comments'
