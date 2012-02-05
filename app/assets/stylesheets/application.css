@@ -25,20 +25,54 @@ body {
   padding-right: 14px;
 }
 
-#pitch h1 {
-  font-size: 72px;
-  margin-top: 30px;
-  line-height: 72px;
+/* Jumbotrons
+-------------------------------------------------- */
+.jumbotron {
+  position: relative;
+}
+.jumbotron h1 {
+  margin-bottom: 9px;
+  font-size: 81px;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+.jumbotron p {
+  margin-bottom: 18px;
+  font-weight: 300;
+}
+.jumbotron .btn-large {
+  font-size: 20px;
+  font-weight: normal;
+  padding: 14px 24px;
+  margin-right: 10px;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
 }
 
-#masthead {
+/* Masthead (docs home) */
+.masthead {
+  padding-top: 36px;
+  margin-bottom: 72px;
+}
+.masthead h1,
+.masthead p {
+  text-align: left;
+}
+.masthead h1 {
+  margin-bottom: 18px;
+}
+.masthead p {
+  margin-right: 5%;
+  font-size: 16px;
+  line-height: 22px;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
 #header {
   background: #323A44;
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;
+  margin-bottom: 20px;
 }
 
 #header h1 {
@@ -53,7 +87,7 @@ body {
   padding-left: 14px;
 }
 
-#header h2 {
+#header h2 a {
   font-size: 28px;
   color: #FFF;
   margin-bottom: 0px;
@@ -61,28 +95,25 @@ body {
 }
 
 p#make-it-more-accurate {
-  padding-right: 12px;
+  padding-left: 14px;
   color: #FFF;
   font-weight: bold;
   margin-bottom: 0px;
 }
 
-.budget-vision-score-data {
-  border-top-right-radius: 2px;
-  margin-left: 0px;
-  padding-left: 8px;
-  color: #FFFFFF;
+#budget-vision-score-data {
+  color: #323A44;
 }
 
 #budget-vision-score {
   text-align: center;
   background: #FFF;
-  margin-left: 0px;
 }
 
 #budget-vision-score h1 {
   font-size: 72px;
   line-height: 52px;
+  color: #323A44;
 }
 
 .box {
@@ -92,7 +123,7 @@ p#make-it-more-accurate {
   border-radius: 4px;
 }
 
-table td.number {
+table td.number, table th.number {
   text-align: right;
 }
 

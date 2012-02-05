@@ -9,3 +9,15 @@ div class="row"
       = tab.goals "Goals (#{@project.goals.length})", organization_project_goals_path(@project.organization, @project)
       = tab.forecasts "Forecasts (#{@project.forecasts.length})", organization_project_forecasts_path(@project.organization, @project)
       = tab.sources "Sources (#{@project.sources.length})", organization_project_sources_path(@project.organization, @project)
+    
+      - if !@project.nil?
+        div class="btn-group pull-right"
+          a class="btn btn-primary"
+            | #{@project.year}
+          a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"
+            span class="caret"
+
+          ul class="dropdown-menu"
+            - for project in @organization.projects
+              li
+                = link_to project.year, organization_project_path(@organization, project)

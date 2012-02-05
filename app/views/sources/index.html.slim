@@ -12,11 +12,18 @@ div class="row"
     div class="row"
       div class="span10"
         p Below are sources or reference materials that were used in the construction of this budget.
-        - for source in @project.sources
-        	div
-        		h2 = link_to source.title, project_source_path(@project, source)
-        		h3 = best_in_place source, :url, :type => :input
-            p = best_in_place source, :description, :type => :textarea
-            hr
+        table class="table table-striped"
+          tbody
+            - for source in @project.sources
+              tr
+                td
+                  h2
+                    = link_to source.title, organization_project_source_path(@organization, @project, source)
+                td
+                  h3
+                    = best_in_place source, :url, :type => :input
+                td
+                  p
+                    = best_in_place source, :description, :type => :textarea
 
 == render :partial => 'shared/comments'

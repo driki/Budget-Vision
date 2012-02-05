@@ -1,30 +1,22 @@
 == render :partial => 'shared/welcome_modal', :locals => {:organization => @project.organization}
-
 == render :partial => 'shared/masthead', :locals => {:organization => @project.organization}
+== render :partial => 'shared/project_nav'
 
 div class="row"
   div class="span12"
-    div class="row"
-      div class="span2" id="left-rail"
-        == render :partial => 'shared/left_rail'
+    span class="pull-right"
+      = link_to "New source", new_organization_project_source_path(@organization, @project, @source)
+      '  |  
+      = link_to "Edit this source", edit_organization_project_source_path(@organization, @project, @source)
+      '  |  
+      = link_to "Delete", { :action => "destroy", :id => @source.id }, :confirm => "Are you sure?", :method => :delete
 
-      div class="span10"
-        div class="row action-bar"
-          div class="span5"
-            == render :partial => 'shared/social_sharing'
-          div class="span5"
-            span style="float: right; padding-right: 10px;"
-              = link_to "New source", new_project_source_path(@project, @source)
-              '  |  
-              = link_to "Edit this source", edit_project_source_path(@project, @source)
-              '  |  
-              = link_to "Delete", { :action => "destroy", :id => @source.id }, :confirm => "Are you sure?", :method => :delete
+== render :partial => 'shared/not_verified'
 
-      == render :partial => 'shared/not_verified'
+div class="row"
+  div class="span12"
+    h2 = best_in_place @source, :title, :type => :input
+    h3 = best_in_place @source, :url, :type => :input
+    p = best_in_place @source, :description, :type => :textarea
 
-      div class="span10"
-        h2 = best_in_place @source, :title, :type => :input
-        h3 = best_in_place @source, :url, :type => :input
-        p = best_in_place @source, :description, :type => :textarea
-      div class="span8"
-        == render :partial => 'shared/comments'
+== render :partial => 'shared/comments'
