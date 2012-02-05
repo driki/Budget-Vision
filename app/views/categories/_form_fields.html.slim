@@ -1,30 +1,29 @@
 = simple_form_for [@organization, @project, @category], :html => { :class => 'form-horizontal' } do |f|
   - if f.error_notification
-    div class="row"
-      div class="span10 offset2"
-        div class="alert alert-error fade in"
-          a class="close" data-dismiss="alert" href="#" &times;
-          = f.error_notification
-  div class="controls"
-    = f.input :name, :hint => "Example: Fire Department, Public Safety, General Government"
-  div class="controls"
-    = f.input :parent_id, :label => "Parent Category", :collection => @project.categories.roots, :input_html => { :multiple => false }
-  div class="controls"
-    = f.input :is_expense, :label => 'Expense', :hint => 'Is this category an expense?', :as => :boolean
-  div class="controls"
-    = f.input :expense_budget, :hint => "Example: $120,000"
-  div class="controls"
-    = f.input :revenue_budget, :hint => "Example: $120,000"
-  - if @category.class.name == "Department"
-    div class="controls"
-      = f.input :people, :hint => "Example: 12 or 120. The number of people working in the department"
-  div class="controls"
-    = f.input :tag_list, :label => 'Tags', :hint => "Example: expense, revenue, taxes, debt"
-  div class="controls"
-    = f.input :description, :input_html => { :class => "span6", :rows => "4" }
-  div class="controls"
-    = f.input :goal, :input_html => { :class => "span6", :rows => "4" }
-  div class="form-actions span6 offset2"
-    = f.button :submit, "Save Category", :class => 'primary'
-    '  or
-    = link_to "Cancel", request.env['HTTP_REFERER'], :class => "btn"
+    div class="alert alert-error fade in"
+      a class="close" data-dismiss="alert" href="#" &times;
+      = f.error_notification
+  fieldset
+    div class="control-group"
+      = f.input :name, :hint => "Example: Fire Department, Public Safety, General Government"
+    div class="control-group"
+      = f.input :parent_id, :label => "Parent Category", :collection => @project.categories.roots, :input_html => { :multiple => false }
+    div class="control-group"
+      = f.input :is_expense, :label => 'Expense', :hint => 'Is this category an expense?', :as => :boolean
+    div class="control-group"
+      = f.input :expense_budget, :hint => "Example: $120,000"
+    div class="control-group"
+      = f.input :revenue_budget, :hint => "Example: $120,000"
+    - if @category.class.name == "Department"
+      div class="control-group"
+        = f.input :people, :hint => "Example: 12 or 120. The number of people working in the department"
+    div class="control-group"
+      = f.input :tag_list, :label => 'Tags', :hint => "Example: expense, revenue, taxes, debt"
+    div class="control-group"
+      = f.input :description, :input_html => { :class => "span6", :rows => "4" }
+    div class="control-group"
+      = f.input :goal, :input_html => { :class => "span6", :rows => "4" }
+    div class="form-actions"
+      = f.button :submit, "Save Category", :class => 'btn btn-primary'
+      '  or
+      = link_to "Cancel", request.env['HTTP_REFERER'], :class => "btn"
