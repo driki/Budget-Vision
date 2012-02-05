@@ -17,6 +17,6 @@ div class="row"
           a class="btn dropdown-toggle" data-toggle="dropdown" href="#"
             span class="caret"
           ul class="dropdown-menu"
-            - for project in @organization.projects
+            - for project in @organization.projects.order("year desc")
               li
                 = link_to project.year, organization_project_path(@organization, project)
