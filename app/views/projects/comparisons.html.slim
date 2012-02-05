@@ -26,7 +26,7 @@ div class="row"
               - for org in @similar_orgs
                 div class="org-card span4"
                   h2 = link_to "#{org.name}, #{org.state}", organization_path(org)
-                  table
+                  table class="table"
                     tbody
                       tr
                         td Population
@@ -52,7 +52,7 @@ div class="row"
               - for org in Organization.near(@project.organization).limit(10)
                 div class="org-card span4"
                   h2 = link_to "#{org.name}, #{org.state}", organization_path(org)
-                  table
+                  table class="table"
                     tbody
                       tr
                         td Population

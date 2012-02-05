@@ -8,7 +8,7 @@ div class="row"
       div class="box span3"
         h2 Hamlet $29/mo
         p Less than 1,000 people
-        table
+        table class="table"
           tbody
             tr
               td Weekly cost per person
@@ -19,12 +19,12 @@ div class="row"
             tr
               td Yearly cost per person
               td class="number" $ #{(350/1000.00).round(3)}
-        p
+        p class="pull-right"
           = link_to "Sign up!", contact_path, :class => "btn primary large"
       div class="box span3"
         h2 Village $75/mo
         p Less than 5,000 people
-        table
+        table class="table"
           tbody
             tr
               td Weekly cost per person
@@ -35,12 +35,12 @@ div class="row"
             tr
               td Yearly cost per person
               td class="number" $ #{(900/5000.00).round(3)}
-        p
+        p class="pull-right"
           = link_to "Sign up!", contact_path, :class => "btn primary large"
       div class="box span3"
         h2 Town $150/mo
         p Less than 20,000 people
-        table
+        table class="table"
           tbody
             tr
               td Weekly cost per person
@@ -51,14 +51,14 @@ div class="row"
             tr
               td Yearly cost per person
               td class="number" $ #{(1800/20000.00).round(3)}
-        p
+        p class="pull-right"
           = link_to "Sign up!", contact_path, :class => "btn primary large"
 
     div class="row"
       div class="box span3"
         h2 City $200/mo
         p Less than 50,000 people
-        table
+        table class="table"
           tbody
             tr
               td Weekly cost per person
@@ -74,7 +74,7 @@ div class="row"
       div class="box span3"
         h2 Big City $500/mo
         p Less than 500,000 people
-        table
+        table class="table"
           tbody
             tr
               td Weekly cost per person
@@ -85,12 +85,12 @@ div class="row"
             tr
               td Yearly cost per person
               td class="number" $ #{(6000/500000.00).round(3)}
-        p
+        p class="pull-right"
           = link_to "Sign up!", contact_path, :class => "btn primary large"
       div class="box span3"
-        h2 Metropolis $1000/mo
+        h2 Metro $1000/mo
         p More than 500,000 people
-        table
+        table class="table"
           tbody
             tr
               td Weekly cost per person
@@ -101,5 +101,5 @@ div class="row"
             tr
               td Yearly cost per person
               td class="number" $ #{(12000/500000.00).round(3)}
-        p
+        p class="pull-right"
           = link_to "Sign up!", contact_path, :class => "btn primary large"

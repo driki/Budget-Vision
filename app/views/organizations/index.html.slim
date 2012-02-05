@@ -7,7 +7,7 @@ div id="masthead"
           but you can search for your city or town or select the state you are interested in.
     - else
       h2
-        | Our robots think that you might be somewhere near #{@location.city_name}, #{@location.region_name} so they thought you
+        | Our robots think that you might be near #{@location.city_name}, #{@location.region_name} so they thought you
           might be interested in budgets for these cities or towns.
 
 div class="row"
@@ -35,7 +35,7 @@ div class="row"
             - for org in @nearby_orgs do
               div class="org-card span4"
                 h2 = link_to org.name, organization_path(org)
-                table
+                table class="table"
                   tbody
                     tr
                       td Population

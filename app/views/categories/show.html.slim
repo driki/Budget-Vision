@@ -92,7 +92,7 @@ div class="row"
                 = link_to child_category.name, organization_project_category_path(@organization, @project, child_category)
                 '
                 = best_in_place child_category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-              div class="progress danger"
+              div class="progress progress-danger"
                 - if @category.expense_budget > 0
                   div class="bar" style="width: #{((child_category.expense_budget/@category.expense_budget)*100).to_i}%;"
           - if @category.descendants.empty?
@@ -106,7 +106,7 @@ div class="row"
                 = link_to item.name, organization_project_category_item_path(@organization, @project, @category, item)
                 '
                 = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-              div class="progress danger"
+              div class="progress progress-danger"
                 - if @category.expense_budget > 0
                   div class="bar" style="width: #{((item.total/@category.expense_budget)*100).to_i}%;"
           - if @category.items.empty?
@@ -144,7 +144,7 @@ div class="row"
                 = link_to child_category.name, organization_project_category_path(@organization, @project, child_category)
                 '
                 = best_in_place child_category, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-              div class="progress success"
+              div class="progress progress-success"
                 - if @category.revenue_budget > 0
                   div class="bar" style="width: #{((child_category.revenue_budget/@category.revenue_budget)*100).to_i}%;"
           h2 Line Items
@@ -154,7 +154,7 @@ div class="row"
                 = link_to item.name, organization_project_category_item_path(@organization, @project, @category, item)
                 '
                 = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-              div class="progress success"
+              div class="progress progress-success"
                 - if @category.revenue_budget > 0
                   div class="bar" style="width: #{((item.total/@category.revenue_budget)*100).to_i}%;"
           - if @category.items.empty?

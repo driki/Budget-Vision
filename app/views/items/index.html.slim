@@ -23,7 +23,7 @@ div class="row"
               #{link_to item.category.name, organization_project_category_path(@organization,item.category.project, item.category)} :: #{link_to item.name, organization_project_category_item_path(@organization, @project, item.category, item)}
               ' 
               = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-            div class="progress danger"
+            div class="progress-danger"
               - if @project.expense_budget > 0
                 div class="bar" style="width: #{((item.total/@project.expense_budget)*100).to_i}%;"
       

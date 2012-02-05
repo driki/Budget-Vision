@@ -1,88 +1,51 @@
 == render :partial => 'shared/welcome_modal', :locals => {:organization => @project.organization}
 == render :partial => 'shared/masthead', :locals => {:organization => @project.organization}
 
+div id="action-bar" class="row"
+  div class="span12"
+    = tabs_tag :open_tabs => { :class => "nav nav-pills" } do |tab|
+      = tab.overview 'Overview', organization_project_path(@project.organization, @project)
+      = tab.trends "Trends", trends_organization_project_path(@project.organization, @project)
+      = tab.comparisons "Comparisons", comparisons_organization_project_path(@project.organization, @project)
+      = tab.categories "Categories", organization_project_categories_path(@project.organization, @project)
+      = tab.items "Line Items (#{@project.items.length})", organization_project_items_path(@project.organization, @project)
+      = tab.goals "Goals (#{@project.goals.length})", organization_project_goals_path(@project.organization, @project)
+      = tab.forecasts "Forecasts (#{@project.forecasts.length})", organization_project_forecasts_path(@project.organization, @project)
+      = tab.sources "Sources (#{@project.sources.length})", organization_project_sources_path(@project.organization, @project)
+  div class="span12"
+    span class="pull-right"
+        = link_to "New budget", new_organization_project_path(@organization)
+        '  |
+        = link_to "Edit this budget", edit_organization_project_path(@organization, @project)
+        '  |
+        = link_to "Delete", { :action => "destroy", :id => @project.id }, :confirm => "Are you sure?", :method => :delete
+
+== render :partial => 'shared/not_verified'
+
+== render :partial => 'shared/left_rail'
+
+div class="row"
+  div class="span6"
+    - if !@project.description.empty?
+      h1
+        ' Description
+      p == RedCloth.new(@project.description, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
+
+  div class="span6"
+    - if !@project.summary.empty?
+      h1
+        ' Summary
+      p == RedCloth.new(@project.summary, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
+
+hr
+
 div class="row"
   div class="span12"
-    div class="row"
-      div class="span2" id="left-rail"
-        == render :partial => 'shared/left_rail'
-
-      div class="span10"
-        div class="row action-bar"
-          div class="span5"
-            == render :partial => 'shared/social_sharing'
-          div class="span5"
-            span style="float: right; padding-right: 10px;"
-              = link_to "New budget", new_organization_project_path(@organization)
-              '  |
-              = link_to "Edit this budget", edit_organization_project_path(@organization, @project)
-              '  |
-              = link_to "Delete", { :action => "destroy", :id => @project.id }, :confirm => "Are you sure?", :method => :delete
-
-      == render :partial => 'shared/not_verified'
-
-      div class="span10"
-        - if !@project.description.empty?
-          div class="row"
-            div class="span10"
-              h1
-                ' Description
-              p == RedCloth.new(@project.description, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
-        - if !@project.summary.empty?
-          div class="row"
-            div class="span10"
-              h1
-                ' Summary
-              p == RedCloth.new(@project.summary, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
-      div class="span5"
-        == render :partial => 'shared/tax_stamp'
-      div class="span5"
-        h1 Learning Center
-        ul
-          li
-            a href="/learning" How are city and town budgets different than a household?
-          li
-            a href="/learning" What are Bonds?
-          li
-            a href="/learning" What is State Aid?
-          li
-            a href="/learning" What are Capital Improvement projects?
-          li
-            a href="/learning" How is your tax bill calculated?
-
-      div class="span10"
         div class="row"
-          div class="span5 barchart-widget"
-            h1 Where it goes
-            table
-              tr
-                td Total Budgeted Expenses
-                td class="number" #{best_in_place @project, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
-              tr
-                td Expense Categories Total
-                td class="number" #{number_to_currency(@expense_categories.sum(:expense_budget), :precision => 0)}
-              tr
-                - if @project.expense_budget != @expense_categories.sum(:expense_budget)
-                  td
-                    | Budget and category totals aren't equal
-                - else
-                  td
-                    | Budget and category totals match
-                td class="number" = number_to_currency(@project.expense_budget - @expense_categories.sum(:expense_budget), :precision => 0)
 
-            - for category in @expense_categories
-              div class="bar-container"
-                div class="bar-category-text"
-                  = link_to category.name, organization_project_category_path(@organization, @project, category)
-                  '
-                  = best_in_place category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-                div class="progress danger"
-                  - if @project.expense_budget > 0
-                    div class="bar" style="width: #{((category.expense_budget/@project.expense_budget)*100).to_i}%;"
-
-          div class="span5 barchart-widget"
+          div class="span6 barchart-widget"
             h1 Where it comes from
-            table
+            table class="table table-condensed"
               tr
                 td Total Budgeted Revenue
                 td class="number" #{best_in_place @project, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
@@ -101,12 +64,50 @@ div class="row"
             - for category in @revenue_categories
               div class="bar-container"
                 div class="bar-category-text"
-                  = link_to category.name, organization_project_category_path(@organization, @project, category)
-                  '
-                  = best_in_place category, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-                div class="progress success"
+                  h3
+                    = link_to category.name, organization_project_category_path(@organization, @project, category)
+                    '
+                    = best_in_place category, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
+                div class="progress progress-success"
                   - if @project.expense_budget > 0
                     div class="bar" style="width: #{((category.revenue_budget/@project.revenue_budget)*100).to_i}%;"
 
-          div class="span8"
-            == render :partial => 'shared/comments'
+          div class="span6 barchart-widget"
+            h1 Where it goes
+            table class="table table-condensed"
+              tr
+                td Total Budgeted Expenses
+                td class="number" #{best_in_place @project, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
+              tr
+                td Expense Categories Total
+                td class="number" #{number_to_currency(@expense_categories.sum(:expense_budget), :precision => 0)}
+              tr
+                - if @project.expense_budget != @expense_categories.sum(:expense_budget)
+                  td
+                    | Budget and category totals aren't equal
+                - else
+                  td
+                    | Budget and category totals match
+                td class="number" = number_to_currency(@project.expense_budget - @expense_categories.sum(:expense_budget), :precision => 0)
+
+            - for category in @expense_categories
+              div class="bar-container"
+                div class="bar-category-text"
+                  h3
+                    = link_to category.name, organization_project_category_path(@organization, @project, category)
+                    '
+                    = best_in_place category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
+                div class="progress progress-danger"
+                  - if @project.expense_budget > 0
+                    div class="bar" style="width: #{((category.expense_budget/@project.expense_budget)*100).to_i}%;"
+div class="row"
+  div class="span6"
+    h2 Nearby
+    ul class="nav list"
+      - for org in Organization.near(@project.organization.name + ", " + @project.organization.state).limit(10)
+        li 
+          h4 = link_to "#{org.name}, #{org.state}", organization_path(org)
+
+
+div class="span12"
+  == render :partial => 'shared/comments'

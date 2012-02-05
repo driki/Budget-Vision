@@ -13,9 +13,15 @@ html
   body
     div class="navbar navbar-fixed-top"
       div class="navbar-inner"
-        div style="width: auto;"
-          div class="nav"
-            = link_to "Budget Vision :: BETA", root_path, :class => "brand"
+        div class="container"
+          a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"
+            span class="icon-bar"
+            span class="icon-bar"
+            span class="icon-bar"
+    
+          a class="brand" href="/" Budget Vision :: BETA
+     
+          div class="nav-collapse"        
             ul class="nav"
               - if request.path_info.eql?(root_path)
                 li class="active"
@@ -59,15 +65,16 @@ html
                 li
                   = link_to "Contact", contact_path
 
-          ul class="secondary-nav"
-            - if current_user.nil?
-              li
-                = link_to "Login", "/login", :class => "popup", :"data-width" => 600, :"data-height" => 400
-            - else
-              li
-                = link_to "Logout", logout_path
-              li
-                = link_to current_user.name, "#"
+            div class="pull-right"
+              ul class="nav"
+                - if current_user.nil?
+                  li
+                    = link_to "Login", "/login", :class => "popup", :"data-width" => 600, :"data-height" => 400
+                - else
+                  li
+                    = link_to current_user.name, "#"
+                  li
+                    = link_to "Logout", logout_path
 
     div id="content" class="container"
       - if flash[:error]
@@ -85,7 +92,7 @@ html
         div class="row"
           div class="span11 offset1"
             h3
-              | A service provided by NearbyFYI
+              | A service provided by NearbyFYI&trade;
             ul
               li 34 Hardy Ave
               li Watertown, MA 02472

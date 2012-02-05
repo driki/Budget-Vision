@@ -7,7 +7,7 @@
       });
     });
 
-  div id="not-verified" class="span9"
+  div id="not-verified"
     br
     div class="alert alert-info"
       a id="close-verification-warning" class="close" href="#" ×
@@ -15,6 +15,6 @@
       p
         ' You can help improve the accuracy of the data and make sure it is up-to-date by encouraging your city or town employees to use Budget Vision. Once logged in, anyone can use Budget Vision to enter information about a city or town, but collaboration tools, reports and other features are only available with a paid account.
       div class="alert-actions"
-        = link_to "Tell your city or town about Budget Vision", share_path(@project.organization.id), :class => "btn primary"
+        = link_to "Tell your city or town about Budget Vision", share_path(@project.organization.id), :class => "btn"
         '  or
-        = link_to "Sign up and verify this information", contact_path(@project.organization.id), :class => "btn secondary"
+        = link_to "Sign up and verify this information", contact_path(@project.organization.id), :class => "btn"

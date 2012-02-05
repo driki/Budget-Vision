@@ -1,38 +1,47 @@
-= tabs_tag :open_tabs => { :class => "nav list" } do |tab|
-  = tab.overview 'Overview', organization_project_path(@project.organization, @project)
-  = tab.trends "Trends", trends_organization_project_path(@project.organization, @project)
-  = tab.comparisons "Comparisons", comparisons_organization_project_path(@project.organization, @project)
-  = tab.categories "Categories", organization_project_categories_path(@project.organization, @project)
-  = tab.items "Line Items (#{@project.items.length})", organization_project_items_path(@project.organization, @project)
-  = tab.goals "Goals (#{@project.goals.length})", organization_project_goals_path(@project.organization, @project)
-  = tab.forecasts "Forecasts (#{@project.forecasts.length})", organization_project_forecasts_path(@project.organization, @project)
-  = tab.sources "Sources (#{@project.sources.length})", organization_project_sources_path(@project.organization, @project)
+div class="row"
+  div class="span12"
+    div class="row"
+      div class="span2"
 
-div id="characteristics"
-  h3 Characteristics
-  table class="characteristics"
-    tbody
-      tr
-        td
-          | #{number_with_delimiter(@project.organization.population)} people
-      tr
-        td
-          | #{number_with_delimiter(@project.organization.housing_units)} homes
-      tr
-        td
-          | #{number_with_precision(@project.organization.diversity*100, :precision => 2)} USA Today Diversity Index
-      tr
-        td
-          | #{number_with_delimiter(@project.organization.total_sq_mi)} sq. miles
-      tr
-        td
-          | #{number_with_delimiter(@project.organization.pop_sq_mi)} pop/sq mile
-      tr
-        td
-          | #{number_with_precision(@project.organization.housing_percent_vacant, :precision => 2)}% homes vacant
 
-div id="nearby"
-  h3 Nearby
-  ul class="nav list"
-    - for org in Organization.near(@project.organization.name + ", " + @project.organization.state).limit(10)
-      li = link_to "#{org.name}, #{org.state}", organization_path(org)
+      div id="tax-stamp" class="span4"
+        == render :partial => 'shared/tax_stamp'
+
+
+      div id="characteristics" class="span4"
+        h2 2010 US Census
+        table class="table table-condensed"
+          tbody
+            tr
+              td
+                | People living here
+              td class="number"
+                | #{number_with_delimiter(@project.organization.population)}
+            tr
+              td
+                | Homes
+              td class="number"
+                | #{number_with_delimiter(@project.organization.housing_units)}
+            tr
+              td
+                | USA Today Diversity Index
+              td class="number"
+                | #{number_with_precision(@project.organization.diversity*100, :precision => 2)}
+            tr
+              td
+                | Land in square miles
+              td class="number"
+                | #{number_with_delimiter(@project.organization.total_sq_mi)}
+            tr
+              td
+                | Population per square mile, density
+              td class="number"
+                | #{number_with_delimiter(@project.organization.pop_sq_mi)}
+            tr
+              td
+                | Percent of homes that are vacant
+              td class="number"
+                | #{number_with_precision(@project.organization.housing_percent_vacant, :precision => 2)}
+
+
+      div id="nearby" class="span3"        
