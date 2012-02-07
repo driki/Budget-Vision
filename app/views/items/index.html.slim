@@ -2,6 +2,18 @@
 == render :partial => 'shared/masthead', :locals => {:organization => @project.organization}
 == render :partial => 'shared/project_nav'
 
+javascript:
+  $(function () {
+    $(".item-detail")
+      .popover({
+        offset: 0,
+        placement: "bottom"
+      })
+      .click(function(e) {
+        e.preventDefault()
+      })
+  });
+
 div class="row"
   div class="span12"
     span class="pull-right"
@@ -32,7 +44,7 @@ div class="row"
               | #{link_to item.category.name, organization_project_category_path(@organization,item.category.project, item.category)}
             td
               - unless item.description.empty?
-                span class="label label-info" Details 
+                span class="label label-info item-detail" rel="popover" data-content="#{item.description}" data-original-title="Item detail" Details
             td class="number"
               | #{number_to_currency(item.total, :precision => 0)}
 
