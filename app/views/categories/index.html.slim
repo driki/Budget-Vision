@@ -20,16 +20,14 @@ div class="row"
         - for category in @project.categories.roots.order("expense_budget desc")
           tr
             td
-              h1
-                = link_to category.name, organization_project_category_path(@organization, @project, category)
-            
+              = link_to category.name, organization_project_category_path(@organization, @project, category)
             td class="number"
               - if category.class.name == "Department"
-                h1 #{category.people.nil? ? 0 : category.people}
+                #{category.people.nil? ? 0 : category.people}
             td class="number"
-              h1 = number_to_currency(category.expense_budget, :precision => 0)
+              = number_to_currency(category.expense_budget, :precision => 0)
             td class="number"
-              h1 = number_to_currency(category.revenue_budget, :precision => 0)
+              = number_to_currency(category.revenue_budget, :precision => 0)
 
 
 == render :partial => 'shared/comments'

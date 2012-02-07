@@ -11,7 +11,11 @@ class ItemsController < ApplicationController
   load_and_authorize_resource :department
 
   def index
-    @items = Item.joins(:category).where(:categories => {:project_id => @project.id}).order("total desc")
+    show_expenses = true
+    if params[:expense] === "false"
+      show_expenses = false
+    end
+    @items = Item.joins(:category).where(:categories => {:project_id => @project.id}).where(:is_expense => show_expenses).order("total desc")
   end
 
   def new

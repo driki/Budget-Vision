@@ -13,6 +13,7 @@
 
 //= require bootstrap
 //= require bootstrap-modal
+//= require bootstrap-button
 //= require bootstrap-collapse
 //= require bootstrap-tooltip
 //= require bootstrap-popover

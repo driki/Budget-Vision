@@ -8,9 +8,14 @@ div class="row"
         = link_to "Add a category", new_organization_project_category_path(@organization, @project)
 
 div class="row"
-  div class="span6"
+  div class="span12"
     h1
-      ' Expense line items
+      ' Line items
+      div class="btn-group pull-right" data-toggle="buttons-radio"
+        button class="btn #{!@items.empty? && @items.first.is_expense ? 'active' : ''}"
+          = link_to 'Expense', organization_project_items_path(@organization, @project, :expense => "true")
+        button class="btn #{!@items.empty? && @items.first.is_expense ? '' : 'active'}"
+          = link_to 'Revenue', organization_project_items_path(@organization, @project, :expense => "false")
     table class="table table-striped"
       thead
         tr
@@ -28,28 +33,6 @@ div class="row"
             td
               - unless item.description.empty?
                 span class="label label-info" Details 
-            td class="number"
-              | #{number_to_currency(item.total, :precision => 0)}
-  div class="span6"
-    h1
-      ' Revenue line items
-    table class="table table-striped"
-      thead
-        tr
-          th Name
-          th Category
-          th Details
-          th class="number" Cost
-      tbody
-        - for item in @items.where(:is_expense => false)
-          tr
-            td
-              | #{link_to item.name, organization_project_category_item_path(@organization, @project, item.category, item)}
-            td
-              | #{link_to item.category.name, organization_project_category_path(@organization,item.category.project, item.category)}
-            td
-              - unless item.description.empty?
-                span class="label label-info" Details
             td class="number"
               | #{number_to_currency(item.total, :precision => 0)}
 
