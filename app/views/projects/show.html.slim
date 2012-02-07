@@ -29,11 +29,11 @@ div class="row"
     - if @project.categories.where(:is_expense => false).sum("revenue_budget") > 0
       div class="row"
         div class="span6"
-          h1 Where money comes from
+          h1 Where it comes from
         div id="revenues" class="span6"
         javascript:
           function drawRevenue() {
-            var w = 460,
+            var w = $(".span6").width(),
             h = 400,
             color = d3.scale.category20c();
 
@@ -94,11 +94,11 @@ div class="row"
     - if @project.categories.where(:is_expense => true).sum("expense_budget") > 0
       div class="row"
           div class="span6"
-            h1 Where money goes
+            h1 Where it goes
           div id="expenses" class="span6"
           javascript:
             function drawExpense() {
-              var w = 460,
+              var w = $(".span6").width(),
               h = 400,
               color = d3.scale.category20c();
 
@@ -158,13 +158,13 @@ div class="row"
   div class="span6"
     - if !@project.description.empty?
       h2
-        ' Revenue Overview
+        ' Overview
       p == RedCloth.new(@project.description, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
 
   div class="span6"
     - if !@project.summary.empty?
       h2
-        ' Expenditure Overview
+        ' Overview
       p == RedCloth.new(@project.summary, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
 
 hr
@@ -174,7 +174,7 @@ div class="row"
         div class="row"
 
           div class="span6 barchart-widget"
-            h1 Where money comes from
+            h1 Where it comes from
             table class="table table-condensed"
               tr
                 td Total Budgeted Revenue
@@ -203,7 +203,7 @@ div class="row"
                     div class="bar" style="width: #{((category.revenue_budget/@project.revenue_budget)*100).to_i}%;"
 
           div class="span6 barchart-widget"
-            h1 Where money goes
+            h1 Where it goes
             table class="table table-condensed"
               tr
                 td Total Budgeted Expenses

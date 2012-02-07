@@ -11,19 +11,6 @@ div id="masthead"
 div class="row"
   div class="span12"
     div class="row"
-      div class="span3" id="left-rail"
-        h2 Recent updates
-        ul
-          - for project in @recently_updated_projects
-            li = link_to "#{project.organization.name}, #{project.organization.state} :: #{project.year}", organization_project_path(project.organization, project)
-
-        hr
-        h2 Browse by state
-        - for state in states
-          div class="state"
-            h3
-              = link_to state[1], states_path(state[0])
-
       div class="span8"
         h2 Nearby Cities and Towns
         div class="row"
@@ -51,3 +38,17 @@ div class="row"
                     tr
                       td Percent of housing that is vacant
                       td class="number" #{number_with_delimiter(org.housing_percent_vacant)}
+      div class="span3 offset1" id="left-rail"
+        h2 Recent updates
+        ul
+          - for project in @recently_updated_projects
+            li = link_to "#{project.organization.name}, #{project.organization.state} :: #{project.year}", organization_project_path(project.organization, project)
+
+        hr
+        h2 Browse by state
+        - for state in states
+          div class="state"
+            h3
+              = link_to state[1], states_path(state[0])
+
+      
