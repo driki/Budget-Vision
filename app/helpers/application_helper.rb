@@ -2,7 +2,7 @@ module ApplicationHelper
   
   def title
     app_name = "Budget Vision"
-    base_title = "The dead simple way to create and share your city or town budget."
+    base_title = "Improve understanding of your city budget"
     if @title.nil?
       "#{app_name} - #{base_title}"
     else
@@ -20,7 +20,7 @@ module ApplicationHelper
 
   def meta_description
     app_name = "Budget Vision"
-    base_description = "provides the public with increased visibility, but the software isn't about transparency, open government and accountability. Budget Vision is a tool for professional town managers and finance directors to better understand their budgets and use data to make decisions with input from the public."
+    base_description = "is an online budget presentation tool that helps citizens understand city and town budgets."
     if @meta_description.nil?
       "#{app_name} #{base_description}"
     else
