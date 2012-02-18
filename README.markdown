@@ -1,9 +1,7 @@
-== Overview
-
+Overview
+-------------------
 Budget Vision is an online budget presentation tool that will increase the number of people viewing your city or town budget. Budget Vision provides interactive charts and graphs that will help your citizens improve their understanding of revenue and expenses. Budget Vision allows you to provide context, history, trends and meaningful comparisons.
 
-
-== Installing
 
 Installing
 -------------------
@@ -23,6 +21,7 @@ Load data to use the web app
 Local environment variables
 -------------------
 You need to set the following local environment variables
+
 * export OMNI_AUTH_FULL_HOST=http://budgetvision.local:3000
 * export TWITTER_KEY=YOUR_KEY_HERE
 * export TWITTER_SECRET=YOUR_SECRET_HERE
@@ -34,8 +33,6 @@ Start Rails
 -------------------
 * rails s
 
-
-== Overview
 
 Models & Persistence
 -------------------
@@ -61,7 +58,8 @@ Authentication
 * OmniAuth: https://github.com/intridea/omniauth
 
 
-== Loading data
+Loading data
+-------------------
 
 Individual line items
 -------------------
@@ -74,15 +72,17 @@ ItemsController.new_bulk is partially fleshed out. It needs work and protection 
 We expect to create an API for import/export of all the data and then create collection agents that interact with the popular ERP and accounting systems that municipalities use. An example would be to create a collector for TylerTechnologies MUNIS accounting product as nearly 10,000 cities and towns use that system.
 
 
-== API
+API
+-------------------
 None yet. Thoughts or ideas send them Twitter @BudgetVision
 
 
-== Test
+Test
+-------------------
 Rspec, coverage is so-so. Any help there would be greatly welcome.
 
 
-== Trademark Policy (Borrowed liberally from WordPress)
+Trademark Policy (Borrowed liberally from WordPress)
 -------------------
 NearbyFYI Inc. owns and oversees the trademarks for the Budget Vision name. We have developed this trademark usage policy with the following goals in mind:
 
