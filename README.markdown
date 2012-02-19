@@ -1,7 +1,38 @@
 Overview
 -------------------
-Budget Vision is an online budget presentation tool that will increase the number of people viewing your city or town budget. Budget Vision provides interactive charts and graphs that will help your citizens improve their understanding of revenue and expenses. Budget Vision allows you to provide context, history, trends and meaningful comparisons.
+Budget Vision is an online budget presentation tool that will increase the number of people viewing your city or town budget. Budget Vision provides interactive charts and graphs that will help your citizens improve their understanding of goals, forecasts, trends and revenue/expense line items. Budget Vision allows you to provide context, history and meaningful comparisons.
 
+What problem does Budget Vision attempt to address?
+-------------------
+Budget Vision makes city and town budgets easier to understand. Budget Vision is domain specific to municipal budgets, models, views and tools are specific to supporting the effort to allow the public to more easily understand city and town budgets.
+
+How is Budget Vision different than other solutions?
+-------------------
+We started down this path because the existing tools were not focused enough. Socrata, Wordpress and Freebase/Refine have all been useful tools for explaining portions of budgets but the general tools must be pieced together. Budget Vision is specifically designed for collecting, visualizing, comparing and explaining city budgets, it is not a generic open data platform.
+
+Other solutions to consider
+-------------------
+Socrata
+* Making Data Social
+* More time to build apps. Less time worrying about the data.
+* https://opendata.socrata.com/ & http://www.socrata.com/solutions/socrata-for-developers/
+* Large cities and towns are using Socrata as part of their Open/Transparency initiatives. Developers can use that open data to build tools.
+
+Wordpress
+* A better way to blog
+* http://www.wordpress.com
+* A web and blog publishing platform for narrative text. Cities could create a blog post for each section of their budget and then use tools like Socrata, Freebase and Google Fusion Tables to provide data and visualizations that explain the budget.
+
+Google Fusion Tables & Google Docs
+* Create and share your work online and access your documents from anywhere. Manage documents, spreadsheets, presentations, surveys, and more all in one place.
+* http://www.google.com/fusiontables/Home/
+
+Excel/Powerpoint
+* We all know what these are... static but highly specific, no access to data.
+
+Freebase
+* http://www.freebase.com/
+* An entity graph of people, places and things, built by a community that loves open data.
 
 Installing
 -------------------
@@ -74,12 +105,42 @@ We expect to create an API for import/export of all the data and then create col
 
 API
 -------------------
-None yet. Thoughts or ideas send them Twitter @BudgetVision
+None yet but coming. Thoughts or ideas send them Twitter @BudgetVision
 
 
 Test
 -------------------
 Rspec, coverage is so-so. Any help there would be greatly welcome.
+
+
+Roadmap
+-------------------
+# Narrative budgets
+We're building out methods that allow cities and towns to provide narrative and context alongside the raw data and charts. Budgets are presented to the public, Budget Vision should improve that experience for both those presenting but also those consuming the information. The work currently being performed in this area is User Experience focused. We are speaking with city officials, showing them mockups and wireframes to test out ideas.
+
+# API
+Creating an API that provides both publishing and export will allow other developers to write collection and publishing tools. It isn't clear that we should spend out time building out the API infrastructure that developers expect or if we plug into one of the services like Mashery or Apigee.
+
+# Standards
+Much like Open311 has done we would like to see an OpenBudget/Finance standard evolve out of the Budget Vision work. OpenBudget could then become a standard that the major ERP providers like TylerTechnologies would need to start supporting and provide standard access to budget and finance information.
+
+# Collection agents for major accounting systems
+In our testing we've found that cities and towns are unable to provide CSV or Excel documents that can be parsed easily. We propose creating a series of collection agents that cities and towns run side by side with their ERP and accounting systems that are OpenBudget compliant . The first agent that we are looking to create is for the TylerTechnologies MUNIS system.
+
+# Plugins
+We want to lower the friction for new ideas and concepts to emerge. Budget Vision users will have the ability to install plugins that allow for modification, customization and enhance a Budget Vision instance.
+
+# Peer-to-Peer Budget Vision instances.
+We believe that cities and towns using Budget Vision will benefit from participating in a shared budget network. We also realize that not every city or town will want to use the service that NearbyFYI Inc. provides. Some cities will want to setup and run their own instances of Budget Vision, we want to encourage and support that, but we also want to make sure that other cities and towns benefit from that Budget Vision information as well.
+
+# Themes
+Cities and towns seem to choose branded solutions, we'd like to develop Budget Vision with theming in mind.
+
+# Analysis
+Once Budget Vision has data from across a significant number of municipalities we intend to start analyzing that data to provide more information that can help inform and improve the budgeting process. An example of a goal in this area would be to inform a city in the Northeast that spends $200,000 on road salt how a community nearby, with similar snowfall last year was able to get by with $125,000 of road salt.
+
+# Other data
+As Budget Vision stabilizes we will look to identify other data from municipalities that are of interest.
 
 
 Trademark Policy (Borrowed liberally from WordPress)
