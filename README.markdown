@@ -13,24 +13,29 @@ We started down this path because the existing tools were not focused enough. So
 Other solutions to consider
 -------------------
 Socrata
+
 * Making Data Social
 * More time to build apps. Less time worrying about the data.
 * https://opendata.socrata.com/ & http://www.socrata.com/solutions/socrata-for-developers/
 * Large cities and towns are using Socrata as part of their Open/Transparency initiatives. Developers can use that open data to build tools.
 
 Wordpress
+
 * A better way to blog
 * http://www.wordpress.com
 * A web and blog publishing platform for narrative text. Cities could create a blog post for each section of their budget and then use tools like Socrata, Freebase and Google Fusion Tables to provide data and visualizations that explain the budget.
 
 Google Fusion Tables & Google Docs
+
 * Create and share your work online and access your documents from anywhere. Manage documents, spreadsheets, presentations, surveys, and more all in one place.
 * http://www.google.com/fusiontables/Home/
 
 Excel/Powerpoint
+
 * We all know what these are... static but highly specific, no access to data.
 
 Freebase
+
 * http://www.freebase.com/
 * An entity graph of people, places and things, built by a community that loves open data.
 
@@ -92,12 +97,12 @@ Authentication
 Loading data
 -------------------
 
-Individual line items
--------------------
+*Individual line items*
+
 Budget Vision provides a UI to create Projects, Categories and Items. Users need to be logged in to edit any data. An Organization can lock down who can perform CRUD operations by setting is_verified = true and then adding Users to that Organization. There is currently no user interface for adding and managing OrganizationUsers.
 
-Bulk line item addition
--------------------
+*Bulk line item addition*
+
 ItemsController.new_bulk is partially fleshed out. It needs work and protection against bad data. There is currently no visible link in the UI to access this controller and it's actions. We've spent time looking at how best to get data from cities and towns into Budget Vision and it appears that expecting a town to upload a CSV seems out of reach.
 
 We expect to create an API for import/export of all the data and then create collection agents that interact with the popular ERP and accounting systems that municipalities use. An example would be to create a collector for TylerTechnologies MUNIS accounting product as nearly 10,000 cities and towns use that system.
@@ -113,38 +118,46 @@ Test
 Rspec, coverage is so-so. Any help there would be greatly welcome.
 
 
-Roadmap
+# Roadmap
+
+Narrative budgets
 -------------------
-# Narrative budgets
 We're building out methods that allow cities and towns to provide narrative and context alongside the raw data and charts. Budgets are presented to the public, Budget Vision should improve that experience for both those presenting but also those consuming the information. The work currently being performed in this area is User Experience focused. We are speaking with city officials, showing them mockups and wireframes to test out ideas.
 
-# API
+API
+-------------------
 Creating an API that provides both publishing and export will allow other developers to write collection and publishing tools. It isn't clear that we should spend out time building out the API infrastructure that developers expect or if we plug into one of the services like Mashery or Apigee.
 
-# Standards
+Standards
+-------------------
 Much like Open311 has done we would like to see an OpenBudget/Finance standard evolve out of the Budget Vision work. OpenBudget could then become a standard that the major ERP providers like TylerTechnologies would need to start supporting and provide standard access to budget and finance information.
 
-# Collection agents for major accounting systems
+Collection agents for major accounting systems
+-------------------
 In our testing we've found that cities and towns are unable to provide CSV or Excel documents that can be parsed easily. We propose creating a series of collection agents that cities and towns run side by side with their ERP and accounting systems that are OpenBudget compliant . The first agent that we are looking to create is for the TylerTechnologies MUNIS system.
 
-# Plugins
+Plugins
+-------------------
 We want to lower the friction for new ideas and concepts to emerge. Budget Vision users will have the ability to install plugins that allow for modification, customization and enhance a Budget Vision instance.
 
-# Peer-to-Peer Budget Vision instances.
+Peer-to-Peer Budget Vision instances.
+-------------------
 We believe that cities and towns using Budget Vision will benefit from participating in a shared budget network. We also realize that not every city or town will want to use the service that NearbyFYI Inc. provides. Some cities will want to setup and run their own instances of Budget Vision, we want to encourage and support that, but we also want to make sure that other cities and towns benefit from that Budget Vision information as well.
 
-# Themes
+Themes
+-------------------
 Cities and towns seem to choose branded solutions, we'd like to develop Budget Vision with theming in mind.
 
-# Analysis
+Analysis
+-------------------
 Once Budget Vision has data from across a significant number of municipalities we intend to start analyzing that data to provide more information that can help inform and improve the budgeting process. An example of a goal in this area would be to inform a city in the Northeast that spends $200,000 on road salt how a community nearby, with similar snowfall last year was able to get by with $125,000 of road salt.
 
-# Other data
+Other data
+-------------------
 As Budget Vision stabilizes we will look to identify other data from municipalities that are of interest.
 
 
-Trademark Policy (Borrowed liberally from WordPress)
--------------------
+#Trademark Policy (Borrowed liberally from WordPress)
 NearbyFYI Inc. owns and oversees the trademarks for the Budget Vision name. We have developed this trademark usage policy with the following goals in mind:
 
 * We’d like to make it easy for anyone to use the Budget Vision name for community-oriented efforts that help spread and improve Budget Vision.
