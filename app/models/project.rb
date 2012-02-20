@@ -1,4 +1,3 @@
-require 'CSV'
 class Project < ActiveRecord::Base
 
   has_paper_trail
@@ -112,7 +111,6 @@ class Project < ActiveRecord::Base
     data = RestClient.get(url)
     csv = CSV.parse(data)
     csv.each_with_index do |row, index|
-      puts "Row number: #{index}"
       if row.size != 12
         raise "Row number (#{index}) :: All rows must contain 12 columns"
       end
