@@ -1,3 +1,4 @@
+require 'CSV'
 class Project < ActiveRecord::Base
 
   has_paper_trail
@@ -105,6 +106,90 @@ class Project < ActiveRecord::Base
     end
 
     return score
+  end
+
+  def self.validate_csv(url)
+    data = RestClient.get(url)
+    csv = CSV.parse(data)
+    csv.each_with_index do |row, index|
+      puts "Row number: #{index}"
+      if row.size != 12
+        raise "Row number (#{index}) :: All rows must contain 12 columns"
+      end
+
+      if !row[0].downcase.eql?("true") && !row[0].downcase.eql?("false")
+        raise "Row number (#{index}) :: The first column must be either true or false"
+      end
+
+      # each row must have either a category or sub-category
+      if row[1].empty? && row[4].empty?
+        raise "Row number (#{index}) :: Each row must have either a category or sub-category"
+      end
+
+      # validate the parent category
+      category = Category.new(:name => row[1], :expense_budget => row[2], :tag_list => row[3])
+      if !category.valid?
+        raise "Row number (#{index}) :: Invalid parent category"
+      end
+
+      # if a row has a sub-category it must have a parent category
+      if (!row[4].empty? && !row[5].empty?) && (row[1].empty?)
+        raise "Row number (#{index}) :: A sub-category must have a parent"
+      end
+
+      # validate the sub-category
+      sub_category = Category.new(:name => row[4], :expense_budget => row[5], :tag_list => row[6])
+      if !category.valid?
+        raise "Row number (#{index}) :: Invalid sub-category"
+      end
+
+      # if a row has an item it must have a category
+      if !row[7].empty? || !row[8].empty? || !row[9].empty? || !row[10].empty? || !row[11].empty?
+        if !row[1].empty? && !row[4].empty?
+          raise "Row number (#{index}) :: If a row has an item it must have a category"
+        end
+        item = Item.new(:number => row[7], :name => row[8], :description => row[9], :total => row[10], :tag_list => row[11])
+        if !item.valid?
+          raise "Row number (#{index}) :: Invalid item row"
+        end
+      end
+
+    end
+    return true
+  end
+
+  def to_csv(is_expense)
+    CSV.generate do |csv|
+      # IS_EXPENSE
+      # CATEGORY_NAME
+      # CATEGORY_AMOUNT
+      # CATEGORY_TAGS
+      # SUB_CATEGORY_NAME
+      # SUB_CATEGORY_AMOUNT
+      # SUB_CATEGORY_TAGS
+      # ITEM_NUMBER
+      # ITEM_NAME
+      # ITEM_DESCRIPTION
+      # ITEM_AMOUNT
+      # ITEM_TAGS
+      # csv << ["", "", "", "", "", "", "", "", "", "", "", ""]
+
+      # all the top level categories first
+      categories.where(:is_expense => is_expense).each do |category|
+        csv << ["#{category.is_expense}", "#{category.name}", "#{category.expense_budget}", "", "", "", "", "", "", "", "", ""]
+
+        # now descendants of this category
+        # all the top level categories first
+        category.descendants.where(:is_expense => is_expense).each do |sub_category|
+          csv << ["#{category.is_expense}", "#{category.name}", "#{category.expense_budget}", "", "#{sub_category.name}", "#{sub_category.expense_budget}", "", "", "", "", "", ""]
+        end
+      end
+
+      # now add all the line items
+      Item.joins(:category).where(:categories => {:project_id => id}).where(:is_expense => is_expense).order("total desc").each do |item|
+        csv << ["#{item.category.is_expense}", "#{item.category.parent.nil? ? item.category.name : item.category.parent.name}", "#{item.category.parent.nil? ? item.category.expense_budget : item.category.parent.expense_budget}", "", "#{item.category.parent.nil? ? '' : item.category.name}", "#{item.category.parent.nil? ? '' : item.category.expense_budget}", "", "#{item.id}", "#{item.name}", "#{item.description}", "#{item.total}", ""]
+      end
+    end
   end
 
   def taxable_revenue
