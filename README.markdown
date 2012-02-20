@@ -47,6 +47,7 @@ Installing
 * cd budgetvision
 * bundle install
 * Create a development database called budgetvision_dev
+* rake db:migrate
 
 Load data to use the web app
 -------------------
