@@ -108,7 +108,12 @@ class Project < ActiveRecord::Base
   end
 
   def self.validate_csv(url)
-    data = RestClient.get(url)
+    begin
+      data = RestClient.get(url)
+    rescue
+      raise "Unable to retrieve the csv document"
+    end
+
     csv = CSV.parse(data)
     csv.each_with_index do |row, index|
       if row.size != 12
