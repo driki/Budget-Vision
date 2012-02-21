@@ -40,6 +40,28 @@ class Organization < ActiveRecord::Base
     return price
   end
 
+  def load_official_website
+    topic = nil
+    website = nil
+    begin
+      topic = Ken::Topic.get("/en/#{name.downcase}_#{helper.states[state].downcase}")  
+    rescue Exception => e
+      begin
+        topic = Ken::Topic.get("/en/#{name.downcase}")  
+      rescue Exception => e
+      end
+    end
+    if !topic.nil?
+      webpages = topic.webpages
+      #Official website pages are first and have a value of {name}
+      if webpages[0]["text"].eql?("{name}")
+        website = webpages[0]["url"]
+        self.website = website
+        self.save
+      end
+    end
+  end
+
   def self.load_census(state_abbriviation)
     api_key = "8gybnk94e8uyt5vzv9enzpyz"
     url = "http://api.usatoday.com/open/census/loc?keypat=#{state_abbriviation}&sumlevid=4,6&api_key=#{api_key}"

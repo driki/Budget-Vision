@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120202123042) do
+ActiveRecord::Schema.define(:version => 20120221001126) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(:version => 20120202123042) do
     t.integer  "employee_count"
     t.string   "type"
     t.string   "slug"
+    t.string   "website"
   end
 
   add_index "organizations", ["latitude", "longitude"], :name => "index_organizations_on_latitude_and_longitude"
@@ -103,8 +104,8 @@ ActiveRecord::Schema.define(:version => 20120202123042) do
     t.integer  "year"
     t.float    "average_tax_bill", :default => 0.0
     t.boolean  "enable_comments",  :default => true
-    t.boolean  "enable_tips"
-    t.boolean  "is_demo"
+    t.boolean  "enable_tips",      :default => false
+    t.boolean  "is_demo",          :default => false
     t.integer  "organization_id"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -1,7 +1,7 @@
 require "#{Rails.root}/app/helpers/application_helper"
 include ApplicationHelper
 
-namespace :db do
+namespace :nearbyfyi do
   desc "Fill database"
 
   task :populate_organizations => :environment do
@@ -34,6 +34,15 @@ namespace :db do
       puts "Creating slug: #{slug_friendly_name}-#{slug_friendly_state}"
       org.slug = slug_friendly_name+"-"+slug_friendly_state
       org.save
+    end
+  end
+
+  desc "Collect official government websites"
+  task :collect_websites, [:city, :state] => :environment do
+    orgs = Organization.limit(100)
+    orgs.each do |org|
+      puts "STARTING: #{org.name}, #{org.state} TIME: #{Time.now.asctime}"
+      org.load_official_website
     end
   end
 end
