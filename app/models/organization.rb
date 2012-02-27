@@ -54,7 +54,7 @@ class Organization < ActiveRecord::Base
     if !topic.nil?
       webpages = topic.webpages
       #Official website pages are first and have a value of {name}
-      if webpages[0]["text"].eql?("{name}")
+      if !webpages[0].nil? && "{name}".eql?(webpages[0]["text"])
         website = webpages[0]["url"]
         self.website = website
         self.save

@@ -1,5 +1,6 @@
 Budgetvision::Application.routes.draw do
   match "/api/v1/validation/validate_csv" => "api/v1/validations#validate_csv"
+  match "/api/v1/categories/:id" => "api/v1/categories#show"
 
   match "/about" => redirect("/tour/about")
   match "/contact" => redirect("/tour/contact")

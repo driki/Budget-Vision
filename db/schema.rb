@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120221001126) do
+ActiveRecord::Schema.define(:version => 20120221004024) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20120221001126) do
     t.string   "type"
     t.string   "slug"
     t.string   "website"
+    t.string   "website_vendor"
   end
 
   add_index "organizations", ["latitude", "longitude"], :name => "index_organizations_on_latitude_and_longitude"

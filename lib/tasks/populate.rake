@@ -39,7 +39,7 @@ namespace :nearbyfyi do
 
   desc "Collect official government websites"
   task :collect_websites, [:city, :state] => :environment do
-    orgs = Organization.limit(100)
+    orgs = Organization.all
     orgs.each do |org|
       puts "STARTING: #{org.name}, #{org.state} TIME: #{Time.now.asctime}"
       org.load_official_website
