@@ -62,6 +62,15 @@ class Organization < ActiveRecord::Base
     end
   end
 
+  def determine_website_vendor
+    # CivicPlus
+    if Typhoeus::Request.head("#{self.website}Archive.aspx").code == 200
+      return "CIVIC_PLUS"
+    else
+      return "UNKNOWN"
+    end
+  end
+
   def self.load_census(state_abbriviation)
     api_key = "8gybnk94e8uyt5vzv9enzpyz"
     url = "http://api.usatoday.com/open/census/loc?keypat=#{state_abbriviation}&sumlevid=4,6&api_key=#{api_key}"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120221004024) do
+ActiveRecord::Schema.define(:version => 20120314130112) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -28,6 +28,9 @@ ActiveRecord::Schema.define(:version => 20120221004024) do
     t.integer  "people"
     t.boolean  "is_expense",     :default => true
   end
+
+  add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"
+  add_index "categories", ["is_expense"], :name => "index_categories_on_is_expense"
 
   create_table "forecasts", :force => true do |t|
     t.string   "name"
