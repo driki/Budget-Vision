@@ -72,11 +72,6 @@ div class="row"
         - unless @category.goal.empty?
           p == RedCloth.new(@category.goal, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
 
-        h1
-          | Challenges
-        - unless @category.challenge.empty?
-          p == RedCloth.new(@category.challenge, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
-
       
 
 div class="row"
