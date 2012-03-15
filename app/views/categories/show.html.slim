@@ -74,7 +74,7 @@ div class="row"
 
         h1
           | Challenges
-        - unless @category.goal.empty?
+        - unless @category.challenge.empty?
           p == RedCloth.new(@category.challenge, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
 
       
