@@ -72,6 +72,8 @@ div class="row"
         - unless @category.goal.empty?
           p == RedCloth.new(@category.goal, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
 
+        
+
       
 
 div class="row"
@@ -87,20 +89,20 @@ div class="row"
           td class="number" #{best_in_place @category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
           tr
             td Sub-Categories Total
-            td class="number" #{number_to_currency(@category.descendants.sum(:expense_budget), :precision => 0)}
+            td class="number" #{number_to_currency(@category.children.sum(:expense_budget), :precision => 0)}
           tr
             td Category Items Total
             td class="number" #{number_to_currency(@category.items.where(:is_expense => true).sum(:total), :precision => 0)}
           tr
-          - if @category.expense_budget != (@category.descendants.sum(:expense_budget) + @category.items.where(:is_expense => true).sum(:total))
+          - if @category.expense_budget != (@category.children.sum(:expense_budget) + @category.items.where(:is_expense => true).sum(:total))
             td
               | Category, sub-category and item totals aren't equal
           - else
             td
               | Category, sub-category and item totals match
-          td class="number" = number_to_currency(@category.expense_budget - (@category.descendants.sum(:expense_budget) + @category.items.where(:is_expense => true).sum(:total)), :precision => 0)
+          td class="number" = number_to_currency(@category.expense_budget - (@category.children.sum(:expense_budget) + @category.items.where(:is_expense => true).sum(:total)), :precision => 0)
 
-      - for child_category in @category.descendants.order("expense_budget desc")
+      - for child_category in @category.children.order("expense_budget desc")
         div class="bar-container"
           div class="bar-category-text"
             = link_to child_category.name, organization_project_category_path(@organization, @project, child_category)
@@ -109,7 +111,7 @@ div class="row"
           div class="progress progress-danger"
             - if @category.expense_budget > 0
               div class="bar" style="width: #{((child_category.expense_budget/@category.expense_budget)*100).to_i}%;"
-      - if @category.descendants.empty?
+      - if @category.children.empty?
         p
           = link_to "Add a category", new_organization_project_category_path(@organization, @project)
           '  to help show where the money goes.
@@ -136,23 +138,23 @@ div class="row"
           td class="number" #{best_in_place @category, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
           tr
             td Sub-Categories Total
-            td class="number" #{number_to_currency(@category.descendants.sum(:revenue_budget), :precision => 0)}
+            td class="number" #{number_to_currency(@category.children.sum(:revenue_budget), :precision => 0)}
           tr
             td Category Items Total
             td class="number" #{number_to_currency(@category.items.where(:is_expense => false).sum(:total), :precision => 0)}
           tr
-          - if @category.revenue_budget != (@category.descendants.sum(:revenue_budget) + @category.items.where(:is_expense => false).sum(:total))
+          - if @category.revenue_budget != (@category.children.sum(:revenue_budget) + @category.items.where(:is_expense => false).sum(:total))
             td
               | Category and sub-category totals aren't equal
           - else
             td
               | Category and sub-category totals match
-          td class="number" = number_to_currency(@category.revenue_budget - (@category.descendants.sum(:revenue_budget) + @category.items.where(:is_expense => false).sum(:total)), :precision => 0)
-      - if @category.descendants.empty?
+          td class="number" = number_to_currency(@category.revenue_budget - (@category.children.sum(:revenue_budget) + @category.items.where(:is_expense => false).sum(:total)), :precision => 0)
+      - if @category.children.empty?
         p
           = link_to "Add a category", new_organization_project_category_path(@organization, @project)
           '  to help show where the money comes from.
-      - for child_category in @category.descendants.order("revenue_budget desc")
+      - for child_category in @category.children.order("revenue_budget desc")
         div class="bar-container"
           div class="bar-category-text"
             = link_to child_category.name, organization_project_category_path(@organization, @project, child_category)
