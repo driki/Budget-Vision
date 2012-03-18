@@ -8,11 +8,11 @@ class SessionsController < ApplicationController
   def create
     auth = request.env["omniauth.auth"]
 
-    @user = User.find_or_create_by_uid_and_provider({
-        :uid => auth["uid"],
+    puts auth
+    @user = User.where(:uid => auth["uid"], :provider => auth["provider"]).first_or_create!(
         :name => auth["info"]["name"],
-        :email => auth["info"]["email"],
-        :provider => auth["provider"]})
+        :email => auth["info"]["email"]
+        )
 
     self.current_user = @user
 
