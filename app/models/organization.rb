@@ -64,6 +64,7 @@ class Organization < ActiveRecord::Base
 
   def determine_website_vendor
     # CivicPlus
+    # Archive.aspx|Archive.asp
     if Typhoeus::Request.head("#{self.website}Archive.aspx").code == 200
       return "CIVIC_PLUS"
     else

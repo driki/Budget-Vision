@@ -158,13 +158,13 @@ div class="row"
   div class="span6"
     - if !@project.description.empty?
       h2
-        ' Overview
+        ' Description
       p == RedCloth.new(@project.description, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
 
   div class="span6"
     - if !@project.summary.empty?
       h2
-        ' Overview
+        ' Summary
       p == RedCloth.new(@project.summary, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
 
 hr

@@ -18,7 +18,7 @@ div class="row"
     == render :partial => 'shared/tax_stamp'
   div class="span6"
     - if @category.is_expense
-      h2 Category costs: #{number_to_currency(@category.expense_budget, :precision => 0)}
+      h2 #{@category.name} costs: #{number_to_currency(@category.expense_budget, :precision => 0)}
       table class="table"
         tbody
           tr
@@ -38,7 +38,7 @@ div class="row"
             td class="number"
               span #{number_to_currency(@category.expense_budget, :precision => 0)}
     - else
-      h2 Category generates: #{number_to_currency(@category.revenue_budget, :precision => 0)}
+      h2 #{@category.name} generates: #{number_to_currency(@category.revenue_budget, :precision => 0)}
       table class="table"
         tbody
           tr
@@ -62,14 +62,13 @@ div class="row"
   div class="span12"
     div class="row"
       div class="span6"
-        h1
-          = @category.name
-        - unless @category.description.empty?  
+        h1 Description
+        - unless @category.description.nil?  
           p == RedCloth.new(@category.description, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
 
         h1
           | Goal
-        - unless @category.goal.empty?
+        - unless @category.goal.nil?
           p == RedCloth.new(@category.goal, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
 
         
@@ -132,7 +131,7 @@ div class="row"
   - else
     div class="span5 barchart-widget"
       h2 Where it comes from
-      table
+      table class="table"
         tr
           td Total Budgeted Revenue
           td class="number" #{best_in_place @category, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}

@@ -1,5 +1,9 @@
 class Project < ActiveRecord::Base
 
+  mount_uploader :csv, CsvUploader
+
+  after_save :bulk_load
+
   has_paper_trail
   
   belongs_to :organization
@@ -17,7 +21,9 @@ class Project < ActiveRecord::Base
 									:summary,
 									:enable_comments,
 									:enable_tips,
-									:is_demo
+									:is_demo,
+                  :csv,
+                  :csv_cache
 
   validates_associated :organization
   validates_presence_of :year
@@ -29,17 +35,17 @@ class Project < ActiveRecord::Base
 
   validates_numericality_of :average_tax_bill,
   	:greater_than_or_equal_to => 0.00,
-  	:allow_nil => true,
+  	:allow_nil => false,
   	:message => "must be greater than 0"
 
   validates_numericality_of :expense_budget,
   	:greater_than_or_equal_to => 0.00,
-  	:allow_nil => true,
+  	:allow_nil => false,
   	:message => "must be greater than 0"
 
   validates_numericality_of :revenue_budget,
   	:greater_than_or_equal_to => 0.00,
-  	:allow_nil => true,
+  	:allow_nil => false,
   	:message => "must be greater than 0"
 
   validates_length_of :description, :in => 0..2000, :allow_nil => true
@@ -107,14 +113,68 @@ class Project < ActiveRecord::Base
     return score
   end
 
-  def self.validate_csv(url)
-    begin
-      data = RestClient.get(url)
-    rescue
-      raise "Unable to retrieve the csv document"
-    end
+  def bulk_load
+    unless csv.nil?
+      validate_csv
 
-    csv = CSV.parse(data)
+      file = File.open(self.csv.current_path)
+      csv = CSV.parse(file)
+
+      csv.each_with_index do |row, index|
+        expense = row[0]
+        category_name = row[1]
+        category_amount = row[2]
+        category_tags = row[3]
+        sub_category_name = row[4]
+        sub_category_amount = row[5]
+        sub_category_tags = row[6]
+        item_number = row[7]
+        item_name = row[8]
+        item_description = row[9]
+        item_amount = row[10]
+        item_tags = row[11]
+
+        # look to see if there is a category before creating one
+        category = categories.find_by_name(category_name)
+        if category.nil?
+          category = categories.build(:name => category_name, 
+                                  :expense_budget => category_amount,
+                                  :tag_list => category_tags)
+          category.save
+          categories << category
+        end
+
+        # look to see if there is a sub-category before creating one
+        sub_category = categories.find_by_name(sub_category_name)
+        if sub_category.nil?
+          sub_category = categories.build(:name => sub_category_name, 
+                                      :expense_budget => sub_category_amount,
+                                      :tag_list => sub_category_tags,
+                                      :parent_id => category.id)
+          sub_category.save
+          categories << sub_category
+        end
+
+        item = Item.new(:name => item_name,
+                        :number => item_number,
+                        :total => item_amount,
+                        :tag_list => item_tags)
+
+        if !sub_category.nil?
+          sub_category.items << item
+          sub_category.save
+        else
+          category.items << item
+          category.save
+        end
+      end
+      save
+    end
+  end
+
+  def validate_csv
+    file = File.open(self.csv.current_path)
+    csv = CSV.parse(file)
     csv.each_with_index do |row, index|
       if row.size != 12
         raise "Row number (#{index}) :: All rows must contain 12 columns"

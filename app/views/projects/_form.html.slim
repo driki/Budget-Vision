@@ -1,4 +1,4 @@
-= simple_form_for [@organization, @project], :html => { :class => 'form-horizontal' } do |f|
+= simple_form_for [@organization, @project], :html => { :class => 'form-horizontal', :multipart => true } do |f|
   - if f.error_notification
     div class="alert alert-error fade in"
       a class="close" data-dismiss="alert" href="#" &times;
@@ -7,6 +7,9 @@
   fieldset
     div class="control-group"
       = f.input :year, :hint => "Example: 2011 or 2012 not FY09 or FY12"
+    div class="control-group"
+      = f.input :csv, :hint => "CSV file for bulk import", :label => "CSV"
+      = f.hidden_field :csv_cache
     div class="control-group"
       = f.input :average_tax_bill
     div class="control-group"
