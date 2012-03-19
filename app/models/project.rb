@@ -135,9 +135,15 @@ class Project < ActiveRecord::Base
         # look to see if there is a category before creating one
         category = categories.find_by_name(category_name)
         if category.nil?
-          category = categories.build(:name => category_name, 
+          if expense === "true"
+            category = categories.build(:name => category_name, 
                                   :expense_budget => category_amount,
                                   :tag_list => category_tags)
+          else
+            category = categories.build(:name => category_name, 
+                                  :revenue_budget => category_amount,
+                                  :tag_list => category_tags)
+          end
           category.save
           categories << category
         end
@@ -145,10 +151,18 @@ class Project < ActiveRecord::Base
         # look to see if there is a sub-category before creating one
         sub_category = categories.find_by_name(sub_category_name)
         if sub_category.nil?
-          sub_category = categories.build(:name => sub_category_name, 
-                                      :expense_budget => sub_category_amount,
+          if expense === "true"
+            sub_category = categories.build(:name => sub_category_name, 
+                                  :revenue_budget => sub_category_amount,
+                                  :tag_list => sub_category_tags,
+                                  :parent_id => category.id)
+          else
+            sub_category = categories.build(:name => sub_category_name, 
+                                      :revenue_budget => sub_category_amount,
                                       :tag_list => sub_category_tags,
                                       :parent_id => category.id)
+          end
+
           sub_category.save
           categories << sub_category
         end
