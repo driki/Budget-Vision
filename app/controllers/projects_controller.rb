@@ -11,8 +11,13 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(params[:project])
+    
     @organization.projects << @project
     if @organization.save
+      # bulk load if it exists
+      unless @project.csv.path.nil?
+        @project.bulk_load
+      end
       redirect_to organization_project_path(@project.organization, @project)
     else
       render :action => 'new'
@@ -55,8 +60,12 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
+    respond_to do |format|      
       if @project.update_attributes(params[:project])
+        # bulk load if it exists
+        unless @project.csv.path.nil?
+          @project.bulk_load
+        end
         format.html { redirect_to organization_project_path(@project.organization, @project, :notice => 'Budget was successfully updated.') }
         format.json { respond_with_bip(@project) }
       else

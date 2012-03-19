@@ -2,8 +2,6 @@ class Project < ActiveRecord::Base
 
   mount_uploader :csv, CsvUploader
 
-  after_save :bulk_load
-
   has_paper_trail
   
   belongs_to :organization
@@ -114,7 +112,7 @@ class Project < ActiveRecord::Base
   end
 
   def bulk_load
-    unless csv.nil?
+    unless csv.path.nil?
       validate_csv
 
       file = File.open(self.csv.current_path)
