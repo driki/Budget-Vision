@@ -25,13 +25,6 @@ class CsvUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
-  # Process files as they are uploaded:
-  process :validate_csv
-
-  def validate_csv
-    @model.validate_csv
-  end
-
   # Create different versions of your uploaded files:
   # version :thumb do
   #   process :scale => [50, 50]

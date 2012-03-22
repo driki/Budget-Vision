@@ -16,7 +16,11 @@ class ProjectsController < ApplicationController
     if @organization.save
       # bulk load if it exists
       unless @project.csv.path.nil?
-        @project.bulk_load
+        begin
+          @project.bulk_load
+        rescue RuntimeError => e
+          flash[:error] = e.message
+        end
       end
       redirect_to organization_project_path(@project.organization, @project)
     else
@@ -60,17 +64,22 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    respond_to do |format|      
-      if @project.update_attributes(params[:project])
-        # bulk load if it exists
-        unless @project.csv.path.nil?
-          @project.bulk_load
+    respond_to do |format|
+      begin
+        if @project.update_attributes(params[:project])
+          # bulk load if it exists
+          unless @project.csv.path.nil?
+            @project.bulk_load
+          end
+          format.html { redirect_to organization_project_path(@project.organization, @project, :notice => 'Budget was successfully updated.') }
+          format.json { respond_with_bip(@project) }
+        else
+          format.html { render :action => "edit" }
+          format.json { respond_with_bip(@project) }
         end
-        format.html { redirect_to organization_project_path(@project.organization, @project, :notice => 'Budget was successfully updated.') }
-        format.json { respond_with_bip(@project) }
-      else
+      rescue RuntimeError => e
+        @project.errors.add(:base, e.message)
         format.html { render :action => "edit" }
-        format.json { respond_with_bip(@project) }
       end
     end
   end
