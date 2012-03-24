@@ -14,7 +14,7 @@ div class="row"
         tr
           th Category
           th People
-          th class="number" Expense Budget
+          th class="number" Expense Item Total
           th class="number" Revenue Budget
       tbody
         - for category in @project.categories.roots.order("expense_budget desc")
@@ -25,7 +25,7 @@ div class="row"
               - if category.class.name == "Department"
                 #{category.people.nil? ? 0 : category.people}
             td class="number"
-              = number_to_currency(category.expense_budget, :precision => 0)
+              = number_to_currency(Item.where(:category_id => category.subtree_ids).where(:is_expense => true).sum(:total), :precision => 0)
             td class="number"
               = number_to_currency(category.revenue_budget, :precision => 0)
 

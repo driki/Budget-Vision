@@ -209,8 +209,8 @@ div class="row"
                 td Total Budgeted Expenses
                 td class="number" #{best_in_place @project, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
               tr
-                td Expense Categories Total
-                td class="number" #{number_to_currency(@expense_categories.sum(:expense_budget), :precision => 0)}
+                td Expense Items Total
+                td class="number" #{number_to_currency(@project.items.where(:is_expense => true).sum(:total), :precision => 0)}
               tr
                 - if @project.expense_budget != @expense_categories.sum(:expense_budget)
                   td
@@ -218,7 +218,7 @@ div class="row"
                 - else
                   td
                     | Budget and category totals match
-                td class="number" = number_to_currency(@project.expense_budget - @expense_categories.sum(:expense_budget), :precision => 0)
+                td class="number" = number_to_currency(@project.expense_budget - @project.items.where(:is_expense => true).sum(:total), :precision => 0)
 
             - for category in @expense_categories
               div class="bar-container"
@@ -226,10 +226,10 @@ div class="row"
                   h3
                     = link_to category.name, organization_project_category_path(@organization, @project, category)
                     '
-                    = best_in_place category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
+                    = number_to_currency(Item.where(:category_id => category.subtree_ids).sum(:total), :precision => 0)
                 div class="progress progress-danger"
                   - if @project.expense_budget > 0
-                    div class="bar" style="width: #{((category.expense_budget/@project.expense_budget)*100).to_i}%;"
+                    div class="bar" style="width: #{((Item.where(:category_id => category.subtree_ids).sum(:total)/@project.items.where(:is_expense => true).sum(:total))*100).to_i}%;"
 hr
 
 div class="row"

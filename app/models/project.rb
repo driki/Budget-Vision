@@ -34,17 +34,17 @@ class Project < ActiveRecord::Base
   validates_numericality_of :average_tax_bill,
   	:greater_than_or_equal_to => 0.00,
   	:allow_nil => false,
-  	:message => "must be greater than 0"
+  	:message => "must be greater than or equal to 0"
 
   validates_numericality_of :expense_budget,
   	:greater_than_or_equal_to => 0.00,
   	:allow_nil => false,
-  	:message => "must be greater than 0"
+  	:message => "must be greater than or equal to 0"
 
   validates_numericality_of :revenue_budget,
   	:greater_than_or_equal_to => 0.00,
   	:allow_nil => false,
-  	:message => "must be greater than 0"
+  	:message => "must be greater than or equal to 0"
 
   validates_length_of :description, :in => 0..2000, :allow_nil => true
   validates_length_of :summary, :in => 0..2000, :allow_nil => true
@@ -130,7 +130,6 @@ class Project < ActiveRecord::Base
         item_name = row[8]
         item_description = row[9]
         item_amount = row[10]
-        item_tags = row[11]
 
         # look to see if there is a category before creating one
         category = categories.find_by_name(category_name)
@@ -169,8 +168,7 @@ class Project < ActiveRecord::Base
 
         item = Item.new(:name => item_name,
                         :number => item_number,
-                        :total => item_amount,
-                        :tag_list => item_tags)
+                        :total => item_amount)
 
         if !sub_category.nil?
           sub_category.items << item
@@ -188,8 +186,8 @@ class Project < ActiveRecord::Base
     file = File.open(self.csv.current_path)
     csv = CSV.parse(file)
     csv.each_with_index do |row, index|
-      if row.size != 12
-        raise "Row number (#{index}) :: All rows must contain 12 columns"
+      if row.size != 11
+        raise "Row number (#{index}) :: All rows must contain 11 columns"
       end
 
       if !row[0].downcase.eql?("true") && !row[0].downcase.eql?("false")
@@ -197,7 +195,7 @@ class Project < ActiveRecord::Base
       end
 
       # each row must have either a category or sub-category
-      if row[1].empty? && row[4].empty?
+      if row[1].nil? && row[4].nil?
         raise "Row number (#{index}) :: Each row must have either a category or sub-category"
       end
 
@@ -208,7 +206,7 @@ class Project < ActiveRecord::Base
       end
 
       # if a row has a sub-category it must have a parent category
-      if (!row[4].empty? && !row[5].empty?) && (row[1].empty?)
+      if (!row[4].nil? && !row[5].nil?) && (row[1].nil?)
         raise "Row number (#{index}) :: A sub-category must have a parent"
       end
 
@@ -219,11 +217,13 @@ class Project < ActiveRecord::Base
       end
 
       # if a row has an item it must have a category
-      if !row[7].empty? || !row[8].empty? || !row[9].empty? || !row[10].empty? || !row[11].empty?
-        if !row[1].empty? && !row[4].empty?
+      if !row[7].nil? || !row[8].nil? || !row[9].nil? || !row[10].nil?
+        if row[1].nil? && row[4].nil?
+          puts "HEY: "+row[1]
+          puts "HEY: "+row[4]
           raise "Row number (#{index}) :: If a row has an item it must have a category"
         end
-        item = Item.new(:number => row[7], :name => row[8], :description => row[9], :total => row[10], :tag_list => row[11])
+        item = Item.new(:number => row[7], :name => row[8], :description => row[9], :total => row[10])
         if !item.valid?
           raise "Row number (#{index}) :: Invalid item row"
         end

@@ -33,6 +33,14 @@ class Category < ActiveRecord::Base
   validates_length_of :goal, :in => 0..2000, :allow_nil => true
   validates_length_of :challenge, :in => 0..2000, :allow_nil => true
 
+  def items_total
+    unless items.nil?
+      return items.where(:is_expense => true).sum(:total)
+    else
+      return expense_budget
+    end
+  end
+
   def meta_keywords
     expense_categories = descendants.where(:is_expense => true).roots.order("expense_budget desc")
     revenue_categories = descendants.where(:is_expense => false).roots.order("revenue_budget desc")
