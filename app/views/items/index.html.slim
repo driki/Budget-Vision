@@ -51,4 +51,6 @@ div class="row"
             td class="number"
               | #{number_to_currency(item.total, :precision => 0)}
 
-== render :partial => 'shared/comments'
+div class="row"
+  div class="span6"
+    == render :partial => 'shared/comments'

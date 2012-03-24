@@ -17,7 +17,7 @@ div class="row"
           th class="number" Expense Item Total
           th class="number" Revenue Budget
       tbody
-        - for category in @project.categories.roots.order("expense_budget desc")
+        - for category in @project.categories.order("expense_budget desc")
           tr
             td
               = link_to category.name, organization_project_category_path(@organization, @project, category)
