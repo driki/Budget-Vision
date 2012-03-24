@@ -209,9 +209,6 @@ div class="row"
                 td Total Budgeted Expenses
                 td class="number" #{best_in_place @project, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
               tr
-                td Expense Items Total
-                td class="number" #{number_to_currency(@project.items.where(:is_expense => true).sum(:total), :precision => 0)}
-              tr
                 - if @project.expense_budget != @expense_categories.sum(:expense_budget)
                   td
                     | Budget and category totals aren't equal
