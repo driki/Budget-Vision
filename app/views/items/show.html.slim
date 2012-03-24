@@ -17,11 +17,14 @@ div class="row"
       div class="span6"
         h1 
           = link_to @item.category.name, organization_project_category_path(@organization, @item.category.project, @item.category)
-          | :: 
+          |  :: 
           = @item.name
         h2 
           #{best_in_place @item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
         p = best_in_place @item, :description, :type => :textarea
+
+        == render :partial => 'shared/comments'
+
       div class="span6"
         == render :partial => 'shared/tax_stamp'            
         h2 Your cost for this item
@@ -39,5 +42,3 @@ div class="row"
             tr
               td Each year is
               td class="number" #{number_to_currency(((@item.total/@project.expense_budget) * @project.average_tax_bill / 1).round(4)) }
-
-== render :partial => 'shared/comments'
