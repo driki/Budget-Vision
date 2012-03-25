@@ -100,43 +100,6 @@ class Organization < ActiveRecord::Base
     Organization.import orgs
   end
 
-  def create_category_hierarchy(project, tree, is_expense)
-    tag_list = is_expense ? "expense" : "revenue";
-
-    tree.each do |parent_name, children_names|
-      parent = Category.new
-      parent.name = parent_name
-      parent.goal = ""
-      parent.description = ""
-      parent.challenge = ""
-      parent.expense_budget = 0
-      parent.revenue_budget = 0
-      parent.is_expense = is_expense
-      parent.tag_list = tag_list
-      parent.save!
-
-      project.categories << parent
-
-      children_names.each do |child_name|
-        child = Category.new
-        child.name = child_name
-        child.goal = ""
-        child.description = ""
-        child.challenge = ""
-        child.expense_budget = 0
-        child.revenue_budget = 0
-        child.is_expense = is_expense
-        child.tag_list = tag_list
-        child.parent = parent
-        child.save!
-
-        project.categories << child
-      end
-
-      project.save!
-    end
-  end
-
   def create_stub_project
     project = Project.new
 
@@ -150,67 +113,6 @@ class Organization < ActiveRecord::Base
     project.average_tax_bill = 0
     project.published = false
     project.save!
-
-    # Based on the Maine Muni Fiscal Survey there are parent categories and sub-categories:
-
-    # Expense categories
-    expense_hierarchy = Hash.new
-    expense_hierarchy["General Admin"] = ["Employee Benefits",
-      "Elected Officials",
-      "Admin Offices",
-      "Legal",
-      "Government Buildings",
-      "Economic Development"]
-    expense_hierarchy["Public Safety"] = ["Police",
-      "Fire",
-      "EMS",
-      "Street Lighting",
-      "Other",
-      "Capital"]
-    expense_hierarchy["Public Works Roads"] = ["Administration",
-      "Roads Winter",
-      "Roads All Other",
-      "Bridges",
-      "Capital"]
-    expense_hierarchy["Public Works Other"] = ["Solid Waste & Recycling",
-      "Water & Sewer",
-      "Capital"]
-    expense_hierarchy["Code & Human Services"] = ["Code Enforcement",
-      "General Assistance",
-      "Social Service Contributions",
-      "Other"]
-    expense_hierarchy["Parks, Recreation & Library"] = ["Parks & Recreation",
-      "Library",
-      "Other",
-      "Capital"]
-    expense_hierarchy["County, Education, & Debt"] = ["County Assessment",
-      "K-12 Assessment",
-      "Long Term Municipal Debt",
-      "Long Term Educational Debt"]
-
-    create_category_hierarchy(project, expense_hierarchy, true)
-
-    # Revenue categories
-    revenue_hierarchy = Hash.new
-    revenue_hierarchy["Municipal Revenue"] = ["Property Tax",
-      "Motor Vehicle Excise Tax",
-      "Watercraft Excise Tax",
-      "Interest Tax",
-      "License, Permits, Fees",
-      "Service Fees"]
-    revenue_hierarchy["State Revenue"] = ["Revenue Sharing",
-      "Homestead Exemption",
-      "Road Assistance",
-      "General Assistance",
-      "Tree Growth",
-      "State Aid Education",
-      "Veterans' Reimbursement",
-      "Other"]
-    revenue_hierarchy["Other Revenue"] = ["Federal",
-      "Surplus",
-      "Reserve or Trust Funds"]
-
-    create_category_hierarchy(project, revenue_hierarchy, false)
 
     self.projects << project
     self.save!
