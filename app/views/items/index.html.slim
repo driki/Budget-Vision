@@ -22,12 +22,16 @@ div class="row"
 div class="row"
   div class="span12"
     h1
-      ' Line items #{number_to_currency(@project.items.where(:is_expense => true).sum(:total), :precision => 0)}
-      div class="btn-group pull-right" data-toggle="buttons-radio"
-        button class="btn #{!@items.empty? && @items.first.is_expense ? 'active' : ''}"
-          = link_to 'Expense', organization_project_items_path(@organization, @project, :expense => "true")
-        button class="btn #{!@items.empty? && @items.first.is_expense ? '' : 'active'}"
-          = link_to 'Revenue', organization_project_items_path(@organization, @project, :expense => "false")
+      - if params[:expense] == "true"
+        ' Expenses #{number_to_currency(@project.items.where(:is_expense => true).sum(:total), :precision => 0)}
+      - else
+        ' Revenues #{number_to_currency(@project.items.where(:is_expense => false).sum(:total), :precision => 0)}
+
+    div class="btn-group pull-right" data-toggle="buttons-radio"
+      button class="btn #{!@items.empty? && @items.first.is_expense ? 'active' : ''}"
+        = link_to 'Expense', organization_project_items_path(@organization, @project, :expense => "true")
+      button class="btn #{!@items.empty? && @items.first.is_expense ? '' : 'active'}"
+        = link_to 'Revenue', organization_project_items_path(@organization, @project, :expense => "false")
     table class="table table-striped"
       thead
         tr
@@ -35,9 +39,9 @@ div class="row"
           th Category
           th Sub-Category
           th Details
-          th class="number" Cost
+          th class="number" Total
       tbody
-        - for item in @items.where(:is_expense => true)
+        - for item in @items
           tr
             td
               | #{link_to item.name, organization_project_category_item_path(@organization, @project, item.category, item)}

@@ -11,27 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120318161007) do
+ActiveRecord::Schema.define(:version => 20120329054536) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.text     "goal"
     t.text     "challenge"
     t.text     "description"
-    t.float    "expense_budget", :default => 0.0
-    t.float    "revenue_budget", :default => 0.0
     t.string   "tags"
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "ancestry"
     t.integer  "people"
-    t.boolean  "is_expense",     :default => true
   end
 
   add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"
-  add_index "categories", ["is_expense"], :name => "index_categories_on_is_expense"
-  add_index "categories", ["project_id", "is_expense"], :name => "index_categories_on_project_id_and_is_expense"
+  add_index "categories", ["project_id"], :name => "index_categories_on_project_id_and_is_expense"
 
   create_table "forecasts", :force => true do |t|
     t.string   "name"

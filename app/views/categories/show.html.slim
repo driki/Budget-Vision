@@ -14,167 +14,97 @@ div class="row"
       = link_to "New line item", new_organization_project_category_item_path(@organization, @project, @category)
 
 div class="row"
+  div class="span12"
+    h1 
+      = link_to "Categories", organization_project_categories_path(@organization, @project)
+      |  :: 
+      = @category.name
+
+div class="row"
   div class="span6"
-    == render :partial => 'shared/tax_stamp'
+    h2 Costs: #{number_to_currency(@category_expenditures_total, :precision => 0)}
+    table class="table"
+      tbody
+        tr
+          td Each day
+          td class="number"
+            span #{number_to_currency(@category_expenditures_total/365, :precision => 0)}
+        tr
+          td Each week
+          td class="number"
+            span #{number_to_currency(@category_expenditures_total/52, :precision => 0)}
+        tr
+          td Each month
+          td class="number"
+            span #{number_to_currency(@category_expenditures_total/12, :precision => 0)}
+        tr
+          td Each year
+          td class="number"
+            span #{number_to_currency(@category_expenditures_total, :precision => 0)}
+  
   div class="span6"
-    - if @category.is_expense
-      h2 #{@category.name} costs: #{Item.where(:category_id => @category.subtree_ids).sum(:total) > 0 ? number_to_currency(Item.where(:category_id => @category.subtree_ids).sum(:total), :precision => 0) : number_to_currency(@category.expense_budget, :precision => 0)}
-      table class="table"
-        tbody
-          tr
-            td Each day
-            td class="number"
-              span #{number_to_currency(@category.expense_budget/365, :precision => 0)}
-          tr
-            td Each week
-            td class="number"
-              span #{number_to_currency(@category.expense_budget/52, :precision => 0)}
-          tr
-            td Each month
-            td class="number"
-              span #{number_to_currency(@category.expense_budget/12, :precision => 0)}
-          tr
-            td Each year
-            td class="number"
-              span #{number_to_currency(@category.expense_budget, :precision => 0)}
-    - else
-      h2 #{@category.name} generates: #{@category.items_total > 0 ? number_to_currency(@category.items_total, :precision => 0) : number_to_currency(@category.expense_budget, :precision => 0)}
-      table class="table"
-        tbody
-          tr
-            td Each day
-            td class="number"
-              span #{number_to_currency(@category.revenue_budget/365, :precision => 0)}
-          tr
-            td Each week
-            td class="number"
-              span #{number_to_currency(@category.revenue_budget/52, :precision => 0)}
-          tr
-            td Each month
-            td class="number"
-              span #{number_to_currency(@category.revenue_budget/12, :precision => 0)}
-          tr
-            td Each year
-            td class="number"
-              span #{number_to_currency(@category.revenue_budget, :precision => 0)}
+    h2 Generates: #{number_to_currency(@category.revenue_items_total, :precision => 0)}
+    table class="table"
+      tbody
+        tr
+          td Each day
+          td class="number"
+            span #{number_to_currency(@category.revenue_items_total/365, :precision => 0)}
+        tr
+          td Each week
+          td class="number"
+            span #{number_to_currency(@category.revenue_items_total/52, :precision => 0)}
+        tr
+          td Each month
+          td class="number"
+            span #{number_to_currency(@category.revenue_items_total/12, :precision => 0)}
+        tr
+          td Each year
+          td class="number"
+            span #{number_to_currency(@category.revenue_items_total, :precision => 0)}
 
 div class="row"
   div class="span12"
     div class="row"
       div class="span6"
-        h1 Description
+        h2 Description
         - unless @category.description.nil?  
           p == RedCloth.new(@category.description, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
 
       div class="span6"
-        h1
+        h2
           | Goal
         - unless @category.goal.nil?
           p == RedCloth.new(@category.goal, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
 
-              
+hr
 
 div class="row"
-  div class="span12"
-    hr
-
-  - if @category.is_expense
-    div class="span6 barchart-widget"
-      h1 Where money goes
-      table class="table"
-        tr
-          td Total Budgeted Expenses
-          td class="number" #{best_in_place @category, :expense_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
-          tr
-            td Sub-Categories Total
-            td class="number" #{number_to_currency(@category.children.sum(:expense_budget), :precision => 0)}
-          tr
-            td Category Items Total
-            td class="number" #{number_to_currency(@category.items_total)}
-          tr
-          - if @category.expense_budget != (@category.children.sum(:expense_budget) + @category.items.where(:is_expense => true).sum(:total))
-            td
-              | Category, sub-category and item totals aren't equal
-          - else
-            td
-              | Category, sub-category and item totals match
-          td class="number" = number_to_currency(@category.expense_budget - (@category.children.sum(:expense_budget) + @category.items.where(:is_expense => true).sum(:total)), :precision => 0)
-
-      == render :partial => 'shared/comments'
-
-    div class="span6 barchart-widget"
-      h1 Sub-Categories
-      - for child_category in @category.children.order("expense_budget desc")
+  div class="span6 barchart-widget"
+    h2 Sub-Categories
+    - unless @category.children.empty?
+      - for child_category in @category.children
         div class="bar-container"
           div class="bar-category-text"
             = link_to child_category.name, organization_project_category_path(@organization, @project, child_category)
             '
-            = number_to_currency(child_category.items_total, :precision => 0)
+            = number_to_currency(child_category.expenditure_items_total, :precision => 0)
           div class="progress progress-danger"
-            - if @category.expense_budget > 0
-              div class="bar" style="width: #{((child_category.expense_budget/@category.expense_budget)*100).to_i}%;"
-      - if @category.children.empty?
-        p
-          = link_to "Add a category", new_organization_project_category_path(@organization, @project)
-          '  to help show where the money goes.
+            - if @category_expenditures_total > 0
+              div class="bar" style="width: #{((child_category.expenditure_items_total/@category_expenditures_total)*100).to_i}%;"
+    - else
+      | No sub-categories found
 
-      - unless @category.items.empty?
-        h2 Line Items
-        - for item in @category.items.where(:is_expense => true).order("total desc")
-          div class="bar-container"
-            div class="bar-category-text"
-              = link_to item.name, organization_project_category_item_path(@organization, @project, @category, item)
-              '
-              = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-            div class="progress progress-danger"
-              - if @category.expense_budget > 0
-                div class="bar" style="width: #{((item.total/@category.expense_budget)*100).to_i}%;"
-
-  - else
-    div class="span6 barchart-widget"
-      h2 Where it comes from
-      table class="table"
-        tr
-          td Total Budgeted Revenue
-          td class="number" #{best_in_place @category, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}}
-          tr
-            td Sub-Categories Total
-            td class="number" #{number_to_currency(@category.children.sum(:revenue_budget), :precision => 0)}
-          tr
-            td Category Items Total
-            td class="number" #{number_to_currency(@category.items.where(:is_expense => false).sum(:total), :precision => 0)}
-          tr
-          - if @category.revenue_budget != (@category.children.sum(:revenue_budget) + @category.items.where(:is_expense => false).sum(:total))
-            td
-              | Category and sub-category totals aren't equal
-          - else
-            td
-              | Category and sub-category totals match
-          td class="number" = number_to_currency(@category.revenue_budget - (@category.children.sum(:revenue_budget) + @category.items.where(:is_expense => false).sum(:total)), :precision => 0)
-      - if @category.children.empty?
-        p
-          = link_to "Add a category", new_organization_project_category_path(@organization, @project)
-          '  to help show where the money comes from.
-      - for child_category in @category.children.order("revenue_budget desc")
-        div class="bar-container"
-          div class="bar-category-text"
-            = link_to child_category.name, organization_project_category_path(@organization, @project, child_category)
-            '
-            = best_in_place child_category, :revenue_budget, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-          div class="progress progress-success"
-            - if @category.revenue_budget > 0
-              div class="bar" style="width: #{((child_category.revenue_budget/@category.revenue_budget)*100).to_i}%;"
-      h2 Line Items
-      - for item in @category.items.where(:is_expense => false).order("total desc")
+  div class="span6 barchart-widget"
+    h2 Line Items
+    - unless @category.items.empty?
+      - for item in @category.items.where(:is_expense => true).order("total desc")
         div class="bar-container"
           div class="bar-category-text"
             = link_to item.name, organization_project_category_item_path(@organization, @project, @category, item)
             '
             = best_in_place item, :total, :type => :input, :display_with => :number_to_currency, :helper_options => {:precision => 0}
-          div class="progress progress-success"
-            - if @category.revenue_budget > 0
-              div class="bar" style="width: #{((item.total/@category.revenue_budget)*100).to_i}%;"
-      - if @category.items.empty?
-        p
-          = link_to "Add an item", new_organization_project_category_item_path(@organization, @project, @category)
-          '  to help show where the money comes from.
+          div class="progress progress-danger"
+            div class="bar" style="width: #{((item.total/@category.expenditure_items_total)*100).to_i}%;"
+    - else
+      | No line items in this category

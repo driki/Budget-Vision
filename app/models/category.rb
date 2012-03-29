@@ -12,44 +12,28 @@ class Category < ActiveRecord::Base
     :goal,
     :challenge,
     :description,
-    :is_expense,
-    :expense_budget,
-    :revenue_budget,
     :tag_list,
     :people,
     :parent_id
-
-  validates_numericality_of :expense_budget,
-  	:greater_than_or_equal_to => 0.00,
-  	:allow_nil => true,
-  	:message => "must be greater than 0"
-
-  validates_numericality_of :revenue_budget,
-  	:greater_than_or_equal_to => 0.00,
-  	:allow_nil => true,
-  	:message => "must be greater than 0"
 
   validates_length_of :description, :in => 0..2000, :allow_nil => true
   validates_length_of :goal, :in => 0..2000, :allow_nil => true
   validates_length_of :challenge, :in => 0..2000, :allow_nil => true
 
-  def items_total
-    unless items.nil?
-      return items.where(:is_expense => true).sum(:total)
-    else
-      return expense_budget
-    end
+  def expenditure_items_total
+    return Item.where(:category_id => subtree_ids).where(:is_expense => true).sum(:total)
   end
 
-  def meta_keywords
-    expense_categories = descendants.where(:is_expense => true).roots.order("expense_budget desc")
-    revenue_categories = descendants.where(:is_expense => false).roots.order("revenue_budget desc")
+  def revenue_items_total
+    return Item.where(:category_id => subtree_ids).where(:is_expense => false).sum(:total)
+  end
 
-    keywords = [project.organization.name, project.organization.state, project.year, name, "city and town budget"]
-    expense_categories.each do |c|
-      keywords << c.name
-    end
-    revenue_categories.each do |c|
+  def meta_keywords    
+    keywords = [project.organization.name, 
+                project.organization.state, 
+                project.year, 
+                name, "city and town budget", ]
+    descendants.each do |c|
       keywords << c.name
     end
     meta_keywords = ""

@@ -51,20 +51,15 @@ class Project < ActiveRecord::Base
   validates_length_of :title, :in => 0..150, :allow_nil => true
 
   def items
-    @items = Item.joins(:category).where(:categories => {:project_id => id})
+    @items = Item.where(:category_id => categories)
   end
 
   def meta_keywords
-    expense_categories = categories.where(:is_expense => true).roots.order("expense_budget desc")
-    revenue_categories = categories.where(:is_expense => false).roots.order("revenue_budget desc")
-
     keywords = [organization.name, organization.state, year, "city and town budget"]
-    expense_categories.each do |c|
+    categories.each do |c|
       keywords << c.name
     end
-    revenue_categories.each do |c|
-      keywords << c.name
-    end
+    
     meta_keywords = ""
     keywords.each do |keyword|
       meta_keywords += "#{keyword}, "
@@ -100,10 +95,7 @@ class Project < ActiveRecord::Base
     end
 
     categories.each do |category|
-      if !category.expense_budget.nil? && category.expense_budget > 0
-        score = score+2
-      end
-      if !category.revenue_budget.nil? && category.revenue_budget > 0
+      if !category.items.nil?
         score = score+2
       end
     end
@@ -121,10 +113,8 @@ class Project < ActiveRecord::Base
       csv.each_with_index do |row, index|
         expense = row[0]
         category_name = row[1]
-        category_amount = row[2]
         category_tags = row[3]
         sub_category_name = row[4]
-        sub_category_amount = row[5]
         sub_category_tags = row[6]
         item_number = row[7]
         item_name = row[8]
@@ -134,13 +124,13 @@ class Project < ActiveRecord::Base
         # look to see if there is a category before creating one
         category = categories.find_by_name(category_name)
         if category.nil?
-          if expense === "true"
-            category = categories.build(:name => category_name, 
-                                  :expense_budget => category_amount,
+          if expense.downcase === "true"
+            category = categories.build(:name => category_name,
+                                  :is_expense => true, 
                                   :tag_list => category_tags)
           else
-            category = categories.build(:name => category_name, 
-                                  :revenue_budget => category_amount,
+            category = categories.build(:name => category_name,
+                                  :is_expense => false,
                                   :tag_list => category_tags)
           end
           category.save
@@ -151,14 +141,14 @@ class Project < ActiveRecord::Base
         sub_category = categories.find_by_name(sub_category_name)
         if sub_category.nil?
           if expense === "true"
-            sub_category = categories.build(:name => sub_category_name, 
-                                  :revenue_budget => sub_category_amount,
+            sub_category = categories.build(:name => sub_category_name,
                                   :tag_list => sub_category_tags,
+                                  :is_expense => true,
                                   :parent_id => category.id)
           else
-            sub_category = categories.build(:name => sub_category_name, 
-                                      :revenue_budget => sub_category_amount,
+            sub_category = categories.build(:name => sub_category_name,
                                       :tag_list => sub_category_tags,
+                                      :is_expense => false,
                                       :parent_id => category.id)
           end
 
@@ -167,6 +157,7 @@ class Project < ActiveRecord::Base
         end
 
         item = Item.new(:name => item_name,
+                        :is_expense => expense,
                         :number => item_number,
                         :total => item_amount)
 
@@ -200,9 +191,9 @@ class Project < ActiveRecord::Base
       end
 
       # validate the parent category
-      category = Category.new(:name => row[1], :expense_budget => row[2], :tag_list => row[3])
+      category = Category.new(:name => row[1], :tag_list => row[3])
       if !category.valid?
-        raise "Row number (#{index}) :: Invalid parent category"
+        raise "Row number (#{index}) :: Invalid parent category :: #{category.errors.full_messages}"
       end
 
       # if a row has a sub-category it must have a parent category
@@ -211,7 +202,7 @@ class Project < ActiveRecord::Base
       end
 
       # validate the sub-category
-      sub_category = Category.new(:name => row[4], :expense_budget => row[5], :tag_list => row[6])
+      sub_category = Category.new(:name => row[4], :tag_list => row[6])
       if !category.valid?
         raise "Row number (#{index}) :: Invalid sub-category"
       end

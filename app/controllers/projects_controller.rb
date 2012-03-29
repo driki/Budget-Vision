@@ -29,11 +29,10 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @revenue_categories = @project.categories.where(:is_expense => false).roots.order("revenue_budget desc")
-    @expense_categories = @project.categories.where(:is_expense => true).roots.order("expense_budget desc")
-
     @title = "#{@organization.name}, #{@organization.state} #{@project.year} city and town budget"
     @meta_keywords = @project.meta_keywords
+    @project_expense_total = @project.items.where(:is_expense => true).sum(:total)
+    @project_revenue_total = @project.items.where(:is_expense => false).sum(:total)
   end
 
   # just redirect over to show, this is because of old Google cached links.

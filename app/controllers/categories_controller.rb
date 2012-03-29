@@ -23,7 +23,9 @@ class CategoriesController < ApplicationController
   
   def show
     @title = "#{@organization.name}, #{@organization.state} #{@project.year} #{@category.name} budget"
-    @meta_keywords = @category.meta_keywords 
+    @meta_keywords = @category.meta_keywords
+    @category_expenditures_total = Item.where(:category_id => @category.subtree_ids).where(:is_expense => true).sum(:total)
+    @category_revenues_total = Item.where(:category_id => @category.subtree_ids).where(:is_expense => false).sum(:total)
   end
 
   def update

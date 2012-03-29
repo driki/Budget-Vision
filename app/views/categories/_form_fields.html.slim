@@ -8,12 +8,6 @@
       = f.input :name, :hint => "Example: Fire Department, Public Safety, General Government"
     div class="control-group"
       = f.input :parent_id, :label => "Parent Category", :collection => @project.categories.roots, :input_html => { :multiple => false }
-    div class="control-group"
-      = f.input :is_expense, :label => 'Expense', :hint => "Is this category an expense?", :as => :boolean
-    div class="control-group"
-      = f.input :expense_budget, :hint => "Example: $120,000"
-    div class="control-group"
-      = f.input :revenue_budget, :hint => "Example: $120,000"
     - if @category.class.name == "Department"
       div class="control-group"
         = f.input :people, :hint => "Example: 12 or 120. The number of people working in the department"

@@ -13,11 +13,11 @@ div class="row"
       thead
         tr
           th Category
-          th People
+          th Sub-Category
           th class="number" Expense Item Total
           th class="number" Revenue Budget
       tbody
-        - for category in @project.categories.order("expense_budget desc")
+        - for category in @project.categories.roots
           tr
             td
               = link_to category.name, organization_project_category_path(@organization, @project, category)
@@ -27,7 +27,16 @@ div class="row"
             td class="number"
               = number_to_currency(Item.where(:category_id => category.subtree_ids).where(:is_expense => true).sum(:total), :precision => 0)
             td class="number"
-              = number_to_currency(category.revenue_budget, :precision => 0)
-
+              = number_to_currency(Item.where(:category_id => category.subtree_ids).where(:is_expense => false).sum(:total), :precision => 0)
+          - for sub_category in category.descendants
+            tr
+              td
+                | &nbsp;
+              td
+                = link_to sub_category.name, organization_project_category_path(@organization, @project, sub_category)
+              td class="number"
+                = number_to_currency(sub_category.expenditure_items_total, :precision => 0)
+              td class="number"
+                = number_to_currency(sub_category.revenue_items_total, :precision => 0)
 
 == render :partial => 'shared/comments'
