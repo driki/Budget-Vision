@@ -27,16 +27,16 @@ div class="row"
       tbody
         tr
           td Each day is
-          td class="number" #{number_to_currency(((@item.total/@project.expense_budget) * @project.average_tax_bill / 365).round(4)) }
+          td class="number" #{number_to_currency(((@item.total/@project.items.where(:is_expense => true).sum(:total)) * @project.average_tax_bill / 365).round(4)) }
         tr
           td Each week is
-          td class="number" #{number_to_currency(((@item.total/@project.expense_budget) * @project.average_tax_bill / 52).round(4)) }
+          td class="number" #{number_to_currency(((@item.total/@project.items.where(:is_expense => true).sum(:total)) * @project.average_tax_bill / 52).round(4)) }
         tr
           td Each month is
-          td class="number" #{number_to_currency(((@item.total/@project.expense_budget) * @project.average_tax_bill / 12).round(4)) }
+          td class="number" #{number_to_currency(((@item.total/@project.items.where(:is_expense => true).sum(:total)) * @project.average_tax_bill / 12).round(4)) }
         tr
           td Each year is
-          td class="number" #{number_to_currency(((@item.total/@project.expense_budget) * @project.average_tax_bill / 1).round(4)) }
+          td class="number" #{number_to_currency(((@item.total/@project.items.where(:is_expense => true).sum(:total)) * @project.average_tax_bill / 1).round(4)) }
   div class="span6"
     == render :partial => 'shared/tax_stamp' 
 

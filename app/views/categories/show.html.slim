@@ -21,8 +21,8 @@ div class="row"
       = @category.name
 
 div class="row"
-  div class="span6"
-    h2 Costs: #{number_to_currency(@category_expenditures_total, :precision => 0)}
+  div class="span4"
+    h2 Expenses: #{number_to_currency(@category_expenditures_total, :precision => 0)}
     table class="table"
       tbody
         tr
@@ -42,8 +42,8 @@ div class="row"
           td class="number"
             span #{number_to_currency(@category_expenditures_total, :precision => 0)}
   
-  div class="span6"
-    h2 Generates: #{number_to_currency(@category.revenue_items_total, :precision => 0)}
+  div class="span4"
+    h2 Revenue: #{number_to_currency(@category.revenue_items_total, :precision => 0)}
     table class="table"
       tbody
         tr
@@ -62,6 +62,24 @@ div class="row"
           td Each year
           td class="number"
             span #{number_to_currency(@category.revenue_items_total, :precision => 0)}
+
+  div class="span4"           
+    h2 Your cost
+    table class="table quick-stats"
+      tbody
+        tr
+          td Each day is
+          td class="number" #{number_to_currency(((@category_expenditures_total/@project.items.where(:is_expense => true).sum(:total)) * @project.average_tax_bill / 365).round(4)) }
+        tr
+          td Each week is
+          td class="number" #{number_to_currency(((@category_expenditures_total/@project.items.where(:is_expense => true).sum(:total)) * @project.average_tax_bill / 52).round(4)) }
+        tr
+          td Each month is
+          td class="number" #{number_to_currency(((@category_expenditures_total/@project.items.where(:is_expense => true).sum(:total)) * @project.average_tax_bill / 12).round(4)) }
+        tr
+          td Each year is
+          td class="number" #{number_to_currency(((@category_expenditures_total/@project.items.where(:is_expense => true).sum(:total)) * @project.average_tax_bill / 1).round(4)) }
+  
 
 div class="row"
   div class="span12"
@@ -108,3 +126,7 @@ div class="row"
             div class="bar" style="width: #{((item.total/@category.expenditure_items_total)*100).to_i}%;"
     - else
       | No line items in this category
+
+div class="row"
+  div class="span6"
+    == render :partial => 'shared/comments'

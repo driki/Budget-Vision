@@ -58,7 +58,9 @@ div class="row"
               div class="bar" style="width: #{((category.expenditure_items_total)/@project_expense_total)*100.to_i}%;"
             = number_to_currency(Item.where(:category_id => category.subtree_ids).where(:is_expense => false).sum(:total)+category.items.where(:is_expense => false).sum(:total), :precision => 0)
             div class="progress progress-success"
-              div class="bar" style="width: #{((Item.where(:category_id => category.subtree_ids).where(:is_expense => false).sum(:total)/@project.items.where(:is_expense => false).sum(:total))*100).to_i}%;"                    
+              div class="bar" style="width: #{((Item.where(:category_id => category.subtree_ids).where(:is_expense => false).sum(:total)/@project.items.where(:is_expense => false).sum(:total))*100).to_i}%;"
+      div class="span6"
+        == render :partial => 'shared/comments'                    
 hr
 
 div class="row"
