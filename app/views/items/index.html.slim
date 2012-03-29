@@ -22,7 +22,7 @@ div class="row"
 div class="row"
   div class="span12"
     h1
-      - if params[:expense] == "true"
+      - if @show_expenses
         ' Expenses #{number_to_currency(@project.items.where(:is_expense => true).sum(:total), :precision => 0)}
       - else
         ' Revenues #{number_to_currency(@project.items.where(:is_expense => false).sum(:total), :precision => 0)}

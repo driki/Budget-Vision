@@ -12,10 +12,13 @@ class ItemsController < ApplicationController
 
   def index
     show_expenses = true
-    if params[:expense] === "false"
-      show_expenses = false
+    if params[:expense].nil? || params[:expense] === "true"
+      @show_expenses = true
+    elsif params[:expense] === "false"
+      @show_expenses = false
     end
-    @items = Item.joins(:category).where(:categories => {:project_id => @project.id}).where(:is_expense => show_expenses).order("total desc")
+    @items = Item.joins(:category).where(
+      :categories => {:project_id => @project.id}).where(:is_expense => @show_expenses).order("total desc")
   end
 
   def new
