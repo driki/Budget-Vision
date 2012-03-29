@@ -46,9 +46,16 @@ div class="row"
             td
               | #{link_to item.name, organization_project_category_item_path(@organization, @project, item.category, item)}
             td
-              | #{link_to item.category.parent.name, organization_project_category_path(@organization,item.category.parent.project, item.category.parent)}
+              - if item.category.parent.nil?
+                | #{link_to item.category.name, organization_project_category_path(@organization,item.category.project, item.category)}
+              - else
+                | #{link_to item.category.parent.name, organization_project_category_path(@organization,item.category.parent.project, item.category.parent)}
+
             td
-              | #{link_to item.category.name, organization_project_category_path(@organization,item.category.project, item.category)}
+              - if item.category.parent.nil?
+                | &nbsp;
+              - else
+                | #{link_to item.category.name, organization_project_category_path(@organization,item.category.project, item.category)}
             td
               - unless item.description.nil?
                 span class="label label-info item-detail" rel="popover" data-content="#{item.description}" data-original-title="Item detail" Details
