@@ -37,6 +37,7 @@ div class="row"
         tr
           td Each year is
           td class="number" #{number_to_currency(((@item.total/@project.items.where(:is_expense => true).sum(:total)) * @project.average_tax_bill / 1).round(4)) }
+  
   div class="span6"
     == render :partial => 'shared/tax_stamp' 
 
@@ -45,3 +46,5 @@ div class="row"
     h2 Description
     p
       = @item.description
+  div class="span6"
+    == render :partial => 'shared/comments'
