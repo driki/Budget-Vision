@@ -66,8 +66,8 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       begin
         if @project.update_attributes(params[:project])
-          # bulk load if it exists
-          unless @project.csv.path.nil?
+          # Only allow the user to bulk load a budget once
+          if !params[:project][:csv].nil?
             @project.bulk_load
           end
           format.html { redirect_to organization_project_path(@project.organization, @project, :notice => 'Budget was successfully updated.') }
