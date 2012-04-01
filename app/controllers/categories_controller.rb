@@ -26,6 +26,12 @@ class CategoriesController < ApplicationController
     @meta_keywords = @category.meta_keywords
     @category_expenditures_total = Item.where(:category_id => @category.subtree_ids).where(:is_expense => true).sum(:total)
     @category_revenues_total = Item.where(:category_id => @category.subtree_ids).where(:is_expense => false).sum(:total)
+    @child_categories = @category.children
+    @categories_by_total = Hash.new
+    @child_categories.each do |cat|
+      @categories_by_total[cat.expenditure_items_total] = cat
+    end
+    @categories_by_total = Hash[@categories_by_total.sort.reverse]
   end
 
   def update
