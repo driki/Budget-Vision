@@ -33,6 +33,14 @@ class ProjectsController < ApplicationController
     @meta_keywords = @project.meta_keywords
     @project_expense_total = @project.items.where(:is_expense => true).sum(:total)
     @project_revenue_total = @project.items.where(:is_expense => false).sum(:total)
+
+
+    @child_categories = @project.categories.roots
+    @categories_by_total = Hash.new
+    @child_categories.each do |cat|
+      @categories_by_total[cat.expenditure_items_total] = cat
+    end
+    @categories_by_total = Hash[@categories_by_total.sort.reverse]
   end
 
   # just redirect over to show, this is because of old Google cached links.
