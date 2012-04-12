@@ -15,6 +15,9 @@ Budgetvision::Application.routes.draw do
     match "/learning" => "home#learning"
   end
 
+  match "/hermon-me" => redirect("/organizations/hermon-me")
+  match "/watertown-ma" => redirect("/organizations/watertown-ma")
+
   scope "/help" do
     match "/learning" => "home#learning"
   end
@@ -30,9 +33,6 @@ Budgetvision::Application.routes.draw do
 
   post "versions/:id/revert" => "versions#revert", :as => "revert_version"
 
-  # Google still knows about these so must redirect
-  match "/organizations/:id" => "organizations#show_by_id"
-  match "/projects/:id(/trends)(/comparisons)(/goals)" => "projects#show_by_id"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -48,9 +48,8 @@ Budgetvision::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
 
   # See: http://weblog.jamisbuck.org/2007/2/5/nesting-resources
-  match "/organizations" => "organizations#index", :as => "organizations"
-  resources :organizations, :path => '', :except => [:index]
-  resources :organizations, :path => '', :only => [] do
+  # Also: http://jasoncodes.com/posts/rails-3-nested-resource-slugs
+  resources :organizations do
     resources :projects, :path => '', :except => [:index] do 
       resources :categories do 
         resources :items do
